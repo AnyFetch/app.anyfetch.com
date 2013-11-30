@@ -10,8 +10,10 @@
   </header>
   <!-- SEARCH -->
   <section class="search-box">
-    <h3>Search</h3>
-    <input type="text" value="" />
+    <form ng-submit="search()">
+      <h3>Search</h3>
+      <input type="text" placeholder="Search" ng-model="textSearch" />
+    </form>
   </section>
   <section class="content">
     <!-- LEFT FILTERS -->
