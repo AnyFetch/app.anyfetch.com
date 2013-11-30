@@ -4,7 +4,8 @@ angular.module('anyfetchFrontApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'anyfetchFrontApp.filters'
 ])
   .config(function ($routeProvider) {
     $routeProvider
