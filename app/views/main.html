@@ -10,8 +10,10 @@
   </header>
   <!-- SEARCH -->
   <section class="search-box">
-    <h3>Fetch</h3>
-    <input type="text" value="John Smith" speech x-webkit-speech/>
+    <form ng-submit="search()">
+     <h3>Fetch</h3>
+      <input type="text" value="" placeholder="Search" ng-model="textSearch"  speech x-webkit-speech/>
+    </form>
   </section>
   <section class="content">
     <!-- LEFT FILTERS -->
