@@ -204,6 +204,7 @@ filter('infoItem', function() {
                 case 'pptx':
                   return 'ppt';
                 case 'docx':
+                case 'pdf':
                   return 'doc';
                 case 'xlsx':
                   return 'xls';
