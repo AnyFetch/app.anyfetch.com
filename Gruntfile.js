@@ -349,7 +349,18 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true
       }
+    },
+
+    git_deploy: {
+      your_target: {
+        options: {
+          url: 'git@github.com:Papiel/anyfetch-front.git',
+          branch: 'gh-pages',
+        },
+        src: 'dist'
+      },
     }
+
   });
 
 
@@ -393,6 +404,10 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin'
+  ]);
+
+  grunt.registerTask('deploy', [
+    'git_deploy'
   ]);
 
   grunt.registerTask('default', [
