@@ -11,7 +11,7 @@ Welcome @ anyFetch
 
 ## How to use it
 
-Before running any of these commands you need to install all the requierements.
+Before running any of these commands you need to install all the requierements. To load all the dependents packages you will need to launch `npm install` and `bower install`.
 
 ```
 	grunt serve				#launch the developement server
