@@ -87,8 +87,8 @@
             <div class="icon-provider icon-provider-{{result | infoItem:'provider'}}"></div>
           </div>
           <div class="details">
-            <h2 ng-bind-html-unsafe='result.datas.title'></h2>
-            <p ng-bind-html-unsafe='result.datas.snippet'></p>
+            <h2 ng-bind-html='result.datas.title'></h2>
+            <p ng-bind-html='result.datas.snippet'>{{result.datas.snippet}}</p>
           </div>
           <div class="date">{{result.creation_date | niceDate}}</div>
           <div class="arrow"></div>
