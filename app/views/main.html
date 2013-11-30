@@ -81,29 +81,21 @@
 
     <!-- RESULT ROWS -->
     <article class="results">
-
-      <div class="row">
-        <div class="icon">
-          <div class="icon-types icon-types-file"></div>
-          <div class="icon-provider icon-provider-dropbox"></div>
-        </div>
-        <div class="details">
-          <h2>Invoice 421.docx</h2>
-          <p>To: <strong>John Smith</strong>, Adress : 20 Avenue Albert Einstein 69100 Villeurbanne ... Signature <strong>John Smith</strong> Brian Clark</p>
-        </div>
-        <div class="date">Today</div>
+      <div class="loading" ng-hide="!loading">
+        Loading...
       </div>
-
-      <div class="row">
-        <div class="icon">
-          <div class="icon-types icon-types-event"></div>
-          <div class="icon-provider icon-provider-salesforce"></div>
+      <div class="loaded" ng-hide="loading">
+        <div class="row" ng-repeat="result in results">
+          <div class="icon">
+            <div class="icon-types icon-types-{{result | infoItem:'type'}}"></div>
+            <div class="icon-provider icon-provider-{{result | infoItem:'provider'}}"></div>
+          </div>
+          <div class="details">
+            <h2 ng-bind-html-unsafe='result.datas.title'></h2>
+            <p ng-bind-html-unsafe='result.datas.snippet'></p>
+          </div>
+          <div class="date">{{result.creation_date | niceDate}}</div>
         </div>
-        <div class="details">
-          <h2>IMG_3456.jpg</h2>
-          <p><strong>John Smith</strong> Senior Consultat at BMI group Tel: 053452356 ... email: jsmith@bmi-group.com</p>
-        </div>
-        <div class="date">Today</div>
       </div>
     </article>
   </section>
