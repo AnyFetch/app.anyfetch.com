@@ -1,13 +1,22 @@
+$primary-color : #2a9ad6;
+$border-color : #b7b7b7;
+
 body{
   padding:0px;
   margin:0px;
   font-family:Helvetica;
 }
 
+h3{
+  text-transform:uppercase;
+  color: $primary-color;
+  font-size: 12px;
+  margin:0px;
+}
 .header{
   width:100%;
   height:70px;
-  background-color: #2a9ad6;
+  background-color: $primary-color;
 
   a{
     color: inherit;
@@ -34,9 +43,6 @@ body{
     top:0px;
     right:0px;
     line-height:50px;
-  }
-
-  .menu{
     font-size:12px;
     color:#FFF;
     text-align: right;
@@ -45,9 +51,41 @@ body{
 
 }
 
+.content{
+  position:relative;
+  width:100%;
+  height:100%;
+
+  .filters{
+    position:absolute;
+    background-color:#f3f3f3;
+    border-right:1px solid $border-color;
+    width:210px;
+    top:0px;
+    left:0px;
+
+    .filter{
+      margin:20px;
+
+      .row{
+        font-size:12px;
+        color:#676767;
+      }
+    }
+
+  }
+
+  .results{
+    position:absolute;
+    top:0px;
+    left:211px;
+    right:0px;
+  }
+
+}
 .search-box{
     width: 100%;
     height: 60px;
     background-color: #f3fcff;
-    border-bottom:1px solid #b7b7b7;
+    border-bottom:1px solid $border-color;
 }
