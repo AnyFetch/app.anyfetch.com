@@ -3,6 +3,8 @@ $legend-color : #adadad;
 $border-color : #b7b7b7;
 $text-color : #676767;
 
+$sidebar-width : 210px;
+
 body{
   padding:0px;
   margin:0px;
@@ -87,10 +89,11 @@ h3{
     position:absolute;
     background-color:#f3f3f3;
     border-right:1px solid $border-color;
-    width:210px;
+    width:$sidebar-width;
     top:0px;
     left:0px;
-    bottom:0px;
+    bottom:43px;
+    overflow-y: scroll;
 
     .filter{
       margin:20px;
@@ -100,25 +103,6 @@ h3{
         color:$text-color;
       }
     }
-
-    footer{
-      position:absolute;
-      bottom:0px;
-      left: 0px;
-      right: 0px;
-      border-top:1px solid $border-color;
-      background-color:#f7f7f7;
-      height:42px;
-
-      h3{
-        font-weight: normal;
-        font-size:10px;
-      }
-      small{
-        font-size: 10px;
-        color: $legend-color;
-      }
-    }
   }
 
   .results{
@@ -126,6 +110,8 @@ h3{
     top:0px;
     left:211px;
     right:0px;
+    bottom:0px;
+    overflow-y:scroll; 
 
     .row{
       position:relative;
@@ -207,4 +193,23 @@ h3{
     height: 60px;
     background-color: #f3fcff;
     border-bottom:1px solid $border-color;
+}
+footer{
+  position:absolute;
+  bottom:0px;
+  left: 0px;
+  width: $sidebar-width;
+  border-top:1px solid $border-color;
+  background-color:#f7f7f7;
+  height:42px;
+  border-right:1px solid $border-color;
+
+  h3{
+    font-weight: normal;
+    font-size:10px;
+  }
+  small{
+    font-size: 10px;
+    color: $legend-color;
+  }
 }
