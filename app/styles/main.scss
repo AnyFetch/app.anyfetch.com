@@ -80,19 +80,70 @@ h3{
     top:0px;
     left:211px;
     right:0px;
+
     .row{
-      .icon-types{
-        width:43px;
-        height:56px;
+      position:relative;
+      width:100%;
+      height:90px;
+      border-bottom:1px solid $border-color;
+      background:#FFFFFF url('../images/arrow.png') no-repeat right center;
+
+      .icon{
+        position: absolute;
+        width:85px;
+        top:0px;
+        left:0px;
+        margin-left:20px;
+        margin-top:10px;
+
+        .icon-types{
+          width:43px;
+          height:56px;
+        }
+
+        .icon-provider{
+          position: absolute;
+          bottom:-12px;
+          left:-12px;
+          width:23px;
+          height:23px;
+        }
+        @import "../images/icon-provider/*.png";
+        @include all-icon-provider-sprites;
+        @import "../images/icon-types/*.png";
+        @include all-icon-types-sprites;
       }
-      .icon-provider{
-        width:23px;
-        height:23px;
+
+      .details{
+        position: absolute;
+        left:85px;
+        top:0px;
+        right:180px;
+
+        h2{
+          font-weight: normal;
+          color:#676767;
+          font-size:16px;
+          margin:10px 0 0 0;
+        }
+
+        p{
+          font-size:14px;
+          color:#adadad;
+          margin:0;
+          strong{
+            color:$primary-color;
+          }
+        }
       }
-      @import "../images/icon-provider/*.png";
-      @include all-icon-provider-sprites;
-      @import "../images/icon-types/*.png";
-      @include all-icon-types-sprites;
+      .date{
+        position:absolute;
+        color:#adadad;
+        right:20px;
+        width:160px;
+        line-height:90px;
+        font-size:12px;
+      }
 
     }
   }
