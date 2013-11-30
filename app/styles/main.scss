@@ -80,6 +80,21 @@ h3{
     top:0px;
     left:211px;
     right:0px;
+    .row{
+      .icon-types{
+        width:43px;
+        height:56px;
+      }
+      .icon-provider{
+        width:23px;
+        height:23px;
+      }
+      @import "../images/icon-provider/*.png";
+      @include all-icon-provider-sprites;
+      @import "../images/icon-types/*.png";
+      @include all-icon-types-sprites;
+
+    }
   }
 
 }
