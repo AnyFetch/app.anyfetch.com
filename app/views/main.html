@@ -1,106 +1,120 @@
-<div class="container">
-  <!-- HEADER -->
-  <header class="header">
-    <div class="small-logo"></div>
-    <div class="menu">
-      <a href="#">Settings</a> | 
-      <a href="#">Support</a> | 
-      <a href="#"><img src="images/avatar.png" width="30px" height="30px"/> Tata ▾</a>
-    </div>
-  </header>
-  <!-- SEARCH -->
-  <section class="search-box">
-    <form ng-submit="search()">
-     <h3>Fetch</h3>
-      <input type="text" value="" placeholder="Search" ng-model="textSearch"  speech x-webkit-speech/>
-    </form>
+<nav class="top-bar">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+      <a href="/"><div class="small-logo"></div> anyFetch</a>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href=""><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="divider"></li>
+      <li> <a href="#">Settings</a> </li>
+      <li class="divider"></li>
+      <li> <a href="#">Support</a> </li>
+      <li class="divider"></li>
+      <li><a href="#"><img src="images/avatar.png" width="30px" height="30px"/> Tata ▾</a></li>
+    </ul>
   </section>
-  <section class="content">
-    <!-- LEFT FILTERS -->
-    <aside class="filters">
+</nav>
 
-      <div class="filter">
-        <h3>What</h3>
-        <div class="row">
-          <input type="checkbox" checked name="type[document]" id="type-document"/> <label for="type-document">Document</label>
-        </div>
-        <div class="row">
-          <input type="checkbox" checked name="type[image]" id="type-image"/> <label for="type-image">Image</label>
-        </div>
-        <div class="row">
-          <input type="checkbox" checked name="type[spreadsheet]" id="type-spreadsheet"/> <label for="type-spreadsheet">Spreadsheet</label>
-        </div>
-        <div class="row">
-          <input type="checkbox" checked name="type[mail]" id="type-mail"/> <label for="type-mail">Mail</label>
-        </div>
-      </div>
+<!-- SEARCH -->
+<section class="search-box">
+  <form ng-submit="search(textSearch)">
+   <h3>Fetch</h3>
+    <input type="text" value="" placeholder="Search" ng-model="textSearch"  speech x-webkit-speech/>
+  </form>
+</section>
 
-      <div class="filter">
-        <h3>Where</h3>
-        <div class="row">
-          <input type="checkbox" checked name="provider[dropbox]" id="provider-dropbox"/> <label for="provider-dropbox">Dropbox</label>
-        </div>
-        <div class="row">
-          <input type="checkbox" checked name="provider[evernote]" id="provider-evernote"/> <label for="provider-evernote">Evernote</label>
-        </div>
-        <div class="row">
-          <input type="checkbox" checked name="provider[gdrive]" id="provider-gdrive"/> <label for="provider-gdrive">Google Drive</label>
-        </div>
-        <div class="row">
-          <input type="checkbox" checked name="provider[gmail]" id="provider-gmail"/> <label for="provider-gmail">Gmail</label>
-        </div>
-      </div>
+<section class="wrapper">
+  <!-- LEFT FILTERS -->
+  <aside class="filters">
 
-      <div class="filter">
-        <h3>When</h3>
-        <div class="row">
-          <select>
-            <option value="anytime">Anytime</option>
-            <option value="today">Today</option>
-            <option value="week">This Week</option>
-            <option value="month">This Month</option>
-            <option value="year">This Year</option>
-          </select>
-        </div>
+    <div class="filter">
+      <h3>What</h3>
+      <div class="row">
+        <input type="checkbox" checked name="type[document]" id="type-document"/> <label for="type-document">Document</label>
       </div>
-
-      <div class="filter">
-        <h3>How</h3>
-        <div class="row">
-          <select>
-            <option value="time">Time</option>
-            <option value="name">Name</option>
-          </select>
-        </div>
+      <div class="row">
+        <input type="checkbox" checked name="type[image]" id="type-image"/> <label for="type-image">Image</label>
       </div>
-    </aside>
-
-    <!-- RESULT ROWS -->
-    <article class="results">
-      <div class="loading" ng-hide="!loading">
-        Loading...
+      <div class="row">
+        <input type="checkbox" checked name="type[spreadsheet]" id="type-spreadsheet"/> <label for="type-spreadsheet">Spreadsheet</label>
       </div>
-      <div class="loaded" ng-hide="loading">
-        <div class="row" ng-repeat="result in results">
-          <div class="icon">
-            <div class="icon-types icon-types-{{result | infoItem:'type'}}"></div>
-            <div class="icon-provider icon-provider-{{result | infoItem:'provider'}}"></div>
-          </div>
-          <div class="details">
-            <h2 ng-bind-html='result.datas.title'></h2>
-            <p ng-bind-html='result.datas.snippet'>{{result.datas.snippet}}</p>
-          </div>
-          <div class="date">{{result.creation_date | niceDate}}</div>
-          <div class="separator"></div>
-        </div>
+      <div class="row">
+        <input type="checkbox" checked name="type[mail]" id="type-mail"/> <label for="type-mail">Mail</label>
       </div>
-    </article>
-  </section>
-  <footer>
-    <div class="icon-status">
-      <div class="state loading"></div>
     </div>
-    <h3>Status</h3>
-    <small>Updating...</small>
-  </footer>
-</div>
+
+    <div class="filter">
+      <h3>Where</h3>
+      <div class="row">
+        <input type="checkbox" checked name="provider[dropbox]" id="provider-dropbox"/> <label for="provider-dropbox">Dropbox</label>
+      </div>
+      <div class="row">
+        <input type="checkbox" checked name="provider[evernote]" id="provider-evernote"/> <label for="provider-evernote">Evernote</label>
+      </div>
+      <div class="row">
+        <input type="checkbox" checked name="provider[gdrive]" id="provider-gdrive"/> <label for="provider-gdrive">Google Drive</label>
+      </div>
+      <div class="row">
+        <input type="checkbox" checked name="provider[gmail]" id="provider-gmail"/> <label for="provider-gmail">Gmail</label>
+      </div>
+    </div>
+
+    <div class="filter">
+      <h3>When</h3>
+      <div class="row">
+        <select>
+          <option value="anytime">Anytime</option>
+          <option value="today">Today</option>
+          <option value="week">This Week</option>
+          <option value="month">This Month</option>
+          <option value="year">This Year</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter">
+      <h3>How</h3>
+      <div class="row">
+        <select>
+          <option value="time">Time</option>
+          <option value="name">Name</option>
+        </select>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RESULT ROWS -->
+  <article class="results">
+    <div class="loading" ng-hide="!loading">
+      Loading...
+    </div>
+    <div class="loaded" ng-hide="loading">
+      <div class="row" ng-repeat="result in results">
+        <div class="icon">
+          <div class="icon-types icon-types-{{result | infoItem:'type'}}"></div>
+          <div class="icon-provider icon-provider-{{result | infoItem:'provider'}}"></div>
+        </div>
+        <div class="details">
+          <h2 ng-bind-html='result.datas.title'></h2>
+          <p ng-bind-html='result.datas.snippet'>{{result.datas.snippet}}</p>
+        </div>
+        <div class="date">{{result.creation_date | niceDate}}</div>
+        <div class="separator"></div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<footer>
+  <div class="icon-status">
+    <div class="state loading"></div>
+  </div>
+  <h3>Status</h3>
+  <small>Updating...</small>
+</footer>

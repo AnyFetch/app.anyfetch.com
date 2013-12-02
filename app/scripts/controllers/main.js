@@ -3,14 +3,14 @@
 angular.module('anyfetchFrontApp')
 	.controller('MainCtrl', function ($scope, $http) {
 
-		$scope.search = function () {
+		$scope.search = function (query) {
 			// DEBUG
 			$scope.userName = 'test@papiel.fr';
 			$scope.userPass = 'arf';
 
 			$scope.loading = true;
 
-			var searchUrl = 'http://api.anyfetch.com/documents?search='+$scope.textSearch+'&limit=50';
+			var searchUrl = 'http://api.anyfetch.com/documents?search='+query+'&limit=50';
 			var basicAuthBase64 = btoa($scope.userName+':'+$scope.userPass);
 			console.log(basicAuthBase64);
 

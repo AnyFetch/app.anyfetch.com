@@ -1,111 +1,73 @@
+@import
+"compass/css3",
+"settings",
+"foundation/scss/foundation";
 
-/** VARIABLES **/
-$primary-color : #2a9ad6;
-$legend-color : #adadad;
-$border-color : #b7b7b7;
-$text-color : #676767;
+// -----------------------------------------------------
+//          General
+// -----------------------------------------------------
 
-$sidebar-width : 210px;
-
-/** ANIMATIONS **/
-@keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
-
-/** STYLE **/
-body{
-  padding:0px;
-  margin:0px;
-  font-family:Helvetica;
-}
-
-h3{
+h3 {
   text-transform:uppercase;
-  color: $primary-color;
   font-size: 12px;
-  margin:0;
-  padding:0;
 }
-.header{
-  width:100%;
-  height:60px;
-  background-color: $primary-color;
 
-  a{
-    color: inherit;
-    text-decoration: none;
-  }
+.top-bar {
 
-  img{
+  img {
     vertical-align: middle;
   }
 
-  .small-logo{
+  .small-logo {
     position: absolute;
     background: transparent url('../images/small-logo.png');
-    width: 42px;
-    height: 42px;
+    width: 35px;
+    height: 35px;
     left: 20px;
-    top:9px;
+    top:5px;
   }
-
-  .menu{
-    position: absolute;
-    width:400px;
-    height:70px;
-    top:0px;
-    right:0px;
-    line-height:60px;
-    font-size:12px;
-    color:#FFF;
-    text-align: right;
-    padding-right:30px;
-  }
-
 }
 
-.search-box{
+// -----------------------------------------------------
+//          Search box
+// -----------------------------------------------------
+
+.search-box {
   position:relative;
+  width: 100%;
   height: 60px;
-  h3{
+  background-color: #f3fcff;
+  border-bottom:1px solid $secondary-color;
+  
+  h3 {
     margin-left:20px;
     padding-top:5px;
   }
-  input{
-    position:absolute;
-    background-color: transparent;
-    border:0;
-    left:20px;
-    right:20px;
-    top:15px;
-    bottom:0px;
-    font-size: 30px;
-    color:$text-color;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica;
-    outline: none;
 
+  input {
+    text-indent: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
   }
 }
 
-.content{
-  position:absolute;
-  width:100%;
-  top: 121px;
-  bottom:0px;
-  left:0px;
+// -----------------------------------------------------
+//          Content
+// -----------------------------------------------------
 
-  .filters{
-    position:absolute;
-    background-color:#f3f3f3;
-    border-right:1px solid $border-color;
-    width:$sidebar-width;
-    top:0px;
-    left:0px;
-    bottom:43px;
+.wrapper {
+  height: 100%;
+
+  .filters {
+    background-color: #f3f3f3;
+    border-right:1px solid $secondary-color;
+    width: $sidebar-width;
     overflow-y: auto;
 
-    .filter{
+    .filter {
       margin:20px;
 
-      .row{
+      .row {
         font-size:12px;
         color:$text-color;
       }
@@ -183,28 +145,27 @@ h3{
         float:right;
       }
       .separator{
-        border-bottom:1px solid $border-color;
+        border-bottom:1px solid $secondary-color;
         clear:both;
       }
     }
   }
 
 }
-.search-box{
-    width: 100%;
-    height: 60px;
-    background-color: #f3fcff;
-    border-bottom:1px solid $border-color;
-}
+
+// -----------------------------------------------------
+//          Footer
+// -----------------------------------------------------
+
 footer{
   position:absolute;
   bottom:0px;
   left: 0px;
   width: $sidebar-width;
-  border-top:1px solid $border-color;
+  border-top:1px solid $secondary-color;
   background-color:#f7f7f7;
   height:42px;
-  border-right:1px solid $border-color;
+  border-right:1px solid $secondary-color;
 
   .icon-status{
     position:relative;
