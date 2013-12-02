@@ -1,3 +1,5 @@
+
+/** VARIABLES **/
 $primary-color : #2a9ad6;
 $legend-color : #adadad;
 $border-color : #b7b7b7;
@@ -114,42 +116,38 @@ h3{
     overflow-y:auto; 
 
     .row{
-      position:relative;
       width:100%;
-      height:90px;
-      border-bottom:1px solid $border-color;
+      background: #FFF url('../images/arrow.png') no-repeat calc(100% - 10px) center;
 
       .icon{
-        position: absolute;
-        width:85px;
-        top:0px;
-        left:0px;
-        margin-left:20px;
-        margin-top:10px;
+        position:relative;
+        width:55px;
+        height:68px;
+        margin:10px 20px 10px 20px;
+        float:left;
 
         .icon-types{
           width:43px;
           height:56px;
+          margin-left:12px;
         }
+        @import "../images/icon-types/*.png";
+        @include all-icon-types-sprites;
 
         .icon-provider{
           position: absolute;
-          bottom:-12px;
-          left:-12px;
+          bottom:0px;
+          left:0px;
           width:23px;
           height:23px;
         }
         @import "../images/icon-provider/*.png";
         @include all-icon-provider-sprites;
-        @import "../images/icon-types/*.png";
-        @include all-icon-types-sprites;
       }
 
       .details{
-        position: absolute;
-        left:85px;
-        top:0px;
-        right:180px;
+        display:table;
+        margin-right:180px;
 
         h2{
           font-weight: normal;
@@ -172,21 +170,16 @@ h3{
         }
       }
       .date{
-        position:absolute;
         color:#adadad;
-        right:50px;
-        width:160px;
-        line-height:90px;
+        margin:10px 30px 0 0;
+        width:140px;
         font-size:12px;
         text-align:right;
+        float:right;
       }
-      .arrow{
-        position:absolute;
-        width:10px;
-        height:20px;
-        background: transparent url('../images/arrow.png') no-repeat;
-        right:10px;
-        top:35px;
+      .separator{
+        border-bottom:1px solid $border-color;
+        clear:both;
       }
     }
   }
