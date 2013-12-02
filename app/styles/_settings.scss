@@ -1,7 +1,7 @@
 // 
 // FOUNDATION SETTINGS
 //
-
+$transitionable-prefixed-values: transform-origin;
 // Uncomment to use rem-calc() in your settings
 // @import "foundation/functions";
 
@@ -51,8 +51,7 @@ $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 
 // We use these as default colors throughout
 $primary-color: #2a9ad6;
-$legend-color: #adadad;
-$secondary-color: #b7b7b7;
+$secondary-color: #ddd;
 $text-color: #676767;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
@@ -501,7 +500,7 @@ $input-include-glowing-effect: false;
 
 // Off Canvas Menu Variables
 // $off-canvas-width: 250px;
-// $off-canvas-bg: #333;
+$off-canvas-bg: #ddd;
 
 // Off Canvas Menu List Variables
 // $off-canvas-label-padding: 0.3rem rem-calc(15);
@@ -517,8 +516,8 @@ $input-include-glowing-effect: false;
 // $off-canvas-link-border-bottom: 1px solid darken($off-canvas-bg, 5%);
 
 // Off Canvas Menu Icon Variables
-// $tabbar-menu-icon-color: #FFF;
-// $tabbar-menu-icon-hover: darken($tabbar-menu-icon-color, 30%);
+$tabbar-menu-icon-color: #000;
+$tabbar-menu-icon-hover: lighten(#000, 30%);
 
 // $tabbar-menu-icon-text-indent: rem-calc(35);
 // $tabbar-menu-icon-width: $tabbar-height;
@@ -531,14 +530,14 @@ $input-include-glowing-effect: false;
 // $tabbar-hamburger-icon-top: rem-calc(5);
 
 // Off Canvas Back-Link Overlay
-// $off-canvas-overlay-transition: background 300ms ease;
+$off-canvas-overlay-transition: background 300ms ease;
 // $off-canvas-overlay-cursor: pointer;
-// $off-canvas-overlay-box-shadow: -4px 0 4px rgba(#000, 0.5), 4px 0 4px rgba(#000, 0.5);
+$off-canvas-overlay-box-shadow: -2px 0 15px rgba(#000, 0.2), 2px 0 15px rgba(#000, 0.2);
 // $off-canvas-overlay-background: rgba(#FFF, 0.2);
 // $off-canvas-overlay-background-hover: rgba(#FFF, 0.05);
 
 // Transition Variabls
-// $menu-slide: "transform 500ms ease";
+$menu-slide: "transform 0.5s ease";
 
 // Orbit
 

@@ -27,4 +27,6 @@ angular.module('anyfetchFrontApp')
 			});
 
 		};
+
+		$scope.search('style');
 	});

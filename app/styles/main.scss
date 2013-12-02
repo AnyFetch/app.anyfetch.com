@@ -7,7 +7,7 @@
 //          General
 // -----------------------------------------------------
 
-html, body {
+html, body, .container, .wrapper>.row, .off-canvas-wrap, .inner-wrap {
   height: 100%;
 }
 
@@ -16,21 +16,15 @@ h3 {
   font-size: 12px;
 }
 
-.top-bar {
-
-  img {
-    vertical-align: middle;
-  }
-
-  .small-logo {
-    position: absolute;
-    background: transparent url('../images/small-logo.png');
-    width: 35px;
-    height: 35px;
-    left: 20px;
-    top:5px;
-  }
+.small-logo {
+  position: absolute;
+  background: transparent url('../images/small-logo.png');
+  width: 35px;
+  height: 35px;
+  left: 20px;
+  top:5px;
 }
+
 
 // -----------------------------------------------------
 //          Search box
@@ -42,6 +36,10 @@ h3 {
   height: 60px;
   background-color: #f3fcff;
   border-bottom:1px solid $secondary-color;
+
+  &>.row {
+    position: relative;
+  }
   
   h3 {
     margin-left:20px;
@@ -68,15 +66,20 @@ h3 {
 .wrapper {
   position:absolute;
   width:100%;
-  top: 121px;
+  top: 105px;
   bottom:0px;
   left:0px;
 
+  .inner-wrap {
+    -webkit-transition: -webkit-#{$menu-slide};
+    -moz-transition: -moz-#{$menu-slide};
+    -ms-transition: -ms-#{$menu-slide};
+    -o-transition: -o-#{$menu-slide};
+    // transition: #{$menu-slide};
+  }
+
   .filters {
-    background-color: #f3f3f3;
-    border-right:1px solid $secondary-color;
-    width: $sidebar-width;
-    overflow-y: auto;
+    border-right: 1px solid $secondary-color;
 
     .filter {
       margin:20px;
@@ -89,11 +92,6 @@ h3 {
   }
 
   .results{
-    position:absolute;
-    top:0px;
-    left:211px;
-    right:0px;
-    bottom:0px;
     overflow-y:auto; 
 
     .row{
@@ -139,7 +137,7 @@ h3 {
 
         p{
           font-size:14px;
-          color:$legend-color;
+          color:$secondary-color;
           margin:0;
           strong{
             color:$primary-color;
@@ -157,10 +155,6 @@ h3 {
         font-size:12px;
         text-align:right;
         float:right;
-      }
-      .separator{
-        border-bottom:1px solid $secondary-color;
-        clear:both;
       }
     }
   }
@@ -219,6 +213,6 @@ footer{
     font-size: 10px;
     padding:0;
     margin: 0;
-    color: $legend-color;
+    color: $secondary-color;
   }
 }
