@@ -7,6 +7,10 @@
 //          General
 // -----------------------------------------------------
 
+html, body {
+  height: 100%;
+}
+
 h3 {
   text-transform:uppercase;
   font-size: 12px;
@@ -44,10 +48,16 @@ h3 {
     padding-top:5px;
   }
 
-  input {
-    text-indent: 20px;
-    margin-bottom: 20px;
-    font-size: 20px;
+  form {
+    height: 100%;
+
+    input {
+      position:absolute;
+      text-indent: 20px;
+      top:15px;
+      bottom:0px;
+      font-size: 20px;
+    }
   }
 }
 
@@ -56,7 +66,11 @@ h3 {
 // -----------------------------------------------------
 
 .wrapper {
-  height: 100%;
+  position:absolute;
+  width:100%;
+  top: 121px;
+  bottom:0px;
+  left:0px;
 
   .filters {
     background-color: #f3f3f3;
@@ -158,8 +172,8 @@ h3 {
 // -----------------------------------------------------
 
 footer{
-  position:absolute;
-  bottom:0px;
+  position: absolute;
+  bottom: 0px;
   left: 0px;
   width: $sidebar-width;
   border-top:1px solid $secondary-color;
@@ -192,7 +206,6 @@ footer{
       width: 22px;
       height: 16px;
       animation:spin 4s linear infinite;
-
     }
 
   }
