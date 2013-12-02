@@ -7,6 +7,10 @@ $text-color : #676767;
 
 $sidebar-width : 210px;
 
+/** ANIMATIONS **/
+@keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+
+/** STYLE **/
 body{
   padding:0px;
   margin:0px;
@@ -17,7 +21,8 @@ h3{
   text-transform:uppercase;
   color: $primary-color;
   font-size: 12px;
-  margin:0px;
+  margin:0;
+  padding:0;
 }
 .header{
   width:100%;
@@ -201,12 +206,45 @@ footer{
   height:42px;
   border-right:1px solid $border-color;
 
+  .icon-status{
+    position:relative;
+    background-image: url('../images/icon-footer-status.png');
+    background-repeat:no-repeat;
+    width: 35px;
+    height:27px;
+    margin:10px 10px 0px 10px;
+    float:left;
+
+    .state{
+      position:absolute;
+      background-repeat:no-repeat;
+      bottom:0px;
+      right:0px;
+    }
+    .state.ok{
+      background-image: url('../images/icon-footer-status-ok.png');
+      width: 18px;
+      height: 14px;
+    }
+    .state.loading{
+      background-image: url('../images/icon-footer-status-loading.png');
+      width: 22px;
+      height: 16px;
+      animation:spin 4s linear infinite;
+
+    }
+
+  }
+
   h3{
     font-weight: normal;
     font-size:10px;
+    margin-top:10px;
   }
   small{
     font-size: 10px;
+    padding:0;
+    margin: 0;
     color: $legend-color;
   }
 }
