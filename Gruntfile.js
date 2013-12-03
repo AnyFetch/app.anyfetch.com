@@ -8,6 +8,8 @@
 // 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
+  // Grunt bower install: Inject your Bower dependencies right into your HTML from Grunt
+  grunt.loadNpmTasks('grunt-bower-install');
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
@@ -39,10 +41,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
       },
-      styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
-      },
+      // styles: {
+      //   files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+      //   tasks: ['newer:copy:styles', 'autoprefixer']
+      // },
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -359,6 +361,42 @@ module.exports = function (grunt) {
         },
         src: 'dist'
       },
+    },
+
+    'bower-install': {
+      target: {
+
+        // Point to the html file that should be updated
+        // when you run `grunt bower-install`
+        html: 'app/index.html',
+
+        // Optional:
+        // ---------
+
+        // If your file paths shouldn't contain a certain
+        // portion of a url, it can be excluded
+        //
+        //   default: ''
+        ignorePath: 'app/',
+
+        // Customize how your stylesheets are included on
+        // your page.
+        //
+        //   default: '<link rel="stylesheet" href="{{filePath}}" />'
+        cssPattern: '<link href="{{filePath}}" rel="stylesheet">',
+
+        // Customize how your <script>s are included into
+        // your HTML file.
+        //
+        //   default: '<script src="{{filePath}}"></script>'
+        jsPattern: '<script type="text/javascript" src="{{filePath}}"></script>',
+
+        // An array of strings or regular expressions to
+        // exclude from your HTML file.
+        //
+        //   default: [],
+        exclude: []
+      }
     }
 
   });
