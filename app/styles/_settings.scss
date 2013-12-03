@@ -932,10 +932,11 @@ $menu-slide: "transform 0.5s ease";
 
 // Background color for the top bar
 $topbar-bg-color: $primary-color;
+$topbar-link-bg-hover: darken($primary-color, 5%);
 $topbar-bg: $topbar-bg-color;
 
 // Height and margin
-// $topbar-height: 40px;
+$topbar-height: 47px;
 // $topbar-margin-bottom: 0;
 
 // Control Input height for top bar
@@ -945,7 +946,7 @@ $topbar-bg: $topbar-bg-color;
 // $topbar-title-font-size: rem-calc(17);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: #333;
+$topbar-dropdown-bg: $primary-color;
 // $topbar-dropdown-link-color: #000;
 // $topbar-dropdown-link-bg: #333;
 // $topbar-dropdown-toggle-size: 5px;

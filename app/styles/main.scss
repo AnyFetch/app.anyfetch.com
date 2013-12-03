@@ -3,6 +3,12 @@
 "settings",
 "foundation/scss/foundation";
 
+@mixin svg-background($img, $width, $height) {
+  background-image: inline-image($img + ".svg");
+  background-size: $width $height;
+  background-repeat:no-repeat;
+}
+
 // -----------------------------------------------------
 //          General
 // -----------------------------------------------------
@@ -16,13 +22,36 @@ h3 {
   font-size: 12px;
 }
 
-.small-logo {
-  position: absolute;
-  background: transparent url('../images/small-logo.png');
-  width: 35px;
-  height: 35px;
-  left: 20px;
-  top:5px;
+
+
+// -----------------------------------------------------
+//          Header
+// -----------------------------------------------------
+
+.top-bar{
+  .small-logo {
+    position: absolute;
+    background: transparent url('../images/small-logo.png');
+    width: 35px;
+    height: 35px;
+    left: 20px;
+    top:5px;
+  }
+  .text-logo{
+    color:#FFF;
+    position: absolute;
+    left: 60px;
+    top:7px;
+  }
+  .h-icon{
+    width:20px;
+    height:20px;
+  }
+  @each $icon in settings, cloud, support {
+    .h-icon.#{$icon} {
+      @include svg-background("icon-header/"+quote($icon), 20px, 20px);
+    }
+  }
 }
 
 
