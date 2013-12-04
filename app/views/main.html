@@ -13,10 +13,11 @@
     <ul class="right">
       <li class="divider"></li>
       <li> <a href="#">
-        <div class="header-icon cloud">
+        <div class="header-icon cloud has-tip" data-tooltip title="Providers Updated !">
           <div class="state ok"></div>
         </div>
       </a> </li>
+
       <li class="divider"></li>
       <li> <a href="#"> <div class="header-icon settings"></div></a> </li>
       <li class="divider"></li>
@@ -154,13 +155,13 @@
         <div class="large-9 medium-9 columns">
           <article class="results">
             <div class="loading" ng-hide="!loading">
-              Loading...
+              <div class="loading-icon"></div> Loading...
             </div>
             <div class="loaded" ng-hide="loading">
               <div class="result-row" ng-repeat="result in results">
                 <div class="icon">
-                  <div class="icon-types icon-types-{{result.document_type}}"></div>
-                  <div class="icon-provider icon-provider-{{provStatus[result.token].application}}"></div>
+                  <div class="icon-types type-{{result.document_type}}"></div>
+                  <div class="icon-provider provider-{{provStatus[result.token].application}}"></div>
                 </div>
                 <div class="details">
                   <h2 ng-bind-html='result.datas.title'></h2>

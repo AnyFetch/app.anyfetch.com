@@ -33,7 +33,7 @@ h3 {
 .top-bar{
   .small-logo {
     position: absolute;
-    background: transparent url('../images/small-logo.png');
+    @include svg-background("logo", 35px, 35px);
     width: 35px;
     height: 35px;
     left: 20px;
@@ -72,7 +72,7 @@ h3 {
     @include svg-background("icon-header/loading", 16px, 16px);
     width: 16px;
     height: 16px;
-    animation:spin 4s linear infinite;
+    animation:antispin 4s linear infinite;
   }
 
 }
@@ -94,7 +94,7 @@ h3 {
   }
   
   h3 {
-    margin-left:20px;
+    margin-left:17px;
     padding-top:5px;
   }
 
@@ -152,6 +152,20 @@ h3 {
     border-right: 1px solid $border-color;
     background-color:#fff;
 
+    .loading{
+      padding:30px 0px 30px 0px;
+      text-align: center;
+      font-size:18px;
+      color: #ddd;
+
+      .loading-icon{
+        display: inline-block;
+        @include svg-background("spinner", 16px, 16px);
+        width: 16px;
+        height: 16px;
+        animation:spin 2s linear infinite;
+      }
+    }
     .result-row{
       position:relative;
       width:100%;
@@ -168,7 +182,7 @@ h3 {
 
       &:first-child{
         border-top: 0px;
-      }
+      } 
 
       .icon{
         position:relative;
@@ -182,20 +196,26 @@ h3 {
           height:56px;
           margin-left:12px;
         }
-        // @import "../images/icon-types/*.png";
-        // @include all-icon-types-sprites;
+        @each $type in "5252ce4ce4cfcd16f55cfa3b", "5252ce4ce4cfcd16f55cfa3c", "5252ce4ce4cfcd16f55cfa3d", "5252ce4ce4cfcd16f55cfa3f" {
+          .type-#{$type} {
+            @include svg-background("icon-types/"+quote($type), 43px, 56px);
+          }
+        }
 
         .icon-provider{
           position: absolute;
           bottom:0px;
           left:0px;
-          width:23px;
-          height:23px;
+          width:20px;
+          height:20px;
         }
-        // @import "../images/icon-provider/*.png";
-        // @include all-icon-provider-sprites;
+        @each $provider in "525eaa1603a470782b000001", "5252cedd03a470843f000004", "5267cff903a470d5f9000006" {
+          .provider-#{$provider} {
+            @include svg-background("icon-provider/"+quote($provider), 20px, 20px);
+          }
+        }
       }
-
+      
 
       .details{
         display:table;
@@ -232,60 +252,4 @@ h3 {
     }
   }
 
-}
-
-// -----------------------------------------------------
-//          Footer
-// -----------------------------------------------------
-
-footer{
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  width: $sidebar-width;
-  border-top:1px solid $border-color;
-  background-color:#f7f7f7;
-  height:42px;
-  border-right:1px solid $border-color;
-
-  .icon-status{
-    position:relative;
-    background-image: url('../images/icon-footer-status.png');
-    background-repeat:no-repeat;
-    width: 35px;
-    height:27px;
-    margin:10px 10px 0px 10px;
-    float:left;
-
-    .state{
-      position:absolute;
-      background-repeat:no-repeat;
-      bottom:0px;
-      right:0px;
-    }
-    .state.ok{
-      background-image: url('../images/icon-footer-status-ok.png');
-      width: 18px;
-      height: 14px;
-    }
-    .state.loading{
-      background-image: url('../images/icon-footer-status-loading.png');
-      width: 22px;
-      height: 16px;
-      animation:spin 4s linear infinite;
-    }
-
-  }
-
-  h3{
-    font-weight: normal;
-    font-size:10px;
-    margin-top:10px;
-  }
-  small{
-    font-size: 10px;
-    padding:0;
-    margin: 0;
-    color: $secondary-color;
-  }
 }
