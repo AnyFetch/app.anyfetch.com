@@ -13,14 +13,14 @@
     <ul class="right">
       <li class="divider"></li>
       <li> <a href="#">
-        <div class="h-icon cloud">
-          <div class="status ok"></div>
+        <div class="header-icon cloud">
+          <div class="state ok"></div>
         </div>
       </a> </li>
       <li class="divider"></li>
-      <li> <a href="#"> <div class="h-icon settings"></div></a> </li>
+      <li> <a href="#"> <div class="header-icon settings"></div></a> </li>
       <li class="divider"></li>
-      <li> <a href="#"><div class="h-icon support"></div></li>
+      <li> <a href="#"><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
       <li><a href="#"><img src="images/avatar.png" width="30px" height="30px"/> Tata</a></li>
     </ul>
@@ -55,39 +55,39 @@
           <div class="filters">
             <div class="filter">
               <h3>What</h3>
-              <div class="row">
+              <div class="element">
                 <input type="checkbox" checked name="type[document]" id="type-document"/> <label for="type-document">Document</label>
               </div>
-              <div class="row">
+              <div class="element">
                 <input type="checkbox" checked name="type[image]" id="type-image"/> <label for="type-image">Image</label>
               </div>
-              <div class="row">
+              <div class="element">
                 <input type="checkbox" checked name="type[spreadsheet]" id="type-spreadsheet"/> <label for="type-spreadsheet">Spreadsheet</label>
               </div>
-              <div class="row">
+              <div class="element">
                 <input type="checkbox" checked name="type[mail]" id="type-mail"/> <label for="type-mail">Mail</label>
               </div>
             </div>
 
             <div class="filter">
               <h3>Where</h3>
-              <div class="row">
+              <div class="element">
                 <input type="checkbox" checked name="provider[dropbox]" id="provider-dropbox"/> <label for="provider-dropbox">Dropbox</label>
               </div>
-              <div class="row">
+              <div class="element">
                 <input type="checkbox" checked name="provider[evernote]" id="provider-evernote"/> <label for="provider-evernote">Evernote</label>
               </div>
-              <div class="row">
+              <div class="element">
                 <input type="checkbox" checked name="provider[gdrive]" id="provider-gdrive"/> <label for="provider-gdrive">Google Drive</label>
               </div>
-              <div class="row">
+              <div class="element">
                 <input type="checkbox" checked name="provider[gmail]" id="provider-gmail"/> <label for="provider-gmail">Gmail</label>
               </div>
             </div>
 
             <div class="filter">
               <h3>How</h3>
-              <div class="row">
+              <div class="element">
                 <select>
                   <option value="time">Time</option>
                   <option value="name">Name</option>
@@ -102,39 +102,39 @@
             <div class="sidebar">
               <div class="filter">
                 <h3>What</h3>
-                <div class="row">
+                <div class="element">
                   <input type="checkbox" checked name="type[document]" id="type-document"/> <label for="type-document">Document</label>
                 </div>
-                <div class="row">
+                <div class="element">
                   <input type="checkbox" checked name="type[image]" id="type-image"/> <label for="type-image">Image</label>
                 </div>
-                <div class="row">
+                <div class="element">
                   <input type="checkbox" checked name="type[spreadsheet]" id="type-spreadsheet"/> <label for="type-spreadsheet">Spreadsheet</label>
                 </div>
-                <div class="row">
+                <div class="element">
                   <input type="checkbox" checked name="type[mail]" id="type-mail"/> <label for="type-mail">Mail</label>
                 </div>
               </div>
 
               <div class="filter">
                 <h3>Where</h3>
-                <div class="row">
+                <div class="element">
                   <input type="checkbox" checked name="provider[dropbox]" id="provider-dropbox"/> <label for="provider-dropbox">Dropbox</label>
                 </div>
-                <div class="row">
+                <div class="element">
                   <input type="checkbox" checked name="provider[evernote]" id="provider-evernote"/> <label for="provider-evernote">Evernote</label>
                 </div>
-                <div class="row">
+                <div class="element">
                   <input type="checkbox" checked name="provider[gdrive]" id="provider-gdrive"/> <label for="provider-gdrive">Google Drive</label>
                 </div>
-                <div class="row">
+                <div class="element">
                   <input type="checkbox" checked name="provider[gmail]" id="provider-gmail"/> <label for="provider-gmail">Gmail</label>
                 </div>
               </div>
 
               <div class="filter">
                 <h3>How</h3>
-                <div class="row">
+                <div class="element">
                   <select>
                     <option value="time">Time</option>
                     <option value="name">Name</option>
@@ -148,7 +148,7 @@
 
 
         <!-- //////////////////////////////////////////////
-                Main content: result rows
+                Main content: result elements
             ////////////////////////////////////////////// -->
 
         <div class="large-9 medium-9 columns">
@@ -157,7 +157,7 @@
               Loading...
             </div>
             <div class="loaded" ng-hide="loading">
-              <div class="row" ng-repeat="result in results">
+              <div class="result-row" ng-repeat="result in results">
                 <div class="icon">
                   <div class="icon-types icon-types-{{result.document_type}}"></div>
                   <div class="icon-provider icon-provider-{{provStatus[result.token].application}}"></div>
@@ -166,6 +166,7 @@
                   <h2 ng-bind-html='result.datas.title'></h2>
                   <p ng-bind-html='result.datas.snippet'></p>
                 </div>
+                <div class="clearer"></div>
               </div>
             </div>
           </article>
@@ -177,10 +178,3 @@
     </div>
   </div>
 </div>
-
-<footer>
-  <div class="icon-status">
-    <div class="state loading"></div>
-  </div>
-  <h3>Status <small>Updating...</small></h3>
-</footer>
