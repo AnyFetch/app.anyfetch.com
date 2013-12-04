@@ -139,8 +139,8 @@ h3 {
           height:56px;
           margin-left:12px;
         }
-        @import "../images/icon-types/*.png";
-        @include all-icon-types-sprites;
+        // @import "../images/icon-types/*.png";
+        // @include all-icon-types-sprites;
 
         .icon-provider{
           position: absolute;
@@ -149,8 +149,8 @@ h3 {
           width:23px;
           height:23px;
         }
-        @import "../images/icon-provider/*.png";
-        @include all-icon-provider-sprites;
+        // @import "../images/icon-provider/*.png";
+        // @include all-icon-provider-sprites;
       }
 
       .details{
