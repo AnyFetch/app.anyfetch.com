@@ -22,18 +22,19 @@ angular.module('anyfetchFrontApp')
 		};
 
 		$scope.search = function (query) {
+			var apiQuery = 'documents?search='+query+'&limit=50';
 			$scope.loading = true;
-
-			$scope.apiCall(
-				'documents?search='+query+'&limit=50',
-				function(data, status, headers, config) {
-					console.log(data, status, headers(), config);
-					$scope.results = data.datas;
-
+			$scope.apiCall(apiQuery, function(data) {
+					$scope.results = data.datas.map($scope.mustacheTemplate);
 					$scope.loading = false;
 				});
 		};
 
+		$scope.mustacheTemplate = function(result) {
+			var htmlTemplate = $scope.docTypes[result.document_type].template_snippet;
+			var templatedResult = Mustache.render(htmlTemplate, result.datas);
+			return templatedResult;
+		};
 
 		// ----------------- Main -----------------
 
@@ -41,15 +42,13 @@ angular.module('anyfetchFrontApp')
 		$scope.userName = 'test@papiel.fr';
 		$scope.userPass = 'arf';
 
-		$scope.apiCall(
-			'',
-			function(data) {
-				console.log(data);
+		$scope.apiCall('', function(data) {
 
-				$scope.docTypes = data.document_types;
-				$scope.provStatus = data.provider_status;
-				$scope.userName = data.name;
-			});
+			$scope.docTypes = data.document_types;
+			$scope.provStatus = data.provider_status;
+			$scope.userName = data.name;
 
-		$scope.search('style');
+			// DEBUG
+			$scope.search('style');
+		});
 	});

@@ -163,10 +163,7 @@
                   <div class="icon-types type-{{result.document_type}}"></div>
                   <div class="icon-provider provider-{{provStatus[result.token].application}}"></div>
                 </div>
-                <div class="details">
-                  <h2 ng-bind-html='result.datas.title'></h2>
-                  <p ng-bind-html='result.datas.snippet'></p>
-                </div>
+                <div class="details" ng-bind-html='result'></div>
                 <div class="clearer"></div>
               </div>
             </div>
