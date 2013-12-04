@@ -31,25 +31,10 @@ angular.module('anyfetchFrontApp')
 		};
 
 		$scope.mustacheTemplate = function(result) {
-			console.log(result);
 			var htmlTemplate = $scope.docTypes[result.document_type].template_snippet;
 			var templatedResult = Mustache.render(htmlTemplate, result.datas);
 			return templatedResult;
 		};
-
-		// $scope.$watch('results', function() {
-		// 	$scope.results.forEach(function(result) {
-		// 		console.log(result);
-
-		// 		// var template = $scope.document_types[result.datas.document_type];
-
-		// 		// console.log(template);
-		// 		// var output = Mustache.render($scope.document_types[document_type], result.datas);
-		// 	});
-
-		// 	// document.getElementById('person').innerHTML = output;
-		// });
-
 
 		// ----------------- Main -----------------
 
