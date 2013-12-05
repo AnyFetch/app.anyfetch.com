@@ -4,7 +4,7 @@
 //                 Angular Directives
 //--------------------------------------------------------------
 
-angular.module('anyfetchFrontApp.filters', []).
+angular.module('anyfetchFrontApp.directives', []).
 	directive('snippet', function() {
 		var mustacheTemplate = function(result, template) {
 			return Mustache.render(template, result.datas);
