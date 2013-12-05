@@ -351,7 +351,6 @@ module.exports = function (grunt) {
       }
     },
 
-
     buildcontrol: {
       options: {
         dir: 'dist',
@@ -361,7 +360,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:Papiel/anyfetch-front.git',
+          remote: 'https://github.com/Papiel/anyfetch-front.git',
           branch: 'gh-pages'
         }
       },
