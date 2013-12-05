@@ -25,7 +25,7 @@ angular.module('anyfetchFrontApp')
 			var apiQuery = 'documents?search='+query+'&limit=50';
 			$scope.loading = true;
 			$scope.apiCall(apiQuery, function(data) {
-					$scope.results = data.datas.map($scope.mustacheTemplate);
+					$scope.results = data.datas;
 					$scope.loading = false;
 				});
 		};

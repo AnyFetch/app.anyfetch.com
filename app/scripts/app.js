@@ -8,7 +8,8 @@ angular.module('anyfetchFrontApp', [
   'ngCookies',
   'ngResource',
   'ngRoute',
-  'anyfetchFrontApp.filters'
+  'anyfetchFrontApp.filters',
+  'anyfetchFrontApp.directives'
 ])
   .config(function ($routeProvider, $sceProvider, $locationProvider) {
     $routeProvider
