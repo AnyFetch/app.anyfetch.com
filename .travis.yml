@@ -11,8 +11,8 @@ script:
 - grunt build
 after_success:
 - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-- git config credential.helper "store --file=.git/credentials"
-- echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+- git config credential.helper "store --file=$HOME/.git/credentials"
+- echo "https://${GH_TOKEN}:@github.com" > $HOME/.git/credentials
 - grunt deploy
 env:
   global:
