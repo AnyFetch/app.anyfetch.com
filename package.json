@@ -1,7 +1,7 @@
 {
   "name": "anyfetch-front",
   "version": "0.1.0",
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/Papiel/anyfetch-front"
   },
@@ -44,7 +44,8 @@
     "karma-requirejs": "~0.2.0",
     "karma-phantomjs-launcher": "~0.1.1",
     "karma": "~0.10.6",
-    "karma-ng-html2js-preprocessor": "~0.1.0"
+    "karma-ng-html2js-preprocessor": "~0.1.0",
+    "grunt-build-control": "~0.1.2"
   },
   "engines": {
     "node": ">=0.8.0"

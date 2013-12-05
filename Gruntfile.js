@@ -351,16 +351,17 @@ module.exports = function (grunt) {
       }
     },
 
-    git_deploy: {
-      your_target: {
-        options: {
-          url: 'git@github.com:Papiel/anyfetch-front.git',
-          branch: 'gh-pages',
-        },
-        src: 'dist'
+
+    buildcontrol: {
+      options: {
+        dir: 'dist',
+        commit: true,
+        push: true,
+        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%',
+        remote: 'git@github.com:Papiel/anyfetch-front.git',
+        branch: 'gh-pages'
       },
     },
-
   });
 
 
@@ -415,4 +416,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.loadNpmTasks('grunt-build-control');
 };
