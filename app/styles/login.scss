@@ -6,7 +6,7 @@
 $height-login : 280px;
 
 body{
-	background-color: $primary-color;
+	background-color: $light-primary-color;
 }
 .wrapper{
 	margin-top:100px;
@@ -28,9 +28,15 @@ body{
 		input{
 			&[type="email"], &[type="password"]{
 				background-color: $light-bg;
-				border:1px solid $border-color;
 			}
 		}
+		.button{
+			background-color: $alternative-color;
+			&:hover{
+				background-color: darken($alternative-color,10%);
+			}
+		}
+		
 		label{
 			color:#FFFFFF;
 		}

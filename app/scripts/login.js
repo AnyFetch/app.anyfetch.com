@@ -1,40 +1,10 @@
 'use strict';
 
 var cookie_life = 365; //Days
-var cookie = {
-	set : function(c_name, value, exdays) {
-		var exdate = new Date();
-		exdate.setDate(exdate.getDate() + exdays);
-		var c_value = escape(value) + ((exdays===null) ? '' : '; expires=' + exdate.toUTCString());
-		document.cookie = c_name + '=' + c_value;
-	},
-
-	get : function(c_name) {
-		var c_value = document.cookie;
-		var c_start = c_value.indexOf(' ' + c_name + '=');
-		if (c_start === -1) {
-			c_start = c_value.indexOf(c_name + '=');
-		}
-		if (c_start === -1) {
-			c_value = null;
-		} else {
-			c_start = c_value.indexOf('=', c_start) + 1;
-			var c_end = c_value.indexOf(';', c_start);
-			if (c_end === -1) {
-				c_end = c_value.length;
-			}
-			c_value = unescape(c_value.substring(c_start, c_end));
-		}
-		return c_value;
-	}
-};
 
 $(document).ready(function(){
-	if(cookie.get('credentials') !== null){
-		document.location.href = '/app.html';
-	}
 	$('#login_form').submit(function(){
-		var expiration = $('#remember').is(':checked') ? null : cookie_life ;
+		var expiration = $('#remember').is(':checked') ? cookie_life : null ;
 		cookie.set('credentials', btoa($('#email').val() + ':' + $('#password').val()), expiration);
 		document.location.href = '/app.html';
 		return false;

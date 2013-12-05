@@ -31,7 +31,7 @@
         <input name="password" id="password" type="password" placeholder="Password" required />
         <input type="checkbox" id="remember"/> <label for="remember">Remember me</label>
         <div class="right">
-          <input type="submit" id="login" class="button small right radius add-border" value="Login" />
+          <input type="submit" id="login" class="button small right radius" value="Login" />
           <a href="http://settings.anyfetch.com/sign_up" class="sign_up">Sign up</a>
         </div>
       </form>
@@ -43,6 +43,8 @@
   <script src="bower_components/jquery/jquery.js"></script>
 
   <!-- build:js({.tmp,app}) scripts/login.js -->
+  <script src="scripts/cookie.js"></script>
+  <script src="scripts/connect.js"></script>
   <script src="scripts/login.js"></script>
   <!-- endbuild -->
 
