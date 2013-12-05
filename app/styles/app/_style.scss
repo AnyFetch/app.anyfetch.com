@@ -1,8 +1,3 @@
-@import
-"compass/css3",
-"settings",
-"foundation/scss/foundation";
-
 @mixin svg-background($img, $width, $height) {
   background-image: inline-image($img + ".svg");
   background-size: $width $height;
