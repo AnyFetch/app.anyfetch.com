@@ -9,11 +9,3 @@ before_script:
 - gem install compass
 script:
 - grunt build
-after_success:
-- echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-- git config credential.helper "store --file=$HOME/.git/credentials"
-- echo "https://${GH_TOKEN}:@github.com" > $HOME/.git/credentials
-- grunt deploy
-env:
-  global:
-    secure: NqjRbj2FyDFxw5lTaG/JC4gVegA/7c7TFZdsGlu3bKfCCZPqokeIjoJnR2q69EkxNtqo5kZU0TogJBPEAKwXbZDSuufjrnPzOCf0CjmgwZ4GMXQ1Xd1smEtACpp+fMZT3h027pA9HFFbedPO+fQ4rYSrRDw9RQsIo9yBmB2Bnvk=
