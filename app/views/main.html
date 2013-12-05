@@ -159,12 +159,7 @@
             </div>
             <div class="loaded" ng-hide="loading">
               <div class="result-row" ng-repeat="result in results">
-                <div class="icon">
-                  <div class="icon-types type-{{result.document_type}}"></div>
-                  <div class="icon-provider provider-{{provStatus[result.token].application}}"></div>
-                </div>
-                <div class="details" ng-bind-html='result'></div>
-                <div class="clearer"></div>
+                <snippet result="result" documenttypes="docTypes" providers="provStatus"></snippet>
               </div>
             </div>
           </article>

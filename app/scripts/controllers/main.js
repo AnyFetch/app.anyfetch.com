@@ -25,7 +25,7 @@ angular.module('anyfetchFrontApp')
 			var apiQuery = 'documents?search='+query+'&limit=50';
 			$scope.loading = true;
 			$scope.apiCall(apiQuery, function(data) {
-					$scope.results = data.datas.map($scope.mustacheTemplate);
+					$scope.results = data.datas;
 					$scope.loading = false;
 				});
 		};
@@ -51,4 +51,23 @@ angular.module('anyfetchFrontApp')
 			// DEBUG
 			$scope.search('style');
 		});
+	}).directive('snippet', function() {
+
+		var mustacheTemplate = function(result, template) {
+			return Mustache.render(template, result.datas);
+		};
+
+		return {
+			restrict: 'E',
+			scope: {
+				result: '=',
+				documenttypes: '=',
+				providers: '='
+			},
+			templateUrl: 'views/template snippet.html',
+			link : function(scope, element, attrs) {
+				var htmlTemplate = scope.documenttypes[scope.result.document_type].template_snippet;
+				scope.snippetText = mustacheTemplate(scope.result, htmlTemplate);
+			}
+		};
 	});
