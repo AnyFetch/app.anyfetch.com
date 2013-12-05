@@ -106,7 +106,7 @@
               <div class="loading-icon"></div> Loading...
             </div>
             <div class="loaded" ng-hide="loading">
-              <div class="result-row" ng-repeat="result in results" ngShow="result | filtersResult:this">
+              <div class="result-row" ng-repeat="result in results" ng-show="result | filtersResult:this">
                 <div class="icon">
                   <div class="icon-types type-{{result.document_type}}"></div>
                   <div class="icon-provider provider-{{provStatus[result.token].application}}"></div>

@@ -17,4 +17,21 @@ filter('niceDate', function() {
       return '';
     }
   };
+})
+.filter('capitalizeFirst', function() {
+  return function(string) {
+    if (string) {
+      string = string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    return string;
+  };
+})
+.filter('filtersResult', function() {
+  return function(result, scope) {
+    var selectedDoc = (scope.filterType[result.document_type] === true);
+    var selectedProv = (scope.filterProv[result.token] === true);
+    console.log(selectedDoc, selectedProv);
+    return selectedDoc && selectedProv;
+  };
 });

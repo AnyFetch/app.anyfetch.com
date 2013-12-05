@@ -52,11 +52,19 @@ angular.module('anyfetchFrontApp')
 		$scope.apiCall('', function(data) {
 
 			$scope.docTypes = data.document_types;
+			for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
+				$scope.filterType[Object.keys($scope.docTypes)[i]] = true;
+			}
+
 			$scope.provStatus = data.provider_status;
+			for(var j = 0; j < Object.keys($scope.provStatus).length; j++) {
+				$scope.filterProv[Object.keys($scope.provStatus)[j]] = true;
+			}
+
 			$scope.userName = data.name;
 
-			console.info($scope.docTypes);
-			console.info($scope.provStatus);
+			console.log($scope.docTypes, $scope.provStatus);
+			console.log($scope.filterType, $scope.filterProv);
 
 			// DEBUG
 			$scope.search('style');
