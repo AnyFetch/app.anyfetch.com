@@ -236,11 +236,16 @@ h3 {
 
 	.excel-file .glass table {
 		position:absolute;
-		top: -43px;
-		left: -70px;
+		top: -32px;
+		left: -76px;
 		background-color: white;
 		font-size: 24px;
 		text-align: center;
+
+		tr td  {
+			padding: 0.8625rem 0.725rem;
+			font-size: 1.3rem;
+		}
 	}
 }
 
@@ -270,6 +275,10 @@ h3 {
 			top: -48px;
 			left: -95px;
 			font-size: 28px;
+		}
+		.excel-file .glass table tr td  {
+			padding: 1.2rem 0.825rem;
+			font-size: 1.6rem;
 		}
 		.word-icon, .excel-icon {width: 180px;}
 		.pdf-file .glass {@include transition-delay(.9s);}
@@ -362,7 +371,7 @@ h3 {
 	}
 	.mc-field-group .button {
 		float:left; 
-		height: 32px;
+		height: 38px;
 		line-height: 9px; 
 		border-radius: 0 5px 5px 0;
 	}
