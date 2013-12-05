@@ -1,13 +1,16 @@
 language: node_js
 node_js:
-  - '0.10'
+- '0.10'
 install:
-  - npm install
+- npm install
 before_script:
-  - npm install -g bower grunt-cli
-  - bower install
-  - gem install compass
+- npm install -g bower grunt-cli
+- bower install
+- gem install compass
 script:
-  - grunt build
+- grunt build
 after_success:
-  - grunt deploy
+- grunt deploy
+env:
+  global:
+    secure: bOAQH7naAncFG6/NiHOPtzENmYjrxUFJT9Y8SMDGRZaGjnLkNLSquvNdTjLzP5upLMqaje7VL4R4YeJRkx5cyHZT91BkhSPWSb3mVKOm7W7wXZ5hdnCpzApH47j13gOr4WgW6vEFMTbqWCDw38R7bBgToDu948/mTtYaQZ7y61U=
