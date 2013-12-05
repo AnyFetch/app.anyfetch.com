@@ -412,7 +412,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('deploy', [
-    'git_deploy'
+    'buildcontrol:pages '
   ]);
 
   grunt.registerTask('default', [
