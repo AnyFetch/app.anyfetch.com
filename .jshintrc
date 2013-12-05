@@ -1,5 +1,5 @@
 {
-  "node": true,
+  "node": false,
   "browser": true,
   "esnext": true,
   "bitwise": true,
@@ -23,6 +23,8 @@
     "$": false,
     "jQuery": false,
     "Mustache": false,
-    "ga": false
+    "ga": false,
+    "escape": false,
+    "unescape": false
   }
 }

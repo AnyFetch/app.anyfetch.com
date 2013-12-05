@@ -106,18 +106,8 @@
               <div class="loading-icon"></div> Loading...
             </div>
             <div class="loaded" ng-hide="loading">
-<<<<<<< HEAD
               <div class="result-row" ng-repeat="result in results">
                 <snippet result="result" documenttypes="docTypes" providers="provStatus"></snippet>
-=======
-              <div class="result-row" ng-repeat="result in results" ng-show="result | filtersResult:this">
-                <div class="icon">
-                  <div class="icon-types type-{{result.document_type}}"></div>
-                  <div class="icon-provider provider-{{provStatus[result.token].application}}"></div>
-                </div>
-                <div class="details">{{result.datas.title}}</div>
-                <div class="clearer">{{result.document_type}}</div>
->>>>>>> filters
               </div>
             </div>
           </article>
