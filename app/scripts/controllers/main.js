@@ -27,6 +27,8 @@ angular.module('anyfetchFrontApp')
 			$scope.apiCall(apiQuery, function(data) {
 					$scope.results = data.datas.map($scope.mustacheTemplate);
 					$scope.loading = false;
+
+					console.log($scope.results);
 				});
 		};
 
@@ -42,11 +44,19 @@ angular.module('anyfetchFrontApp')
 		$scope.userName = 'test@papiel.fr';
 		$scope.userPass = 'arf';
 
+		// Init
+		$scope.Object = Object;
+		$scope.filterType = {};
+		$scope.filterProv = {};
+
 		$scope.apiCall('', function(data) {
 
 			$scope.docTypes = data.document_types;
 			$scope.provStatus = data.provider_status;
 			$scope.userName = data.name;
+
+			console.info($scope.docTypes);
+			console.info($scope.provStatus);
 
 			// DEBUG
 			$scope.search('style');
