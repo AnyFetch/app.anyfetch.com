@@ -6,7 +6,8 @@ install:
 before_script:
   - npm install -g bower grunt-cli
   - bower install
+  - gem install compass
 script:
   - grunt build
-after_script:
+after_success:
   - grunt deploy
