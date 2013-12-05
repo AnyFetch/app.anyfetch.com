@@ -10,7 +10,9 @@ before_script:
 script:
 - grunt build
 after_success:
-- grunt deploy
+  - git config user.email $GIT_EMAIL
+  - git config user.name $GIT_NAME
+  - grunt deploy
 env:
   global:
     secure: bOAQH7naAncFG6/NiHOPtzENmYjrxUFJT9Y8SMDGRZaGjnLkNLSquvNdTjLzP5upLMqaje7VL4R4YeJRkx5cyHZT91BkhSPWSb3mVKOm7W7wXZ5hdnCpzApH47j13gOr4WgW6vEFMTbqWCDw38R7bBgToDu948/mTtYaQZ7y61U=
