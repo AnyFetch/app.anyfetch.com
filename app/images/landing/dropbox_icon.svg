@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="drawing" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="252.725px" height="253.064px" viewBox="1 1 252.725 253.064" enable-background="new 1 1 252.725 253.064"
+	 xml:space="preserve">
+<rect id="contour" x="0" display="none" fill="#4AA3EF" width="240.667" height="241"/>
+<path fill="#91BCCC" d="M253.725,242.065c0,6.627-5.373,12-12,12H25.058c-6.627,0-12-5.373-12-12v-217c0-6.627,5.373-12,12-12
+	h216.667c6.627,0,12,5.373,12,12V242.065z"/>
+<path fill="#4AA3EF" d="M241.667,230c0,6.627-5.373,12-12,12H13c-6.627,0-12-5.373-12-12V13C1,6.373,6.373,1,13,1h216.667
+	c6.627,0,12,5.373,12,12V230z"/>
+<polygon fill="#FFFFFF" points="38.333,74.667 71.416,103.25 120.333,70.667 86.166,42.334 "/>
+<polyline fill="#FFFFFF" points="122.416,70.75 156.416,42.334 204.478,74.563 171.416,103.25 122.416,70.938 "/>
+<polygon fill="#FFFFFF" points="171.416,104.563 121.916,136.938 156.291,165.438 204.353,132.625 "/>
+<polygon fill="#FFFFFF" points="71.666,165.812 71.666,173.875 121.334,204.438 171.416,173.625 171.416,165.438 156.416,174.938 
+	121.334,145.562 86.478,174.375 "/>
+<polygon fill="#FFFFFF" points="38.333,132.334 71.666,104.251 120.333,136.751 86.583,165.438 "/>
+</svg>
