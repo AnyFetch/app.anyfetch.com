@@ -10,7 +10,7 @@ function writeInputTop(text) {
     if (text.length > 0) {
       // Get previous text and insert the new one
       var previous = $('#search-input').text();
-      $('#search-input').text(previous + text.charAt(0)); 
+      $('#search-input').text(previous + text.charAt(0));
 
       // Call another time the text
       text = text.substring(1);
@@ -21,7 +21,7 @@ function writeInputTop(text) {
       clearTimeout(timeOut);
     }
   },100);
-};
+}
 
 
 // -----------------------
@@ -44,34 +44,34 @@ function initOnePageScroll() {
   // Init the Onepage-scroll plugin
   var lastCurrentIndex;
 
-  $(".main").onepage_scroll({
-    sectionContainer: "section",
-    easing: "ease",
+  $('.main').onepage_scroll({
+    sectionContainer: 'section',
+    easing: 'ease',
     animationTime: 1000,
     pagination: true,
     updateURL: false,
     loop: false,
     beforeMove: function (index) {
 
-      if (index != 1) {
-        $('#search-input').text(""); 
-      };
+      if (index !== 1) {
+        $('#search-input').text('');
+      }
     },
-    afterMove: function (index,key) {
-     var key = $(".active").data("index");
-     if(lastCurrentIndex != index){
-      lastCurrentIndex = index;
-      console.log(index+"--"+key);
-      ga('send', 'event', 'landingHome', 'slide', index+"--"+key);
+    afterMove: function (index) {
+      var key = $('.active').data('index');
+      if(lastCurrentIndex !== index){
+        lastCurrentIndex = index;
+        console.log(index+'--'+key);
+        ga('send', 'event', 'landingHome', 'slide', index+'--'+key);
 
-      if ($('body').hasClass('viewing-page-1') && !inputInUse) {
-        inputInUse = true;
-        $('#search-input').text(""); 
-        writeInputTop("Invoice 421");
-      };
+        if ($('body').hasClass('viewing-page-1') && !inputInUse) {
+          inputInUse = true;
+          $('#search-input').text('');
+          writeInputTop('Invoice 421');
+        }
+      }
     }
-  }
-});
+  });
 }
 
 
@@ -82,5 +82,5 @@ $(document).ready(function() {
   if ($(window).width() > 600 && $(window).height() > 500) {
     initOnePageScroll();
   }
-  writeInputTop("Invoice 421");
+  writeInputTop('Invoice 421');
 });
