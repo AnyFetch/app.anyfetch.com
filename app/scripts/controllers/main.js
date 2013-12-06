@@ -40,6 +40,9 @@ angular.module('anyfetchFrontApp')
 		// ----------------- Main -----------------
 
 		$rootScope.credentials = $cookies.credentials;
+		if (!$rootScope.credentials) {
+			document.location.href = '/login.html';
+		}
 
 		// Init
 		$scope.Object = Object;
