@@ -10,7 +10,8 @@ angular.module('anyfetchFrontApp')
 		// ----------------- Géneral functions -----------------
 
 		$scope.apiCall = function(query, callback) {
-			var searchUrl = 'http://api.anyfetch.com/'+query;
+			var searchUrl = 'http://api.anyfetch.com'+query;
+			var basicAuthBase64 = btoa($scope.userName+':'+$scope.userPass);
 
 			$http.defaults.headers.common.Authorization = 'Basic ' + $rootScope.credentials;
 			$http({method: 'GET', url: searchUrl})
@@ -21,7 +22,7 @@ angular.module('anyfetchFrontApp')
 		};
 
 		$scope.search = function (query) {
-			var apiQuery = 'documents?search='+query+'&limit=50';
+			var apiQuery = '/documents?search='+query+'&limit=50';
 			$scope.loading = true;
 			$scope.apiCall(apiQuery, function(data) {
 					$scope.results = data.datas;
@@ -49,7 +50,7 @@ angular.module('anyfetchFrontApp')
 		$scope.filterType = {};
 		$scope.filterProv = {};
 
-		$scope.apiCall('', function(data) {
+		$scope.apiCall('/', function(data) {
 
 			$scope.docTypes = data.document_types;
 			for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
