@@ -5,13 +5,12 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies) {
+	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location) {
 
 		// ----------------- Géneral functions -----------------
 
 		$scope.apiCall = function(query, callback) {
 			var searchUrl = 'http://api.anyfetch.com'+query;
-			// var basicAuthBase64 = btoa($scope.userName+':'+$scope.userPass);
 
 			$http.defaults.headers.common.Authorization = 'Basic ' + $rootScope.credentials;
 			$http({method: 'GET', url: searchUrl})
@@ -27,8 +26,7 @@ angular.module('anyfetchFrontApp')
 			$scope.apiCall(apiQuery, function(data) {
 					$scope.results = data.datas;
 					$scope.loading = false;
-
-					console.log($scope.results);
+					$location.search('q', $scope.textSearch);
 				});
 		};
 
@@ -69,7 +67,10 @@ angular.module('anyfetchFrontApp')
 			console.log($scope.docTypes, $scope.provStatus);
 			console.log($scope.filterType, $scope.filterProv);
 
-			// DEBUG
-			$scope.search('style');
+
+			if ($location.search().q) {
+				$scope.textSearch = $location.search().q;
+				$scope.search($location.search().q);
+			}
 		});
 	});

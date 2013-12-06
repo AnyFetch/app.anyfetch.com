@@ -15,7 +15,8 @@ angular.module('anyfetchFrontApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        reloadOnSearch: false
       })
       .otherwise({
         redirectTo: '/'
