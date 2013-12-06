@@ -55,7 +55,7 @@ h3 {
     width:20px;
     height:20px;
   }
-  @each $icon in settings, cloud, support {
+  @each $icon in logout, cloud, support {
     .header-icon.#{$icon} {
       @include svg-background("icon-header/"+quote($icon), 20px, 20px);
     }
