@@ -11,7 +11,7 @@ angular.module('anyfetchFrontApp')
 
 		$scope.apiCall = function(query, callback) {
 			var searchUrl = 'http://api.anyfetch.com'+query;
-			var basicAuthBase64 = btoa($scope.userName+':'+$scope.userPass);
+			// var basicAuthBase64 = btoa($scope.userName+':'+$scope.userPass);
 
 			$http.defaults.headers.common.Authorization = 'Basic ' + $rootScope.credentials;
 			$http({method: 'GET', url: searchUrl})
@@ -32,10 +32,16 @@ angular.module('anyfetchFrontApp')
 				});
 		};
 
-		$scope.mustacheTemplate = function(result) {
-			var htmlTemplate = $scope.docTypes[result.document_type].template_snippet;
-			var templatedResult = Mustache.render(htmlTemplate, result.datas);
-			return templatedResult;
+		$scope.setFilterDocs = function(value) {
+			for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
+				$scope.filterType[Object.keys($scope.docTypes)[i]] = value;
+			}
+		};
+
+		$scope.setFilterProv = function(value) {
+			for(var j = 0; j < Object.keys($scope.provStatus).length; j++) {
+				$scope.filterProv[Object.keys($scope.provStatus)[j]] = value;
+			}
 		};
 
 		// ----------------- Main -----------------
@@ -53,14 +59,10 @@ angular.module('anyfetchFrontApp')
 		$scope.apiCall('/', function(data) {
 
 			$scope.docTypes = data.document_types;
-			for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
-				$scope.filterType[Object.keys($scope.docTypes)[i]] = true;
-			}
+			$scope.setFilterDocs(true);
 
 			$scope.provStatus = data.provider_status;
-			for(var j = 0; j < Object.keys($scope.provStatus).length; j++) {
-				$scope.filterProv[Object.keys($scope.provStatus)[j]] = true;
-			}
+			$scope.setFilterProv(true);
 
 			$scope.userName = data.name;
 
