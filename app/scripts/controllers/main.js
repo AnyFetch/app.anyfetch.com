@@ -5,7 +5,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies) {
+	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location) {
 
 		// ----------------- Géneral functions -----------------
 
@@ -26,8 +26,7 @@ angular.module('anyfetchFrontApp')
 			$scope.apiCall(apiQuery, function(data) {
 					$scope.results = data.datas;
 					$scope.loading = false;
-
-					console.log($scope.results);
+					$location.search('q', $scope.textSearch);
 				});
 		};
 
@@ -66,7 +65,10 @@ angular.module('anyfetchFrontApp')
 			console.log($scope.docTypes, $scope.provStatus);
 			console.log($scope.filterType, $scope.filterProv);
 
-			// DEBUG
-			$scope.search('style');
+
+			if ($location.search().q) {
+				$scope.textSearch = $location.search().q;
+				$scope.search($location.search().q);
+			}
 		});
 	});
