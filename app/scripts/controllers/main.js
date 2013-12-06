@@ -11,7 +11,6 @@ angular.module('anyfetchFrontApp')
 
 		$scope.apiCall = function(query, callback) {
 			var searchUrl = 'http://api.anyfetch.com'+query;
-			var basicAuthBase64 = btoa($scope.userName+':'+$scope.userPass);
 
 			$http.defaults.headers.common.Authorization = 'Basic ' + $rootScope.credentials;
 			$http({method: 'GET', url: searchUrl})
