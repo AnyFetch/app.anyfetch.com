@@ -1,5 +1,6 @@
 'use strict';
-var cookie = {
+
+window.cookie = {
 	set : function(c_name, value, exdays) {
 		var exdate = new Date();
 		exdate.setDate(exdate.getDate() + exdays);

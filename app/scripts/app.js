@@ -11,15 +11,14 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.filters',
   'anyfetchFrontApp.directives'
 ])
-  .config(function ($routeProvider, $sceProvider, $locationProvider) {
+  .config(function ($routeProvider, $sceProvider) {
     $routeProvider
-      .when('/app', {
+      .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
       .otherwise({
-        redirectTo: '/app'
+        redirectTo: '/'
       });
     $sceProvider.enabled(false);
-    $locationProvider.html5Mode(true);
   });

@@ -5,15 +5,14 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-	.controller('MainCtrl', function ($scope, $http) {
+	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies) {
 
 		// ----------------- Géneral functions -----------------
 
 		$scope.apiCall = function(query, callback) {
 			var searchUrl = 'http://api.anyfetch.com/'+query;
-			var basicAuthBase64 = btoa($scope.userName+':'+$scope.userPass);
 
-			$http.defaults.headers.common.Authorization = 'Basic ' + basicAuthBase64;
+			$http.defaults.headers.common.Authorization = 'Basic ' + $rootScope.credentials;
 			$http({method: 'GET', url: searchUrl})
 			.success(callback)
 			.error(function(data) {
@@ -40,9 +39,7 @@ angular.module('anyfetchFrontApp')
 
 		// ----------------- Main -----------------
 
-		// DEBUG
-		$scope.userName = 'test@papiel.fr';
-		$scope.userPass = 'arf';
+		$rootScope.credentials = $cookies.credentials;
 
 		// Init
 		$scope.Object = Object;
