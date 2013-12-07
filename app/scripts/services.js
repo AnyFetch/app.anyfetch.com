@@ -5,8 +5,15 @@ angular.module('anyfetchFrontApp.services', [])
 	var currentUser;
 
 	var login = function(user, success, error) {
+		console.log('try to login');
 		// Creation of the user credential
-		var credentials = btoa(user.email + ':' + user.password);
+
+		var credentials;
+		if (user) {
+			credentials = btoa(user.email + ':' + user.password);
+		} else {
+			credentials = $cookies.credentials;
+		}
 
 		// Check the user credentials validity
 		$http.defaults.headers.common.Authorization = 'Basic ' + credentials;
@@ -14,7 +21,8 @@ angular.module('anyfetchFrontApp.services', [])
 			.success(function(data) {
 				data.credentials = credentials;
 				currentUser = data;
-				success();
+				$cookies.credentials = credentials;
+				success(currentUser);
 			})
 			.error(error);
 	};
@@ -24,7 +32,21 @@ angular.module('anyfetchFrontApp.services', [])
 		cb();
 	};
 
-	var isLoggedin = function() { return currentUser ? true : false; };
+	var isLoggedin = function(success, error) {
+		if (currentUser !== undefined ) {
+			success();
+		} else if ($cookies.credentials) {
+			login(null, function() {
+				success();
+			},
+			function() {
+				$cookieStore.remove('credentials');
+				error();
+			});
+		} else {
+			error();
+		}
+	};
 
 	return {
 		login: login,

@@ -61,11 +61,15 @@ angular.module('anyfetchFrontApp', [
       $rootScope.error = null;
 
       // Check if the user is connected
-      if( AuthService.isLoggedin() ) {
-        $location.path('/');
-      } else {
-        $location.path('/login');
-      }
+      AuthService.isLoggedin(
+        function() {
+          $location.path('/');
+        },
+        function() {
+          console.log('Not Loggedin');
+          $location.path('/login');
+        }
+      );
 
     });
   });

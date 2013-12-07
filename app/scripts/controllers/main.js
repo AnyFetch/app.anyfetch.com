@@ -5,7 +5,10 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function () {
+.controller('MainCtrl', function ($rootScope, AuthService) {
+  
+  console.log($rootScope.currentUser);
+
 }).controller('LoginCtrl', function ($scope, $rootScope, $location, AuthService) {
 
   $scope.rememberme = true;
@@ -17,7 +20,8 @@ angular.module('anyfetchFrontApp')
       password: $scope.password,
       rememberme: $scope.rememberme
     },
-    function() {
+    function(user) {
+      $rootScope.currentUser = user;
       $location.path('/');
     },
     function() {
