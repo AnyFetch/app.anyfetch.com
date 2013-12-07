@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.services', [])
-.factory( 'AuthService', function($cookies, $cookieStore, $http) {
+.factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http) {
 	var currentUser;
 
 	var login = function() {
@@ -31,13 +31,11 @@ angular.module('anyfetchFrontApp.services', [])
 
 	var isLoggedin = function() { return currentUser ? true : false; };
 
-	var getUser = function() { return currentUser; };
-
 	return {
 		login: login,
 		logout: logout,
 		isLoggedin : isLoggedin,
-		currentUser: getUser
+		currentUser: currentUser
 	};
 })
 .factory( 'ProviderService', function($http, AuthService) {
