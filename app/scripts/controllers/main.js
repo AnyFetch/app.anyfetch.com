@@ -5,7 +5,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location) {
+	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location, AuthService) {
 
 		// ----------------- Géneral functions -----------------
 
@@ -44,6 +44,14 @@ angular.module('anyfetchFrontApp')
 
 		// ----------------- Main -----------------
 
+		$scope.$watch( AuthService.isLoggedin, function ( isLoggedIn ) {
+			$scope.isLoggedIn = isLoggedIn;
+			$scope.currentUser = AuthService.currentUser();
+			console.log($scope.currentUser);
+		});
+
+		AuthService.login();
+
 		$rootScope.credentials = $cookies.credentials;
 		if (!$rootScope.credentials) {
 			document.location.href = '/login.html';
@@ -66,7 +74,6 @@ angular.module('anyfetchFrontApp')
 
 			console.log($scope.docTypes, $scope.provStatus);
 			console.log($scope.filterType, $scope.filterProv);
-
 
 			if ($location.search().q) {
 				$scope.textSearch = $location.search().q;

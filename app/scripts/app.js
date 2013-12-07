@@ -9,7 +9,8 @@ angular.module('anyfetchFrontApp', [
   'ngResource',
   'ngRoute',
   'anyfetchFrontApp.filters',
-  'anyfetchFrontApp.directives'
+  'anyfetchFrontApp.directives',
+  'anyfetchFrontApp.services'
 ])
   .config(function ($routeProvider, $sceProvider) {
     $routeProvider
