@@ -13,7 +13,7 @@ angular.module('anyfetchFrontApp')
   // Login the user to anyfetch
   $scope.login = function() {
     AuthService.login({
-      username: $scope.username,
+      email: $scope.email,
       password: $scope.password,
       rememberme: $scope.rememberme
     },
