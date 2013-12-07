@@ -39,4 +39,31 @@ angular.module('anyfetchFrontApp.services', [])
 		isLoggedin : isLoggedin,
 		currentUser: getUser
 	};
+})
+.factory( 'ProviderService', function($http, AuthService) {
+	var connectedProviders;
+
+	var setProviders = function(providers, cb) {
+		connectedProviders = providers;
+		cb();
+	};
+
+	var updateConnectedProviders = function(cb) {
+		$http.defaults.headers.common.Authorization = 'Basic ' + AuthService.getUser().credentials;
+		$http({method: 'GET', url: 'http://api.anyfetch.com/update'})
+			.success(function(data, status) {
+				if (status !== 204) {
+					return cb(data);
+				}
+				cb(null);
+			})
+			.error(function(data) {
+				cb(data);
+			});
+	};
+
+	return {
+		setProviders: setProviders,
+		updateConnectedProviders: updateConnectedProviders
+	};
 });
