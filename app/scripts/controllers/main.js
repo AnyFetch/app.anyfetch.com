@@ -5,9 +5,15 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function ($rootScope, AuthService) {
+.controller('MainCtrl', function ($rootScope, $scope, $location, AuthService) {
   
-  console.log($rootScope.currentUser);
+  console.log(AuthService.currentUser);
+
+  $scope.logout = function() {
+    AuthService.logout(function() {
+      $location.path('/login');
+    });
+  };
 
 }).controller('LoginCtrl', function ($scope, $rootScope, $location, AuthService) {
 

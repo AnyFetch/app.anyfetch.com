@@ -28,12 +28,14 @@ angular.module('anyfetchFrontApp.services', [])
 	};
 
 	var logout = function(cb) {
+		console.log('loggin out');
+		currentUser = null;
 		$cookieStore.remove('credentials');
 		cb();
 	};
 
 	var isLoggedin = function(success, error) {
-		if (currentUser !== undefined ) {
+		if (currentUser) {
 			success();
 		} else if ($cookies.credentials) {
 			login(null, function() {
