@@ -4,17 +4,17 @@ angular.module('anyfetchFrontApp.services', [])
 .factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http) {
 	var currentUser;
 
-	var login = function(user, sucess, error) {
-		console.log(user.email, user.password);
+	var login = function(user, success, error) {
+		// Creation of the user credential
+		var credentials = btoa(user.email + ':' + user.password);
 
+		// Check the user credentials validity
 		$http.defaults.headers.common.Authorization = 'Basic ' + credentials;
 		$http({method: 'GET', url: 'http://api.anyfetch.com'})
-			.success(function(data, status) {
-				if (status !== 200) {
-					console.log('Error ', data);
-				}
+			.success(function(data) {
 				data.credentials = credentials;
 				currentUser = data;
+				success();
 			})
 			.error(error);
 	};
