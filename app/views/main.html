@@ -61,10 +61,15 @@
                 <div class="filter">
                   <div class="row">
                     <h3 class="large-6 columns">What</h3>
-                    <a class="large-6 columns text-right" ng-click="setFilterDocs(false)">None</a>
+                  </div>
+                  <div class="element" ng-mouseup="setFilterDocs(!filterDocsFull)">
+                    <input type="checkbox" name="type-all" id="type-all" ng-checked="(filterDocsFull === true)"/>
+                    <label>
+                      All
+                    </label>
                   </div>
                   <div class="element" ng-repeat="docType in docTypes">
-                    <label for="type-{{docType.id}}">
+                    <label for="type-{{docType.id}}" ng-click="setFilterDocs(false)" ng-class="{disabled: filterDocsFull}">
                       <input type="checkbox" name="type-{{docType.id}}" ng-model="filterType[docType.id]" id="type-{{docType.id}}"/>
                       {{docType.name | capitalizeFirst}}
                     </label>
@@ -74,11 +79,16 @@
                 <div class="filter">
                   <div class="row">
                     <h3 class="large-6 columns">How</h3>
-                    <a class="large-6 columns text-right" ng-click="setFilterProv(false)">None</a>
+                  </div>
+                  <div class="element">
+                    <label for="prov-all" ng-click="setFilterProv(!filterProvFull)">
+                      <input type="checkbox" name="prov-all" id="prov-all" ng-model="filterProvFull"/>
+                      All
+                    </label>
                   </div>
                   <div class="element" ng-repeat="provStatu in provStatus">
-                    <label for="prov-{{provStatu.id}}">
-                      <input type="checkbox" name="prov-{{provStatu.id}}" ng-model="filterProv[Object.keys(provStatus)[$index]]" id="prov-{{provStatu.id}}"/>
+                    <label for="prov-{{provStatu.id}}" ng-click="setFilterProv(false)" ng-class="{disabled: filterProvFull}">
+                      <input type="checkbox" name="prov-{{provStatu.id}}" ng-model="filterProv[Object.keys(provStatus)[$index]]" id="prov-{{provStatu.id}}" />
                       {{provStatu.name | capitalizeFirst}}
                     </label>
                   </div>

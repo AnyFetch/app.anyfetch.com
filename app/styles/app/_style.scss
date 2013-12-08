@@ -139,6 +139,14 @@ h3 {
     .filter {
       margin:20px 0px 20px 0px;
 
+      .disabled {
+        color: #999;
+      }
+
+      input[type="checkbox"] + label {
+        margin-left: 0.20rem;
+      }
+
       .element {
         margin-left:20px;
         margin-right:20px;

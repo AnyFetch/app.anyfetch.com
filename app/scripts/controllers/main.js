@@ -9,6 +9,7 @@ angular.module('anyfetchFrontApp')
 
 		// ----------------- Géneral functions -----------------
 
+		// !!! Do the $scope.loading management yourself !!!
 		$scope.apiCall = function(query, callback) {
 			var searchUrl = 'http://api.anyfetch.com'+query;
 
@@ -16,7 +17,7 @@ angular.module('anyfetchFrontApp')
 			$http({method: 'GET', url: searchUrl})
 			.success(callback)
 			.error(function(data) {
-				console.log('Error ', data);
+				console.log('Error ', data, query);
 			});
 		};
 
@@ -31,14 +32,24 @@ angular.module('anyfetchFrontApp')
 		};
 
 		$scope.setFilterDocs = function(value) {
-			for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
-				$scope.filterType[Object.keys($scope.docTypes)[i]] = value;
+			$scope.filterDocsFull = value;
+
+			console.info("Filter Docs -> ", value)
+
+			if (value) {
+				for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
+					$scope.filterType[Object.keys($scope.docTypes)[i]] = !value;
+				}
 			}
 		};
 
 		$scope.setFilterProv = function(value) {
-			for(var j = 0; j < Object.keys($scope.provStatus).length; j++) {
-				$scope.filterProv[Object.keys($scope.provStatus)[j]] = value;
+			$scope.filterProvFull = value;
+
+			if (value) {
+				for(var j = 0; j < Object.keys($scope.provStatus).length; j++) {
+					$scope.filterProv[Object.keys($scope.provStatus)[j]] = !value;
+				}
 			}
 		};
 
@@ -54,6 +65,7 @@ angular.module('anyfetchFrontApp')
 		$scope.filterType = {};
 		$scope.filterProv = {};
 
+		$scope.loading = true;
 		$scope.apiCall('/', function(data) {
 
 			$scope.docTypes = data.document_types;
@@ -66,11 +78,16 @@ angular.module('anyfetchFrontApp')
 
 			console.log($scope.docTypes, $scope.provStatus);
 			console.log($scope.filterType, $scope.filterProv);
+			console.log(Object.keys($scope.provStatus)[0]);
+			console.log($scope.filterProv['529c457e03a470cfad000007']);
 
+			$scope.loading = false;
 
 			if ($location.search().q) {
 				$scope.textSearch = $location.search().q;
 				$scope.search($location.search().q);
+			} else {
+				//ZERO STATE
 			}
 		});
 	});

@@ -41,7 +41,7 @@ $transitionable-prefixed-values: transform-origin;
 // We use these to control various global styles
 // $body-bg: #fff;
 $body-font-color: #222;
-$body-font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -972,7 +972,7 @@ $topbar-dropdown-bg: $primary-color;
 // $topbar-link-bg-hover: $primary-color;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: darken($primary-color, 5%);
-// $topbar-link-font-family: $body-font-family;
+$topbar-link-font-family: $body-font-family;
 
 // $topbar-button-font-size: 0.75rem;
 
