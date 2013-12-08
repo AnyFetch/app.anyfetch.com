@@ -1,9 +1,11 @@
-<nav class="top-bar" data-topbar="">
+<nav class="top-bar">
   <ul class="title-area">
     <!-- Title Area -->
     <li class="name">
       <a href="/"><div class="small-logo"></div> <div class="text-logo">any<strong>Fetch</strong></div></a>
     </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href=""><span>Menu</span></a></li>
   </ul>
 
   <section class="top-bar-section">
@@ -17,11 +19,11 @@
       </a> </li>
 
       <li class="divider"></li>
+      <li> <a href="#"> <div class="header-icon settings"></div></a> </li>
+      <li class="divider"></li>
       <li> <a href="#"><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
-      <li><a href="#"><div class="header-icon logout"></div></a></li>
-      <li class="show-for-medium-up divider"></li>
-      <li class="show-for-medium-up"><a href="#"><img src="images/38784cd8.avatar.png" width="30px" height="30px"> {{userName}}</a></li>
+      <li><a href="#"><img src="images/90b4a065.avatar.png" width="30px" height="30px"> {{userName}}</a></li>
     </ul>
   </section>
 </nav>
@@ -59,10 +61,7 @@
             <div class="sidebar">
               <form>
                 <div class="filter">
-                  <div class="row">
-                    <h3 class="large-6 columns">What</h3>
-                    <a class="large-6 columns text-right" ng-click="setFilterDocs(false)">None</a>
-                  </div>
+                  <h3>What</h3>
                   <div class="element" ng-repeat="docType in docTypes">
                     <label for="type-{{docType.id}}">
                       <input type="checkbox" name="type-{{docType.id}}" ng-model="filterType[docType.id]" id="type-{{docType.id}}">
@@ -72,10 +71,7 @@
                 </div>
 
                 <div class="filter">
-                  <div class="row">
-                    <h3 class="large-6 columns">How</h3>
-                    <a class="large-6 columns text-right" ng-click="setFilterProv(false)">None</a>
-                  </div>
+                  <h3>Where</h3>
                   <div class="element" ng-repeat="provStatu in provStatus">
                     <label for="prov-{{provStatu.id}}">
                       <input type="checkbox" name="prov-{{provStatu.id}}" ng-model="filterProv[Object.keys(provStatus)[$index]]" id="prov-{{provStatu.id}}">
@@ -111,7 +107,7 @@
             </div>
             <div class="loaded" ng-hide="loading">
               <div class="result-row" ng-repeat="result in results">
-                <snippet result="result" documenttypes="docTypes" providers="provStatus" ng-show="result | filtersResult:this"></snippet>
+                <snippet result="result" documenttypes="docTypes" providers="provStatus"></snippet>
               </div>
             </div>
           </article>
