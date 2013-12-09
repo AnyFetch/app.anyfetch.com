@@ -21,8 +21,7 @@ angular.module('anyfetchFrontApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        reloadOnSearch: false
+        controller: 'MainCtrl'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -54,22 +53,29 @@ angular.module('anyfetchFrontApp', [
     };
     $httpProvider.responseInterceptors.push(interceptor);
   })
-  .run(function ($rootScope, $location, AuthService) {
+  .run(function ($route, $rootScope, $q, $location, AuthService) {
 
-    $rootScope.$on('$routeChangeStart', function () {
-      // Delete all routing errors
-      $rootScope.error = null;
+    angular.forEach($route.routes,function(value, key) {
+      // console.log(value, key);
+      $route.routes[key].resolve = {};
+      $route.routes[key].resolve.currentUser = function() {
 
-      // Check if the user is connected
-      AuthService.isLoggedin(
-        function() {
-          $location.path('/');
-        },
-        function() {
-          console.log('Not Loggedin');
-          $location.path('/login');
-        }
-      );
+        var deferred = $q.defer();
+
+        // Watch if the current user is connected
+        AuthService.isLoggedin()
+          .then(function(user) {
+            if (user) {
+              $location.path('/');
+              deferred.resolve(user);
+            } else {
+              $location.path('/login');
+              deferred.resolve();
+            }
+          });
+
+        return deferred.promise;
+      };
 
     });
   });

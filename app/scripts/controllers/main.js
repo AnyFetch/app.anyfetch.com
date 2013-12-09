@@ -6,9 +6,9 @@
 
 angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function ($rootScope, $scope, $location, AuthService) {
-  
-  console.log(AuthService.currentUser);
 
+  $scope.user = AuthService.currentUser;
+  
   $scope.logout = function() {
     AuthService.logout(function() {
       $location.path('/login');

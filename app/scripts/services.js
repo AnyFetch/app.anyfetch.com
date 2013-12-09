@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.services', [])
-.factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http) {
-	var currentUser;
+.factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http, $q) {
+	
+	var datas = {
+		currentUser: null
+	};
 
-	var login = function(user, success, error) {
-		console.log('try to login');
+	datas.login = function(user) {
+		var deferred = $q.defer();
+
 		// Creation of the user credential
-
 		var credentials;
 		if (user) {
 			credentials = btoa(user.email + ':' + user.password);
@@ -20,42 +23,48 @@ angular.module('anyfetchFrontApp.services', [])
 		$http({method: 'GET', url: 'http://api.anyfetch.com'})
 			.success(function(data) {
 				data.credentials = credentials;
-				currentUser = data;
+				datas.currentUser = data;
 				$cookies.credentials = credentials;
-				success(currentUser);
+				deferred.resolve(datas.currentUser);
 			})
-			.error(error);
+			.error(deferred.reject);
+
+		return deferred.promise;
 	};
 
-	var logout = function(cb) {
+	datas.logout = function(cb) {
 		console.log('loggin out');
-		currentUser = null;
+		datas.currentUser = null;
 		$cookieStore.remove('credentials');
 		cb();
 	};
 
-	var isLoggedin = function(success, error) {
-		if (currentUser) {
-			success();
+	datas.isLoggedin = function() {
+		var deferred = $q.defer();
+		console.log('Is trying to logged in');
+
+		if (datas.currentUser) {
+			deferred.resolve(datas.currentUser);
 		} else if ($cookies.credentials) {
-			login(null, function() {
-				success();
-			},
-			function() {
-				$cookieStore.remove('credentials');
-				error();
-			});
+			datas.login()
+				.then(function(user) {
+					console.log('Login ', user);
+					if (user) {
+						datas.currentUser = user;
+						deferred.resolve(user);
+					} else {
+						$cookieStore.remove('credentials');
+						deferred.resolve();
+					}
+				});
 		} else {
-			error();
+			deferred.resolve();
 		}
+
+		return  deferred.promise;
 	};
 
-	return {
-		login: login,
-		logout: logout,
-		isLoggedin : isLoggedin,
-		currentUser: currentUser
-	};
+	return datas;
 })
 .factory( 'ProviderService', function($http, AuthService) {
 	var connectedProviders;
