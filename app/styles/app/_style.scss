@@ -139,6 +139,20 @@ h3 {
     .filter {
       margin:20px 0px 20px 0px;
 
+      h3 {
+        color: $body-font-color;
+        font-size: 0.9em;
+
+        &.active {
+          color: $primary-color;
+        }
+      }
+
+      .reset {
+        color: $body-font-color;
+        font-size: 0.7em;
+      }
+
       .disabled {
         color: #999;
       }

@@ -31,26 +31,28 @@ angular.module('anyfetchFrontApp')
 				});
 		};
 
-		$scope.setFilterDocs = function(value) {
-			$scope.filterDocsFull = value;
+		$scope.resetFilterDocs = function() {
+			$scope.filterNeutralDocs = true;
 
-			console.info("Filter Docs -> ", value)
-
-			if (value) {
-				for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
-					$scope.filterType[Object.keys($scope.docTypes)[i]] = !value;
-				}
+			for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
+				$scope.filterType[Object.keys($scope.docTypes)[i]] = false;
 			}
 		};
 
-		$scope.setFilterProv = function(value) {
-			$scope.filterProvFull = value;
+		$scope.setFilterDocs = function() {
+			$scope.filterNeutralDocs = false;
+		};
 
-			if (value) {
-				for(var j = 0; j < Object.keys($scope.provStatus).length; j++) {
-					$scope.filterProv[Object.keys($scope.provStatus)[j]] = !value;
-				}
+		$scope.resetFilterProv = function() {
+			$scope.filterNeutralProv = true;
+
+			for(var j = 0; j < Object.keys($scope.provStatus).length; j++) {
+				$scope.filterProv[Object.keys($scope.provStatus)[j]] = false;
 			}
+		};
+
+		$scope.setFilterProv = function() {
+			$scope.filterNeutralProv = false;
 		};
 
 		// ----------------- Main -----------------
@@ -69,10 +71,10 @@ angular.module('anyfetchFrontApp')
 		$scope.apiCall('/', function(data) {
 
 			$scope.docTypes = data.document_types;
-			$scope.setFilterDocs(true);
+			$scope.resetFilterDocs();
 
 			$scope.provStatus = data.provider_status;
-			$scope.setFilterProv(true);
+			$scope.resetFilterProv();
 
 			$scope.userName = data.name;
 

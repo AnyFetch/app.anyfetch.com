@@ -32,6 +32,6 @@ filter('niceDate', function() {
     var selectedDoc = ( (scope.filterType[result.document_type] === true) || (scope.filterDocsFull === true) );
     var selectedProv = ( (scope.filterProv[result.token] === true) || (scope.filterProvFull === true) );
     console.log(selectedDoc, selectedProv);
-    return selectedDoc && selectedProv;
+    return (selectedDoc || scope.filterNeutralDocs) && (selectedProv || scope.filterNeutralProv);
   };
 });
