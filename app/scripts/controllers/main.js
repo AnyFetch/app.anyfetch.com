@@ -7,7 +7,7 @@
 angular.module('anyfetchFrontApp')
 	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location) {
 
-		// ----------------- Géneral functions -----------------
+		// ----------------- API calls functions -----------------
 
 		// !!! Do the $scope.loading management yourself !!!
 		$scope.apiCall = function(query, callback) {
@@ -26,10 +26,15 @@ angular.module('anyfetchFrontApp')
 			$scope.loading = true;
 			$scope.apiCall(apiQuery, function(data) {
 					$scope.results = data.datas;
+					$scope.nbResultsDocs = data.document_types;
+					$scope.nbResultsProv = data.tokens;
+					console.log($scope.nbResultsProv);
 					$scope.loading = false;
 					$location.search('q', $scope.textSearch);
 				});
 		};
+
+		// ----------------- Filters functions -----------------
 
 		$scope.resetFilterDocs = function() {
 			$scope.filterNeutralDocs = true;
@@ -77,11 +82,6 @@ angular.module('anyfetchFrontApp')
 			$scope.resetFilterProv();
 
 			$scope.userName = data.name;
-
-			console.log($scope.docTypes, $scope.provStatus);
-			console.log($scope.filterType, $scope.filterProv);
-			console.log(Object.keys($scope.provStatus)[0]);
-			console.log($scope.filterProv['529c457e03a470cfad000007']);
 
 			$scope.loading = false;
 
