@@ -53,29 +53,27 @@ angular.module('anyfetchFrontApp', [
     };
     $httpProvider.responseInterceptors.push(interceptor);
   })
-  .run(function ($route, $rootScope, $q, $location, AuthService) {
+  .run(function ($route, $q, $location, AuthService) {
 
-    angular.forEach($route.routes,function(value, key) {
-      // console.log(value, key);
-      $route.routes[key].resolve = {};
-      $route.routes[key].resolve.currentUser = function() {
-
+    var bootstrapApp = function() {
         var deferred = $q.defer();
 
         // Watch if the current user is connected
         AuthService.isLoggedin()
           .then(function(user) {
-            if (user) {
-              $location.path('/');
-              deferred.resolve(user);
-            } else {
-              $location.path('/login');
-              deferred.resolve();
-            }
+            deferred.resolve(user);
+          }, function() {
+            $location.path('/login');
+            deferred.resolve();
           });
 
         return deferred.promise;
       };
 
+    angular.forEach($route.routes,function(value, key) {
+      if(key !== '/login' || key !== '/login/') {
+        $route.routes[key].resolve = {};
+        $route.routes[key].resolve.currentUser = bootstrapApp;
+      }
     });
   });

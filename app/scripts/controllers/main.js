@@ -21,18 +21,20 @@ angular.module('anyfetchFrontApp')
 
   // Login the user to anyfetch
   $scope.login = function() {
-    AuthService.login({
+    var credentials = {
       email: $scope.email,
       password: $scope.password,
       rememberme: $scope.rememberme
-    },
-    function(user) {
-      $rootScope.currentUser = user;
-      $location.path('/');
-    },
-    function() {
-      $rootScope.error = 'Failed to login';
-    });
+    };
+
+    AuthService.login(credentials)
+      .then(function(user) {
+        if (user) {
+          $location.path('/');
+        }
+      }, function() {
+        $rootScope.error = 'Failed to login';
+      });
   };
 
 });
