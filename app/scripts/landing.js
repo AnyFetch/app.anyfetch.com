@@ -61,7 +61,6 @@ function initOnePageScroll() {
       var key = $('.active').data('index');
       if(lastCurrentIndex !== index){
         lastCurrentIndex = index;
-        console.log(index+'--'+key);
         ga('send', 'event', 'landingHome', 'slide', index+'--'+key);
 
         if ($('body').hasClass('viewing-page-1') && !inputInUse) {
