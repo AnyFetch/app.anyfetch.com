@@ -1,0 +1,47 @@
+<form>
+  <div class="filter">
+    <div class="row">
+      <h3 class="large-6 columns" ng-class="{active : !filterNeutralDocs}">What</h3>
+      <div class="large-6 columns text-right">
+        <a class="reset" ng-mouseup="resetFilterDocs()" ng-show="!filterNeutralDocs">RESET</a>
+      </div>
+    </div>
+    
+    <div class="element" ng-repeat="docType in docTypes" ng-show="nbResultsDocs[docType.id]" ng-click="setFilterDocs()">
+      <label for="type-{{docType.id}}" ng-class="{disabled: filterNeutralDocs}">
+        <div class="row">
+          <div class="large-9 columns">
+            <input type="checkbox" ng-model="filterType[docType.id]" id="type-{{docType.id}}">
+            {{docType.name | capitalizeFirst}}
+          </div>
+          <div class="large-3 columns text-right">
+            <span class="numberRes">{{nbResultsDocs[docType.id]}}</span>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <div class="filter">
+    <div class="row">
+      <h3 class="large-6 columns" ng-class="{active : !filterNeutralProv}">Where</h3>
+      <div class="large-6 columns text-right">
+        <a class="reset" ng-mouseup="resetFilterProv()" ng-show="!filterNeutralProv">RESET</a>
+      </div>
+    </div>
+
+    <div class="element" ng-repeat="provStatu in Object.keys(provStatus)" ng-show="nbResultsProv[provStatu]" ng-click="setFilterProv()">
+      <label for="prov-{{provStatu}}" ng-class="{disabled: filterNeutralProv}">
+        <div class="row">
+          <div class="large-9 columns">
+            <input type="checkbox" ng-model="filterProv[provStatu]" id="prov-{{provStatu}}">
+            {{provStatus[provStatu].name | capitalizeFirst}}
+          </div>
+          <div class="large-3 columns text-right">
+            <span class="numberRes">{{nbResultsProv[provStatu]}}</span>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+</form>
