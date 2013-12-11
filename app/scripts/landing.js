@@ -77,9 +77,37 @@ function initOnePageScroll() {
 // -----------------------
 //        MAIN
 // -----------------------
-$(document).ready(function() {
+$(function() {
   if ($(window).width() > 600 && $(window).height() > 500) {
     initOnePageScroll();
   }
   writeInputTop('Invoice 421');
+});
+
+// Subscription form
+$(function() {
+  var keyNotPressed = true;
+  $('#subscribe').submit(function(){
+    $.post(
+      $(this).attr('action'),
+      $(this).serialize(),
+      function()
+      {
+        $('#subscribe').hide();
+        $('#subscribe-ok').show();
+        ga('send','event','landingHome','submit');
+      }
+    );
+
+    return false;
+  });
+
+  $('#email-field').focus(function(){
+    ga('send','event','landingHome','focus');
+  }).keydown(function(){
+    if(keyNotPressed) {
+      ga('send','event','landingHome','typing');
+      keyNotPressed = false;
+    }
+  });
 });
