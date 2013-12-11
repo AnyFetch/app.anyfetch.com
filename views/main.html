@@ -60,47 +60,37 @@
               <form>
                 <div class="filter">
                   <div class="row">
-                    <h3 class="large-6 columns" ng-class="{active : !filterNeutralDocs}">What</h3>
-                    <div class="large-6 columns text-right">
-                      <a class="reset" ng-mouseup="resetFilterDocs()" ng-show="!filterNeutralDocs">RESET</a>
-                    </div>
+                    <h3 class="large-6 columns">What</h3>
+                    <a class="large-6 columns text-right" ng-click="setFilterDocs(false)">None</a>
                   </div>
-                  
-                  <div class="element" ng-repeat="docType in docTypes" ng-show="nbResultsDocs[docType.id]" ng-click="setFilterDocs()">
-                    <label for="type-{{docType.id}}" ng-class="{disabled: filterNeutralDocs}">
-                      <div class="row">
-                        <div class="large-9 columns">
-                          <input type="checkbox" ng-model="filterType[docType.id]" id="type-{{docType.id}}">
-                          {{docType.name | capitalizeFirst}}
-                        </div>
-                        <div class="large-3 columns text-right">
-                          <span class="numberRes">{{nbResultsDocs[docType.id]}}</span>
-                        </div>
-                      </div>
+                  <div class="element" ng-repeat="docType in docTypes">
+                    <label for="type-{{docType.id}}">
+                      <input type="checkbox" name="type-{{docType.id}}" ng-model="filterType[docType.id]" id="type-{{docType.id}}">
+                      {{docType.name | capitalizeFirst}}
                     </label>
                   </div>
                 </div>
 
                 <div class="filter">
                   <div class="row">
-                    <h3 class="large-6 columns" ng-class="{active : !filterNeutralProv}">Where</h3>
-                    <div class="large-6 columns text-right">
-                      <a class="reset" ng-mouseup="resetFilterProv()" ng-show="!filterNeutralProv">RESET</a>
-                    </div>
+                    <h3 class="large-6 columns">How</h3>
+                    <a class="large-6 columns text-right" ng-click="setFilterProv(false)">None</a>
                   </div>
-
-                  <div class="element" ng-repeat="provStatu in Object.keys(provStatus)" ng-show="nbResultsProv[provStatu]" ng-click="setFilterProv()">
-                    <label for="prov-{{provStatu}}" ng-class="{disabled: filterNeutralProv}">
-                      <div class="row">
-                        <div class="large-9 columns">
-                          <input type="checkbox" ng-model="filterProv[provStatu]" id="prov-{{provStatu}}">
-                          {{provStatus[provStatu].name | capitalizeFirst}}
-                        </div>
-                        <div class="large-3 columns text-right">
-                          <span class="numberRes">{{nbResultsProv[provStatu]}}</span>
-                        </div>
-                      </div>
+                  <div class="element" ng-repeat="provStatu in provStatus">
+                    <label for="prov-{{provStatu.id}}">
+                      <input type="checkbox" name="prov-{{provStatu.id}}" ng-model="filterProv[Object.keys(provStatus)[$index]]" id="prov-{{provStatu.id}}">
+                      {{provStatu.name | capitalizeFirst}}
                     </label>
+                  </div>
+                </div>
+
+                <div class="filter">
+                  <h3>How</h3>
+                  <div class="element">
+                    <select>
+                      <option value="time">Time</option>
+                      <option value="name">Name</option>
+                    </select>
                   </div>
                 </div>
               </form>
