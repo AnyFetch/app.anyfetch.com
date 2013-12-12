@@ -5,7 +5,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function ($rootScope, $scope, $location, AuthService) {
+.controller('MainCtrl', function ($scope, $location, AuthService) {
 
   $scope.user = AuthService.currentUser;
   

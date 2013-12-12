@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.services', [])
-.factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http, $q) {
+.factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http, $q, DocumentTypesService, ProvidersService) {
   
   var datas = {
     currentUser: null
+  };
+
+  var bootstrapUserContent = function(data) {
+    DocumentTypeService.set(data.document_types);
+    ProvidersService.set(data.provider_status);
   };
 
   // Login : Login the user using the basic method or the cookies credentials
@@ -24,9 +29,14 @@ angular.module('anyfetchFrontApp.services', [])
     $http.defaults.headers.common.Authorization = 'Basic ' + credentials;
     $http({method: 'GET', url: 'http://api.anyfetch.com'})
       .success(function(data) {
-        data.credentials = credentials;
-        datas.currentUser = data;
+        datas.currentUser = {
+          email: data.name,
+          id: data.id,
+          credentials: credentials
+        };
+
         $cookies.credentials = credentials;
+
         deferred.resolve(datas.currentUser);
       })
       .error(deferred.reject);
@@ -63,6 +73,40 @@ angular.module('anyfetchFrontApp.services', [])
     }
 
     return  deferred.promise;
+  };
+
+  // Return of the service
+  return datas;
+
+}).factory( 'DocumentTypesService', function() {
+  
+  var datas = {
+    documentTypes: null
+  };
+
+  datas.set = function(documentTypes) {
+    datas.documentTypes = documentTypes;
+  };
+
+  datas.get = function() {
+    return datas.documentTypes;
+  };
+
+  // Return of the service
+  return datas;
+
+}).factory( 'ProvidersService', function() {
+  
+  var datas = {
+    providers: null
+  };
+
+  datas.set = function(providers) {
+    datas.providers = providers;
+  };
+
+  datas.get = function() {
+    return datas.providers;
   };
 
   // Return of the service
