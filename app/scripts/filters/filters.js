@@ -29,9 +29,10 @@ filter('niceDate', function() {
 })
 .filter('filtersResult', function() {
   return function(result, scope) {
-    var selectedDoc = (scope.filterType[result.document_type] === true);
-    var selectedProv = (scope.filterProv[result.token] === true);
-    console.log(selectedDoc, selectedProv);
-    return selectedDoc && selectedProv;
+    var selectedDoc = ( (scope.filterType[result.document_type] === true) || (scope.filterDocsFull === true) );
+    var selectedProv = ( (scope.filterProv[result.token] === true) || (scope.filterProvFull === true) );
+    // console.log(selectedDoc, selectedProv);
+    
+    return (selectedDoc || scope.filterNeutralDocs) && (selectedProv || scope.filterNeutralProv);
   };
 });

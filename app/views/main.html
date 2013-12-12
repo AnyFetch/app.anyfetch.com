@@ -21,7 +21,7 @@
       <li class="divider"></li>
       <li><a href="#" ng-click='logout()'><div class="header-icon logout"></div></a></li>
       <li class="show-for-medium-up divider"></li>
-      <li class="show-for-medium-up"><a href="#"><img src="images/avatar.png" width="30px" height="30px"/> {{user.email}}</a></li>
+      <li class="show-for-medium-up"><a href="#"><gravatar data-gravatar-email="user.email"/> {{user.email}}</a></li>
     </ul>
   </section>
 </nav>
@@ -51,54 +51,16 @@
 
         <!-- Off Canvas Menu -->
         <aside class="left-off-canvas-menu">
-
+          <ng-include src="'views/filter_large.html'"/>
         </aside>
 
         <div class="large-3 medium-3 columns filters">
           <div class="hide-for-small">
             <div class="sidebar">
-              <form>
-                <div class="filter">
-                  <div class="row">
-                    <h3 class="large-6 columns">What</h3>
-                    <a class="large-6 columns text-right" ng-click="setFilterDocs(false)">None</a>
-                  </div>
-                  <div class="element" ng-repeat="docType in docTypes">
-                    <label for="type-{{docType.id}}">
-                      <input type="checkbox" name="type-{{docType.id}}" ng-model="filterType[docType.id]" id="type-{{docType.id}}"/>
-                      {{docType.name | capitalizeFirst}}
-                    </label>
-                  </div>
-                </div>
-
-                <div class="filter">
-                  <div class="row">
-                    <h3 class="large-6 columns">How</h3>
-                    <a class="large-6 columns text-right" ng-click="setFilterProv(false)">None</a>
-                  </div>
-                  <div class="element" ng-repeat="provStatu in provStatus">
-                    <label for="prov-{{provStatu.id}}">
-                      <input type="checkbox" name="prov-{{provStatu.id}}" ng-model="filterProv[Object.keys(provStatus)[$index]]" id="prov-{{provStatu.id}}"/>
-                      {{provStatu.name | capitalizeFirst}}
-                    </label>
-                  </div>
-                </div>
-
-                <div class="filter">
-                  <h3>How</h3>
-                  <div class="element">
-                    <select>
-                      <option value="time">Time</option>
-                      <option value="name">Name</option>
-                    </select>
-                  </div>
-                </div>
-              </form>
+              <ng-include src="'views/filter_large.html'"/>
             </div>
           </div>
         </div>
-
-
 
         <!-- //////////////////////////////////////////////
                 Main content: result elements

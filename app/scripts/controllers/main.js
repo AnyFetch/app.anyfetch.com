@@ -32,13 +32,15 @@ angular.module('anyfetchFrontApp')
     });
   };
 
+
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || "";
+
   $scope.results = [];
 
   if ($scope.query) {
     $scope.loading = true;
-    
+
     $scope.getSnippets($scope.query)
       .then(function(data) {
         $scope.results = data.datas;
