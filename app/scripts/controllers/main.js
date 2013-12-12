@@ -15,7 +15,6 @@ angular.module('anyfetchFrontApp')
     var deferred = $q.defer();
 
     var apiQuery = 'http://api.anyfetch.com/documents?search='+query+'&limit=50';
-    $scope.loading = true;
 
     $http({method: 'GET', url: apiQuery})
       .success(function(data) {
@@ -36,9 +35,10 @@ angular.module('anyfetchFrontApp')
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || "";
   $scope.results = [];
-  console.log(DocumentTypesService.get());
 
   if ($scope.query) {
+    $scope.loading = true;
+    
     $scope.getSnippets($scope.query)
       .then(function(data) {
         $scope.results = data.datas;

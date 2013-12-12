@@ -6,6 +6,7 @@
 
 angular.module('anyfetchFrontApp.directives', []).
   directive('snippet', function(DocumentTypesService) {
+    
     var mustacheTemplate = function(result, template) {
       return Mustache.render(template, result.datas);
     };
