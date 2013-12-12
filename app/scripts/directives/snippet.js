@@ -5,7 +5,7 @@
 //--------------------------------------------------------------
 
 angular.module('anyfetchFrontApp.directives', []).
-  directive('snippet', function() {
+  directive('snippet', function(DocumentTypesService) {
     var mustacheTemplate = function(result, template) {
       return Mustache.render(template, result.datas);
     };
@@ -13,13 +13,11 @@ angular.module('anyfetchFrontApp.directives', []).
     return {
       restrict: 'E',
       scope: {
-        result: '=',
-        documenttypes: '=',
-        providers: '='
+        result: '='
       },
       templateUrl: 'views/template snippet.html',
       link : function(scope) {
-        var htmlTemplate = scope.documenttypes[scope.result.document_type].template_snippet;
+        var htmlTemplate = DocumentTypesService.get()[scope.result.document_type].template_snippet;
         scope.snippetText = mustacheTemplate(scope.result, htmlTemplate);
       }
     };

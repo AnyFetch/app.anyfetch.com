@@ -5,7 +5,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService) {
+.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService, DocumentTypesService) {
 
   $scope.search = function(query) {
     $location.search({q: query});
@@ -36,11 +36,12 @@ angular.module('anyfetchFrontApp')
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || "";
   $scope.results = [];
+  console.log(DocumentTypesService.get());
 
   if ($scope.query) {
     $scope.getSnippets($scope.query)
       .then(function(data) {
-        console.log(data);
+        $scope.results = data.datas;
       });
   };
 

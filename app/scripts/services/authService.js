@@ -8,7 +8,7 @@ angular.module('anyfetchFrontApp.services', [])
   };
 
   var bootstrapUserContent = function(data) {
-    DocumentTypeService.set(data.document_types);
+    DocumentTypesService.set(data.document_types);
     ProvidersService.set(data.provider_status);
   };
 
@@ -36,6 +36,8 @@ angular.module('anyfetchFrontApp.services', [])
         };
 
         $cookies.credentials = credentials;
+
+        bootstrapUserContent(data);
 
         deferred.resolve(datas.currentUser);
       })
