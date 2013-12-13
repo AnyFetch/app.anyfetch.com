@@ -2,8 +2,7 @@
 
 /* Filters */
 
-angular.module('anyfetchFrontApp.filters', []).
-filter('niceDate', function() {
+anyfetchFrontApp.filter('niceDate', function() {
   return function(date, plus) {
     date = new Date(date);
 

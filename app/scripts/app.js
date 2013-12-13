@@ -4,13 +4,10 @@
 //                 Angular Main
 //--------------------------------------------------------------
 
-angular.module('anyfetchFrontApp', [
+var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
   'ngCookies',
   'ngResource',
   'ngRoute',
-  'anyfetchFrontApp.filters',
-  'anyfetchFrontApp.directives',
-  'anyfetchFrontApp.services'
 ])
   .config(function ($routeProvider, $sceProvider, $httpProvider) {
     

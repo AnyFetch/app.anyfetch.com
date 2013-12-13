@@ -4,12 +4,11 @@
 //                  MainCrtl
 // ------------------------------------------------------
 
-angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService, DocumentTypesService) {
+anyfetchFrontApp.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService) {
 
   $scope.search = function(query) {
     $location.search({q: query});
-  }
+  };
   
   $scope.getSnippets = function (query) {
     var deferred = $q.defer();
@@ -34,7 +33,7 @@ angular.module('anyfetchFrontApp')
 
 
   $scope.user = AuthService.currentUser;
-  $scope.query  = $location.search().q || "";
+  $scope.query  = $location.search().q || '';
 
   $scope.results = [];
 
@@ -45,7 +44,7 @@ angular.module('anyfetchFrontApp')
       .then(function(data) {
         $scope.results = data.datas;
       });
-  };
+  }
 
 }).controller('LoginCtrl', function ($scope, $rootScope, $location, AuthService) {
 

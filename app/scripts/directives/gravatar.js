@@ -1,10 +1,11 @@
-angular.module('anyfetchFrontApp.directives', []).
-  directive('gravatar', function() {
+'use strict';
+
+anyfetchFrontApp.directive('gravatar', function() {
     var getImageSrc = function(value, size, defaultUrl) {
-        var hash = md5(value);
-        var src = 'http://www.gravatar.com/avatar/' + hash + '?s=' + size + '&d=' + defaultUrl;
-        return src;
-    }
+      var hash = md5(value);
+      var src = 'http://www.gravatar.com/avatar/' + hash + '?s=' + size + '&d=' + defaultUrl;
+      return src;
+    };
 
     return {
       restrict: 'EAC',
