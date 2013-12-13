@@ -1,5 +1,6 @@
 'use strict';
 
+
 // ------------------------------------------------------
 // 					MainCrtl
 // ------------------------------------------------------
@@ -62,6 +63,11 @@ angular.module('anyfetchFrontApp')
 
 		// ----------------- Main -----------------
 
+		$scope.logout = function(){
+			window.cookie.delete('credentials');
+			document.location.href = '/login.html';
+		};
+
 		$rootScope.credentials = $cookies.credentials;
 		if (!$rootScope.credentials) {
 			document.location.href = '/login.html';
@@ -92,4 +98,6 @@ angular.module('anyfetchFrontApp')
 				//ZERO STATE
 			}
 		});
+
+
 	});

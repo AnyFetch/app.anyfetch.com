@@ -19,7 +19,7 @@
       <li class="divider"></li>
       <li> <a href="#"><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
-      <li><a href="#"><div class="header-icon logout"></div></a></li>
+      <li><a href="" ng-click="logout()"><div class="header-icon logout"></div></a></li>
       <li class="show-for-medium-up divider"></li>
       <li class="show-for-medium-up"><a href="#"><img src="images/avatar.png" width="30px" height="30px"/> {{userName}}</a></li>
     </ul>
@@ -31,7 +31,7 @@
   <div class="row">
     <form ng-submit="search(textSearch)">
       <h3>Fetch</h3>
-      <input type="text" value="" placeholder="Search" ng-model="textSearch"  speech x-webkit-speech/>
+      <input type="text" value="" placeholder="Search" ng-model="textSearch" speech x-webkit-speech/>
     </form>
   </div>
 </section>

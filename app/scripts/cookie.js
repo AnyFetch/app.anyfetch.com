@@ -25,5 +25,9 @@ window.cookie = {
 			c_value = unescape(c_value.substring(c_start, c_end));
 		}
 		return c_value;
+	},
+
+	delete : function(c_name) {
+		document.cookie = c_name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	}
 };
