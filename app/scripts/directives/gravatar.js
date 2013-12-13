@@ -1,7 +1,8 @@
 angular.module('anyfetchFrontApp.directives', []).
   directive('gravatar', function() {
     var getImageSrc = function(value, size, defaultUrl) {
-        var src = 'http://www.gravatar.com/avatar/' + value + '?s=' + size + '&d=' + defaultUrl;
+        var hash = md5(value);
+        var src = 'http://www.gravatar.com/avatar/' + hash + '?s=' + size + '&d=' + defaultUrl;
         return src;
     }
 
@@ -14,10 +15,7 @@ angular.module('anyfetchFrontApp.directives', []).
           var defaultUrl = attrs.gravatarDefault || 'mm';
 
           var src = getImageSrc(value, size, defaultUrl);
-
           var tag = '<img " src="' + src + '" >';
-
-          console.log(tag);
 
           elm.find('img').remove();
           elm.append(tag);
