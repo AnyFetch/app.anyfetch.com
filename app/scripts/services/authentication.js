@@ -79,38 +79,4 @@ anyfetchFrontApp.factory( 'AuthService', function($cookies, $cookieStore, $rootS
   // Return of the service
   return datas;
 
-}).factory( 'DocumentTypesService', function() {
-  
-  var datas = {
-    documentTypes: null
-  };
-
-  datas.set = function(documentTypes) {
-    datas.documentTypes = documentTypes;
-  };
-
-  datas.get = function() {
-    return datas.documentTypes;
-  };
-
-  // Return of the service
-  return datas;
-
-}).factory( 'ProvidersService', function() {
-  
-  var datas = {
-    providers: null
-  };
-
-  datas.set = function(providers) {
-    datas.providers = providers;
-  };
-
-  datas.get = function() {
-    return datas.providers;
-  };
-
-  // Return of the service
-  return datas;
-
 });
