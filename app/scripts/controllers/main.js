@@ -12,8 +12,8 @@ angular.module('anyfetchFrontApp')
 
 		// !!! Do the $scope.loading management yourself !!!
 		$scope.apiCall = function(query, callback) {
-			var searchUrl = 'http://api.anyfetch.com'+query;
-
+			//var searchUrl = 'http://api.anyfetch.com'+query;
+			var searchUrl = 'offline'+query;
 			$http.defaults.headers.common.Authorization = 'Basic ' + $rootScope.credentials;
 			$http({method: 'GET', url: searchUrl})
 			.success(callback)
@@ -23,7 +23,7 @@ angular.module('anyfetchFrontApp')
 		};
 
 		$scope.search = function (query) {
-			var apiQuery = '/documents?search='+query+'&limit=50';
+			var apiQuery = '/documents.json?search='+query+'&limit=50';
 			$scope.loading = true;
 			$scope.apiCall(apiQuery, function(data) {
 					$scope.results = data.datas;
@@ -79,7 +79,7 @@ angular.module('anyfetchFrontApp')
 		$scope.filterProv = {};
 
 		$scope.loading = true;
-		$scope.apiCall('/', function(data) {
+		$scope.apiCall('/api.json', function(data) {
 
 			$scope.docTypes = data.document_types;
 			$scope.resetFilterDocs();
@@ -97,7 +97,6 @@ angular.module('anyfetchFrontApp')
 			} else {
 				//ZERO STATE
 			}
+			$(document).foundation();
 		});
-
-
 	});

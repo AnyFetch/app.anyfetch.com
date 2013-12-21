@@ -2,6 +2,8 @@
   background-image: inline-image($img + ".svg");
   background-size: $width $height;
   background-repeat:no-repeat;
+  width: $width;
+  height: $height;
 }
 
 // -----------------------------------------------------
@@ -60,26 +62,77 @@ h3 {
       @include svg-background("icon-header/"+quote($icon), 20px, 20px);
     }
   }
-  .state{
-    position:absolute;
-    background-repeat:no-repeat;
-    bottom:-4px;
-    right:-4px;
-  }
-  .state.ok{
+}
+
+.state{
+  position:absolute;
+  background-repeat:no-repeat;
+  bottom:-4px;
+  right:-4px;
+
+  &.ok{
     @include svg-background("icon-header/ok", 16px, 16px);
     width: 16px;
     height: 16px;
   }
-  .state.loading{
+  &.loading{
     @include svg-background("icon-header/loading", 16px, 16px);
     width: 16px;
     height: 16px;
     animation:antispin 4s linear infinite;
   }
-
 }
 
+#dropdown_providers{
+  ul{
+    list-style-type: none;
+    margin: 0;
+
+    li{
+      padding: 10px 5px 10px 5px;
+      font-size: 11px;
+      color: $dropdown-bg;
+      border-bottom: 1px solid $border-color;
+      cursor: normal;
+
+      .state{
+        position:relative;
+        float:left;
+        margin-right:10px;
+      }
+      &:hover{
+        background-color:#FFF;
+        .edit{
+          display:block;
+        }
+      }
+
+      .ic{
+        position:relative;
+        float:left;
+        margin-right:5px;
+      }
+
+      .edit{
+        color: #FFF; // TODO CHANGE TO FOUNDATION STANDARDS
+        float:right;
+        padding:5px 10px 5px 10px;
+        margin:0px;
+        border-radius: 2px;
+        font-size: 9px;
+        display:none;
+      }
+      small{
+        color: #999;
+        font-size: 9px;
+      }
+    }
+    .add{
+      margin:0px;
+      width:100%;
+    }
+  }
+}
 
 // -----------------------------------------------------
 //          Search box
@@ -240,11 +293,6 @@ h3 {
           width:20px;
           height:20px;
         }
-        @each $provider in "525eaa1603a470782b000001", "5252cedd03a470843f000004", "5267cff903a470d5f9000006" {
-          .provider-#{$provider} {
-            @include svg-background("icon-provider/"+quote($provider), 20px, 20px);
-          }
-        }
       }
       
 
@@ -281,5 +329,13 @@ h3 {
       }
     }
   }
-
+}
+.inline_svg{
+    display: inline-block;
+    vertical-align: middle;
+}
+@each $provider in "525eaa1603a470782b000001", "5252cedd03a470843f000004", "5267cff903a470d5f9000006" {
+  .provider-#{$provider} {
+    @include svg-background("icon-provider/"+quote($provider), 20px, 20px);
+  }
 }
