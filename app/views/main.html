@@ -44,9 +44,9 @@
         <!-- //////////////////////////////////////////////
                     Filters
             ////////////////////////////////////////////// -->
-        
+
         <div class="show-for-small">
-          <a class="left-off-canvas-toggle">Filters</a> 
+          <a class="left-off-canvas-toggle">Filters</a>
         </div>
 
         <!-- Off Canvas Menu -->
@@ -72,7 +72,7 @@
               <div class="loading-icon"></div> Loading...
             </div>
             <div class="loaded" ng-hide="loading">
-              <div class="result-row" ng-repeat="result in results">
+              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible">
                 <snippet result="result"></snippet>
               </div>
             </div>
