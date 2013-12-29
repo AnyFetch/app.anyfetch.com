@@ -1,7 +1,7 @@
 'use strict';
 
 anyfetchFrontApp.directive('snippet', function(DocumentTypesService) {
-    
+
     var mustacheTemplate = function(result, template) {
       return Mustache.render(template, result.datas);
     };
@@ -11,7 +11,7 @@ anyfetchFrontApp.directive('snippet', function(DocumentTypesService) {
       scope: {
         result: '='
       },
-      
+
       templateUrl: 'views/template snippet.html',
       link : function(scope) {
         var htmlTemplate = DocumentTypesService.get()[scope.result.document_type].template_snippet;
