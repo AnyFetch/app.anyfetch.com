@@ -4,7 +4,7 @@
 //                  MainCrtl
 // ------------------------------------------------------
 
-anyfetchFrontApp.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService, DocumentTypesService) {
+anyfetchFrontApp.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
   $scope.search = function(query) {
     $location.search({q: query});
@@ -17,7 +17,8 @@ anyfetchFrontApp.controller('MainCtrl', function ($scope, $location, $http, $q, 
 
     $http({method: 'GET', url: apiQuery})
       .success(function(data) {
-        DocumentTypesService.updateSearchCounts(data.document_types)
+        DocumentTypesService.updateSearchCounts(data.document_types);
+        ProvidersService.updateSearchCounts(data.tokens);
         $scope.loading = false;
         deferred.resolve(data);
       })
@@ -38,6 +39,7 @@ anyfetchFrontApp.controller('MainCtrl', function ($scope, $location, $http, $q, 
 
   $scope.results = [];
   $scope.documentTypes = DocumentTypesService.documentTypes;
+  $scope.providers = ProvidersService.providers;
 
   if ($scope.query) {
     $scope.loading = true;

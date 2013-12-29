@@ -72,7 +72,7 @@
               <div class="loading-icon"></div> Loading...
             </div>
             <div class="loaded" ng-hide="loading">
-              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible">
+              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
                 <snippet result="result"></snippet>
               </div>
             </div>

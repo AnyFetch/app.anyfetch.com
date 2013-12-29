@@ -13,9 +13,30 @@
           </label>
         </div>
         <div class="large-3 columns text-right">
-          <span class="numberRes">{{docType.search_count}}</span>
+          <span class="numberRes">({{docType.search_count}})</span>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="filter">
+    <div class="row">
+      <h3 class="large-6 columns">Where</h3>
+    </div>
+
+    <div class="element" ng-repeat="provider in providers" ng-show="provider.search_count">
+      <div class="row">
+        <div class="large-9 columns">
+          <input type="checkbox" ng-model="provider.visible" id="type-{{provider.id}}"/>
+          <label for="type-{{provider.id}}">
+            {{provider.name | capitalizeFirst}}
+          </label>
+        </div>
+        <div class="large-3 columns text-right">
+          <span class="numberRes">({{provider.search_count}})</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </form>
