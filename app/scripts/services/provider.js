@@ -25,7 +25,6 @@ anyfetchFrontApp.factory( 'ProvidersService', function() {
     return datas.providers;
   };
 
-  // Return of the service
   return datas;
 
 });

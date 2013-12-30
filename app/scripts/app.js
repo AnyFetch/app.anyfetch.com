@@ -11,7 +11,7 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
 ])
   .config(function ($routeProvider, $sceProvider, $httpProvider) {
     
-    // Desable templating HTML protection for Mustache 
+    // Disable templating HTML protection for Mustache 
     $sceProvider.enabled(false);
 
     // Routing
