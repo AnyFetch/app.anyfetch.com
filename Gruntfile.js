@@ -298,8 +298,8 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       test: [
-        'compass',
-        'copy:styles'
+        // 'compass', // No need for compass, we don't do end to end tests for now
+        // 'copy:styles'// See above
       ],
       dist: [
         'compass:dist',
