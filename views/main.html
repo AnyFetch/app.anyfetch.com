@@ -10,28 +10,42 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="divider"></li>
-      <li> <a href="#">
-        <div class="header-icon cloud">
-          <div class="state ok"></div>
-        </div>
-      </a> </li>
-
+      <li>
+        <a href="#" data-dropdown="dropdown_providers" data-options="is_hover:true">
+          <div class="header-icon cloud">
+            <div class="state ok"></div>
+          </div>
+        </a>
+      </li>
       <li class="divider"></li>
-      <li> <a href="#"><div class="header-icon support"></div></a></li>
+      <li> <a href="mailto:support@papiel.fr"><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
-      <li><a href="#"><div class="header-icon logout"></div></a></li>
+      <li><a href="#" ng-click="logout()"><div class="header-icon logout"></div></a></li>
       <li class="show-for-medium-up divider"></li>
-      <li class="show-for-medium-up"><a href="#"><img src="images/90b4a065.avatar.png" width="30px" height="30px"> {{userName}}</a></li>
+      <li class="show-for-medium-up"><a href="#"><gravatar data-gravatar-email="user.email"> {{user.email}}</a></li>
     </ul>
-  </section>
+   </section>
 </nav>
+
+<!-- Dropdown providers -->
+
+<div id="dropdown_providers" class="f-dropdown" data-dropdown-content="">
+  <ul>
+    <li ng-repeat="provider in providers">
+      <div class="ic provider-{{provider.application}}"></div> {{provider.name}}<!--  <a class="button tiny edit">Edit</a> -->
+      <div class="clearer"></div>
+      <div class="state" ng-class="{true:'ok', false:'loading' }[isProviderUpToDate(provider)]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
+    </li>
+    <button class="tiny add">+ Add provider</button>
+  </ul>
+</div>
 
 <!-- SEARCH -->
 <section class="search-box">
   <div class="row">
-    <form ng-submit="search(textSearch)">
+    <form ng-submit="search(query)">
       <h3>Fetch</h3>
-      <input type="text" value="" placeholder="Search" ng-model="textSearch" speech="" x-webkit-speech="">
+      <input type="text" value="" placeholder="Search" ng-model="query" speech="" x-webkit-speech="">
     </form>
   </div>
 </section>
@@ -44,9 +58,9 @@
         <!-- //////////////////////////////////////////////
                     Filters
             ////////////////////////////////////////////// -->
-        
+
         <div class="show-for-small">
-          <a class="left-off-canvas-toggle">Filters</a> 
+          <a class="left-off-canvas-toggle">Filters</a>
         </div>
 
         <!-- Off Canvas Menu -->
@@ -62,8 +76,6 @@
           </div>
         </div>
 
-
-
         <!-- //////////////////////////////////////////////
                 Main content: result elements
             ////////////////////////////////////////////// -->
@@ -74,16 +86,14 @@
               <div class="loading-icon"></div> Loading...
             </div>
             <div class="loaded" ng-hide="loading">
-              <div class="result-row" ng-repeat="result in results">
-                <snippet result="result" documenttypes="docTypes" providers="provStatus" ng-show="result | filtersResult:this"></snippet>
+              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
+                <snippet result="result"></snippet>
               </div>
             </div>
           </article>
-        </div>
-
-        <!-- close the off-canvas menu -->
+         <!-- close the off-canvas menu -->
         <a class="exit-off-canvas"></a>
       </div>
     </div>
   </div>
-</div>
+</div></div>
