@@ -10,8 +10,8 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
   'ngRoute',
 ])
   .config(function ($routeProvider, $sceProvider, $httpProvider) {
-    
-    // Disable templating HTML protection for Mustache 
+
+    // Disable templating HTML protection for Mustache
     $sceProvider.enabled(false);
 
     // Routing
@@ -28,7 +28,7 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
         redirectTo: '/'
       });
 
-    // Redirection to the login page if request is unauthorized  
+    // Redirection to the login page if request is unauthorized
     var interceptor = function($location, $q) {
       function success(response) {
         return response;
@@ -50,7 +50,7 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
     };
     $httpProvider.responseInterceptors.push(interceptor);
   })
-  .run(function ($route, $q, $location, AuthService) {
+  .run(function ($route, $q, $location, AuthService, $rootScope) {
 
     var bootstrapApp = function() {
         var deferred = $q.defer();
@@ -72,5 +72,9 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
         $route.routes[key].resolve = {};
         $route.routes[key].resolve.currentUser = bootstrapApp;
       }
+    });
+
+    $rootScope.$on('$viewContentLoaded', function () {
+      $(document).foundation();
     });
   });
