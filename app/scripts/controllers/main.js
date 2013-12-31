@@ -2,101 +2,53 @@
 
 
 // ------------------------------------------------------
-// 					MainCrtl
+//                  MainCrtl
 // ------------------------------------------------------
 
-angular.module('anyfetchFrontApp')
-	.controller('MainCtrl', function ($scope, $http, $rootScope, $cookies, $location) {
+anyfetchFrontApp.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
-		// ----------------- API calls functions -----------------
+  $scope.search = function(query) {
+    $location.search({q: query});
+  };
 
-		// !!! Do the $scope.loading management yourself !!!
-		$scope.apiCall = function(query, callback) {
-			//var searchUrl = 'http://api.anyfetch.com'+query;
-			var searchUrl = 'offline'+query;
-			$http.defaults.headers.common.Authorization = 'Basic ' + $rootScope.credentials;
-			$http({method: 'GET', url: searchUrl})
-			.success(callback)
-			.error(function(data) {
-				console.log('Error ', data, query);
-			});
-		};
+  $scope.getSnippets = function (query) {
+    var deferred = $q.defer();
 
-		$scope.search = function (query) {
-			var apiQuery = '/documents.json?search='+query+'&limit=50';
-			$scope.loading = true;
-			$scope.apiCall(apiQuery, function(data) {
-					$scope.results = data.datas;
-					$scope.nbResultsDocs = data.document_types;
-					$scope.nbResultsProv = data.tokens;
-					console.log($scope.nbResultsProv);
-					$scope.loading = false;
-					$location.search('q', $scope.textSearch);
-				});
-		};
+    var apiQuery = 'http://api.anyfetch.com/documents?search='+query+'&limit=50';
 
-		// ----------------- Filters functions -----------------
+    $http({method: 'GET', url: apiQuery})
+      .success(function(data) {
+        DocumentTypesService.updateSearchCounts(data.document_types);
+        ProvidersService.updateSearchCounts(data.tokens);
+        $scope.loading = false;
+        deferred.resolve(data);
+      })
+      .error(deferred.reject);
 
-		$scope.resetFilterDocs = function() {
-			$scope.filterNeutralDocs = true;
+    return deferred.promise;
+  };
 
-			for(var i = 0; i < Object.keys($scope.docTypes).length; i++) {
-				$scope.filterType[Object.keys($scope.docTypes)[i]] = false;
-			}
-		};
+  $scope.logout = function() {
+    AuthService.logout(function() {
+      $location.path('/login');
+    });
+  };
 
-		$scope.setFilterDocs = function() {
-			$scope.filterNeutralDocs = false;
-		};
 
-		$scope.resetFilterProv = function() {
-			$scope.filterNeutralProv = true;
+  $scope.user = AuthService.currentUser;
+  $scope.query  = $location.search().q || '';
 
-			for(var j = 0; j < Object.keys($scope.provStatus).length; j++) {
-				$scope.filterProv[Object.keys($scope.provStatus)[j]] = false;
-			}
-		};
+  $scope.results = [];
+  $scope.documentTypes = DocumentTypesService.documentTypes;
+  $scope.providers = ProvidersService.providers;
 
-		$scope.setFilterProv = function() {
-			$scope.filterNeutralProv = false;
-		};
+  if ($scope.query) {
+    $scope.loading = true;
 
-		// ----------------- Main -----------------
+    $scope.getSnippets($scope.query)
+      .then(function(data) {
+        $scope.results = data.datas;
+      });
+  }
 
-		$scope.logout = function(){
-			window.cookie.delete('credentials');
-			document.location.href = '/login.html';
-		};
-
-		$rootScope.credentials = $cookies.credentials;
-		if (!$rootScope.credentials) {
-			document.location.href = '/login.html';
-		}
-
-		// Init
-		$scope.Object = Object;
-		$scope.filterType = {};
-		$scope.filterProv = {};
-
-		$scope.loading = true;
-		$scope.apiCall('/api.json', function(data) {
-
-			$scope.docTypes = data.document_types;
-			$scope.resetFilterDocs();
-
-			$scope.provStatus = data.provider_status;
-			$scope.resetFilterProv();
-
-			$scope.userName = data.name;
-
-			$scope.loading = false;
-
-			if ($location.search().q) {
-				$scope.textSearch = $location.search().q;
-				$scope.search($location.search().q);
-			} else {
-				//ZERO STATE
-			}
-			$(document).foundation();
-		});
-	});
+});

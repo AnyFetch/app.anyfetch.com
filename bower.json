@@ -12,7 +12,8 @@
     "foundation": "~5.0.2",
     "mustache": "~0.7.3",
     "onepage-scroll": "~1.1.1",
-    "bourbon": "~3.1.8"
+    "bourbon": "~3.1.8",
+    "js-md5": "~1.1.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

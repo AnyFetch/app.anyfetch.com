@@ -2,8 +2,7 @@
 
 /* Filters */
 
-angular.module('anyfetchFrontApp.filters', []).
-filter('niceDate', function() {
+anyfetchFrontApp.filter('niceDate', function() {
   return function(date, plus) {
     date = new Date(date);
 
@@ -31,8 +30,6 @@ filter('niceDate', function() {
   return function(result, scope) {
     var selectedDoc = ( (scope.filterType[result.document_type] === true) || (scope.filterDocsFull === true) );
     var selectedProv = ( (scope.filterProv[result.token] === true) || (scope.filterProvFull === true) );
-    // console.log(selectedDoc, selectedProv);
-    
     return (selectedDoc || scope.filterNeutralDocs) && (selectedProv || scope.filterNeutralProv);
   };
 });

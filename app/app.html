@@ -5,11 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>anyFetch Search</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp,app}) styles/app.css -->
@@ -58,11 +58,16 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script src="bower_components/mustache/mustache.js"></script>
-    <script src="scripts/cookie.js"></script>
+    <script src="bower_components/js-md5/js/md5.min.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/directives.js"></script>
-    <script src="scripts/filters.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/services/authentication.js"></script>
+    <script src="scripts/services/provider.js"></script>
+    <script src="scripts/services/document.js"></script>
+    <script src="scripts/directives/snippet.js"></script>
+    <script src="scripts/directives/gravatar.js"></script>
+    <script src="scripts/filters/filters.js"></script>
     <!-- endbuild -->
 
     <script type="text/javascript">

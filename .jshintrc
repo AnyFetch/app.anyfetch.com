@@ -28,6 +28,8 @@
     "unescape": false,
     "module": false,
     "require": false,
-    "console": false
+    "console": false,
+    "anyfetchFrontApp": false,
+    "md5": false
   }
 }
