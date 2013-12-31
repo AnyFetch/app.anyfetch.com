@@ -18,7 +18,7 @@
         </a>
       </li>
       <li class="divider"></li>
-      <li> <a href="#"><div class="header-icon support"></div></a></li>
+      <li> <a href="mailto:support@papiel.fr"><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
       <li><a href="#" ng-click='logout()'><div class="header-icon logout"></div></a></li>
       <li class="show-for-medium-up divider"></li>
@@ -34,7 +34,7 @@
     <li ng-repeat="provider in providers">
       <div class="ic provider-{{provider.application}}"></div> {{provider.name}}<!--  <a class="button tiny edit">Edit</a> -->
       <div class="clearer"></div>
-      <div class="state ok"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
+      <div class="state" ng-class="{true:'ok', false:'loading' }[isProviderUpToDate(provider)]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
     </li>
     <button class="tiny add">+ Add provider</button>
   </ul>

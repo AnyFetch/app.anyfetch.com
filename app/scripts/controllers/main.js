@@ -34,6 +34,11 @@ anyfetchFrontApp.controller('MainCtrl', function ($scope, $location, $http, $q, 
     });
   };
 
+  $scope.isProviderUpToDate = function(provider) {
+    var currentDate = new Date();
+    return provider.updated > currentDate  - (60000 * 120);
+  };
+
 
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || '';
