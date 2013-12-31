@@ -31,15 +31,10 @@
 
 <div id="dropdown_providers" class="f-dropdown" data-dropdown-content>
   <ul>
-    <li>
-      <div class="ic provider-5252cedd03a470843f000004"></div> Dropbox <a class="button tiny edit">Edit</a>
+    <li ng-repeat="provider in providers">
+      <div class="ic provider-{{provider.application}}"></div> {{provider.name}}<!--  <a class="button tiny edit">Edit</a> -->
       <div class="clearer"></div>
-      <div class="state ok"></div><small>Last update: 20/12/13 4:43PM</small>
-    </li>
-    <li>
-      <div class="ic provider-525eaa1603a470782b000001"></div> GMail <a class="button tiny edit">Edit</a>
-      <div class="clearer"></div>
-      <div class="state loading"></div><small>Indexing...</small>
+      <div class="state ok"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
     </li>
     <button class="tiny add">+ Add provider</button>
   </ul>
