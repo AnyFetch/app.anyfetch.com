@@ -6,15 +6,25 @@ angular.module('anyfetchFrontApp.providerService', [])
   var serverTime = null;
   var updateFreq = 10000;
   var datas = {
-    providers: null
+    providers: null,
+    providersUpToDate: null
   };
 
   var checkProviderStatus = function () {
     serverTime += updateFreq;
+    var providerStatusTmp = true;
+
     angular.forEach(datas.providers, function(value){
       var updateProvider = new Date(value.updated).getTime() + 2 * 60 * 1000;
-      value.upToDate = updateProvider < serverTime;
+      var status = updateProvider < serverTime;
+      value.upToDate = status;
+
+      if (!status) {
+        providerStatusTmp = false;
+      }
     });
+
+    datas.providersUpToDate = providerStatusTmp;
     $timeout(checkProviderStatus, updateFreq);
   };
 

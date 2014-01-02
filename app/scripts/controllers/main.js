@@ -42,6 +42,7 @@ angular.module('anyfetchFrontApp')
   $scope.results = [];
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
+  $scope.providersStatus = ProvidersService.providersUpToDate;
 
   if ($scope.query) {
     $scope.loading = true;
