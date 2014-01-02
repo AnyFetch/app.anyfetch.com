@@ -1,1 +1,0 @@
-"use strict";angular.module("anyfetchFrontApp").controller("LoginCtrl",["$scope","$rootScope","$location","AuthService",function(a,b,c,d){a.rememberme=!0,a.login=function(){var e={email:a.email,password:a.password,rememberme:a.rememberme};d.login(e).then(function(a){a&&c.path("/")},function(){b.error="Failed to login"})}}]);
