@@ -52,7 +52,7 @@ angular.module('anyfetchFrontApp', [
     };
     $httpProvider.responseInterceptors.push(interceptor);
   })
-  .run(function ($route, $q, $location, AuthService, $rootScope) {
+  .run(function (AuthService, $route, $q, $location, $rootScope) {
 
     var bootstrapApp = function() {
         var deferred = $q.defer();
