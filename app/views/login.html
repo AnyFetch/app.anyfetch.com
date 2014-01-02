@@ -8,11 +8,11 @@
       <form id="loginForm" ng-submit="login()">
         <input name="email" type="email" placeholder="Email" data-ng-model="email" required autofocus/>
         <input name="password" type="password" placeholder="Password" data-ng-model="password" required />
-        <input type="checkbox" name="rememberme" data-ng-model="rememberMe" /> <label for="remember">Remember me</label>
+        <input type="checkbox" name="rememberMe" data-ng-model="rememberMe" /> <label for="rememberMe">Remember me</label>
 
         <div class="right">
           <input type="submit" data-ng-disabled="loginForm.$invalid" id="login" class="button small right radius" value="Login" />
-          <a href="http://settings.anyfetch.com/sign_up" class="sign_up">Sign up</a>
+          <a href="http://settings.anyfetch.com/sign_up" class="sign_up" style="display:none;">Sign up</a>
         </div>
       </form>
 

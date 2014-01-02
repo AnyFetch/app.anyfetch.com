@@ -13,7 +13,8 @@
     "mustache": "~0.7.3",
     "onepage-scroll": "~1.1.1",
     "bourbon": "~3.1.8",
-    "js-md5": "~1.1.0"
+    "js-md5": "~1.1.0",
+    "ngDialog": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
