@@ -4,22 +4,15 @@
       <div class="logo">
         <img src="images/2718fe18.logo-white.svg">any<b>Fetch</b>
       </div>
-
-      <form id="loginForm" ng-submit="login()">
-        <input name="email" type="email" placeholder="Email" data-ng-model="email" required="" autofocus="">
-        <input name="password" type="password" placeholder="Password" data-ng-model="password" required="">
-        <input type="checkbox" name="rememberme" data-ng-model="rememberme"> <label for="remember">Remember me</label>
-
+      <form id="login_form">
+        <input name="email" id="email" type="email" placeholder="Email" required="">
+        <input name="password" id="password" type="password" placeholder="Password" required="">
+        <input type="checkbox" id="remember"> <label for="remember">Remember me</label>
         <div class="right">
-          <input type="submit" data-ng-disabled="loginForm.$invalid" id="login" class="button small right radius" value="Login">
+          <input type="submit" id="login" class="button small right radius" value="Login">
           <a href="http://settings.anyfetch.com/sign_up" class="sign_up">Sign up</a>
         </div>
       </form>
-
-      <div data-alert="" class="alert-box warning" data-ng-bind="error" data-ng-show="error">
-        <a href="#" class="close">&times;</a>
-      </div>
-      
     </div>
   </div>
 </div>
