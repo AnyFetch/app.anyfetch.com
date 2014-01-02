@@ -3,14 +3,15 @@
 angular.module('anyfetchFrontApp')
 .controller('LoginCtrl', function ($scope, $rootScope, $location, AuthService) {
 
-  $scope.rememberme = true;
+  $rootScope.loginPage = true;
+  $scope.rememberMe = true;
 
   // Login the user to anyfetch
   $scope.login = function() {
     var credentials = {
       email: $scope.email,
       password: $scope.password,
-      rememberme: $scope.rememberme
+      rememberMe: $scope.rememberMe
     };
 
     AuthService.login(credentials)

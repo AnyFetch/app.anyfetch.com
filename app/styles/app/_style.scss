@@ -12,7 +12,10 @@
 
 html, body, .container, .wrapper, .wrapper>.row, .off-canvas-wrap, .inner-wrap {
   height: 100%;
-  background-color:#fafafa;
+}
+
+body.app {
+  background-color: #fafafa;
 }
 
 h3 {
@@ -148,7 +151,7 @@ h3 {
   &>.row {
     position: relative;
   }
-  
+
   h3 {
     margin-left:15px;
     padding-top:5px;
@@ -229,7 +232,7 @@ h3 {
   }
 
   .results{
-    overflow-y:auto; 
+    overflow-y:auto;
     border-left: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
     border-right: 1px solid $border-color;
@@ -266,7 +269,7 @@ h3 {
 
       &:first-child{
         border-top: 0px;
-      } 
+      }
 
       .icon{
         position:relative;
@@ -294,7 +297,7 @@ h3 {
           height:20px;
         }
       }
-      
+
 
       .details{
         display:table;

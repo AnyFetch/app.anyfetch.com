@@ -6,7 +6,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
+.controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
   $scope.search = function(query) {
     $location.search({q: query});
@@ -40,6 +40,7 @@ angular.module('anyfetchFrontApp')
     return provider.updated > currentDate  - (60000 * 120);
   };
 
+  $rootScope.loginPage = false;
 
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || '';
