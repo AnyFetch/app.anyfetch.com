@@ -5,11 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
     <title>anyFetch Search</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-
+    
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link rel="stylesheet" href="styles/4b6297e3.app.css"/>
@@ -28,6 +28,34 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+
+    <div class="preview">
+      <div class="background"></div>
+      <div class="details"></div>
+      <div class="close"></div>
+      <div class="footer">
+        <div class="left">
+          <div class="ariane-1">
+            <div class="separator-ariane"></div>
+            <div class="provider provider-white-5252cedd03a470843f000004"></div>
+            <h1>Dropbox</h1>
+          </div>
+          <div class="ariane-2">
+            <div class="types-vector types-5252ce4ce4cfcd16f55cfa3d"></div>
+            <h2>Methodologie de commentaire</h2>
+            <legend>31/12/2014 12:34PM</legend>
+          </div>
+        </div>
+        <div class="buttons right">
+          <a class="button tiny radius"><img src="/images/icon-preview/8c947ff0.download.svg" width="16px" height="16px"></a>
+          <a class="button tiny radius"><img src="/images/icon-preview/98610741.share.svg" width="16px" height="16px"></a>
+          <a class="button tiny radius primary">Open</a>
+        </div>
+      </div>
+
+    </div>
+
+
     <div class="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -47,6 +75,11 @@
     <script src="scripts/407dc50d.modules.js"></script>
 
     <script src="scripts/2998c454.scripts.js"></script>
+
+    <script type="text/javascript">
+      // Foundation init
+      $(document).foundation();
+    </script>
 
 </body>
 </html>
