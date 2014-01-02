@@ -79,4 +79,8 @@ angular.module('anyfetchFrontApp', [
     $rootScope.$on('$viewContentLoaded', function () {
       $(document).foundation();
     });
+
+    window.setTimeout(function() {
+      $('input[ng-model]').trigger('input');
+    }, 100);
   });
