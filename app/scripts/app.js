@@ -50,7 +50,7 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
     };
     $httpProvider.responseInterceptors.push(interceptor);
   })
-  .run(function ($route, $q, $location, AuthService, $rootScope) {
+  .run(['$route', '$q', '$location', 'AuthService', '$rootScope', function ($route, $q, $location, AuthService, $rootScope) {
 
     var bootstrapApp = function() {
         var deferred = $q.defer();
@@ -77,4 +77,4 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
     $rootScope.$on('$viewContentLoaded', function () {
       $(document).foundation();
     });
-  });
+  }]);
