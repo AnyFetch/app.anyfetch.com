@@ -13,7 +13,6 @@ angular.module('anyfetchFrontApp')
       password: $scope.password,
       rememberMe: $scope.rememberMe
     };
-    console.log(credentials);
 
     AuthService.login(credentials)
       .then(function(user) {

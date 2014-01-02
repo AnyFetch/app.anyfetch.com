@@ -25,7 +25,6 @@ angular.module('anyfetchFrontApp.authenticationService', [])
     } else {
       credentials = $cookies.credentials;
     }
-    console.log(user);
 
     // Check the user credentials validity
     $http.defaults.headers.common.Authorization = 'Basic ' + credentials;
