@@ -19,9 +19,9 @@
       <li class="divider"></li>
       <li> <a href="#"><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
-      <li><a href="#" ng-click="logout()"><div class="header-icon logout"></div></a></li>
+      <li><a href="#"><div class="header-icon logout"></div></a></li>
       <li class="show-for-medium-up divider"></li>
-      <li class="show-for-medium-up"><a href="#"><img src="images/38784cd8.avatar.png" width="30px" height="30px"> {{user.email}}</a></li>
+      <li class="show-for-medium-up"><a href="#"><img src="images/38784cd8.avatar.png" width="30px" height="30px"> {{userName}}</a></li>
     </ul>
   </section>
 </nav>
@@ -105,7 +105,7 @@
             ////////////////////////////////////////////// -->
 
         <div class="large-9 medium-9 columns">
-          <article class="results" ng-hide="results.length == 0">
+          <article class="results">
             <div class="loading" ng-hide="!loading">
               <div class="loading-icon"></div> Loading...
             </div>
