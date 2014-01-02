@@ -30,27 +30,27 @@ angular.module('anyfetchFrontApp', [
         redirectTo: '/'
       });
 
-    // Redirection to the login page if request is unauthorized
-    var interceptor = function($location, $q) {
-      function success(response) {
-        return response;
-      }
+    // // Redirection to the login page if request is unauthorized
+    // var interceptor = function($location, $q) {
+    //   function success(response) {
+    //     return response;
+    //   }
 
-      function error(response) {
-        if(response.status === 401) {
-          $location.path('/login');
-          return $q.reject(response);
-        }
-        else {
-          return $q.reject(response);
-        }
-      }
+    //   function error(response) {
+    //     if(response.status === 401) {
+    //       $location.path('/login');
+    //       return $q.reject(response);
+    //     }
+    //     else {
+    //       return $q.reject(response);
+    //     }
+    //   }
 
-      return function(promise) {
-        return promise.then(success, error);
-      };
-    };
-    $httpProvider.responseInterceptors.push(interceptor);
+    //   return function(promise) {
+    //     return promise.then(success, error);
+    //   };
+    // };
+    // $httpProvider.responseInterceptors.push(interceptor);
   })
   .run(function (AuthService, $route, $q, $location, $rootScope) {
 
