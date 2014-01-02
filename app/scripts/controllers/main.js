@@ -35,13 +35,7 @@ angular.module('anyfetchFrontApp')
     });
   };
 
-  $scope.isProviderUpToDate = function(provider) {
-    var currentDate = new Date();
-    return provider.updated > currentDate  - (60000 * 120);
-  };
-
   $rootScope.loginPage = false;
-
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || '';
 

@@ -9,7 +9,8 @@ angular.module('anyfetchFrontApp.authenticationService', [])
 
   var bootstrapUserContent = function(data) {
     DocumentTypesService.set(data.document_types);
-    ProvidersService.set(data.provider_status);
+    ProvidersService.set(data.provider_status, data.server_time);
+    ProvidersService.update();
   };
 
   // Login : Login the user using the basic method or the cookies credentials
