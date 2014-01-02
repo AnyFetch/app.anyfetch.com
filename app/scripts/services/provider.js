@@ -1,6 +1,7 @@
 'use strict';
 
-anyfetchFrontApp.factory( 'ProvidersService', function() {
+angular.module('anyfetchFrontApp.providerService', [])
+.factory( 'ProvidersService', function() {
 
   var datas = {
     providers: null

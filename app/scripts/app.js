@@ -1,13 +1,15 @@
 'use strict';
 
-//--------------------------------------------------------------
-//                 Angular Main
-//--------------------------------------------------------------
-
-var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
+angular.module('anyfetchFrontApp', [
   'ngCookies',
   'ngResource',
   'ngRoute',
+  'anyfetchFrontApp.filters',
+  'anyfetchFrontApp.gravatarDirective',
+  'anyfetchFrontApp.snippetDirective',
+  'anyfetchFrontApp.authenticationService',
+  'anyfetchFrontApp.documentService',
+  'anyfetchFrontApp.providerService'
 ])
   .config(function ($routeProvider, $sceProvider, $httpProvider) {
 
@@ -50,7 +52,7 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
     };
     $httpProvider.responseInterceptors.push(interceptor);
   })
-  .run(['$route', '$q', '$location', 'AuthService', '$rootScope', function ($route, $q, $location, AuthService, $rootScope) {
+  .run(function ($route, $q, $location, AuthService, $rootScope) {
 
     var bootstrapApp = function() {
         var deferred = $q.defer();
@@ -77,4 +79,4 @@ var anyfetchFrontApp = angular.module('anyfetchFrontApp', [
     $rootScope.$on('$viewContentLoaded', function () {
       $(document).foundation();
     });
-  }]);
+  });

@@ -1,7 +1,8 @@
 'use strict';
 
-anyfetchFrontApp.factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http, $q, DocumentTypesService, ProvidersService) {
-  
+angular.module('anyfetchFrontApp.authenticationService', [])
+.factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http, $q, DocumentTypesService, ProvidersService) {
+
   var datas = {
     currentUser: null
   };

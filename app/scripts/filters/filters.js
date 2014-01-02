@@ -1,8 +1,7 @@
 'use strict';
 
-/* Filters */
-
-anyfetchFrontApp.filter('niceDate', function() {
+angular.module('anyfetchFrontApp.filters', [])
+.filter('niceDate', function() {
   return function(date, plus) {
     date = new Date(date);
 

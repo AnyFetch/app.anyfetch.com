@@ -1,6 +1,7 @@
 'use strict';
 
-anyfetchFrontApp.directive('snippet', function(DocumentTypesService) {
+angular.module('anyfetchFrontApp.snippetDirective', [])
+.directive('snippet', function(DocumentTypesService) {
 
     var mustacheTemplate = function(result, template) {
       return Mustache.render(template, result.datas);

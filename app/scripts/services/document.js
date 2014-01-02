@@ -1,6 +1,7 @@
 'use strict';
 
-anyfetchFrontApp.factory( 'DocumentTypesService', function() {
+angular.module('anyfetchFrontApp.documentService', [])
+.factory( 'DocumentTypesService', function() {
 
   var datas = {
     documentTypes: null

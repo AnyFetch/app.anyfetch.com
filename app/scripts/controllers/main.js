@@ -5,7 +5,8 @@
 //                  MainCrtl
 // ------------------------------------------------------
 
-anyfetchFrontApp.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
+angular.module('anyfetchFrontApp')
+.controller('MainCtrl', function ($scope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
   $scope.search = function(query) {
     $location.search({q: query});
