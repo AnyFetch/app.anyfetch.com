@@ -1,0 +1,1 @@
+"use strict";angular.module("anyfetchFrontApp.snippetDirective",[]).directive("snippet",["DocumentTypesService",function(a){var b=function(a,b){return Mustache.render(b,a.datas)};return{restrict:"E",scope:{result:"="},templateUrl:"views/template snippet.html",link:function(c){var d=a.get()[c.result.document_type].template_snippet;c.snippetText=b(c.result,d)}}}]);

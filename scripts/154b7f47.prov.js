@@ -1,0 +1,1 @@
+"use strict";angular.module("anyfetchFrontApp.providerService",[]).factory("ProvidersService",function(){var a={providers:null};return a.set=function(b){angular.forEach(b,function(a){a.search_count=0,a.visible=!0}),a.providers=b},a.updateSearchCounts=function(b){angular.forEach(a.providers,function(a,c){var d=b[c];a.search_count=d?d:0})},a.get=function(){return a.providers},a});
