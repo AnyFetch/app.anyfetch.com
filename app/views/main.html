@@ -89,6 +89,9 @@
               <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
                 <snippet result="result"></snippet>
               </div>
+              <div class="result-row more text-center" ng-show="moreResult">
+                <a ng-click="loadMore()">Load more</a>
+              </div>
             </div>
           </article>
          <!-- close the off-canvas menu -->
