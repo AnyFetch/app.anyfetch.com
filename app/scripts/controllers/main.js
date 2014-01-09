@@ -10,6 +10,10 @@ angular.module('anyfetchFrontApp')
 
   $scope.search = function(query) {
     $location.search({q: query});
+    $scope.getRes($scope.query, 0, 2)
+        .then(function(data) {
+          $scope.results = data.datas;
+        });
   };
 
   $scope.getRes = function (query, start, limit) {
@@ -50,10 +54,21 @@ angular.module('anyfetchFrontApp')
     $http({method: 'GET', url: apiQuery})
       .success(function(data) {
         $scope.full = data;
+        var actualSearch = $location.search();
+        actualSearch.id = id;
+        $location.search(actualSearch);
         $scope.modalShow = true;
       });
 
   };
+
+  $scope.$watch('modalShow', function(newValue, oldValue) {
+    if (!newValue && oldValue) {
+      var actualSearch = $location.search();
+      delete actualSearch.id;
+      $location.search(actualSearch);
+    }
+  });
 
   $rootScope.loginPage = false;
   $scope.modalShow = false;
@@ -72,6 +87,16 @@ angular.module('anyfetchFrontApp')
     $scope.getRes($scope.query, 0, 2)
       .then(function(data) {
         $scope.results = data.datas;
+      });
+  }
+
+  if ($location.search().id) {
+    var apiQuery = 'http://api.anyfetch.com/documents/' + $location.search().id;
+
+    $http({method: 'GET', url: apiQuery})
+      .success(function(data) {
+        $scope.full = data;
+        $scope.modalShow = true;
       });
   }
 
