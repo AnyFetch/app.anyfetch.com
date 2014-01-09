@@ -9,7 +9,15 @@ angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
   $scope.search = function(query) {
-    $location.search({q: query});
+    if (query.length) {
+      $location.search({q: query});
+    } else {
+      console.log('REtour home!');
+      $location.search({});
+      $scope.results = [];
+      $scope.documentTypes = DocumentTypesService.updateSearchCounts($scope.results);
+      $scope.providersStatus = ProvidersService.updateSearchCounts($scope.results);
+    }
   };
 
   $scope.getRes = function (query, start, limit) {
