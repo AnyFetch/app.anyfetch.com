@@ -11,7 +11,7 @@
       </div>
       <div class="ariane-2">
         <div class="types-vector types-{{documentfull.document_type}}"></div>
-        <h2>{{documentfull.datas.name}}</h2>
+        <h2>{{documentfull.datas.name || documentfull.datas.title}}</h2>
         <legend>{{documentfull.creation_date | date:'short'}}</legend>
       </div>
     </div>
