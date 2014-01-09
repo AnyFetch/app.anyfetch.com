@@ -10,7 +10,7 @@
 //          General
 // -----------------------------------------------------
 
-html, body, .container, .wrapper, .wrapper>.row, .off-canvas-wrap, .inner-wrap {
+html, body, .container/*, .wrapper, .wrapper>.row, .off-canvas-wrap, .inner-wrap */ {
   height: 100%;
 }
 
@@ -41,8 +41,8 @@ h3 {
 .top-bar{
   .small-logo {
     position: absolute;
-    @include svg-background("logo-white", 35px, 35px);
-    width: 35px;
+    @include svg-background("logo-white", 120px, 35px);
+    width: 120px;
     height: 35px;
     left: 20px;
     top:5px;
@@ -238,6 +238,45 @@ h3 {
     border-right: 1px solid $border-color;
     background-color:#fff;
     margin-bottom:20px;
+
+    .empty {
+      display: block;
+      padding: 20px 0 40px;
+
+      .logoFull {
+        position: relative;
+        height: 100px;
+        width: 350px;
+        margin: 0 auto;
+
+        .small-logo {
+          position: absolute;
+          @include svg-background("landing/cluestr_icon_grey", 80px, 80px);
+          width: 80px;
+          height: 80px;
+          left: 20px;
+          top:5px;
+        }
+        .text-logo{
+          color:$secondary-color;
+          position: absolute;
+          left: 120px;
+          top:20px;
+          font-size: 3em;
+        }
+      }
+
+      .punchline {
+        color: darken($secondary-color, 0);
+        font-size: 1.5em;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica;
+        text-transform: uppercase;
+      }
+
+      .greyLogo {
+        width: 70px;
+      }
+    }
 
     .loading{
       padding:30px 0px 30px 0px;

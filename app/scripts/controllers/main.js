@@ -9,7 +9,15 @@ angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
   $scope.search = function(query) {
-    $location.search({q: query});
+    if (query.length) {
+      $location.search({q: query});
+    } else {
+      console.log('REtour home!');
+      $location.search({});
+      $scope.results = [];
+      $scope.documentTypes = DocumentTypesService.updateSearchCounts($scope.results);
+      $scope.providersStatus = ProvidersService.updateSearchCounts($scope.results);
+    }
   };
 
   $scope.getRes = function (query, start, limit) {
@@ -22,8 +30,14 @@ angular.module('anyfetchFrontApp')
         DocumentTypesService.updateSearchCounts(data.document_types);
         ProvidersService.updateSearchCounts(data.tokens);
         $scope.loading = false;
-        $scope.lastRes = start+limit;
-        $scope.moreResult = true;
+        
+        if (data.datas.length === limit) {
+          $scope.lastRes = start+limit;
+          $scope.moreResult = true;
+        } else {
+          $scope.lastRes = start+data.datas.length;
+          $scope.moreResult = false;
+        }
         deferred.resolve(data);
       })
       .error(deferred.reject);
@@ -31,8 +45,14 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
+  $scope.focusSearch = function() {
+    $('#search').focus();
+  };
+
   $scope.loadMore = function() {
-    $scope.getRes($scope.query, $scope.lastRes, 2)
+    $scope.loading = true;
+
+    $scope.getRes($scope.query, $scope.lastRes, 5)
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
       });
@@ -56,7 +76,7 @@ angular.module('anyfetchFrontApp')
   if ($scope.query) {
     $scope.loading = true;
 
-    $scope.getRes($scope.query, 0, 2)
+    $scope.getRes($scope.query, 0, 5)
       .then(function(data) {
         $scope.results = data.datas;
       });
