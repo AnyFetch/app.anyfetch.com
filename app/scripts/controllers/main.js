@@ -47,6 +47,7 @@ angular.module('anyfetchFrontApp')
   $rootScope.loginPage = false;
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || '';
+  $scope.modalShow = false;
 
   $scope.results = [];
   $scope.documentTypes = DocumentTypesService.documentTypes;
