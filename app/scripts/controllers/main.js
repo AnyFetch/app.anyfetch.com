@@ -45,10 +45,15 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.displayFull = function(id) {
-    $scope.modalShow = true;
-    console.log("tata");
-    // Get the document there id
-  }
+    var apiQuery = 'http://api.anyfetch.com/documents/' + id;
+
+    $http({method: 'GET', url: apiQuery})
+      .success(function(data) {
+        $scope.full = data;
+        $scope.modalShow = true;
+      });
+
+  };
 
   $rootScope.loginPage = false;
   $scope.modalShow = false;
@@ -56,6 +61,7 @@ angular.module('anyfetchFrontApp')
   $scope.query  = $location.search().q || '';
 
   $scope.results = [];
+  $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
   $scope.providersStatus = ProvidersService.providersUpToDate;

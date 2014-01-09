@@ -1,6 +1,6 @@
 <div class="preview" ng-show="show">
   <div class="background" ng-click="hideModal()"></div>
-  <div class="details"></div>
+  <div class="details" ng-bind-html='fullText'></div>
   <div class="close" ng-click="hideModal()"></div>
   <div class="footer">
     <div class="left">
@@ -11,8 +11,8 @@
       </div>
       <div class="ariane-2">
         <div class="types-vector types-5252ce4ce4cfcd16f55cfa3d"></div>
-        <h2>Methodologie de commentaire</h2>
-        <legend>31/12/2014 12:34PM</legend>
+        <h2>{{documentfull.datas.name}}</h2>
+        <legend>{{documentfull.creation_date | date:'short'}}</legend>
       </div>
     </div>
     <div class="buttons right">

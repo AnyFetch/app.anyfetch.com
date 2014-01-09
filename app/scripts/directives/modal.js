@@ -1,27 +1,28 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.modalDirective', [])
-.directive('modal', function() {
+.directive('modal', function(DocumentTypesService) {
+
   return {
     restrict: 'E',
     scope: {
-      show: '='
+      show: '=',
+      documentfull: '='
     },
     templateUrl: 'views/template modal.html',
     replace: true,
-    transclude: true,
-    link: function(scope, element, attrs) {
-      scope.dialogStyle = {};
-      if (attrs.width) {
-        scope.dialogStyle.width = attrs.width;
-      }
-      if (attrs.height) {
-        scope.dialogStyle.height = attrs.height;
-      }
+    link: function(scope) {
 
       scope.hideModal = function() {
         scope.show = false;
       };
+
+      scope.$watch('show', function(newVal) {
+        if (newVal) {
+          var htmlTemplate = DocumentTypesService.get()[scope.documentfull.document_type].template_full;
+          scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
+        }
+      });
     }
   };
 });
