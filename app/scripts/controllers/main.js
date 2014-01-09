@@ -22,8 +22,14 @@ angular.module('anyfetchFrontApp')
         DocumentTypesService.updateSearchCounts(data.document_types);
         ProvidersService.updateSearchCounts(data.tokens);
         $scope.loading = false;
-        $scope.lastRes = start+limit;
-        $scope.moreResult = true;
+        
+        if (data.datas.length === limit) {
+          $scope.lastRes = start+limit;
+          $scope.moreResult = true;
+        } else {
+          $scope.lastRes = start+data.datas.length;
+          $scope.moreResult = false;
+        }
         deferred.resolve(data);
       })
       .error(deferred.reject);
