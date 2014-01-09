@@ -44,10 +44,16 @@ angular.module('anyfetchFrontApp')
     });
   };
 
+  $scope.displayFull = function(id) {
+    $scope.modalShow = true;
+    console.log("tata");
+    // Get the document there id
+  }
+
   $rootScope.loginPage = false;
+  $scope.modalShow = false;
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || '';
-  $scope.modalShow = false;
 
   $scope.results = [];
   $scope.documentTypes = DocumentTypesService.documentTypes;

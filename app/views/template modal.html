@@ -1,7 +1,25 @@
-<div class='ng-modal' ng-show='show'>
-  <div class='ng-modal-overlay' ng-click='hideModal()'></div>
-  <div class='ng-modal-dialog' ng-style='dialogStyle'>
-    <div class='ng-modal-close' ng-click='hideModal()'>X</div>
-    <div class='ng-modal-dialog-content' ng-transclude></div>
+<div class="preview" ng-show="show">
+  <div class="background" ng-click="hideModal()"></div>
+  <div class="details"></div>
+  <div class="close" ng-click="hideModal()"></div>
+  <div class="footer">
+    <div class="left">
+      <div class="ariane-1">
+        <div class="separator-ariane"></div>
+        <div class="provider provider-white-5252cedd03a470843f000004"></div>
+        <h1>Dropbox</h1>
+      </div>
+      <div class="ariane-2">
+        <div class="types-vector types-5252ce4ce4cfcd16f55cfa3d"></div>
+        <h2>Methodologie de commentaire</h2>
+        <legend>31/12/2014 12:34PM</legend>
+      </div>
+    </div>
+    <div class="buttons right">
+      <a class="button tiny radius"><img src="/images/icon-preview/download.svg" width="16px" height="16px" /></a>
+      <a class="button tiny radius"><img src="/images/icon-preview/share.svg" width="16px" height="16px" /></a>
+      <a class="button tiny radius primary">Open</a>
+    </div>
   </div>
+
 </div>
