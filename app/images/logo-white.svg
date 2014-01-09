@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 17.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="262.619px" height="263.443px" viewBox="0 0 262.619 263.443" enable-background="new 0 0 262.619 263.443"
+	 width="831.81px" height="263.443px" viewBox="0 0 831.81 263.443" enable-background="new 0 0 831.81 263.443"
 	 xml:space="preserve">
 <g>
-	<path fill="#FFFFFF" d="M241.923,0H12.696C9.106,0,5.87,1.496,3.561,3.892C1.36,6.175,0,9.274,0,12.696v141.604
+	<path fill="#FFFFFF" d="M241.923,0H12.696C9.106,0,5.87,1.496,3.561,3.892C1.36,6.175,0,9.274,0,12.696V154.3
 		c2.314-3.313,4.651-6.61,6.938-9.942c14.454-21.062,37.677-26.82,58.885-14.59c22.635,13.054,31.502,39.361,20.04,61.727
 		c-10.956,21.378-22.725,42.34-34.146,63.479h10.65c8.756-15.861,17.085-31.979,26.417-47.493
 		c10.235-17.015,17.457-34.177,8.283-55.113c6.167,2.195,10.671,4.377,15.424,5.381c13.6,2.873,24.549-4.496,26.025-17.044
@@ -18,4 +18,5 @@
 		c-8.542,14.939-16.967,29.947-25.423,44.937h147.609c3.421,0,6.521-1.36,8.804-3.561c2.396-2.31,3.893-5.545,3.893-9.136V12.696
 		C254.619,5.684,248.935,0,241.923,0z"/>
 </g>
+<text transform="matrix(1 0 0 1 297.7654 188.2858)"><tspan x="0" y="0" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="130">any</tspan><tspan x="196.037" y="0" fill="#FFFFFF" font-family="'MyriadPro-Bold'" font-size="130">Fetc</tspan><tspan x="439.523" y="0" fill="#FFFFFF" font-family="'MyriadPro-Bold'" font-size="130" letter-spacing="-2">h</tspan></text>
 </svg>

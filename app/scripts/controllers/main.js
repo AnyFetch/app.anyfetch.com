@@ -45,8 +45,14 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
+  $scope.focusSearch = function() {
+    $('#search').focus();
+  };
+
   $scope.loadMore = function() {
-    $scope.getRes($scope.query, $scope.lastRes, 2)
+    $scope.loading = true;
+
+    $scope.getRes($scope.query, $scope.lastRes, 5)
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
       });
@@ -70,7 +76,7 @@ angular.module('anyfetchFrontApp')
   if ($scope.query) {
     $scope.loading = true;
 
-    $scope.getRes($scope.query, 0, 2)
+    $scope.getRes($scope.query, 0, 5)
       .then(function(data) {
         $scope.results = data.datas;
       });
