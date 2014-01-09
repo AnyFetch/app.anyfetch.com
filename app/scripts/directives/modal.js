@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.modalDirective', [])
-.directive('modal', function(DocumentTypesService) {
+.directive('modal', function(DocumentTypesService, ProvidersService) {
 
   return {
     restrict: 'E',
@@ -21,6 +21,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         if (newVal) {
           var htmlTemplate = DocumentTypesService.get()[scope.documentfull.document_type].template_full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
+          scope.provider = ProvidersService.providers[scope.documentfull.token];
         }
       });
     }

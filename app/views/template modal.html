@@ -6,19 +6,29 @@
     <div class="left">
       <div class="ariane-1">
         <div class="separator-ariane"></div>
-        <div class="provider provider-white-5252cedd03a470843f000004"></div>
-        <h1>Dropbox</h1>
+        <div class="provider provider-white-{{documentfull.token}}"></div>
+        <h1>{{provider.name}}</h1>
       </div>
       <div class="ariane-2">
-        <div class="types-vector types-5252ce4ce4cfcd16f55cfa3d"></div>
+        <div class="types-vector types-{{documentfull.document_type}}"></div>
         <h2>{{documentfull.datas.name}}</h2>
         <legend>{{documentfull.creation_date | date:'short'}}</legend>
       </div>
     </div>
     <div class="buttons right">
-      <a class="button tiny radius"><img src="/images/icon-preview/download.svg" width="16px" height="16px" /></a>
-      <a class="button tiny radius"><img src="/images/icon-preview/share.svg" width="16px" height="16px" /></a>
-      <a class="button tiny radius primary">Open</a>
+      <a class="button tiny radius" ng-show="documentfull.actions.delete" href="{{documentfull.actions.delete}}">
+        <img src="/images/icon-preview/remove.svg" width="16px" height="16px" />
+      </a>
+      <a class="button tiny radius" ng-show="documentfull.actions.reply" href="{{documentfull.actions.reply}}">
+        <img src="/images/icon-preview/share.svg" width="16px" height="16px" />
+      </a>
+      <a class="button tiny radius" ng-show="documentfull.actions.share" href="{{documentfull.actions.share}}">
+        <img src="/images/icon-preview/share.svg" width="16px" height="16px" />
+      </a>
+      <a class="button tiny radius" ng-show="documentfull.actions.download" href="{{documentfull.actions.download}}">
+        <img src="/images/icon-preview/download.svg" width="16px" height="16px" />
+      </a>
+      <a class="button tiny radius primary" ng-show="documentfull.actions.show" href="{{documentfull.actions.show}}">Open</a>
     </div>
   </div>
 
