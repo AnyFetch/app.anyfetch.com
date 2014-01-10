@@ -7,6 +7,7 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.filters',
   'anyfetchFrontApp.gravatarDirective',
   'anyfetchFrontApp.snippetDirective',
+  'anyfetchFrontApp.modalDirective',
   'anyfetchFrontApp.authenticationService',
   'anyfetchFrontApp.documentService',
   'anyfetchFrontApp.providerService'
@@ -20,7 +21,8 @@ angular.module('anyfetchFrontApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        reloadOnSearch: false
       })
       .when('/login', {
         templateUrl: 'views/login.html',

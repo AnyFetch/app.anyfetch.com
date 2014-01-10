@@ -10,13 +10,18 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
     return {
       restrict: 'E',
       scope: {
-        result: '='
+        result: '=',
+        click: '&'
       },
 
       templateUrl: 'views/template snippet.html',
       link : function(scope) {
         var htmlTemplate = DocumentTypesService.get()[scope.result.document_type].template_snippet;
         scope.snippetText = mustacheTemplate(scope.result, htmlTemplate);
+
+        scope.snippetClick = function() {
+          scope.click({id: scope.result.id});
+        };
       }
     };
   });

@@ -11,12 +11,15 @@ angular.module('anyfetchFrontApp')
   $scope.search = function(query) {
     if (query.length) {
       $location.search({q: query});
+      $scope.getRes($scope.query, 0, 5)
+          .then(function(data) {
+            $scope.results = data.datas;
+          });
     } else {
-      console.log('REtour home!');
       $location.search({});
       $scope.results = [];
-      $scope.documentTypes = DocumentTypesService.updateSearchCounts($scope.results);
-      $scope.providersStatus = ProvidersService.updateSearchCounts($scope.results);
+      DocumentTypesService.updateSearchCounts();
+      ProvidersService.updateSearchCounts();
     }
   };
 
@@ -30,7 +33,7 @@ angular.module('anyfetchFrontApp')
         DocumentTypesService.updateSearchCounts(data.document_types);
         ProvidersService.updateSearchCounts(data.tokens);
         $scope.loading = false;
-        
+
         if (data.datas.length === limit) {
           $scope.lastRes = start+limit;
           $scope.moreResult = true;
@@ -64,11 +67,41 @@ angular.module('anyfetchFrontApp')
     });
   };
 
+  $scope.displayFull = function(id) {
+    var apiQuery = 'http://api.anyfetch.com/documents/' + id;
+    if ($scope.query) {
+      apiQuery += '?search=' + $scope.query;
+    }
+
+    $http({method: 'GET', url: apiQuery})
+      .success(function(data) {
+        $scope.full = data;
+        $scope.modalShow = true;
+
+        if (!$location.search().id) {
+          var actualSearch = $location.search();
+          actualSearch.id = id;
+          $location.search(actualSearch);
+        }
+      });
+
+  };
+
+  $scope.$watch('modalShow', function(newValue, oldValue) {
+    if (!newValue && oldValue) {
+      var actualSearch = $location.search();
+      delete actualSearch.id;
+      $location.search(actualSearch);
+    }
+  });
+
   $rootScope.loginPage = false;
+  $scope.modalShow = false;
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || '';
 
   $scope.results = [];
+  $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
   $scope.providersStatus = ProvidersService.providersUpToDate;
@@ -80,6 +113,10 @@ angular.module('anyfetchFrontApp')
       .then(function(data) {
         $scope.results = data.datas;
       });
+  }
+
+  if ($location.search().id) {
+    $scope.displayFull($location.search().id);
   }
 
 });
