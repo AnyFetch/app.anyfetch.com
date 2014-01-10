@@ -1,3 +1,6 @@
+<!-- Modal full page -->
+<modal show="modalShow" documentfull="full"></modal>
+
 <nav class="top-bar" data-topbar="">
   <ul class="title-area">
     <!-- Title Area -->
@@ -22,7 +25,7 @@
       <li class="divider"></li>
       <li><a href="#" ng-click="logout()"><div class="header-icon logout"></div></a></li>
       <li class="show-for-medium-up divider"></li>
-      <li class="show-for-medium-up"><a href="#"><gravatar data-gravatar-email="user.email"> {{user.email}}</a></li>
+      <li class="show-for-medium-up"><a href="#"><span gravatar="" data-gravatar-email="user.email"></span> {{user.email}}</a></li>
     </ul>
    </section>
 </nav>
@@ -91,7 +94,7 @@
             </a>
             <div class="loaded">
               <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
-                <snippet result="result"></snippet>
+                <snippet result="result" click="displayFull(id)"></snippet>
               </div>
               <div class="loading" ng-hide="!loading">
                 <div class="loading-icon"></div> Loading...
