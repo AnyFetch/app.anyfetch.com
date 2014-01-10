@@ -18,8 +18,9 @@ angular.module('anyfetchFrontApp')
     } else {
       $location.search({});
       $scope.results = [];
-      DocumentTypesService.updateSearchCounts();
-      ProvidersService.updateSearchCounts();
+      DocumentTypesService.updateSearchCounts([]);
+      ProvidersService.updateSearchCounts([]);
+      $scope.moreResult = false;
     }
   };
 
