@@ -10,11 +10,13 @@ angular.module('anyfetchFrontApp')
 
   $scope.search = function(query) {
     if (query.length) {
+      $scope.loading = true;
       $scope.firstSearch = false;
       $location.search({q: query});
       $scope.getRes($scope.query, 0, 5)
           .then(function(data) {
             $scope.results = data.datas;
+            $scope.loading = false;
           });
     } else {
       $location.search({});
