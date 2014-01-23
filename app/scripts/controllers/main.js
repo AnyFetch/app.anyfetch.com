@@ -10,6 +10,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.search = function(query) {
     if (query.length) {
+      $scope.firstSearch = false;
       $location.search({q: query});
       $scope.getRes($scope.query, 0, 5)
           .then(function(data) {
@@ -100,6 +101,7 @@ angular.module('anyfetchFrontApp')
   $scope.modalShow = false;
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || '';
+  $scope.firstSearch = true;
 
   $scope.results = [];
   $scope.full = null;

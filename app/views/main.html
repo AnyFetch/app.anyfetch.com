@@ -86,7 +86,8 @@
         <div class="large-9 medium-9 columns">
           <article class="results">
             <a class="empty text-center" ng-hide="results.length || loading" ng-click="focusSearch()">
-              <p class="punchline">Start finding!</p>
+              <p class="punchline" ng-show="firstSearch">Start finding!</p>
+              <p class="punchline" ng-show="!firstSearch">No results match your query!</p>
               <div class="logoFull">
                 <div class="small-logo"></div>
                 <div class="text-logo">any<strong>Fetch</strong></div>
