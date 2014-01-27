@@ -7,12 +7,12 @@ angular.module('anyfetchFrontApp.modalDirective', [])
     restrict: 'E',
     scope: {
       show: '=',
-      documentfull: '='
+      documentfull: '=',
+      query: '='
     },
     templateUrl: 'views/template modal.html',
     replace: true,
     link: function(scope) {
-
       scope.hideModal = function() {
         scope.show = false;
       };
@@ -28,6 +28,8 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.$watch('documentfull', function(newVal) {
+        scope.fullText = null;
+
         if (newVal) {
           var htmlTemplate = DocumentTypesService.get()[scope.documentfull.document_type].template_full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);

@@ -1,14 +1,14 @@
 <div class="preview" ng-show="show">
   <div class="background" ng-click="hideModal()"></div>
   <div class="details" ng-bind-html='fullText'></div>
-  <div class="loading" ng-hide="fullText != undefined">
+  <div class="loading" ng-hide="fullText != null">
     <h1 class="text-center">Loading...</h1>
   </div>
   <div class="close" ng-click="hideModal()"></div>
   <div class="highlight_bar">
     <div class="left">
       <a class="close_hightlight">x</a>
-      Highlight : <span class="highlight_example">Test : {{query}}</span>
+      Highlight : <span class="highlight_example">{{query}}</span>
     </div>
     <div class="buttons right">
       <a class="button tiny radius">&lt; Previous</a>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="footer">
-    <div ng-show="fullText != undefined">
+    <div ng-show="fullText != null">
       <div class="left">
         <div class="ariane-1">
           <div class="separator-ariane"></div>
