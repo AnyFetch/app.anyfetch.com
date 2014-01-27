@@ -1,7 +1,7 @@
 <!-- Modal full page -->
 <modal show="modalShow" documentfull="full"></modal>
 
-<nav class="top-bar" data-topbar>
+<nav class="header_bar">
   <ul class="title-area">
     <!-- Title Area -->
     <li class="name">
@@ -9,7 +9,7 @@
     </li>
   </ul>
 
-  <section class="top-bar-section">
+  <section class="header_bar_section">
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="divider"></li>
@@ -21,11 +21,11 @@
         </a>
       </li>
       <li class="divider"></li>
-      <li> <a href="mailto:support@papiel.fr"><div class="header-icon support"></div></a></li>
+      <li class="show-for-medium-up"> <a href="mailto:support@papiel.fr"><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
       <li><a href="#" ng-click='logout()'><div class="header-icon logout"></div></a></li>
-      <li class="show-for-medium-up divider"></li>
-      <li class="show-for-medium-up"><a href="#"><span gravatar data-gravatar-email="user.email"></span> {{user.email}}</a></li>
+      <li class="divider"></li>
+      <li><a href="#"><span gravatar data-gravatar-email="user.email"></span> <span class="show-for-medium-up">{{user.email}}</span></a></li>
     </ul>
    </section>
 </nav>

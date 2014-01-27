@@ -44,7 +44,50 @@ blockquote{
 //          Header
 // -----------------------------------------------------
 
-.top-bar{
+.header_bar{
+  background: $topbar-bg-color;
+  overflow: hidden;
+  height:$topbar-height;
+
+  .header_bar_section{
+    width: auto;
+    display: inline;
+    list-style: none;
+  }
+
+  ul{
+    width: auto;
+    display: inline;
+    list-style: none;
+
+    li{
+      float: left;
+
+      &.divider{
+        border-bottom: 0;
+        border-top: 0;
+        border-right: solid 1px lighten($topbar-bg-color, 10%);
+        clear: none;
+        height: $topbar-height;
+        width: 0;
+      }
+
+      a:not(.button){
+        padding: 0 15.66667px;
+        line-height: 47px;
+        background: #16A9E2;
+      }
+
+      &>a{
+        //display: block;
+        width: 100%;
+        color: $topbar-menu-link-color;
+        font-family: $header-font-family;
+        font-size: $topbar-menu-link-font-size;
+      }
+    }
+  }
+
   .small-logo {
     position: absolute;
     @include svg-background("logo-white", 120px, 35px);
