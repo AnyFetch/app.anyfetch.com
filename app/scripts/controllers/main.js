@@ -84,10 +84,14 @@ angular.module('anyfetchFrontApp')
       apiQuery += '?search=' + $scope.query;
     }
 
+    $scope.modalShow = true;
+    $scope.full = null;
+
     $http({method: 'GET', url: apiQuery})
       .success(function(data) {
         $scope.full = data;
         $scope.modalShow = true;
+        $scope.modalLoading = false;
 
         if (!$location.search().id) {
           var actualSearch = $location.search();
@@ -112,9 +116,9 @@ angular.module('anyfetchFrontApp')
     $scope.query  = $location.search().q || '';
     $scope.id  = $location.search().id || '';
     $scope.similar_to  = $location.search().similar_to || '';
-
+    
     if ($scope.id) {
-      $scope.displayFull($location.search().id);
+      $scope.displayFull($scope.id);
     }
     if ($scope.similar_to) {
       $scope.similarShow = true;
