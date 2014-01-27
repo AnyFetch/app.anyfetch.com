@@ -1,8 +1,8 @@
 <div class="preview" ng-show="show">
   <div class="background" ng-click="hideModal()"></div>
   <div class="details" ng-bind-html='fullText'></div>
-  <div class="loading" ng-hide="fullText != null">
-    <h1 class="text-center">Loading...</h1>
+  <div class="loading text-center" ng-hide="fullText != null">
+    <div class="loading-icon"></div> Loading...
   </div>
   <div class="close" ng-click="hideModal()"></div>
   <div class="highlight_bar">

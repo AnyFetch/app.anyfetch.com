@@ -177,6 +177,27 @@ blockquote{
   }
 }
 
+
+// -----------------------------------------------------
+//          Loading spinner
+// -----------------------------------------------------
+
+.loading{
+  padding:30px 0px 30px 0px;
+  text-align: center;
+  font-size:18px;
+  color: #ddd;
+
+  .loading-icon{
+    display: inline-block;
+    @include svg-background("spinner", 16px, 16px);
+    width: 16px;
+    height: 16px;
+    animation:spin 2s linear infinite;
+  }
+}
+
+
 // -----------------------------------------------------
 //          Content
 // -----------------------------------------------------
@@ -284,20 +305,6 @@ blockquote{
       }
     }
 
-    .loading{
-      padding:30px 0px 30px 0px;
-      text-align: center;
-      font-size:18px;
-      color: #ddd;
-
-      .loading-icon{
-        display: inline-block;
-        @include svg-background("spinner", 16px, 16px);
-        width: 16px;
-        height: 16px;
-        animation:spin 2s linear infinite;
-      }
-    }
     .result-row{
       position:relative;
       width:100%;
