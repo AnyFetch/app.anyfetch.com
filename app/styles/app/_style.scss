@@ -550,3 +550,51 @@ blockquote{
     }
   }
 }
+
+
+
+// -----------------------------------------------------
+//          RELATED
+// -----------------------------------------------------
+
+$search-height:61px;
+
+.related_overlay{
+  position:absolute;
+  top:47px;
+  left:0px;
+  right:0px;
+  background-color:#fbf7ed;
+  height:$search-height;
+  overflow:hidden;
+  z-index:2;
+  border-bottom:3px solid $border-color;
+
+  .info{
+    line-height:$search-height;
+
+    label{
+      display:inline;
+      color:$alternative-color;
+      text-transform: uppercase;
+      font-weight:bold;
+      margin-left:20px;
+      cursor:default;
+    }
+    a{
+      color:#676767;
+      text-decoration: underline;
+      margin-left:10px;
+    }
+  }
+  a.close{
+    float:right;
+    color:$alternative-color;
+    line-height:$search-height;
+    margin-right:20px;
+    &:hover{
+      opacity:0.8;
+    }
+  }
+
+}

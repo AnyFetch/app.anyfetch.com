@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.modalDirective', [])
-.directive('modal', function(DocumentTypesService, ProvidersService) {
+.directive('modal', function(DocumentTypesService, ProvidersService, $location) {
 
   return {
     restrict: 'E',
@@ -15,6 +15,16 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.hideModal = function() {
         scope.show = false;
+      };
+
+      scope.show_related = function() {
+        scope.hideModal();
+        if (!$location.search().related_to && $location.search().id) {
+          var actualSearch = $location.search();
+          actualSearch.related_to = actualSearch.id;
+          delete actualSearch.id;
+          $location.search(actualSearch);
+        }
       };
 
       scope.$watch('show', function(newVal) {

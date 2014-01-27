@@ -26,6 +26,13 @@ angular.module('anyfetchFrontApp')
       $scope.moreResult = false;
     }
   };
+  $scope.close_related = function(){
+    if ($location.search().related_to) {
+      var actualSearch = $location.search();
+      delete actualSearch.related_to;
+      $location.search(actualSearch);
+    }
+  };
 
   $scope.getRes = function (query, start, limit) {
     var deferred = $q.defer();
@@ -104,6 +111,7 @@ angular.module('anyfetchFrontApp')
   $scope.user = AuthService.currentUser;
   $scope.query  = $location.search().q || '';
   $scope.firstSearch = true;
+  $scope.relatedShow = false;
 
   $scope.results = [];
   $scope.full = null;
@@ -120,8 +128,21 @@ angular.module('anyfetchFrontApp')
       });
   }
 
-  if ($location.search().id) {
-    $scope.displayFull($location.search().id);
-  }
+  $scope.$on('$routeUpdate', function(){
+    if ($location.search().id) {
+      $scope.displayFull($location.search().id);
+    }
+    if ($location.search().related_to) {
+      $scope.relatedShow = true;
+      // Change endpoint
+    }
+    else{
+      $scope.relatedShow = false;
+      // Change endpoint
+    }
+  });
+
+
+
 
 });
