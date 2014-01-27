@@ -1,5 +1,5 @@
 <!-- Modal full page -->
-<modal show="modalShow" documentfull="full"></modal>
+<modal show="modalShow" documentfull="full" query="query"></modal>
 
 <nav class="top-bar" data-topbar="">
   <ul class="title-area">
@@ -43,6 +43,15 @@
   </ul>
 </div>
 
+<!-- similar -->
+<div class="similar_overlay" ng-show="similarShow">
+  <a class="close" ng-click="close_similar()">x</a>
+  <div class="info">
+    <label>similar to</label>
+    <a href="#">invoice123.docx</a>
+  </div>
+</div>
+
 <!-- SEARCH -->
 <section class="search-box">
   <div class="row">
@@ -52,7 +61,6 @@
     </form>
   </div>
 </section>
-
 
 <div class="wrapper">
   <div class="row">
@@ -86,7 +94,8 @@
         <div class="large-9 medium-9 columns">
           <article class="results">
             <a class="empty text-center" ng-hide="results.length || loading" ng-click="focusSearch()">
-              <p class="punchline">Start finding!</p>
+              <p class="punchline" ng-show="firstSearch">Start finding!</p>
+              <p class="punchline" ng-show="!firstSearch">No results match your query!</p>
               <div class="logoFull">
                 <div class="small-logo"></div>
                 <div class="text-logo">any<strong>Fetch</strong></div>
