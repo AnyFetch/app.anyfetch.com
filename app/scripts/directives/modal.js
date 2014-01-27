@@ -17,11 +17,11 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         scope.show = false;
       };
 
-      scope.show_related = function() {
+      scope.show_similar = function() {
         scope.hideModal();
-        if (!$location.search().related_to && $location.search().id) {
+        if (!$location.search().similar_to && $location.search().id) {
           var actualSearch = $location.search();
-          actualSearch.related_to = actualSearch.id;
+          actualSearch.similar_to = actualSearch.id;
           delete actualSearch.id;
           $location.search(actualSearch);
         }
