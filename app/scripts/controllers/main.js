@@ -106,10 +106,38 @@ angular.module('anyfetchFrontApp')
     }
   });
 
+  $scope.$on('$routeUpdate', $scope.rootUpdate);
+
+  $scope.rootUpdate = function() {
+    $scope.query  = $location.search().q || '';
+    $scope.id  = $location.search().id || '';
+    $scope.similar_to  = $location.search().similar_to || '';
+
+    if ($scope.id) {
+      $scope.displayFull($location.search().id);
+    }
+    if ($scope.similar_to) {
+      $scope.similarShow = true;
+      // Change endpoint
+    }
+    else {
+      $scope.similarShow = false;
+      // Change endpoint
+
+      if ($scope.query) {
+        $scope.loading = true;
+
+        $scope.getRes($scope.query, 0, 5)
+          .then(function(data) {
+            $scope.results = data.datas;
+          });
+      }
+    }
+  };
+
   $rootScope.loginPage = false;
   $scope.modalShow = false;
   $scope.user = AuthService.currentUser;
-  $scope.query  = $location.search().q || '';
   $scope.firstSearch = true;
   $scope.similarShow = false;
 
@@ -119,30 +147,5 @@ angular.module('anyfetchFrontApp')
   $scope.providers = ProvidersService.providers;
   $scope.providersStatus = ProvidersService.providersUpToDate;
 
-  if ($scope.query) {
-    $scope.loading = true;
-
-    $scope.getRes($scope.query, 0, 5)
-      .then(function(data) {
-        $scope.results = data.datas;
-      });
-  }
-
-  $scope.$on('$routeUpdate', function(){
-    if ($location.search().id) {
-      $scope.displayFull($location.search().id);
-    }
-    if ($location.search().similar_to) {
-      $scope.similarShow = true;
-      // Change endpoint
-    }
-    else{
-      $scope.similarShow = false;
-      // Change endpoint
-    }
-  });
-
-
-
-
+  $scope.rootUpdate();
 });
