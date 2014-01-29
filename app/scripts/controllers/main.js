@@ -82,27 +82,32 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.displayFull = function(id) {
-    var apiQuery = 'http://api.anyfetch.com/documents/' + id;
-    if ($scope.query) {
-      apiQuery += '?search=' + $scope.query;
+    var actualSearch = $location.search();
+    actualSearch.id = id;
+    $location.search(actualSearch);
+  };
+
+  $scope.loadFull = function() {
+    if ($scope.id) {
+      var apiQuery = 'http://api.anyfetch.com/documents/' + $scope.id;
+      if ($scope.query) {
+        apiQuery += '?search=' + $scope.query;
+      }
+
+      $scope.modalShow = true;
+      //LOCK SCROLL MAIN!!!
+      $scope.full = null;
+
+      $http({method: 'GET', url: apiQuery})
+        .success(function(data) {
+          $scope.full = data;
+          $scope.modalShow = true;
+          $scope.modalLoading = false;
+        });
     }
-
-    $scope.modalShow = true;
-    $scope.full = null;
-
-    $http({method: 'GET', url: apiQuery})
-      .success(function(data) {
-        $scope.full = data;
-        $scope.modalShow = true;
-        $scope.modalLoading = false;
-
-        if (!$location.search().id) {
-          var actualSearch = $location.search();
-          actualSearch.id = id;
-          $location.search(actualSearch);
-        }
-      });
-
+    else {
+      console.log('Nothing to display in full.');
+    }
   };
 
   $scope.$watch('modalShow', function(newValue, oldValue) {
@@ -113,7 +118,9 @@ angular.module('anyfetchFrontApp')
     }
   });
 
-  $scope.$on('$routeUpdate', $scope.rootUpdate);
+  $scope.$on('$routeUpdate', function() {
+    $scope.rootUpdate();
+  });
 
   $scope.rootUpdate = function() {
     $scope.query  = $location.search().q || '';
@@ -121,22 +128,23 @@ angular.module('anyfetchFrontApp')
     $scope.similar_to  = $location.search().similar_to || '';
     
     if ($scope.id) {
-      $scope.displayFull($scope.id);
+      $scope.modalLoading = true;
+      $scope.loadFull();
       //LOCK SCROLL MAIN!!!
     }
-
-    if ($scope.similar_to) {
-      $scope.similarShow = true;
-      // Change endpoint
-    }
     else {
-      $scope.similarShow = false;
-      // Change endpoint
+      $scope.loading = true;
 
-      if ($scope.query) {
-        $scope.loading = true;
+      if ($scope.similar_to) {
+        $scope.similarShow = true;
+        // Change endpoint
+      }
+      else {
+        $scope.similarShow = false;
 
-        $scope.search($scope.query);
+        if ($scope.query) {
+          $scope.search($scope.query);
+        }
       }
     }
   };
