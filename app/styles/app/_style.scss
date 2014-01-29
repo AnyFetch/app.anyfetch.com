@@ -24,7 +24,9 @@ h3 {
 }
 blockquote{
   color: darken($primary-color, 10);
-
+  padding:0px;
+  margin:0px;
+  border:0;
 }
 ::selection {
   background: $selection-bg;
@@ -413,14 +415,27 @@ blockquote{
           width:20px;
           height:20px;
         }
+
+
+        @media #{$small-only}{
+          width:40px;
+          height: 38px;
+          margin:5px;
+
+          .icon-types{
+            width:21px;
+            height:28px;
+            background-size: 21px 28px;
+          }
+        }
       }
 
 
       .details{
-        display:table;
-        padding:10px 20px 10px 0px;
+        padding:10px;
 
         h2,h1{
+          display:block;
           font-weight: normal;
           color:$text-color;
           font-size:16px;
@@ -430,9 +445,15 @@ blockquote{
         p{
           font-size:14px;
           color:$secondary-color;
-          margin:0;
+          margin:5px;
           strong{
             color:$primary-color;
+          }
+        }
+
+        @media #{$small-only}{
+          h2,h1{
+            margin:0;
           }
         }
       }
