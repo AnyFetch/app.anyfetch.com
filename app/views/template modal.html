@@ -8,16 +8,18 @@
       Highlight : <span class="highlight_example">texte</span>
     </div>
     <div class="buttons right">
-      <a class="button tiny radius">&lt; Previous</a>
-      <a class="button tiny radius">Next &gt;</a>
+      <a class="button tiny radius">&lt; <span class="hide-for-small">Previous</span></a>
+      <a class="button tiny radius"><span class="hide-for-small">Next</span> &gt;</a>
     </div>
   </div>
   <div class="footer">
     <div class="left">
       <div class="ariane-1">
-        <div class="separator-ariane"></div>
-        <div class="provider provider-white-{{documentfull.token}}"></div>
-        <h1>{{provider.name}}</h1>
+        <h1>
+          <div class="provider provider-white-{{documentfull.token}}"></div>
+          <div class="separator-ariane"></div>
+          <span><span class="hide-for-small">{{provider.name}}</span></span>
+        </h1>
       </div>
       <div class="ariane-2">
         <div class="types-vector types-{{documentfull.document_type}}"></div>
@@ -28,7 +30,7 @@
     <div class="buttons right">
       <a class="button tiny radius" ng-click="show_similar()">
         <img src="/images/icon-preview/link.svg" width="16px" height="16px" /> 
-        Show similar
+        <span class="hide-for-small">Show similar</span>
       </a>
       <a class="button tiny radius" ng-show="documentfull.actions.delete" href="{{documentfull.actions.delete}}">
         <img src="/images/icon-preview/remove.svg" width="16px" height="16px" />
