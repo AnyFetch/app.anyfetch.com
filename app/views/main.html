@@ -1,7 +1,7 @@
 <!-- Modal full page -->
 <modal show="modalShow" documentfull="full"></modal>
 
-<nav class="top-bar" data-topbar>
+<nav class="header_bar">
   <ul class="title-area">
     <!-- Title Area -->
     <li class="name">
@@ -9,7 +9,7 @@
     </li>
   </ul>
 
-  <section class="top-bar-section">
+  <section class="header_bar_section">
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="divider"></li>
@@ -20,12 +20,12 @@
           </div>
         </a>
       </li>
-      <li class="divider"></li>
-      <li> <a href="mailto:support@papiel.fr"><div class="header-icon support"></div></a></li>
+      <li class="divider show-for-medium-up"></li>
+      <li class="show-for-medium-up"> <a href="mailto:support@papiel.fr"><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
       <li><a href="#" ng-click='logout()'><div class="header-icon logout"></div></a></li>
-      <li class="show-for-medium-up divider"></li>
-      <li class="show-for-medium-up"><a href="#"><span gravatar data-gravatar-email="user.email"></span> {{user.email}}</a></li>
+      <li class="divider"></li>
+      <li><a href="#"><span gravatar data-gravatar-email="user.email"></span> <span class="show-for-medium-up">{{user.email}}</span></a></li>
     </ul>
    </section>
 </nav>
@@ -52,35 +52,33 @@
   </div>
 </div>
 
-<!-- SEARCH -->
-<section class="search-box">
-  <div class="row">
-    <form ng-submit="search(query)">
-      <h3>Fetch</h3>
-      <input id="search" type="text" value="" placeholder="Search" ng-model="query"  speech x-webkit-speech/>
-    </form>
-  </div>
-</section>
 
 <div class="wrapper">
-  <div class="row">
-    <div class="off-canvas-wrap">
-      <div class="inner-wrap">
+  <div class="off-canvas-wrap">
+    <div class="inner-wrap">
+      <!-- SEARCH -->
+      <section class="search-box">
+        <div class="row">
+          <nav class="show-for-small filter_icon_container">
+            <a class="left-off-canvas-toggle filter_icon"></a>
+          </nav>
+          <form ng-submit="search(query)">
+            <h3>Fetch</h3>
+            <input id="search" type="text" value="" placeholder="Search" ng-model="query"  speech x-webkit-speech/>
+          </form>
+        </div>
+      </section>
+      <div class="row">
         <!-- //////////////////////////////////////////////
                     Filters
             ////////////////////////////////////////////// -->
-
-        <div class="show-for-small">
-          <a class="left-off-canvas-toggle">Filters</a>
-        </div>
-
         <!-- Off Canvas Menu -->
-        <aside class="left-off-canvas-menu">
+        <aside class="left-off-canvas-menu show-for-small filters_off_canvas">
           <ng-include src="'views/filter_large.html'"/>
         </aside>
 
         <div class="large-3 medium-3 columns filters">
-          <div class="hide-for-small">
+          <div class="hide-for-small show-for-medium-up">
             <div class="sidebar">
               <ng-include src="'views/filter_large.html'"/>
             </div>
