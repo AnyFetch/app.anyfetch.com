@@ -213,7 +213,7 @@ blockquote{
   .filter_icon_container{
     float:left;
     height:60px;
-    width:58px;
+    width:38px;
 
     .filter_icon{
       display: block;
@@ -229,7 +229,7 @@ blockquote{
   form {
     height: 100%;
     @media #{$small-only}{
-      margin-left:58px;
+      margin-left:38px;
     }
     input {
       position:relative;
