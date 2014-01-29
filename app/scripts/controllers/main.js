@@ -7,34 +7,10 @@
 
 angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
-
-  $scope.search = function(query) {
-    $scope.results = [];
-
-    if (query.length) {
-      $scope.loading = true;
-      $scope.firstSearch = false;
-      $location.search({q: query});
-      $scope.getRes($scope.query, 0, 5)
-          .then(function(data) {
-            $scope.results = data.datas;
-            $scope.loading = false;
-          });
-    } else {
-      $location.search({});
-      $scope.results = [];
-      DocumentTypesService.updateSearchCounts([]);
-      ProvidersService.updateSearchCounts([]);
-      $scope.moreResult = false;
-    }
-  };
-
-  $scope.close_similar = function(){
-    if ($location.search().similar_to) {
-      var actualSearch = $location.search();
-      delete actualSearch.similar_to;
-      $location.search(actualSearch);
-    }
+  $scope.logout = function() {
+    AuthService.logout(function() {
+      $location.path('/login');
+    });
   };
 
   $scope.getRes = function (query, start, limit) {
@@ -62,6 +38,36 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
+  $scope.searchLunch = function(query) {
+    $location.search({q: query});
+    $scope.searchUpdate();
+  };
+
+  $scope.searchUpdate = function() {
+    $scope.query = $location.search().q || '';
+    $scope.search();
+  };
+
+  $scope.search = function() {
+    if ($scope.query.length) {
+      $scope.loading = true;
+      $scope.results = [];
+      $scope.getRes($scope.query, 0, 5)
+        .then(function(data) {
+          $scope.results = data.datas;
+          $scope.loading = false;
+        });
+    } else {
+      $scope.query = '';
+      $location.search({});
+      $scope.loading = false;
+      $scope.results = [];
+      DocumentTypesService.updateSearchCounts([]);
+      ProvidersService.updateSearchCounts([]);
+      $scope.moreResult = false;
+    }
+  };
+
   $scope.focusSearch = function() {
     $('#search').focus();
   };
@@ -73,12 +79,6 @@ angular.module('anyfetchFrontApp')
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
       });
-  };
-
-  $scope.logout = function() {
-    AuthService.logout(function() {
-      $location.path('/login');
-    });
   };
 
   $scope.displayFull = function(id) {
@@ -103,10 +103,22 @@ angular.module('anyfetchFrontApp')
           $scope.full = data;
           $scope.modalShow = true;
           $scope.modalLoading = false;
+        })
+        .error(function() {
+          console.log('Error while loading full preview of the document '+$scope.id);
+          $location.search({q: $scope.query});
         });
     }
     else {
       console.log('Nothing to display in full.');
+    }
+  };
+
+  $scope.close_similar = function(){
+    if ($location.search().similar_to) {
+      var actualSearch = $location.search();
+      delete actualSearch.similar_to;
+      $location.search(actualSearch);
     }
   };
 
@@ -123,9 +135,8 @@ angular.module('anyfetchFrontApp')
   });
 
   $scope.rootUpdate = function() {
-    $scope.query  = $location.search().q || '';
     $scope.id  = $location.search().id || '';
-    $scope.similar_to  = $location.search().similar_to || '';
+    $scope.similar_to = $location.search().similar_to || '';
     
     if ($scope.id) {
       $scope.modalLoading = true;
@@ -134,16 +145,19 @@ angular.module('anyfetchFrontApp')
     }
     else {
       $scope.loading = true;
+      $scope.modalShow = false;
 
       if ($scope.similar_to) {
         $scope.similarShow = true;
-        // Change endpoint
+        // Similar endpoint Query
       }
       else {
         $scope.similarShow = false;
 
-        if ($scope.query) {
-          $scope.search($scope.query);
+        if (!$scope.query || $scope.query !== $location.search().q) {
+          $scope.searchUpdate();
+        } else {
+          $scope.loading = false;
         }
       }
     }
@@ -152,7 +166,6 @@ angular.module('anyfetchFrontApp')
   $rootScope.loginPage = false;
   $scope.modalShow = false;
   $scope.user = AuthService.currentUser;
-  $scope.firstSearch = true;
   $scope.similarShow = false;
 
   $scope.results = [];
