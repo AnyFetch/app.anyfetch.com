@@ -39,19 +39,22 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.searchLunch = function(query) {
+    console.log('Search lunched!');
     $location.search({q: query});
     $scope.searchUpdate();
   };
 
   $scope.searchUpdate = function() {
+    console.log('Search updating!');
     $scope.query = $location.search().q || '';
     $scope.search();
   };
 
   $scope.search = function() {
+    $scope.loading = true;
+    $scope.results = [];
+
     if ($scope.query.length) {
-      $scope.loading = true;
-      $scope.results = [];
       $scope.getRes($scope.query, 0, 5)
         .then(function(data) {
           $scope.results = data.datas;
@@ -61,7 +64,6 @@ angular.module('anyfetchFrontApp')
       $scope.query = '';
       $location.search({});
       $scope.loading = false;
-      $scope.results = [];
       DocumentTypesService.updateSearchCounts([]);
       ProvidersService.updateSearchCounts([]);
       $scope.moreResult = false;
@@ -124,6 +126,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.$watch('modalShow', function(newValue, oldValue) {
     if (!newValue && oldValue) {
+      $scope.closeModal = true;
       var actualSearch = $location.search();
       delete actualSearch.id;
       $location.search(actualSearch);
@@ -156,8 +159,9 @@ angular.module('anyfetchFrontApp')
 
         if (!$scope.query || $scope.query !== $location.search().q) {
           $scope.searchUpdate();
-        } else {
+        } else if ($scope.closeModal) {
           $scope.loading = false;
+          $scope.closeModal = false;
         }
       }
     }

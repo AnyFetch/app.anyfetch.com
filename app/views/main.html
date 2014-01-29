@@ -93,14 +93,6 @@
 
         <div class="large-9 medium-9 columns">
           <article class="results">
-            <a class="empty text-center" ng-hide="results.length || loading" ng-click="focusSearch()">
-              <p class="punchline" ng-hide="query.length">Start finding!</p>
-              <p class="punchline" ng-show="query.length">No results match your query!</p>
-              <div class="logoFull">
-                <div class="small-logo"></div>
-                <div class="text-logo">any<strong>Fetch</strong></div>
-              </div>
-            </a>
             <div class="loaded">
               <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
                 <snippet result="result" click="displayFull(id)"></snippet>
@@ -112,6 +104,14 @@
                 <a>Load more</a>
               </div>
             </div>
+            <a class="empty text-center" ng-hide="results.length || loading" ng-click="focusSearch()">
+              <p class="punchline" ng-hide="query.length">Start finding!</p>
+              <p class="punchline" ng-show="query.length">No results match your query!</p>
+              <div class="logoFull">
+                <div class="small-logo"></div>
+                <div class="text-logo">any<strong>Fetch</strong></div>
+              </div>
+            </a>
           </article>
          <!-- close the off-canvas menu -->
         <a class="exit-off-canvas"></a>
