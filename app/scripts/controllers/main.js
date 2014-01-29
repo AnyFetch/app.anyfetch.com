@@ -9,6 +9,8 @@ angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
   $scope.search = function(query) {
+    $scope.results = [];
+
     if (query.length) {
       $scope.loading = true;
       $scope.firstSearch = false;
@@ -26,6 +28,7 @@ angular.module('anyfetchFrontApp')
       $scope.moreResult = false;
     }
   };
+
   $scope.close_similar = function(){
     if ($location.search().similar_to) {
       var actualSearch = $location.search();
@@ -119,7 +122,9 @@ angular.module('anyfetchFrontApp')
     
     if ($scope.id) {
       $scope.displayFull($scope.id);
+      //LOCK SCROLL MAIN!!!
     }
+
     if ($scope.similar_to) {
       $scope.similarShow = true;
       // Change endpoint
@@ -131,10 +136,7 @@ angular.module('anyfetchFrontApp')
       if ($scope.query) {
         $scope.loading = true;
 
-        $scope.getRes($scope.query, 0, 5)
-          .then(function(data) {
-            $scope.results = data.datas;
-          });
+        $scope.search($scope.query);
       }
     }
   };
@@ -150,6 +152,6 @@ angular.module('anyfetchFrontApp')
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
   $scope.providersStatus = ProvidersService.providersUpToDate;
-
+  
   $scope.rootUpdate();
 });
