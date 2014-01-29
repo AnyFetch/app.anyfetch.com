@@ -15,7 +15,7 @@ html, body, .container/*, .wrapper, .wrapper>.row, .off-canvas-wrap, .inner-wrap
 }
 
 body.app {
-  background-color: #fafafa;
+  background-color: $bg-color;
 }
 
 h3 {
@@ -299,6 +299,14 @@ blockquote{
     }
   }
 
+  .filters_off_canvas{
+    @extend .filters;
+    border-right: 1px solid $border-color;
+    form{
+      margin:5px;
+    }
+  }
+  
   .results{
     overflow-y:auto;
     border-left: 1px solid $border-color;
