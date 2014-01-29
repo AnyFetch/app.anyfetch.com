@@ -292,6 +292,8 @@ blockquote{
         color:$text-color;
 
         .numberRes {
+          float:right;
+          line-height: 15px;
           &:before { content: "("; }
           &:after { content: ")"; }
         }
@@ -306,7 +308,7 @@ blockquote{
       margin:5px;
     }
   }
-  
+
   .results{
     overflow-y:auto;
     border-left: 1px solid $border-color;
