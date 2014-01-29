@@ -102,9 +102,11 @@ angular.module('anyfetchFrontApp')
 
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
-          $scope.full = data;
-          $scope.modalShow = true;
-          $scope.modalLoading = false;
+          if($location.search().id) {
+            $scope.full = data;
+            $scope.modalShow = true;
+            $scope.modalLoading = false;
+          }
         })
         .error(function() {
           console.log('Error while loading full preview of the document '+$scope.id);
