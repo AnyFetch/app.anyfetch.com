@@ -1,53 +1,50 @@
 <div class="preview" ng-show="show">
   <div class="background" ng-click="hideModal()"></div>
   <div class="details" ng-bind-html="fullText"></div>
-  <div class="loading text-center" ng-hide="fullText != null">
-    <div class="loading-icon"></div> Loading...
-  </div>
   <div class="close" ng-click="hideModal()"></div>
   <div class="highlight_bar">
     <div class="left">
       <a class="close_hightlight">x</a>
-      Highlight : <span class="highlight_example">{{query}}</span>
+      Highlight : <span class="highlight_example">texte</span>
     </div>
     <div class="buttons right">
-      <a class="button tiny radius">&lt; Previous</a>
-      <a class="button tiny radius">Next &gt;</a>
+      <a class="button tiny radius">&lt; <span class="hide-for-small">Previous</span></a>
+      <a class="button tiny radius"><span class="hide-for-small">Next</span> &gt;</a>
     </div>
   </div>
   <div class="footer">
-    <div ng-show="fullText != null">
-      <div class="left">
-        <div class="ariane-1">
-          <div class="separator-ariane"></div>
+    <div class="left">
+      <div class="ariane-1">
+        <h1>
           <div class="provider provider-white-{{documentfull.token}}"></div>
-          <h1>{{provider.name}}</h1>
-        </div>
-        <div class="ariane-2">
-          <div class="types-vector types-{{documentfull.document_type}}"></div>
-          <h2>{{documentfull.datas.name || documentfull.datas.title}}</h2>
-          <legend>{{documentfull.creation_date | date:'short'}}</legend>
-        </div>
+          <div class="separator-ariane"></div>
+          <span><span class="hide-for-small">{{provider.name}}</span></span>
+        </h1>
       </div>
-      <div class="buttons right">
-        <a class="button tiny radius" ng-click="show_similar()">
-          <img src="/images/icon-preview/54e70e4b.link.svg" width="16px" height="16px"> 
-          Show similar
-        </a>
-        <a class="button tiny radius" ng-show="documentfull.actions.delete" href="{{documentfull.actions.delete}}">
-          <img src="/images/icon-preview/42960d2d.remove.svg" width="16px" height="16px">
-        </a>
-        <a class="button tiny radius" ng-show="documentfull.actions.reply" href="{{documentfull.actions.reply}}">
-          <img src="/images/icon-preview/98610741.share.svg" width="16px" height="16px">
-        </a>
-        <a class="button tiny radius" ng-show="documentfull.actions.share" href="{{documentfull.actions.share}}">
-          <img src="/images/icon-preview/98610741.share.svg" width="16px" height="16px">
-        </a>
-        <a class="button tiny radius" ng-show="documentfull.actions.download" href="{{documentfull.actions.download}}">
-          <img src="/images/icon-preview/8c947ff0.download.svg" width="16px" height="16px">
-        </a>
-        <a class="button tiny radius primary" ng-show="documentfull.actions.show" href="{{documentfull.actions.show}}">Open</a>
+      <div class="ariane-2">
+        <div class="types-vector types-{{documentfull.document_type}}"></div>
+        <h2>{{documentfull.datas.name || documentfull.datas.title}}</h2>
+        <legend>{{documentfull.creation_date | date:'short'}}</legend>
       </div>
+    </div>
+    <div class="buttons right">
+      <a class="button tiny radius" ng-click="show_similar()">
+        <img src="/images/icon-preview/54e70e4b.link.svg" width="16px" height="16px"> 
+        <span class="hide-for-small">Show similar</span>
+      </a>
+      <a class="button tiny radius" ng-show="documentfull.actions.delete" href="{{documentfull.actions.delete}}">
+        <img src="/images/icon-preview/42960d2d.remove.svg" width="16px" height="16px">
+      </a>
+      <a class="button tiny radius" ng-show="documentfull.actions.reply" href="{{documentfull.actions.reply}}">
+        <img src="/images/icon-preview/98610741.share.svg" width="16px" height="16px">
+      </a>
+      <a class="button tiny radius" ng-show="documentfull.actions.share" href="{{documentfull.actions.share}}">
+        <img src="/images/icon-preview/98610741.share.svg" width="16px" height="16px">
+      </a>
+      <a class="button tiny radius" ng-show="documentfull.actions.download" href="{{documentfull.actions.download}}">
+        <img src="/images/icon-preview/8c947ff0.download.svg" width="16px" height="16px">
+      </a>
+      <a class="button tiny radius primary" ng-show="documentfull.actions.show" href="{{documentfull.actions.show}}">Open</a>
     </div>
   </div>
 

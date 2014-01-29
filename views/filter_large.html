@@ -6,15 +6,11 @@
 
     <div class="element" ng-repeat="docType in documentTypes" ng-show="docType.search_count">
       <div class="row">
-        <div class="large-9 columns">
-          <input type="checkbox" ng-model="docType.visible" id="type-{{docType.id}}">
-          <label for="type-{{docType.id}}">
-            {{docType.name | capitalizeFirst}}
-          </label>
-        </div>
-        <div class="large-3 columns text-right">
-          <span class="numberRes">{{docType.search_count}}</span>
-        </div>
+        <input type="checkbox" ng-model="docType.visible" id="type-{{docType.id}}">
+        <label for="type-{{docType.id}}">
+          {{docType.name | capitalizeFirst}}
+        </label>
+        <span class="numberRes">{{docType.search_count}}</span>
       </div>
     </div>
   </div>
@@ -26,15 +22,11 @@
 
     <div class="element" ng-repeat="provider in providers" ng-show="provider.search_count">
       <div class="row">
-        <div class="large-9 columns">
-          <input type="checkbox" ng-model="provider.visible" id="type-{{provider.id}}">
-          <label for="type-{{provider.id}}">
-            {{provider.name | capitalizeFirst}}
-          </label>
-        </div>
-        <div class="large-3 columns text-right">
-          <span class="numberRes">{{provider.search_count}}</span>
-        </div>
+        <input type="checkbox" ng-model="provider.visible" id="type-{{provider.id}}">
+        <label for="type-{{provider.id}}">
+          {{provider.name | capitalizeFirst}}
+        </label>
+        <span class="numberRes">{{provider.search_count}}</span>
       </div>
     </div>
   </div>
