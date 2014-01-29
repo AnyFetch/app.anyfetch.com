@@ -202,18 +202,37 @@ blockquote{
   }
 
   h3 {
+    margin:0px;
     margin-left:15px;
+    padding:0;
     padding-top:5px;
   }
 
+  .filter_icon_container{
+    float:left;
+    height:60px;
+    width:58px;
+
+    .filter_icon{
+      display: block;
+      @include svg-background("icon-header/list", 28px, 28px);
+      width:28px;
+      height:28px;
+      margin-top:16px;
+      margin-left:10px;
+    }
+  }
+
+
   form {
     height: 100%;
-
+    @media #{$small-only}{
+      margin-left:58px;
+    }
     input {
-      position:absolute;
+      position:relative;
       text-indent: 20px;
-      top:15px;
-      bottom:0px;
+      margin-top:-10px;
       font-size: 20px;
       height:45px;
     }
