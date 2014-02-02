@@ -15,7 +15,7 @@ html, body, .container/*, .wrapper, .wrapper>.row, .off-canvas-wrap, .inner-wrap
 }
 
 body.app {
-  background-color: #fafafa;
+  background-color: $bg-color;
 }
 
 h3 {
@@ -24,7 +24,9 @@ h3 {
 }
 blockquote{
   color: darken($primary-color, 10);
-
+  padding:0px;
+  margin:0px;
+  border:0;
 }
 ::selection {
   background: $selection-bg;
@@ -44,7 +46,50 @@ blockquote{
 //          Header
 // -----------------------------------------------------
 
-.top-bar{
+.header_bar{
+  background: $topbar-bg-color;
+  overflow: hidden;
+  height:$topbar-height;
+
+  .header_bar_section{
+    width: auto;
+    display: inline;
+    list-style: none;
+  }
+
+  ul{
+    width: auto;
+    display: inline;
+    list-style: none;
+
+    li{
+      float: left;
+
+      &.divider{
+        border-bottom: 0;
+        border-top: 0;
+        border-right: solid 1px lighten($topbar-bg-color, 10%);
+        clear: none;
+        height: $topbar-height;
+        width: 0;
+      }
+
+      a:not(.button){
+        padding: 0 15.66667px;
+        line-height: 47px;
+        background: #16A9E2;
+      }
+
+      &>a{
+        //display: block;
+        width: 100%;
+        color: $topbar-menu-link-color;
+        font-family: $header-font-family;
+        font-size: $topbar-menu-link-font-size;
+      }
+    }
+  }
+
   .small-logo {
     position: absolute;
     @include svg-background("logo-white", 120px, 35px);
@@ -159,18 +204,37 @@ blockquote{
   }
 
   h3 {
+    margin:0px;
     margin-left:15px;
+    padding:0;
     padding-top:5px;
   }
 
+  .filter_icon_container{
+    float:left;
+    height:60px;
+    width:38px;
+
+    .filter_icon{
+      display: block;
+      @include svg-background("icon-header/list", 28px, 28px);
+      width:28px;
+      height:28px;
+      margin-top:16px;
+      margin-left:10px;
+    }
+  }
+
+
   form {
     height: 100%;
-
+    @media #{$small-only}{
+      margin-left:38px;
+    }
     input {
-      position:absolute;
+      position:relative;
       text-indent: 20px;
-      top:15px;
-      bottom:0px;
+      margin-top:-10px;
       font-size: 20px;
       height:45px;
     }
@@ -251,10 +315,20 @@ blockquote{
         color:$text-color;
 
         .numberRes {
+          float:right;
+          line-height: 15px;
           &:before { content: "("; }
           &:after { content: ")"; }
         }
       }
+    }
+  }
+
+  .filters_off_canvas{
+    @extend .filters;
+    border-right: 1px solid $border-color;
+    form{
+      margin:5px;
     }
   }
 
@@ -348,14 +422,27 @@ blockquote{
           width:20px;
           height:20px;
         }
+
+
+        @media #{$small-only}{
+          width:40px;
+          height: 38px;
+          margin:5px;
+
+          .icon-types{
+            width:21px;
+            height:28px;
+            background-size: 21px 28px;
+          }
+        }
       }
 
 
       .details{
-        display:table;
-        padding:10px 20px 10px 0px;
+        padding:10px;
 
         h2,h1{
+          display:block;
           font-weight: normal;
           color:$text-color;
           font-size:16px;
@@ -365,9 +452,16 @@ blockquote{
         p{
           font-size:14px;
           color:$secondary-color;
-          margin:0;
+          margin:5px;
           strong{
             color:$primary-color;
+          }
+        }
+
+        @media #{$small-only}{
+          font-size:12px;
+          h2,h1{
+            margin:0;
           }
         }
       }
@@ -390,7 +484,7 @@ blockquote{
     display: inline-block;
     vertical-align: middle;
 }
-@each $provider in "52bff114c8318c29e9000005", "52bff1eec8318cb228000001" {
+@each $provider in "52bff114c8318c29e9000005", "52bff1eec8318cb228000001", "52bffb81c8318c29e900000a" {
   .provider-#{$provider} {
     @include svg-background("icon-provider/"+quote($provider), 20px, 20px);
   }
@@ -414,6 +508,11 @@ blockquote{
     top: 30px;
     z-index: 999;
     width: 100%;
+  }
+
+  .button{
+    overflow-y: hidden;
+    height:35px;
   }
 
   .background{
@@ -461,7 +560,7 @@ blockquote{
     z-index:4;
 
     .provider{
-      margin-top:5px;
+      margin-top:2px;
       float:left;
       margin-right:5px;
       vertical-align: middle;
@@ -470,13 +569,12 @@ blockquote{
       float:left;
       margin-left:20px;
       line-height: 65px;
-      width:150px;
       margin-top:14px;
     }
     .ariane-2{
-      float:right;
+      float:left;
       margin-top:12px;
-      margin-left:20px;
+      margin-left:5px;
     }
     .buttons{
       margin-top: 10px;
@@ -493,16 +591,22 @@ blockquote{
         }
       }
     }
-    .separator-ariane{
-      @include svg-background("arrow-right", 24px, 24px);
-      margin-top:5px;
-      float:right;
-    }
     h1{
       font-size: 16px;
       font-style: italic;
       font-weight: bold;
       color: #FFF;
+
+      span{ // to fix hide-for-small block effect
+        display:inline;
+      }
+
+      .separator-ariane{
+        @include svg-background("arrow-right", 24px, 24px);
+        margin-top:3px;
+        margin-left:5px;
+        float:right;
+      }
     }
     h2{
       font-size: 14px;
@@ -562,6 +666,9 @@ blockquote{
         }
       }
     }
+  }
+  @media #{$small-only}{
+
   }
 }
 

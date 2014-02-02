@@ -64,6 +64,8 @@ $selection-bg: #ebebeb;
 
 $dropdown-bg: #555;
 
+$bg-color:#fafafa;
+
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
 // $warning-color: #f08a24;
@@ -511,7 +513,7 @@ $input-include-glowing-effect: false;
 
 // Off Canvas Menu Variables
 // $off-canvas-width: 250px;
-$off-canvas-bg: #ddd;
+$off-canvas-bg: $bg-color;
 
 // Off Canvas Menu List Variables
 // $off-canvas-label-padding: 0.3rem rem-calc(15);
@@ -543,9 +545,9 @@ $tabbar-menu-icon-hover: lighten(#000, 30%);
 // Off Canvas Back-Link Overlay
 $off-canvas-overlay-transition: background 300ms ease;
 // $off-canvas-overlay-cursor: pointer;
-$off-canvas-overlay-box-shadow: -2px 0 15px rgba(#000, 0.2), 2px 0 15px rgba(#000, 0.2);
-// $off-canvas-overlay-background: rgba(#FFF, 0.2);
-// $off-canvas-overlay-background-hover: rgba(#FFF, 0.05);
+$off-canvas-overlay-box-shadow: 0;
+$off-canvas-overlay-background: rgba(#000, 0.2);
+$off-canvas-overlay-background-hover: rgba(#000, 0.4);
 
 // Transition Variabls
 $menu-slide: "transform 0.5s ease";
