@@ -33,7 +33,10 @@ angular.module('anyfetchFrontApp')
         }
         deferred.resolve(data);
       })
-      .error(deferred.reject);
+      .error(function() {
+        $scope.display_error('Error while searching '+ query +'. Please reload.');
+        deferred.reject();
+      });
 
     return deferred.promise;
   };
@@ -91,7 +94,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.loadFull = function() {
     if ($scope.id) {
-      var apiQuery = 'http://api.anyfetch.com/documents/' + $scope.id;
+      var apiQuery = 'http://api.anyfetch.com/documents/'+ $scope.id;
       if ($scope.query) {
         apiQuery += '?search=' + $scope.query;
       }
@@ -109,8 +112,8 @@ angular.module('anyfetchFrontApp')
           }
         })
         .error(function() {
-          console.log('Error while loading full preview of the document '+$scope.id);
-          $location.search({q: $scope.query});
+          $scope.display_error('Error while loading full preview of the document '+$scope.id);
+          $scope.searchLunch($scope.query);
         });
     }
     else {
@@ -124,6 +127,16 @@ angular.module('anyfetchFrontApp')
       delete actualSearch.similar_to;
       $location.search(actualSearch);
     }
+  };
+
+  $scope.close_error = function(){
+    $scope.errorMes = '';
+  };
+
+  $scope.display_error = function(mes){
+    $scope.errorMes = mes;
+    $('body').scrollTop(0);
+    setTimeout($scope.close_error, 1500);
   };
 
   $scope.$watch('modalShow', function(newValue, oldValue) {

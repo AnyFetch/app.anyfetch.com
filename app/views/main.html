@@ -10,6 +10,7 @@
   </ul>
 
   <section class="top-bar-section">
+
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="divider"></li>
@@ -43,8 +44,18 @@
   </ul>
 </div>
 
+
 <!-- similar -->
-<div class="similar_overlay" ng-show="similarShow">
+<div class="error overlay" ng-show="errorMes">
+  <a class="close" ng-click="close_error()">x</a>
+  <div class="info">
+    <label>Error: </label>
+    <a href="#">{{errorMes}}</a>
+  </div>
+</div>
+
+<!-- similar -->
+<div class="similar overlay" ng-show="similarShow">
   <a class="close" ng-click="close_similar()">x</a>
   <div class="info">
     <label>similar to</label>
