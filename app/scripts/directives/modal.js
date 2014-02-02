@@ -29,7 +29,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.$watch('documentfull', function(newVal) {
         scope.fullText = null;
-
+        scope.query = scope.query || $location.search().q;
         if (newVal) {
           var htmlTemplate = DocumentTypesService.get()[scope.documentfull.document_type].template_full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
