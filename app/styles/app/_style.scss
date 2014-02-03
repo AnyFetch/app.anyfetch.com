@@ -563,7 +563,9 @@ blockquote{
     z-index:3;
     box-shadow: 0 0 10px #000;
     padding: 2%;
-
+    @media #{$small-only}{
+      zoom:0.5;
+    }
   }
   .close{
     position:absolute;
