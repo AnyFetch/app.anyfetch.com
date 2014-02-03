@@ -58,7 +58,9 @@
   <a class="close" ng-click="close_similar()">x</a>
   <div class="info">
     <label>similar to</label>
-    <span ng-show="similarLoading"><div class="loading-icon"></div> Loading...</span>
+    <div class="loading inline" ng-show="similarLoading">
+      <div class="loading-icon"></div> Loading...
+    </div>
     <a href="#" ng-hide="similarLoading">{{similar_info.datas.title || similar_info.datas.name}}</a>
   </div>
 </div>
