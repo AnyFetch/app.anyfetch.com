@@ -1,5 +1,5 @@
 <!-- Modal full page -->
-<modal show="modalShow" documentfull="full"></modal>
+<modal show="modalShow" documentfull="full" query="query"></modal>
 
 <nav class="header_bar">
   <ul class="title-area">
@@ -43,15 +43,24 @@
   </ul>
 </div>
 
+
 <!-- similar -->
-<div class="similar_overlay" ng-show="similarShow">
+<div class="error overlay" ng-show="errorMes">
+  <a class="close" ng-click="close_error()">x</a>
+  <div class="info">
+    <label>Error: </label>
+    <a href="#">{{errorMes}}</a>
+  </div>
+</div>
+
+<!-- similar -->
+<div class="similar overlay" ng-show="similarShow">
   <a class="close" ng-click="close_similar()">x</a>
   <div class="info">
     <label>similar to</label>
     <a href="#">invoice123.docx</a>
   </div>
 </div>
-
 
 <div class="wrapper">
   <div class="off-canvas-wrap">
@@ -62,7 +71,7 @@
           <nav class="show-for-small filter_icon_container">
             <a class="left-off-canvas-toggle filter_icon"></a>
           </nav>
-          <form ng-submit="search(query)">
+          <form ng-submit="searchLaunch(query)">
             <h3>Fetch</h3>
             <input id="search" type="text" value="" placeholder="Search" ng-model="query"  speech x-webkit-speech/>
           </form>
@@ -91,14 +100,6 @@
 
         <div class="large-9 medium-9 columns">
           <article class="results">
-            <a class="empty text-center" ng-hide="results.length || loading" ng-click="focusSearch()">
-              <p class="punchline" ng-show="firstSearch">Start finding!</p>
-              <p class="punchline" ng-show="!firstSearch">No results match your query!</p>
-              <div class="logoFull">
-                <div class="small-logo"></div>
-                <div class="text-logo">any<strong>Fetch</strong></div>
-              </div>
-            </a>
             <div class="loaded">
               <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
                 <snippet result="result" click="displayFull(id)"></snippet>
@@ -106,10 +107,18 @@
               <div class="loading" ng-hide="!loading">
                 <div class="loading-icon"></div> Loading...
               </div>
-              <div class="result-row more text-center" ng-show="moreResult && !loading">
-                <a ng-click="loadMore()">Load more</a>
+              <div class="result-row more text-center" ng-show="moreResult && !loading" ng-click="loadMore()">
+                <a>Load more</a>
               </div>
             </div>
+            <a class="empty text-center" ng-hide="results.length || loading" ng-click="focusSearch()">
+              <p class="punchline" ng-hide="query.length">Start finding!</p>
+              <p class="punchline" ng-show="query.length">No results match your query!</p>
+              <div class="logoFull">
+                <div class="small-logo"></div>
+                <div class="text-logo">any<strong>Fetch</strong></div>
+              </div>
+            </a>
           </article>
          <!-- close the off-canvas menu -->
         <a class="exit-off-canvas"></a>

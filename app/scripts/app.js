@@ -44,6 +44,7 @@ angular.module('anyfetchFrontApp', [
           return $q.reject(response);
         }
         else {
+          console.log('Error: ', response);
           return $q.reject(response);
         }
       }

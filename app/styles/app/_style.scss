@@ -241,6 +241,27 @@ blockquote{
   }
 }
 
+
+// -----------------------------------------------------
+//          Loading spinner
+// -----------------------------------------------------
+
+.loading{
+  padding:30px 0px 30px 0px;
+  text-align: center;
+  font-size:18px;
+  color: #ddd;
+
+  .loading-icon{
+    display: inline-block;
+    @include svg-background("spinner", 16px, 16px);
+    width: 16px;
+    height: 16px;
+    animation:spin 2s linear infinite;
+  }
+}
+
+
 // -----------------------------------------------------
 //          Content
 // -----------------------------------------------------
@@ -358,20 +379,6 @@ blockquote{
       }
     }
 
-    .loading{
-      padding:30px 0px 30px 0px;
-      text-align: center;
-      font-size:18px;
-      color: #ddd;
-
-      .loading-icon{
-        display: inline-block;
-        @include svg-background("spinner", 16px, 16px);
-        width: 16px;
-        height: 16px;
-        animation:spin 2s linear infinite;
-      }
-    }
     .result-row{
       position:relative;
       width:100%;
@@ -496,10 +503,18 @@ blockquote{
   width:100%;
   height:100%;
 
+  .loading {
+    position: absolute;
+    top: 30px;
+    z-index: 999;
+    width: 100%;
+  }
+
   .button{
     overflow-y: hidden;
     height:35px;
   }
+
   .background{
     position:absolute;
     top:0;
@@ -665,37 +680,54 @@ blockquote{
 
 $search-height:61px;
 
-.similar_overlay{
+.overlay {
   position:absolute;
   top:47px;
   left:0px;
   right:0px;
-  background-color:#fbf7ed;
   height:$search-height;
   overflow:hidden;
   z-index:2;
   border-bottom:3px solid $border-color;
+
+  &.similar {
+    background-color:#fbf7ed;
+
+    .info {
+      label { color:$alternative-color; }
+      a { text-decoration: underline; color:#676767; }
+    }
+
+    a.close { color:$alternative-color; }
+  }
+
+  &.error {
+    background-color:#df1515;
+
+    .info {
+      label { color: #fff; }
+      a { color:#fee; }
+    }
+
+    a.close { color: #fff; }
+  }
 
   .info{
     line-height:$search-height;
 
     label{
       display:inline;
-      color:$alternative-color;
       text-transform: uppercase;
       font-weight:bold;
       margin-left:20px;
       cursor:default;
     }
     a{
-      color:#676767;
-      text-decoration: underline;
       margin-left:10px;
     }
   }
   a.close{
     float:right;
-    color:$alternative-color;
     line-height:$search-height;
     margin-right:20px;
     &:hover{

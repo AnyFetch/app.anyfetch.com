@@ -1,11 +1,14 @@
 <div class="preview" ng-show="show">
   <div class="background" ng-click="hideModal()"></div>
   <div class="details" ng-bind-html='fullText'></div>
+  <div class="loading text-center" ng-hide="fullText != null">
+    <div class="loading-icon"></div> Loading...
+  </div>
   <div class="close" ng-click="hideModal()"></div>
   <div class="highlight_bar">
     <div class="left">
       <a class="close_hightlight">x</a>
-      Highlight : <span class="highlight_example">texte</span>
+      Highlight : <span class="highlight_example">{{query}}</span>
     </div>
     <div class="buttons right">
       <a class="button tiny radius">&lt; <span class="hide-for-small">Previous</span></a>
@@ -47,5 +50,4 @@
       <a class="button tiny radius primary" ng-show="documentfull.actions.show" href="{{documentfull.actions.show}}">Open</a>
     </div>
   </div>
-
 </div>
