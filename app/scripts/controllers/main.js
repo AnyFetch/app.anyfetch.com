@@ -173,12 +173,11 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.close_similar = function(){
-    if ($location.search().similar_to) {
-      var actualSearch = $location.search();
-      delete actualSearch.similar_to;
-      $location.search(actualSearch);
-      $scope.searchUpdate();
-    }
+    $scope.similar_info = undefined;
+    var actualSearch = $location.search();
+    delete actualSearch.similar_to;
+    $scope.query = undefined;
+    $location.search(actualSearch);
   };
 
   $scope.close_error = function(){
