@@ -58,7 +58,7 @@
   <a class="close" ng-click="close_similar()">x</a>
   <div class="info">
     <label>similar to</label>
-    <span ng-show="similarLoading">Loading...</span>
+    <span ng-show="similarLoading"><div class="loading-icon"></div> Loading...</span>
     <a href="#" ng-hide="similarLoading">{{similar_info.datas.title || similar_info.datas.name}}</a>
   </div>
 </div>
@@ -105,7 +105,7 @@
               <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
                 <snippet result="result" click="displayFull(id)" providerid="providers[result.token].application"></snippet>
               </div>
-              <div class="loading" ng-hide="!loading">
+              <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...
               </div>
               <div class="result-row more text-center" ng-show="moreResult && !loading" ng-click="loadMore()">

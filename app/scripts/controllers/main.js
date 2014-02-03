@@ -60,13 +60,11 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.searchLaunch = function(query) {
-    console.log('Search Launched!');
     $location.search({q: query});
     $scope.searchUpdate();
   };
 
   $scope.searchUpdate = function() {
-    console.log('Search updating!');
     $scope.query = $location.search().q || '';
     $scope.search();
   };
@@ -91,12 +89,16 @@ angular.module('anyfetchFrontApp')
     }
   };
 
-  $scope.loadSimilar = function() {
+  $scope.similarUpdate = function() {
+    $scope.similar_to = $location.search().similar_to || '';
+    $scope.similar();
+  };
+
+  $scope.similar = function() {
     $scope.similarShow = true;
-    if (!$scope.similar_info) {
-      $scope.similarLoading = true;
-      $scope.getFull('http://api.anyfetch.com/documents/'+ $scope.similar_to);
-    }
+
+    $scope.similarLoading = true;
+    $scope.getFull('http://api.anyfetch.com/documents/'+ $scope.similar_to);
 
     $scope.loading = true;
     $scope.results = [];
@@ -115,6 +117,16 @@ angular.module('anyfetchFrontApp')
       ProvidersService.updateSearchCounts([]);
       $scope.moreResult = false;
     }
+  };
+
+  $scope.close_similar = function(){
+    $scope.similar_info = undefined;
+    $scope.similar_to = undefined;
+    
+    var actualSearch = $location.search();
+    delete actualSearch.similar_to;
+    $scope.query = undefined;
+    $location.search(actualSearch);
   };
 
   $scope.loadMore = function() {
@@ -172,14 +184,6 @@ angular.module('anyfetchFrontApp')
       });
   };
 
-  $scope.close_similar = function(){
-    $scope.similar_info = undefined;
-    var actualSearch = $location.search();
-    delete actualSearch.similar_to;
-    $scope.query = undefined;
-    $location.search(actualSearch);
-  };
-
   $scope.close_error = function(){
     $scope.errorMes = '';
   };
@@ -205,7 +209,6 @@ angular.module('anyfetchFrontApp')
 
   $scope.rootUpdate = function() {
     $scope.id  = $location.search().id || '';
-    $scope.similar_to = $location.search().similar_to || '';
     
     if ($scope.id) {
       $scope.modalLoading = true;
@@ -216,8 +219,10 @@ angular.module('anyfetchFrontApp')
       $scope.loading = true;
       $scope.modalShow = false;
 
-      if ($scope.similar_to) {
-        $scope.loadSimilar();
+      if ($location.search().similar_to) {
+        if (!$scope.similar_to || $scope.similar_to !== $location.search().similar_to) {
+          $scope.similarUpdate();
+        }
       }
       else {
         $scope.similarShow = false;

@@ -19,7 +19,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.show_similar = function() {
         scope.hideModal();
-        if (!$location.search().similar_to && $location.search().id) {
+        if ($location.search().id) {
           var actualSearch = $location.search();
           actualSearch.similar_to = actualSearch.id;
           delete actualSearch.id;
