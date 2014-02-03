@@ -7,36 +7,54 @@
 
 angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
+
   $scope.logout = function() {
     AuthService.logout(function() {
       $location.path('/login');
     });
   };
 
-  $scope.getRes = function (query, start, limit) {
+  $scope.focusSearch = function() {
+    $('#search').focus();
+  };
+
+  $scope.getRes = function (start, limit) {
     var deferred = $q.defer();
+    var apiQuery;
 
-    var apiQuery = 'http://api.anyfetch.com/documents?search='+query+'&start='+start+'&limit='+limit;
+    if ($scope.similar_to) {
+      apiQuery = 'http://api.anyfetch.com/documents/'+$scope.similar_to+'/similar?start='+start+'&limit='+limit;
+    } else if ($scope.query) {
+      apiQuery = 'http://api.anyfetch.com/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
+    }
 
-    $http({method: 'GET', url: apiQuery})
-      .success(function(data) {
-        DocumentTypesService.updateSearchCounts(data.document_types);
-        ProvidersService.updateSearchCounts(data.tokens);
-        $scope.loading = false;
+    if (apiQuery !== undefined) {
+      $http({method: 'GET', url: apiQuery})
+        .success(function(data) {
+          DocumentTypesService.updateSearchCounts(data.document_types);
+          ProvidersService.updateSearchCounts(data.tokens);
 
-        if (data.datas.length === limit) {
-          $scope.lastRes = start+limit;
-          $scope.moreResult = true;
-        } else {
-          $scope.lastRes = start+data.datas.length;
-          $scope.moreResult = false;
-        }
-        deferred.resolve(data);
-      })
-      .error(function() {
-        $scope.display_error('Error while searching '+ query +'. Please reload.');
-        deferred.reject();
-      });
+          if (data.datas.length === limit) {
+            $scope.lastRes = start+limit;
+            $scope.moreResult = true;
+          } else {
+            $scope.lastRes = start+data.datas.length;
+            $scope.moreResult = false;
+          }
+          deferred.resolve(data);
+        })
+        .error(function() {
+          if ($scope.similar_to) {
+            $scope.display_error('Error while searching for similar documents of '+ $scope.similar_to +'. Please restart your search.');
+            $location.search({});
+          } else {
+            $scope.display_error('Error while searching '+ $scope.query +'. Please reload.');
+          }
+          deferred.reject();
+        });
+    } else {
+      $scope.display_error('No query or similar documents found. Please retry your search.');
+    }
 
     return deferred.promise;
   };
@@ -58,7 +76,7 @@ angular.module('anyfetchFrontApp')
     $scope.results = [];
 
     if ($scope.query.length) {
-      $scope.getRes($scope.query, 0, 5)
+      $scope.getRes(0, 5)
         .then(function(data) {
           $scope.results = data.datas;
           $scope.loading = false;
@@ -73,14 +91,35 @@ angular.module('anyfetchFrontApp')
     }
   };
 
-  $scope.focusSearch = function() {
-    $('#search').focus();
+  $scope.loadSimilar = function() {
+    $scope.similarShow = true;
+    if (!$scope.full) {
+      //TODO call API on doc endpoint
+    }
+
+    $scope.loading = true;
+    $scope.results = [];
+
+    if ($scope.similar_to.length) {
+      $scope.getRes(0, 5)
+        .then(function(data) {
+          $scope.results = data.datas;
+          $scope.loading = false;
+        });
+    } else {
+      $scope.query = '';
+      $location.search({});
+      $scope.loading = false;
+      DocumentTypesService.updateSearchCounts([]);
+      ProvidersService.updateSearchCounts([]);
+      $scope.moreResult = false;
+    }
   };
 
   $scope.loadMore = function() {
     $scope.loading = true;
 
-    $scope.getRes($scope.query, $scope.lastRes, 5)
+    $scope.getRes($scope.lastRes, 5)
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
       });
@@ -131,6 +170,7 @@ angular.module('anyfetchFrontApp')
       var actualSearch = $location.search();
       delete actualSearch.similar_to;
       $location.search(actualSearch);
+      $scope.searchUpdate();
     }
   };
 
@@ -171,8 +211,7 @@ angular.module('anyfetchFrontApp')
       $scope.modalShow = false;
 
       if ($scope.similar_to) {
-        $scope.similarShow = true;
-        // Similar endpoint Query
+        $scope.loadSimilar();
       }
       else {
         $scope.similarShow = false;
