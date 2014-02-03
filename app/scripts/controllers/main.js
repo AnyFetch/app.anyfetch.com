@@ -41,8 +41,8 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
-  $scope.searchLunch = function(query) {
-    console.log('Search lunched!');
+  $scope.searchLaunch = function(query) {
+    console.log('Search Launched!');
     $location.search({q: query});
     $scope.searchUpdate();
   };
@@ -113,7 +113,7 @@ angular.module('anyfetchFrontApp')
         })
         .error(function() {
           $scope.display_error('Error while loading full preview of the document '+$scope.id);
-          $scope.searchLunch($scope.query);
+          $scope.searchLaunch($scope.query);
         });
     }
     else {
