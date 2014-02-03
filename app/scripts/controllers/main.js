@@ -7,31 +7,10 @@
 
 angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
-
-  $scope.search = function(query) {
-    if (query.length) {
-      $scope.loading = true;
-      $scope.firstSearch = false;
-      $location.search({q: query});
-      $scope.getRes($scope.query, 0, 5)
-          .then(function(data) {
-            $scope.results = data.datas;
-            $scope.loading = false;
-          });
-    } else {
-      $location.search({});
-      $scope.results = [];
-      DocumentTypesService.updateSearchCounts([]);
-      ProvidersService.updateSearchCounts([]);
-      $scope.moreResult = false;
-    }
-  };
-  $scope.close_similar = function(){
-    if ($location.search().similar_to) {
-      var actualSearch = $location.search();
-      delete actualSearch.similar_to;
-      $location.search(actualSearch);
-    }
+  $scope.logout = function() {
+    AuthService.logout(function() {
+      $location.path('/login');
+    });
   };
 
   $scope.getRes = function (query, start, limit) {
@@ -54,9 +33,44 @@ angular.module('anyfetchFrontApp')
         }
         deferred.resolve(data);
       })
-      .error(deferred.reject);
+      .error(function() {
+        $scope.display_error('Error while searching '+ query +'. Please reload.');
+        deferred.reject();
+      });
 
     return deferred.promise;
+  };
+
+  $scope.searchLaunch = function(query) {
+    console.log('Search Launched!');
+    $location.search({q: query});
+    $scope.searchUpdate();
+  };
+
+  $scope.searchUpdate = function() {
+    console.log('Search updating!');
+    $scope.query = $location.search().q || '';
+    $scope.search();
+  };
+
+  $scope.search = function() {
+    $scope.loading = true;
+    $scope.results = [];
+
+    if ($scope.query.length) {
+      $scope.getRes($scope.query, 0, 5)
+        .then(function(data) {
+          $scope.results = data.datas;
+          $scope.loading = false;
+        });
+    } else {
+      $scope.query = '';
+      $location.search({});
+      $scope.loading = false;
+      DocumentTypesService.updateSearchCounts([]);
+      ProvidersService.updateSearchCounts([]);
+      $scope.moreResult = false;
+    }
   };
 
   $scope.focusSearch = function() {
@@ -72,45 +86,105 @@ angular.module('anyfetchFrontApp')
       });
   };
 
-  $scope.logout = function() {
-    AuthService.logout(function() {
-      $location.path('/login');
-    });
+  $scope.displayFull = function(id) {
+    var actualSearch = $location.search();
+    actualSearch.id = id;
+    $location.search(actualSearch);
   };
 
-  $scope.displayFull = function(id) {
-    var apiQuery = 'http://api.anyfetch.com/documents/' + id;
-    if ($scope.query) {
-      apiQuery += '?search=' + $scope.query;
+  $scope.loadFull = function() {
+    if ($scope.id) {
+      var apiQuery = 'http://api.anyfetch.com/documents/'+ $scope.id;
+      if ($scope.query) {
+        apiQuery += '?search=' + $scope.query;
+      }
+
+      $scope.modalShow = true;
+      //LOCK SCROLL MAIN!!!
+      $scope.full = null;
+
+      $http({method: 'GET', url: apiQuery})
+        .success(function(data) {
+          if($location.search().id) {
+            $scope.full = data;
+            $scope.modalShow = true;
+            $scope.modalLoading = false;
+          }
+        })
+        .error(function() {
+          $scope.display_error('Error while loading full preview of the document '+$scope.id);
+          $scope.searchLaunch($scope.query);
+        });
     }
+    else {
+      console.log('Nothing to display in full.');
+    }
+  };
 
-    $http({method: 'GET', url: apiQuery})
-      .success(function(data) {
-        $scope.full = data;
-        $scope.modalShow = true;
+  $scope.close_similar = function(){
+    if ($location.search().similar_to) {
+      var actualSearch = $location.search();
+      delete actualSearch.similar_to;
+      $location.search(actualSearch);
+    }
+  };
 
-        if (!$location.search().id) {
-          var actualSearch = $location.search();
-          actualSearch.id = id;
-          $location.search(actualSearch);
-        }
-      });
+  $scope.close_error = function(){
+    $scope.errorMes = '';
+  };
 
+  $scope.display_error = function(mes){
+    $scope.errorMes = mes;
+    $('body').scrollTop(0);
+    setTimeout($scope.close_error, 1500);
   };
 
   $scope.$watch('modalShow', function(newValue, oldValue) {
     if (!newValue && oldValue) {
+      $scope.closeModal = true;
       var actualSearch = $location.search();
       delete actualSearch.id;
       $location.search(actualSearch);
     }
   });
 
+  $scope.$on('$routeUpdate', function() {
+    $scope.rootUpdate();
+  });
+
+  $scope.rootUpdate = function() {
+    $scope.id  = $location.search().id || '';
+    $scope.similar_to = $location.search().similar_to || '';
+    
+    if ($scope.id) {
+      $scope.modalLoading = true;
+      $scope.loadFull();
+      //LOCK SCROLL MAIN!!!
+    }
+    else {
+      $scope.loading = true;
+      $scope.modalShow = false;
+
+      if ($scope.similar_to) {
+        $scope.similarShow = true;
+        // Similar endpoint Query
+      }
+      else {
+        $scope.similarShow = false;
+
+        if (!$scope.query || $scope.query !== $location.search().q) {
+          $scope.searchUpdate();
+        } else if ($scope.closeModal) {
+          $scope.loading = false;
+          $scope.closeModal = false;
+        }
+      }
+    }
+  };
+
   $rootScope.loginPage = false;
   $scope.modalShow = false;
   $scope.user = AuthService.currentUser;
-  $scope.query  = $location.search().q || '';
-  $scope.firstSearch = true;
   $scope.similarShow = false;
 
   $scope.results = [];
@@ -118,31 +192,6 @@ angular.module('anyfetchFrontApp')
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
   $scope.providersStatus = ProvidersService.providersUpToDate;
-
-  if ($scope.query) {
-    $scope.loading = true;
-
-    $scope.getRes($scope.query, 0, 5)
-      .then(function(data) {
-        $scope.results = data.datas;
-      });
-  }
-
-  $scope.$on('$routeUpdate', function(){
-    if ($location.search().id) {
-      $scope.displayFull($location.search().id);
-    }
-    if ($location.search().similar_to) {
-      $scope.similarShow = true;
-      // Change endpoint
-    }
-    else{
-      $scope.similarShow = false;
-      // Change endpoint
-    }
-  });
-
-
-
-
+  
+  $scope.rootUpdate();
 });
