@@ -16,7 +16,7 @@
       <li>
         <a href="#" data-dropdown="dropdown_providers" data-options="is_hover:true">
           <div class="header-icon cloud">
-            <div class="state" ng-class="{true:'ok', false:'loading'}[providersStatus]"></div>
+            <div class="state" ng-class="{true:'ok', false:'loadingProv'}[providersStatus]"></div>
           </div>
         </a>
       </li>
@@ -37,7 +37,7 @@
     <li ng-repeat="provider in providers">
       <div class="ic provider-{{provider.application}}"></div> {{provider.name}}<!--  <a class="button tiny edit">Edit</a> -->
       <div class="clearer"></div>
-      <div class="state" ng-class="{true:'ok', false:'loading' }[provider.upToDate]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
+      <div class="state" ng-class="{true:'ok', false:'loadingProv' }[provider.upToDate]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
     </li>
     <button class="tiny add">+ Add provider</button>
   </ul>
