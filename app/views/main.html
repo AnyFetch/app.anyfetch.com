@@ -57,7 +57,7 @@
   <div class="off-canvas-wrap">
     <div class="inner-wrap">
       <!-- SEARCH -->
-      <section class="search-box">
+      <section class="search-box" ng-class="{true:'have_results', false:'no_results' }[results.length > 0]">
         <div class="row">
           <nav class="show-for-small filter_icon_container">
             <a class="left-off-canvas-toggle filter_icon"></a>
@@ -101,7 +101,7 @@
             </a>
             <div class="loaded">
               <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
-                <snippet result="result" click="displayFull(id)"></snippet>
+                <snippet result="result" click="displayFull(id)" providerid="providers[result.token].application"></snippet>
               </div>
               <div class="loading" ng-hide="!loading">
                 <div class="loading-icon"></div> Loading...

@@ -228,15 +228,23 @@ blockquote{
 
   form {
     height: 100%;
-    @media #{$small-only}{
-      margin-left:38px;
-    }
     input {
       position:relative;
       text-indent: 20px;
       margin-top:-10px;
       font-size: 20px;
       height:45px;
+    }
+  }
+  @media #{$small-only}{
+    &.no_results nav{
+      display:none !important;
+    }
+    &.no_results form{
+      margin-left:0px;
+    }
+    &.have_results form{
+      margin-left:38px;
     }
   }
 }
@@ -345,7 +353,6 @@ blockquote{
           font-size: 3em;
         }
       }
-
       .punchline {
         color: darken($secondary-color, 0);
         font-size: 1.5em;
@@ -355,6 +362,27 @@ blockquote{
 
       .greyLogo {
         width: 70px;
+      }
+      @media #{$small-only}{
+        .logoFull {
+          width: 200px;
+
+          .small-logo {
+            @include svg-background("landing/cluestr_icon_grey", 40px, 40px);
+            width: 40px;
+            height: 40px;
+            left:10px;
+            top:15px;
+          }
+          .text-logo{
+            color:$secondary-color;
+            left: 70px;
+            font-size: 2em;
+          }
+        }
+        .punchline {
+          font-size:1em;
+        }
       }
     }
 
@@ -477,7 +505,7 @@ blockquote{
     display: inline-block;
     vertical-align: middle;
 }
-@each $provider in "52bff114c8318c29e9000005", "52bff1eec8318cb228000001", "52bffb81c8318c29e900000a" {
+@each $provider in "52bff1eec8318cb228000001", "52bff114c8318c29e9000005", "52cbda1ec8318c2d65000001" {
   .provider-#{$provider} {
     @include svg-background("icon-provider/"+quote($provider), 20px, 20px);
   }

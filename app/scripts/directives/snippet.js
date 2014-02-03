@@ -11,6 +11,7 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
       restrict: 'E',
       scope: {
         result: '=',
+        providerid: '=',
         click: '&'
       },
 
@@ -18,6 +19,7 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
       link : function(scope) {
         var htmlTemplate = DocumentTypesService.get()[scope.result.document_type].template_snippet;
         scope.snippetText = mustacheTemplate(scope.result, htmlTemplate);
+        console.log(scope.providerid);
 
         scope.snippetClick = function() {
           scope.click({id: scope.result.id});
