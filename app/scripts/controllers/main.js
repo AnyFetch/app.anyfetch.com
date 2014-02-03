@@ -93,8 +93,9 @@ angular.module('anyfetchFrontApp')
 
   $scope.loadSimilar = function() {
     $scope.similarShow = true;
-    if (!$scope.full) {
-      //TODO call API on doc endpoint
+    if (!$scope.similar_info) {
+      $scope.similarLoading = true;
+      $scope.getFull('http://api.anyfetch.com/documents/'+ $scope.similar_to);
     }
 
     $scope.loading = true;
@@ -147,22 +148,28 @@ angular.module('anyfetchFrontApp')
       //LOCK SCROLL MAIN!!!
       $scope.full = null;
 
-      $http({method: 'GET', url: apiQuery})
-        .success(function(data) {
-          if($location.search().id) {
-            $scope.full = data;
-            $scope.modalShow = true;
-            $scope.modalLoading = false;
-          }
-        })
-        .error(function() {
-          $scope.display_error('Error while loading full preview of the document '+$scope.id);
-          $scope.searchLaunch($scope.query);
-        });
+      $scope.getFull(apiQuery);
     }
     else {
       console.log('Nothing to display in full.');
     }
+  };
+
+  $scope.getFull = function (apiQuery) {
+    $http({method: 'GET', url: apiQuery})
+      .success(function(data) {
+        if($location.search().id) {
+          $scope.full = data;
+          $scope.modalLoading = false;
+        } else if ($scope.similar_to) {
+          $scope.similar_info = data;
+          $scope.similarLoading = false;
+        }
+      })
+      .error(function() {
+        $scope.display_error('Error while loading full preview of the document '+$scope.id);
+        $scope.searchLaunch($scope.query);
+      });
   };
 
   $scope.close_similar = function(){
