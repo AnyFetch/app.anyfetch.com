@@ -7,48 +7,64 @@
 
 angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
+
   $scope.logout = function() {
     AuthService.logout(function() {
       $location.path('/login');
     });
   };
 
-  $scope.getRes = function (query, start, limit) {
+  $scope.focusSearch = function() {
+    $('#search').focus();
+  };
+
+  $scope.getRes = function (start, limit) {
     var deferred = $q.defer();
+    var apiQuery;
 
-    var apiQuery = 'http://api.anyfetch.com/documents?search='+query+'&start='+start+'&limit='+limit;
+    if ($scope.similar_to) {
+      apiQuery = 'http://api.anyfetch.com/documents/'+$scope.similar_to+'/similar?start='+start+'&limit='+limit;
+    } else if ($scope.query) {
+      apiQuery = 'http://api.anyfetch.com/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
+    }
 
-    $http({method: 'GET', url: apiQuery})
-      .success(function(data) {
-        DocumentTypesService.updateSearchCounts(data.document_types);
-        ProvidersService.updateSearchCounts(data.tokens);
-        $scope.loading = false;
+    if (apiQuery !== undefined) {
+      $http({method: 'GET', url: apiQuery})
+        .success(function(data) {
+          DocumentTypesService.updateSearchCounts(data.document_types);
+          ProvidersService.updateSearchCounts(data.tokens);
 
-        if (data.datas.length === limit) {
-          $scope.lastRes = start+limit;
-          $scope.moreResult = true;
-        } else {
-          $scope.lastRes = start+data.datas.length;
-          $scope.moreResult = false;
-        }
-        deferred.resolve(data);
-      })
-      .error(function() {
-        $scope.display_error('Error while searching '+ query +'. Please reload.');
-        deferred.reject();
-      });
+          if (data.datas.length === limit) {
+            $scope.lastRes = start+limit;
+            $scope.moreResult = true;
+          } else {
+            $scope.lastRes = start+data.datas.length;
+            $scope.moreResult = false;
+          }
+          deferred.resolve(data);
+        })
+        .error(function() {
+          if ($scope.similar_to) {
+            $scope.display_error('Error while searching for similar documents of '+ $scope.similar_to +'. Please restart your search.');
+            $location.search({});
+          } else {
+            $scope.display_error('Error while searching '+ $scope.query +'. Please reload.');
+          }
+          deferred.reject();
+        });
+    } else {
+      $scope.display_error('No query or similar documents found. Please retry your search.');
+    }
 
     return deferred.promise;
   };
 
   $scope.searchLaunch = function(query) {
-    console.log('Search Launched!');
     $location.search({q: query});
     $scope.searchUpdate();
   };
 
   $scope.searchUpdate = function() {
-    console.log('Search updating!');
     $scope.query = $location.search().q || '';
     $scope.search();
   };
@@ -58,7 +74,7 @@ angular.module('anyfetchFrontApp')
     $scope.results = [];
 
     if ($scope.query.length) {
-      $scope.getRes($scope.query, 0, 5)
+      $scope.getRes(0, 5)
         .then(function(data) {
           $scope.results = data.datas;
           $scope.loading = false;
@@ -73,14 +89,50 @@ angular.module('anyfetchFrontApp')
     }
   };
 
-  $scope.focusSearch = function() {
-    $('#search').focus();
+  $scope.similarUpdate = function() {
+    $scope.similar_to = $location.search().similar_to || '';
+    $scope.similar();
+  };
+
+  $scope.similar = function() {
+    $scope.similarShow = true;
+
+    $scope.similarLoading = true;
+    $scope.getFull('http://api.anyfetch.com/documents/'+ $scope.similar_to);
+
+    $scope.loading = true;
+    $scope.results = [];
+
+    if ($scope.similar_to.length) {
+      $scope.getRes(0, 5)
+        .then(function(data) {
+          $scope.results = data.datas;
+          $scope.loading = false;
+        });
+    } else {
+      $scope.query = '';
+      $location.search({});
+      $scope.loading = false;
+      DocumentTypesService.updateSearchCounts([]);
+      ProvidersService.updateSearchCounts([]);
+      $scope.moreResult = false;
+    }
+  };
+
+  $scope.close_similar = function(){
+    $scope.similar_info = undefined;
+    $scope.similar_to = undefined;
+    
+    var actualSearch = $location.search();
+    delete actualSearch.similar_to;
+    $scope.query = undefined;
+    $location.search(actualSearch);
   };
 
   $scope.loadMore = function() {
     $scope.loading = true;
 
-    $scope.getRes($scope.query, $scope.lastRes, 5)
+    $scope.getRes($scope.lastRes, 5)
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
       });
@@ -108,30 +160,28 @@ angular.module('anyfetchFrontApp')
       //LOCK SCROLL MAIN!!!
       $scope.full = null;
 
-      $http({method: 'GET', url: apiQuery})
-        .success(function(data) {
-          if($location.search().id) {
-            $scope.full = data;
-            $scope.modalShow = true;
-            $scope.modalLoading = false;
-          }
-        })
-        .error(function() {
-          $scope.display_error('Error while loading full preview of the document '+$scope.id);
-          $scope.searchLaunch($scope.query);
-        });
+      $scope.getFull(apiQuery);
     }
     else {
       console.log('Nothing to display in full.');
     }
   };
 
-  $scope.close_similar = function(){
-    if ($location.search().similar_to) {
-      var actualSearch = $location.search();
-      delete actualSearch.similar_to;
-      $location.search(actualSearch);
-    }
+  $scope.getFull = function (apiQuery) {
+    $http({method: 'GET', url: apiQuery})
+      .success(function(data) {
+        if($location.search().id) {
+          $scope.full = data;
+          $scope.modalLoading = false;
+        } else if ($scope.similar_to) {
+          $scope.similar_info = data;
+          $scope.similarLoading = false;
+        }
+      })
+      .error(function() {
+        $scope.display_error('Error while loading full preview of the document '+$scope.id);
+        $scope.searchLaunch($scope.query);
+      });
   };
 
   $scope.close_error = function(){
@@ -159,7 +209,6 @@ angular.module('anyfetchFrontApp')
 
   $scope.rootUpdate = function() {
     $scope.id  = $location.search().id || '';
-    $scope.similar_to = $location.search().similar_to || '';
     
     if ($scope.id) {
       $scope.modalLoading = true;
@@ -170,9 +219,10 @@ angular.module('anyfetchFrontApp')
       $scope.loading = true;
       $scope.modalShow = false;
 
-      if ($scope.similar_to) {
-        $scope.similarShow = true;
-        // Similar endpoint Query
+      if ($location.search().similar_to) {
+        if (!$scope.similar_to || $scope.similar_to !== $location.search().similar_to) {
+          $scope.similarUpdate();
+        }
       }
       else {
         $scope.similarShow = false;
