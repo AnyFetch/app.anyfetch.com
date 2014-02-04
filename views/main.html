@@ -16,7 +16,7 @@
       <li>
         <a href="#" data-dropdown="dropdown_providers" data-options="is_hover:true">
           <div class="header-icon cloud">
-            <div class="state" ng-class="{true:'ok', false:'loading'}[providersStatus]"></div>
+            <div class="state" ng-class="{true:'ok', false:'loadingProv'}[providersStatus]"></div>
           </div>
         </a>
       </li>
@@ -37,7 +37,7 @@
     <li ng-repeat="provider in providers">
       <div class="ic provider-{{provider.application}}"></div> {{provider.name}}<!--  <a class="button tiny edit">Edit</a> -->
       <div class="clearer"></div>
-      <div class="state" ng-class="{true:'ok', false:'loading' }[provider.upToDate]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
+      <div class="state" ng-class="{true:'ok', false:'loadingProv' }[provider.upToDate]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
     </li>
     <button class="tiny add">+ Add provider</button>
   </ul>
@@ -58,7 +58,10 @@
   <a class="close" ng-click="close_similar()">x</a>
   <div class="info">
     <label>similar to</label>
-    <a href="#">invoice123.docx</a>
+    <div class="loading inline" ng-show="similarLoading">
+      <div class="loading-icon"></div> Loading...
+    </div>
+    <a href="#" ng-hide="similarLoading">{{similar_info.datas.title || similar_info.datas.name}}</a>
   </div>
 </div>
 
@@ -66,7 +69,7 @@
   <div class="off-canvas-wrap">
     <div class="inner-wrap">
       <!-- SEARCH -->
-      <section class="search-box">
+      <section class="search-box" ng-class="{true:'have_results', false:'no_results' }[results.length > 0]">
         <div class="row">
           <nav class="show-for-small filter_icon_container">
             <a class="left-off-canvas-toggle filter_icon"></a>
@@ -102,9 +105,9 @@
           <article class="results">
             <div class="loaded">
               <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
-                <snippet result="result" click="displayFull(id)"></snippet>
+                <snippet result="result" click="displayFull(id)" providerid="providers[result.token].application"></snippet>
               </div>
-              <div class="loading" ng-hide="!loading">
+              <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...
               </div>
               <div class="result-row more text-center" ng-show="moreResult && !loading" ng-click="loadMore()">
@@ -113,7 +116,7 @@
             </div>
             <a class="empty text-center" ng-hide="results.length || loading" ng-click="focusSearch()">
               <p class="punchline" ng-hide="query.length">Start finding!</p>
-              <p class="punchline" ng-show="query.length">No results match your query!</p>
+              <p class="punchline" ng-show="query.length">No results :(</p>
               <div class="logoFull">
                 <div class="small-logo"></div>
                 <div class="text-logo">any<strong>Fetch</strong></div>
