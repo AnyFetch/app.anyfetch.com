@@ -15,6 +15,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
     link: function(scope) {
       scope.hideModal = function() {
         scope.show = false;
+        $('body').removeClass('lock');
       };
 
       scope.show_similar = function() {

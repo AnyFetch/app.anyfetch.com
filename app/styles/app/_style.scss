@@ -42,6 +42,14 @@ blockquote{
 .hlt {
   background: #fff28a;
 }
+
+html, body{
+  height:100%;
+  &.lock{
+    overflow:hidden;
+  }
+}
+
 // -----------------------------------------------------
 //          Header
 // -----------------------------------------------------
@@ -531,6 +539,9 @@ blockquote{
   width:100%;
   height:100%;
 
+  p{
+    margin-bottom:0;
+  }
   .loadingProv {
     position: absolute;
     top: 30px;
@@ -565,6 +576,12 @@ blockquote{
     padding: 2%;
     @media #{$small-only}{
       zoom:0.5;
+    }
+    @media #{$large-up}{
+      $preview-max : 1024px;
+      left:50%;
+      margin-left:-($preview-max/2);
+      width: $preview-max;
     }
   }
   .close{

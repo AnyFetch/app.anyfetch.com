@@ -97,15 +97,12 @@ angular.module('anyfetchFrontApp')
       var apiQuery = 'http://api.anyfetch.com/documents/'+ $scope.id;
       if ($scope.query) {
         apiQuery += '?search=' + $scope.query;
-      } else if ($location.search().q) {
-        apiQuery += '?search=' + $location.search().q;
-      } else {
-        $scope.display_error('No query passed in the URL. Please resart your search.');
-        $location.search({});
       }
 
       $scope.modalShow = true;
       //LOCK SCROLL MAIN!!!
+      $('body').addClass('lock');
+
       $scope.full = null;
 
       $http({method: 'GET', url: apiQuery})
