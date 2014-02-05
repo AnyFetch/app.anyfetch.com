@@ -14,6 +14,9 @@ body.login{
             width: 210px;
         }
     }
+    .alert-box{
+        margin-top:20px;
+    }
     form{
         margin-top:20px;
         input{
@@ -51,5 +54,8 @@ body.login{
         .register{
             color:#bbb;
         }
+    }
+    @media #{$small-only}{
+        margin-top:50px;
     }
 }
