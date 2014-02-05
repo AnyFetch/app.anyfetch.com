@@ -58,7 +58,10 @@
   <a class="close" ng-click="close_similar()">x</a>
   <div class="info">
     <label>similar to</label>
-    <a href="#">invoice123.docx</a>
+    <div class="loading inline" ng-show="similarLoading">
+      <div class="loading-icon"></div> Loading...
+    </div>
+    <a href="#" ng-hide="similarLoading">{{similar_info.datas.title || similar_info.datas.name}}</a>
   </div>
 </div>
 
@@ -104,7 +107,7 @@
               <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
                 <snippet result="result" click="displayFull(id)" providerid="providers[result.token].application"></snippet>
               </div>
-              <div class="loading" ng-hide="!loading">
+              <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...
               </div>
               <div class="result-row more text-center" ng-show="moreResult && !loading" ng-click="loadMore()">
@@ -113,7 +116,7 @@
             </div>
             <a class="empty text-center" ng-hide="results.length || loading" ng-click="focusSearch()">
               <p class="punchline" ng-hide="query.length">Start finding!</p>
-              <p class="punchline" ng-show="query.length">No results match your query!</p>
+              <p class="punchline" ng-show="query.length">No results :(</p>
               <div class="logoFull">
                 <div class="small-logo"></div>
                 <div class="text-logo">any<strong>Fetch</strong></div>
