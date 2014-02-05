@@ -13,15 +13,20 @@ angular.module('anyfetchFrontApp')
       password: $scope.password,
       rememberMe: $scope.rememberMe
     };
+    $scope.loadingLogin = true;
 
     AuthService.login(credentials)
       .then(function(user) {
         if (user) {
           $location.path('/');
+          $scope.loadingLogin = false;
         }
       }, function() {
         $rootScope.error = 'Failed to login';
+        $scope.loadingLogin = false;
       });
   };
+
+  $scope.loadingLogin = false;
 
 });
