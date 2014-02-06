@@ -149,6 +149,16 @@ angular.module('anyfetchFrontApp')
     $location.search(actualSearch);
   };
 
+  $scope.update = function() {
+    $scope.loading = true;
+
+    $scope.getRes(0, 5)
+      .then(function(data) {
+        $scope.results = data.datas;
+        $scope.loading = false;
+      });
+  };
+
   $scope.loadMore = function() {
     $scope.loading = true;
 

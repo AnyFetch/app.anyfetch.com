@@ -5,7 +5,7 @@
     </div>
 
     <div class="element" ng-repeat="docType in documentTypes" ng-show="docType.search_count">
-      <div class="row">
+      <div class="row" ng-click="update()">
         <input type="checkbox" ng-model="docType.visible" id="type-{{docType.id}}"/>
         <label for="type-{{docType.id}}">
           {{docType.name | capitalizeFirst}}
