@@ -266,13 +266,13 @@ html, body{
   text-align: center;
   font-size:18px;
   color: #ddd;
-  
+
   &.inline {
     padding:0px 0px 0px 20px;
     display: inline-block;
   }
   &:not(.inline) { padding:30px 0px 30px 0px; }
-  
+
   .loading-icon{
     display: inline-block;
     @include svg-background("spinner", 16px, 16px);
@@ -574,7 +574,7 @@ html, body{
   .details{
     position: absolute;
     top:0px;
-    bottom:110px;
+    bottom:63px;
     left:10%;
     right:10%;
     overflow: scroll;
