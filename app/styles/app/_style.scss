@@ -455,6 +455,11 @@ html, body{
             @include svg-background("icon-types/"+quote($type), 43px, 56px);
           }
         }
+        @each $type in "pdf", "prez", "tab" {
+          .type-5252ce4ce4cfcd16f55cfa3c-#{$type} {
+            @include svg-background("icon-types/5252ce4ce4cfcd16f55cfa3c-"+quote($type), 43px, 56px);
+          }
+        }
 
         .icon-provider{
           position: absolute;
