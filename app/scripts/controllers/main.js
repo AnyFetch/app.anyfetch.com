@@ -26,6 +26,8 @@ angular.module('anyfetchFrontApp')
       apiQuery = 'http://api.anyfetch.com/documents/'+$scope.similar_to+'/similar?start='+start+'&limit='+limit;
     } else if ($scope.query) {
       apiQuery = 'http://api.anyfetch.com/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
+
+      apiQuery = $scope.filterDoc(apiQuery);
     }
 
     if (apiQuery !== undefined) {
@@ -58,6 +60,27 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
+  $scope.filterDoc = function(apiQuery) {
+    var args = '';
+    var hasFilter = false;
+
+    angular.forEach(Object.keys($scope.documentTypes), function(value){
+      var docType = $scope.documentTypes[value];
+      if (!docType.visible) {
+        hasFilter = true;
+      } else if (docType.search_count !== 0) {
+        args += '&document_type='+value;
+      }
+    });
+
+    if (hasFilter) {
+      console.log(args);
+      return apiQuery+args;
+    }
+
+    return apiQuery;
+  };
+
   $scope.searchLaunch = function(query) {
     $location.search({q: query});
     $scope.searchUpdate();
@@ -75,10 +98,7 @@ angular.module('anyfetchFrontApp')
     if ($scope.query.length) {
       $scope.getRes(0, 5)
         .then(function(data) {
-          $scope.results = data.datas;
-          DocumentTypesService.updateSearchCounts(data.document_types);
-          ProvidersService.updateSearchCounts(data.tokens);
-          $scope.loading = false;
+          $scope.resultUpdate(data);
         });
     } else {
       $scope.query = '';
@@ -107,8 +127,7 @@ angular.module('anyfetchFrontApp')
     if ($scope.similar_to.length) {
       $scope.getRes(0, 5)
         .then(function(data) {
-          $scope.results = data.datas;
-          $scope.loading = false;
+          $scope.resultUpdate(data);
         });
     } else {
       $scope.query = '';
@@ -137,6 +156,13 @@ angular.module('anyfetchFrontApp')
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
       });
+  };
+
+  $scope.resultUpdate = function(data) {
+    $scope.results = data.datas;
+    DocumentTypesService.updateSearchCounts(data.document_types);
+    ProvidersService.updateSearchCounts(data.tokens);
+    $scope.loading = false;
   };
 
   $scope.displayFull = function(id) {
@@ -242,6 +268,7 @@ angular.module('anyfetchFrontApp')
   $scope.modalShow = false;
   $scope.user = AuthService.currentUser;
   $scope.similarShow = false;
+  $scope.Object = Object;
 
   $scope.results = [];
   $scope.full = null;
