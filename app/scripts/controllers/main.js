@@ -6,7 +6,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
+.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
   $scope.logout = function() {
     AuthService.logout(function() {
@@ -18,7 +18,7 @@ angular.module('anyfetchFrontApp')
     $('#search').focus();
   };
 
-  $scope.getRes = function (start, limit) {
+  $scope.getRes = function(start, limit) {
     var deferred = $q.defer();
     var apiQuery;
 
@@ -31,8 +31,7 @@ angular.module('anyfetchFrontApp')
     if (apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
-          DocumentTypesService.updateSearchCounts(data.document_types);
-          ProvidersService.updateSearchCounts(data.tokens);
+          console.log('Data recieved from search: ', data);
 
           if (data.datas.length === limit) {
             $scope.lastRes = start+limit;
@@ -77,6 +76,8 @@ angular.module('anyfetchFrontApp')
       $scope.getRes(0, 5)
         .then(function(data) {
           $scope.results = data.datas;
+          DocumentTypesService.updateSearchCounts(data.document_types);
+          ProvidersService.updateSearchCounts(data.tokens);
           $scope.loading = false;
         });
     } else {
@@ -163,11 +164,11 @@ angular.module('anyfetchFrontApp')
       $scope.getFull(apiQuery);
     }
     else {
-      console.log('Nothing to display in full.');
+      $scope.display_error('Nothing to display in full.');
     }
   };
 
-  $scope.getFull = function (apiQuery) {
+  $scope.getFull = function(apiQuery) {
     $http({method: 'GET', url: apiQuery})
       .success(function(data) {
         if($location.search().id) {
