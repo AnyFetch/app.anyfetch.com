@@ -6,7 +6,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function ($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
+.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
 
   $scope.logout = function() {
     AuthService.logout(function() {
@@ -18,7 +18,7 @@ angular.module('anyfetchFrontApp')
     $('#search').focus();
   };
 
-  $scope.getRes = function (start, limit) {
+  $scope.getRes = function(start, limit) {
     var deferred = $q.defer();
     var apiQuery;
 
@@ -26,13 +26,14 @@ angular.module('anyfetchFrontApp')
       apiQuery = 'http://api.anyfetch.com/documents/'+$scope.similar_to+'/similar?start='+start+'&limit='+limit;
     } else if ($scope.query) {
       apiQuery = 'http://api.anyfetch.com/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
+
+      apiQuery = $scope.filterDoc(apiQuery);
     }
 
     if (apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
-          DocumentTypesService.updateSearchCounts(data.document_types);
-          ProvidersService.updateSearchCounts(data.tokens);
+          console.log('Data recieved from search: ', data);
 
           if (data.datas.length === limit) {
             $scope.lastRes = start+limit;
@@ -59,6 +60,27 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
+  $scope.filterDoc = function(apiQuery) {
+    var args = '';
+    var hasFilter = false;
+
+    angular.forEach(Object.keys($scope.documentTypes), function(value){
+      var docType = $scope.documentTypes[value];
+      if (!docType.visible) {
+        hasFilter = true;
+      } else if (docType.search_count !== 0) {
+        args += '&document_type='+value;
+      }
+    });
+
+    if (hasFilter) {
+      console.log(args);
+      return apiQuery+args;
+    }
+
+    return apiQuery;
+  };
+
   $scope.searchLaunch = function(query) {
     $location.search({q: query});
     $scope.searchUpdate();
@@ -76,8 +98,7 @@ angular.module('anyfetchFrontApp')
     if ($scope.query.length) {
       $scope.getRes(0, 5)
         .then(function(data) {
-          $scope.results = data.datas;
-          $scope.loading = false;
+          $scope.resultUpdate(data);
         });
     } else {
       $scope.query = '';
@@ -106,8 +127,7 @@ angular.module('anyfetchFrontApp')
     if ($scope.similar_to.length) {
       $scope.getRes(0, 5)
         .then(function(data) {
-          $scope.results = data.datas;
-          $scope.loading = false;
+          $scope.resultUpdate(data);
         });
     } else {
       $scope.query = '';
@@ -129,13 +149,31 @@ angular.module('anyfetchFrontApp')
     $location.search(actualSearch);
   };
 
+  $scope.update = function() {
+    $scope.loading = true;
+
+    $scope.getRes(0, 5)
+      .then(function(data) {
+        $scope.results = data.datas;
+        $scope.loading = false;
+      });
+  };
+
   $scope.loadMore = function() {
     $scope.loading = true;
 
     $scope.getRes($scope.lastRes, 5)
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
+        $scope.loading = false;
       });
+  };
+
+  $scope.resultUpdate = function(data) {
+    $scope.results = data.datas;
+    DocumentTypesService.updateSearchCounts(data.document_types);
+    ProvidersService.updateSearchCounts(data.tokens);
+    $scope.loading = false;
   };
 
   $scope.displayFull = function(id) {
@@ -160,11 +198,11 @@ angular.module('anyfetchFrontApp')
       $scope.getFull(apiQuery);
     }
     else {
-      console.log('Nothing to display in full.');
+      $scope.display_error('Nothing to display in full.');
     }
   };
 
-  $scope.getFull = function (apiQuery) {
+  $scope.getFull = function(apiQuery) {
     $http({method: 'GET', url: apiQuery})
       .success(function(data) {
         if($location.search().id) {
@@ -238,6 +276,7 @@ angular.module('anyfetchFrontApp')
   $scope.modalShow = false;
   $scope.user = AuthService.currentUser;
   $scope.similarShow = false;
+  $scope.Object = Object;
 
   $scope.results = [];
   $scope.full = null;
