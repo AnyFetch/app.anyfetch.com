@@ -5,7 +5,7 @@
     </div>
 
     <div class="element" ng-repeat="docType in documentTypes" ng-show="docType.search_count">
-      <div class="row">
+      <div class="row" ng-click="update()">
         <input type="checkbox" ng-model="docType.visible" id="type-{{docType.id}}">
         <label for="type-{{docType.id}}">
           {{docType.name | capitalizeFirst}}
@@ -22,8 +22,8 @@
 
     <div class="element" ng-repeat="provider in providers" ng-show="provider.search_count">
       <div class="row">
-        <input type="checkbox" ng-model="provider.visible" id="type-{{provider.id}}">
-        <label for="type-{{provider.id}}">
+        <input type="checkbox" ng-model="provider.visible" id="type-{{Object.keys(providers)[$index]}}">
+        <label for="type-{{Object.keys(providers)[$index]}}">
           {{provider.name | capitalizeFirst}}
         </label>
         <span class="numberRes">{{provider.search_count}}</span>
