@@ -155,6 +155,7 @@ angular.module('anyfetchFrontApp')
     $scope.getRes($scope.lastRes, 5)
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
+        $scope.loading = false;
       });
   };
 
