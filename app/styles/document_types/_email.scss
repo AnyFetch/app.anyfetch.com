@@ -1,0 +1,28 @@
+.email-projection{
+	header{
+		margin: auto 50px;
+		padding: 50px auto;
+		padding-bottom: 30px;
+		h1{
+			text-transform: uppercase;
+			font-size: 36px;
+			font-weight:200;
+			color:$primary-color;
+		}
+		small{
+			display:block;
+			color:#a5a5a5;
+			font-size:16px;
+			line-height: 23px;
+			strong{
+				color:$primary-color;
+				font-weight:normal;
+			}
+		}
+		border-bottom:1px solid $border-color;
+	}
+	main{
+		padding:50px;
+		color:#828282;
+	}
+}
