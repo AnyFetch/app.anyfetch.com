@@ -9,11 +9,16 @@ angular.module('anyfetchFrontApp.documentService', [])
   };
 
   datas.set = function(documentTypes) {
-    angular.forEach(documentTypes, function(value){
-      value.search_count = 0;
+    datas.documentTypes = documentTypes;
+    datas.reset(true);
+  };
+
+  datas.reset = function(full) {
+    angular.forEach(datas.documentTypes, function(value){
+      if (full)
+        value.search_count = 0;
       value.visible = true;
     });
-    datas.documentTypes = documentTypes;
   };
 
   datas.updateSearchCounts = function(resultsCounts) {

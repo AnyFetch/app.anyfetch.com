@@ -2,6 +2,9 @@
   <div class="filter">
     <div class="row">
       <h3 class="large-6 columns">What</h3>
+      <div class="large-6 columns text-right">
+        <a class="reset" ng-mouseup="resetDocTypes()" ng-show="docFilters">RESET</a>
+      </div>
     </div>
 
     <div class="element" ng-repeat="docType in documentTypes" ng-show="docType.search_count">

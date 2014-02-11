@@ -30,14 +30,19 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   datas.set = function(providers, time) {
-    angular.forEach(providers, function(value){
-      value.search_count = 0;
-      value.visible = true;
-    });
     datas.providers = providers;
+    datas.reset(true);
     serverTime = new Date(time).getTime();
 
     checkProviderStatus();
+  };
+
+  datas.reset = function(full) {
+    angular.forEach(datas.providers, function(value){
+      if (full)
+        value.search_count = 0;
+      value.visible = true;
+    });
   };
 
   datas.updateSearchCounts = function(resultsCounts) {

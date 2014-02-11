@@ -68,21 +68,21 @@ angular.module('anyfetchFrontApp')
 
   $scope.filterDoc = function(apiQuery) {
     var args = '';
-    var hasFilter = false;
+    $scope.docFilters = false;
 
     angular.forEach(Object.keys($scope.documentTypes), function(value){
       var docType = $scope.documentTypes[value];
       if (!docType.visible) {
-        hasFilter = true;
+        $scope.docFilters = true;
       } else if (docType.search_count !== 0) {
         args += '&document_type='+value;
       }
     });
 
     console.log('Query: ',apiQuery, ' Args: ', args);
-    if (hasFilter && args.length) {
+    if ($scope.docFilters && args.length) {
       return apiQuery+args;
-    } else if (hasFilter && !args.length) {
+    } else if ($scope.docFilters && !args.length) {
       return '';
     }
 
@@ -167,6 +167,16 @@ angular.module('anyfetchFrontApp')
       });
   };
 
+  $scope.resetDocTypes = function() {
+    DocumentTypesService.reset(false);
+    $scope.update();
+  };
+
+  $scope.resetProv = function() {
+    ProvidersService.reset(false);
+    $scope.update();
+  };
+
   $scope.loadMore = function() {
     $scope.loading = true;
 
@@ -181,7 +191,6 @@ angular.module('anyfetchFrontApp')
     $scope.results = data.datas;
     $scope.updateProvDocType(data.document_types, data.tokens);
     $scope.loading = false;
-    console.log(DocumentTypesService.nbDocTypes);
   };
 
   $scope.resetSearch = function () {
