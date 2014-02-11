@@ -30,7 +30,13 @@ angular.module('anyfetchFrontApp')
       apiQuery = $scope.filterDoc(apiQuery);
     }
 
-    if (apiQuery !== undefined) {
+    if (apiQuery === '') {
+      $scope.results = [];
+      $scope.moreResult = false;
+      $scope.loading = false;
+      deferred.reject();
+    } else if (apiQuery !== undefined) {
+      console.log('wazaaaaa');
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
           console.log('Data recieved from search: ', data);
@@ -73,9 +79,11 @@ angular.module('anyfetchFrontApp')
       }
     });
 
-    if (hasFilter) {
-      console.log(args);
+    console.log('Query: ',apiQuery, ' Args: ', args);
+    if (hasFilter && args.length) {
       return apiQuery+args;
+    } else if (hasFilter && !args.length) {
+      return '';
     }
 
     return apiQuery;
@@ -105,12 +113,7 @@ angular.module('anyfetchFrontApp')
           $scope.resultUpdate(data);
         });
     } else {
-      $scope.query = '';
-      $location.search({});
-      $scope.loading = false;
-      DocumentTypesService.updateSearchCounts([]);
-      ProvidersService.updateSearchCounts([]);
-      $scope.moreResult = false;
+      $scope.resetSearch();
     }
   };
 
@@ -134,12 +137,7 @@ angular.module('anyfetchFrontApp')
           $scope.resultUpdate(data);
         });
     } else {
-      $scope.query = '';
-      $location.search({});
-      $scope.loading = false;
-      DocumentTypesService.updateSearchCounts([]);
-      ProvidersService.updateSearchCounts([]);
-      $scope.moreResult = false;
+      $scope.resetSearch();
     }
   };
 
@@ -154,10 +152,12 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.update = function() {
+    console.log('Update initiated');
     $scope.loading = true;
 
     $scope.getRes(0, 5)
       .then(function(data) {
+        console.log('Data then :', data);
         $scope.results = data.datas;
         $scope.loading = false;
       });
@@ -178,6 +178,16 @@ angular.module('anyfetchFrontApp')
     DocumentTypesService.updateSearchCounts(data.document_types);
     ProvidersService.updateSearchCounts(data.tokens);
     $scope.loading = false;
+    console.log(DocumentTypesService.nbDocTypes);
+  };
+
+  $scope.resetSearch = function () {
+    $scope.query = '';
+    $location.search({});
+    $scope.loading = false;
+    DocumentTypesService.updateSearchCounts([]);
+    ProvidersService.updateSearchCounts([]);
+    $scope.moreResult = false;
   };
 
   $scope.displayFull = function(id) {
@@ -290,7 +300,9 @@ angular.module('anyfetchFrontApp')
   $scope.results = [];
   $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;
+  $scope.nbDocTypes = DocumentTypesService.nbDocTypes;
   $scope.providers = ProvidersService.providers;
+  $scope.nbProv = ProvidersService.nbProv;
   $scope.providersStatus = ProvidersService.providersUpToDate;
   
   $scope.rootUpdate();
