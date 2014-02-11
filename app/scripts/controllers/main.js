@@ -89,12 +89,16 @@ angular.module('anyfetchFrontApp')
     return apiQuery;
   };
 
+  $scope.updateProvDocType = function(docTypes, Provs) {
+    $scope.nbDocTypes = DocumentTypesService.updateSearchCounts(docTypes);
+    $scope.nbProv = ProvidersService.updateSearchCounts(Provs);
+  };
+
   $scope.searchLaunch = function(query) {
     $location.search({q: query});
     DocumentTypesService.set($scope.documentTypes);
     ProvidersService.set($scope.providers);
-    DocumentTypesService.updateSearchCounts([]);
-    ProvidersService.updateSearchCounts([]);
+    $scope.updateProvDocType([], []);
     $scope.searchUpdate();
   };
 
@@ -175,8 +179,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.resultUpdate = function(data) {
     $scope.results = data.datas;
-    DocumentTypesService.updateSearchCounts(data.document_types);
-    ProvidersService.updateSearchCounts(data.tokens);
+    $scope.updateProvDocType(data.document_types, data.tokens);
     $scope.loading = false;
     console.log(DocumentTypesService.nbDocTypes);
   };
@@ -185,8 +188,7 @@ angular.module('anyfetchFrontApp')
     $scope.query = '';
     $location.search({});
     $scope.loading = false;
-    DocumentTypesService.updateSearchCounts([]);
-    ProvidersService.updateSearchCounts([]);
+    $scope.updateProvDocType([], []);
     $scope.moreResult = false;
   };
 
@@ -302,7 +304,7 @@ angular.module('anyfetchFrontApp')
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.nbDocTypes = DocumentTypesService.nbDocTypes;
   $scope.providers = ProvidersService.providers;
-  $scope.nbProv = ProvidersService.nbProv;
+  $scope.nbProv = DocumentTypesService.nbProv;
   $scope.providersStatus = ProvidersService.providersUpToDate;
   
   $scope.rootUpdate();

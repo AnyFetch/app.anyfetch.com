@@ -7,6 +7,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   var updateFreq = 10000;
   var datas = {
     providers: null,
+    nbProv: 0,
     providersUpToDate: null
   };
 
@@ -40,10 +41,14 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   datas.updateSearchCounts = function(resultsCounts) {
+    datas.nbProv = 0;
     angular.forEach(datas.providers, function(value, key){
       var nbResults = resultsCounts[key];
       value.search_count = nbResults ? nbResults : 0;
+      datas.nbProv += nbResults ? nbResults : 0;
     });
+
+    return datas.nbProv;
   };
 
   datas.update = function() {
