@@ -83,6 +83,10 @@ angular.module('anyfetchFrontApp')
 
   $scope.searchLaunch = function(query) {
     $location.search({q: query});
+    DocumentTypesService.set($scope.documentTypes);
+    ProvidersService.set($scope.providers);
+    DocumentTypesService.updateSearchCounts([]);
+    ProvidersService.updateSearchCounts([]);
     $scope.searchUpdate();
   };
 
