@@ -235,10 +235,15 @@ angular.module('anyfetchFrontApp')
 
   $scope.$watch('modalShow', function(newValue, oldValue) {
     if (!newValue && oldValue) {
-      $scope.closeModal = true;
-      var actualSearch = $location.search();
-      delete actualSearch.id;
-      $location.search(actualSearch);
+      if ($scope.results.length) {
+        $scope.closeModal = true;
+        var actualSearch = $location.search();
+        delete actualSearch.id;
+        $location.search(actualSearch);
+      }
+      else {
+        $scope.searchLaunch($location.search().q);
+      }
     }
   });
 
