@@ -24,7 +24,7 @@
     </div>
 
     <div class="element" ng-repeat="provider in providers" ng-show="provider.search_count">
-      <div class="row">
+      <div class="row" ng-click="update()">
         <input type="checkbox" ng-model="provider.visible" id="type-{{Object.keys(providers)[$index]}}"/>
         <label for="type-{{Object.keys(providers)[$index]}}">
           {{provider.name | capitalizeFirst}}

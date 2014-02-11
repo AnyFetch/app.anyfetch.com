@@ -69,6 +69,7 @@ angular.module('anyfetchFrontApp')
   $scope.filterDoc = function(apiQuery) {
     var args = '';
     $scope.docFilters = false;
+    $scope.provFilters = false;
 
     angular.forEach(Object.keys($scope.documentTypes), function(value){
       var docType = $scope.documentTypes[value];
@@ -79,10 +80,19 @@ angular.module('anyfetchFrontApp')
       }
     });
 
+    angular.forEach(Object.keys($scope.providers), function(value){
+      var prov = $scope.providers[value];
+      if (!prov.visible) {
+        $scope.provFilters = true;
+      } else if (prov.search_count !== 0) {
+        args += '&token='+value;
+      }
+    });
+
     console.log('Query: ',apiQuery, ' Args: ', args);
-    if ($scope.docFilters && args.length) {
+    if (($scope.docFilters || $scope.provFilters) && args.length) {
       return apiQuery+args;
-    } else if ($scope.docFilters && !args.length) {
+    } else if (($scope.docFilters || $scope.provFilters) && !args.length) {
       return '';
     }
 
