@@ -6,7 +6,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
+.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService, TimeService) {
 
   $scope.logout = function() {
     AuthService.logout(function() {
@@ -89,16 +89,17 @@ angular.module('anyfetchFrontApp')
     return apiQuery;
   };
 
-  $scope.updateProvDocType = function(docTypes, Provs) {
+  $scope.updateFiltersCount = function(docTypes, provs, times) {
     $scope.nbDocTypes = DocumentTypesService.updateSearchCounts(docTypes);
-    $scope.nbProv = ProvidersService.updateSearchCounts(Provs);
+    $scope.nbProv = ProvidersService.updateSearchCounts(provs);
+    $scope.times = TimeService.set(times);
   };
 
   $scope.searchLaunch = function(query) {
     $location.search({q: query});
     DocumentTypesService.set($scope.documentTypes);
     ProvidersService.set($scope.providers);
-    $scope.updateProvDocType([], []);
+    $scope.updateFiltersCount([], [], {});
     $scope.searchUpdate();
   };
 
@@ -189,7 +190,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.resultUpdate = function(data) {
     $scope.results = data.datas;
-    $scope.updateProvDocType(data.document_types, data.tokens);
+    $scope.updateFiltersCount(data.document_types, data.tokens, data.creation_date);
     $scope.loading = false;
   };
 
@@ -197,7 +198,7 @@ angular.module('anyfetchFrontApp')
     $scope.query = '';
     $location.search({});
     $scope.loading = false;
-    $scope.updateProvDocType([], []);
+    $scope.updateFiltersCount([], [], {});
     $scope.moreResult = false;
   };
 
@@ -315,6 +316,7 @@ angular.module('anyfetchFrontApp')
   $scope.providers = ProvidersService.providers;
   $scope.nbProv = DocumentTypesService.nbProv;
   $scope.providersStatus = ProvidersService.providersUpToDate;
+  $scope.times = TimeService.times;
   
   $scope.rootUpdate();
 });

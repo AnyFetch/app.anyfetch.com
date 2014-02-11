@@ -10,7 +10,8 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.modalDirective',
   'anyfetchFrontApp.authenticationService',
   'anyfetchFrontApp.documentService',
-  'anyfetchFrontApp.providerService'
+  'anyfetchFrontApp.providerService',
+  'anyfetchFrontApp.timeService'
 ])
   .config(function ($routeProvider, $sceProvider, $httpProvider) {
 

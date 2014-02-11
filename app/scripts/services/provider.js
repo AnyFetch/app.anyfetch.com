@@ -39,8 +39,9 @@ angular.module('anyfetchFrontApp.providerService', [])
 
   datas.reset = function(full) {
     angular.forEach(datas.providers, function(value){
-      if (full)
+      if (full) {
         value.search_count = 0;
+      }
       value.visible = true;
     });
   };

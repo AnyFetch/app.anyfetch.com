@@ -34,4 +34,13 @@
     </div>
   </div>
 
+  <div class="filter">
+    <h3>WHEN</h3>
+    <div class="element">
+      <select>
+        <option ng-repeat="time in times" value="time.timestamp">{{time.label}}</option>
+      </select>
+    </div>
+  </div>
+
 </form>
