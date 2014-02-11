@@ -1,7 +1,10 @@
-<form ng-show="results.length">
+<form ng-show="nbDocTypes || nbProv">
   <div class="filter">
     <div class="row">
       <h3 class="large-6 columns">What</h3>
+      <div class="large-6 columns text-right">
+        <a class="reset" ng-mouseup="resetDocTypes()" ng-show="docFilters">RESET</a>
+      </div>
     </div>
 
     <div class="element" ng-repeat="docType in documentTypes" ng-show="docType.search_count">
@@ -28,6 +31,15 @@
         </label>
         <span class="numberRes">{{provider.search_count}}</span>
       </div>
+    </div>
+  </div>
+
+  <div class="filter">
+    <h3>WHEN</h3>
+    <div class="element">
+      <select>
+        <option ng-repeat="time in times" value="time.timestamp">{{time.label}}</option>
+      </select>
     </div>
   </div>
 
