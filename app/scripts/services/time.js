@@ -7,6 +7,8 @@ angular.module('anyfetchFrontApp.timeService', [])
     times: []
   };
 
+  var months = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+
   datas.set = function(times) {
     datas.times = [];
     angular.forEach(Object.keys(times), function(value){
@@ -14,7 +16,7 @@ angular.module('anyfetchFrontApp.timeService', [])
       var time = {
         timestamp: value,
         count: times[value],
-        label: 'From ' + date.getMonth() + ' to ' + (date.getMonth() + 3) + ' ' + date.getFullYear()
+        label: 'From ' + months[date.getMonth()] + ' to ' + months[(date.getMonth() + 2)] + ' ' + date.getFullYear()
       };
 
       datas.times.push(time);
