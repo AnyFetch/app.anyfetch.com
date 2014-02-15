@@ -17,7 +17,7 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
 
       templateUrl: 'views/template snippet.html',
       link : function(scope) {
-        var htmlTemplate = DocumentTypesService.get()[scope.result.document_type].template_snippet;
+        var htmlTemplate = DocumentTypesService.get().list[scope.result.document_type].template_snippet;
         scope.snippetText = mustacheTemplate(scope.result, htmlTemplate);
 
         scope.snippetClick = function() {

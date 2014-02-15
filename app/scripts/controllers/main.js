@@ -38,7 +38,7 @@ angular.module('anyfetchFrontApp')
     } else if (apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
-          // console.log('Data recieved from search: ', data);
+          console.log('Data recieved from search: ', data);
 
           if (data.datas.length === limit) {
             $scope.lastRes = start+limit;
@@ -70,8 +70,8 @@ angular.module('anyfetchFrontApp')
     $scope.docFilters = false;
     $scope.provFilters = false;
 
-    angular.forEach(Object.keys($scope.documentTypes), function(value){
-      var docType = $scope.documentTypes[value];
+    angular.forEach(Object.keys($scope.documentTypes.list), function(value){
+      var docType = $scope.documentTypes.list[value];
       if (!docType.visible) {
         $scope.docFilters = true;
       } else if (docType.search_count !== 0) {
@@ -79,8 +79,8 @@ angular.module('anyfetchFrontApp')
       }
     });
 
-    angular.forEach(Object.keys($scope.providers), function(value){
-      var prov = $scope.providers[value];
+    angular.forEach(Object.keys($scope.providers.list), function(value){
+      var prov = $scope.providers.list[value];
       if (!prov.visible) {
         $scope.provFilters = true;
       } else if (prov.search_count !== 0) {
@@ -131,11 +131,11 @@ angular.module('anyfetchFrontApp')
 
   $scope.updateFiltersCount = function(docTypes, provs, times) {
     if (docTypes) {
-      $scope.nbDocTypes = DocumentTypesService.updateSearchCounts(docTypes);
+      DocumentTypesService.updateSearchCounts(docTypes);
     }
     
     if (provs) {
-      $scope.nbProv = ProvidersService.updateSearchCounts(provs);
+      ProvidersService.updateSearchCounts(provs);
     }
     
     if (times) {
@@ -144,9 +144,10 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.searchLaunch = function(query) {
+    console.log('Search launched');
     $location.search({q: query});
-    DocumentTypesService.set($scope.documentTypes);
-    ProvidersService.set($scope.providers);
+    DocumentTypesService.set($scope.documentTypes.list);
+    ProvidersService.set($scope.providers.list);
     $scope.updateFiltersCount([], [], {});
     $scope.searchUpdate();
   };
@@ -360,8 +361,6 @@ angular.module('anyfetchFrontApp')
   $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
-  $scope.nbProv = ProvidersService.nbProv;
-  $scope.nbDocTypes = DocumentTypesService.nbDocTypes;
   $scope.timeFilter = null;
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;

@@ -92,7 +92,7 @@
         <div class="large-3 medium-3 columns filters">
           <div class="hide-for-small show-for-medium-up">
             <div class="sidebar">
-              <filters nbdoctypes="nbDocTypes" nbprov="nbProv" update="update" times="times"/>
+              <filters update="update" times="times"/>
             </div>
           </div>
         </div>
@@ -104,8 +104,8 @@
         <div class="large-9 medium-9 columns">
           <article class="results">
             <div class="loaded">
-              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes[result.document_type].visible && providers[result.token].visible">
-                <snippet result="result" click="displayFull(id)" providerid="providers[result.token].application"></snippet>
+              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes.list[result.document_type].visible && providers.list[result.token].visible">
+                <snippet result="result" click="displayFull(id)" providerid="providers.list[result.token].application"></snippet>
               </div>
               <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...

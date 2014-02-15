@@ -1,5 +1,5 @@
 <div>
-  <form ng-show="nbdoctypes || nbprov">
+  <form ng-show="documentTypes.totalCount || providers.totalCount">
     <div class="filter">
       <div class="row">
         <h3 class="large-6 columns">What</h3>
@@ -8,7 +8,7 @@
         </div>
       </div>
 
-      <div class="element" ng-repeat="docType in documentTypes" ng-show="docType.search_count">
+      <div class="element" ng-repeat="docType in documentTypes.list" ng-show="docType.search_count">
         <div class="row" ng-click="update()">
           <input type="checkbox" ng-model="docType.visible" id="type-{{docType.id}}"/>
           <label for="type-{{docType.id}}">
@@ -24,7 +24,7 @@
         <h3 class="large-6 columns">Where</h3>
       </div>
 
-      <div class="element" ng-repeat="provider in providers" ng-show="provider.search_count">
+      <div class="element" ng-repeat="provider in providers.list" ng-show="provider.search_count">
         <div class="row" ng-click="update()">
           <input type="checkbox" ng-model="provider.visible" id="type-{{Object.keys(providers)[$index]}}"/>
           <label for="type-{{Object.keys(providers)[$index]}}">

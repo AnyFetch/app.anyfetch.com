@@ -6,8 +6,10 @@ angular.module('anyfetchFrontApp.providerService', [])
   var serverTime = null;
   var updateFreq = 10000;
   var datas = {
-    providers: null,
-    nbProv: 0,
+    providers: {
+      list: null,
+      totalCount: 0
+    },
     providersUpToDate: null
   };
 
@@ -15,7 +17,7 @@ angular.module('anyfetchFrontApp.providerService', [])
     serverTime += updateFreq;
     var providerStatusTmp = true;
 
-    angular.forEach(datas.providers, function(value){
+    angular.forEach(datas.providers.list, function(value){
       var updateProvider = new Date(value.updated).getTime() + 2 * 60 * 1000;
       var status = updateProvider < serverTime;
       value.upToDate = status;
@@ -30,7 +32,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   datas.set = function(providers, time) {
-    datas.providers = providers;
+    datas.providers.list = providers;
     datas.reset(true);
     serverTime = new Date(time).getTime();
 
@@ -38,7 +40,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   datas.reset = function(full) {
-    angular.forEach(datas.providers, function(value){
+    angular.forEach(datas.providers.list, function(value){
       if (full) {
         value.search_count = 0;
       }
@@ -47,14 +49,14 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   datas.updateSearchCounts = function(resultsCounts) {
-    datas.nbProv = 0;
-    angular.forEach(datas.providers, function(value, key){
+    datas.providers.totalCount = 0;
+    angular.forEach(datas.providers.list, function(value, key){
       var nbResults = resultsCounts[key];
       value.search_count = nbResults ? nbResults : 0;
-      datas.nbProv += nbResults ? nbResults : 0;
+      datas.providers.totalCount += nbResults ? nbResults : 0;
     });
 
-    return datas.nbProv;
+    return datas.providers.totalCount;
   };
 
   datas.update = function() {

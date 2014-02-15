@@ -6,8 +6,6 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
   return {
     restrict: 'E',
     scope: {
-      nbdoctypes: '=',
-      nbprov: '=',
       update: '=',
       times: '='
     },
