@@ -27,7 +27,7 @@ angular.module('anyfetchFrontApp')
     } else if ($scope.query) {
       apiQuery = 'http://api.anyfetch.com/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
 
-      apiQuery = $scope.filterDoc(apiQuery);
+      apiQuery = $scope.filters(apiQuery);
     }
 
     if (apiQuery === '') {
@@ -49,12 +49,11 @@ angular.module('anyfetchFrontApp')
           }
           deferred.resolve(data);
         })
-        .error(function() {
+        .error(function(error) {
+          console.error(error);
+          $scope.display_error('Error '+ error.code +': '+ error.message +'. Please restart your search.');
           if ($scope.similar_to) {
-            $scope.display_error('Error while searching for similar documents of '+ $scope.similar_to +'. Please restart your search.');
             $location.search({});
-          } else {
-            $scope.display_error('Error while searching '+ $scope.query +'. Please reload.');
           }
           deferred.reject();
         });
@@ -65,8 +64,9 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
-  $scope.filterDoc = function(apiQuery) {
+  $scope.filters = function(apiQuery) {
     var args = '';
+    var newQuery = apiQuery;
     $scope.docFilters = false;
     $scope.provFilters = false;
 
@@ -88,14 +88,45 @@ angular.module('anyfetchFrontApp')
       }
     });
 
-    // console.log('Query: ',apiQuery, ' Args: ', args);
     if (($scope.docFilters || $scope.provFilters) && args.length) {
-      return apiQuery+args;
+      newQuery += args;
     } else if (($scope.docFilters || $scope.provFilters) && !args.length) {
       return '';
     }
 
-    return apiQuery;
+    if ($scope.timeFilter) {
+      var after = new Date(parseInt($scope.timeFilter));
+      var afterMonth = after.getMonth() + 1;
+      if (afterMonth < 10) {
+        afterMonth = '0'+afterMonth;
+      }
+      var afterDate = after.getDate();
+      if (afterDate < 10) {
+        afterDate = '0'+afterDate;
+      }
+      
+      var before = new Date(parseInt($scope.timeFilter));
+      var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth()+1, 0).getDate();
+      before.setMonth(before.getMonth() + 2);
+      before.setDate(nbDaysThisMonth);
+      var beforeMonth = before.getMonth() + 1;
+      if (beforeMonth < 10) {
+        beforeMonth = '0'+beforeMonth;
+      }
+      var beforeDate = before.getDate();
+      if (beforeDate < 10) {
+        beforeDate = '0'+beforeDate;
+      }
+
+      var argsTime = '&after='+after.getFullYear()+'-'+afterMonth+'-'+afterDate;
+      argsTime += '&before='+before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
+      console.log(argsTime);
+
+      newQuery += argsTime;
+    }
+
+    console.log('Old Query: ',apiQuery, ' newQuery: ', newQuery);
+    return newQuery;
   };
 
   $scope.updateFiltersCount = function(docTypes, provs, times) {

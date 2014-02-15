@@ -29,7 +29,7 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
         scope.update();
       };
 
-      scope.$watch('timeFilter', function(newVal) {
+      scope.$watch('timefilter', function(newVal) {
         if (newVal) {
           scope.update();
         }
