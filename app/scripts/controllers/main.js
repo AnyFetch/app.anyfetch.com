@@ -36,10 +36,9 @@ angular.module('anyfetchFrontApp')
       $scope.loading = false;
       deferred.reject();
     } else if (apiQuery !== undefined) {
-      console.log('wazaaaaa');
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
-          console.log('Data recieved from search: ', data);
+          // console.log('Data recieved from search: ', data);
 
           if (data.datas.length === limit) {
             $scope.lastRes = start+limit;
@@ -89,7 +88,7 @@ angular.module('anyfetchFrontApp')
       }
     });
 
-    console.log('Query: ',apiQuery, ' Args: ', args);
+    // console.log('Query: ',apiQuery, ' Args: ', args);
     if (($scope.docFilters || $scope.provFilters) && args.length) {
       return apiQuery+args;
     } else if (($scope.docFilters || $scope.provFilters) && !args.length) {
@@ -167,25 +166,15 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.update = function() {
-    console.log('Update initiated');
+    // console.log('Update initiated');
     $scope.loading = true;
 
     $scope.getRes(0, 5)
       .then(function(data) {
-        console.log('Data then :', data);
+        // console.log('Data then :', data);
         $scope.results = data.datas;
         $scope.loading = false;
       });
-  };
-
-  $scope.resetDocTypes = function() {
-    DocumentTypesService.reset(false);
-    $scope.update();
-  };
-
-  $scope.resetProv = function() {
-    ProvidersService.reset(false);
-    $scope.update();
   };
 
   $scope.loadMore = function() {
@@ -322,9 +311,10 @@ angular.module('anyfetchFrontApp')
   $scope.results = [];
   $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;
-  $scope.nbDocTypes = DocumentTypesService.nbDocTypes;
   $scope.providers = ProvidersService.providers;
-  $scope.nbProv = DocumentTypesService.nbProv;
+  $scope.nbProv = ProvidersService.nbProv;
+  $scope.nbDocTypes = DocumentTypesService.nbDocTypes;
+  $scope.timeFilter = null;
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;
   

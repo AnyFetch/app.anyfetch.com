@@ -8,6 +8,7 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.gravatarDirective',
   'anyfetchFrontApp.snippetDirective',
   'anyfetchFrontApp.modalDirective',
+  'anyfetchFrontApp.filtersDirective',
   'anyfetchFrontApp.authenticationService',
   'anyfetchFrontApp.documentService',
   'anyfetchFrontApp.providerService',

@@ -86,13 +86,15 @@
             ////////////////////////////////////////////// -->
         <!-- Off Canvas Menu -->
         <aside class="left-off-canvas-menu show-for-small filters_off_canvas">
-          <ng-include src="'views/filter_large.html'"/>
+          <!-- filters -->
         </aside>
 
         <div class="large-3 medium-3 columns filters">
           <div class="hide-for-small show-for-medium-up">
             <div class="sidebar">
-              <ng-include src="'views/filter_large.html'"/>
+              {{timeFilter}}
+              <filters nbdoctypes="nbDocTypes" nbprov="nbProv" update="update" times="times" 
+  timefilter="timeFilter"/>
             </div>
           </div>
         </div>
