@@ -14,7 +14,7 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
     link: function(scope) {
       scope.providers = ProvidersService.get();
       scope.documentTypes = DocumentTypesService.get();
-      // setInterval(function() { console.log('Get new'); scope.times = TimeService.get(); }, 1000);
+      scope.Object = Object;
 
       scope.resetDocTypes = function() {
         DocumentTypesService.reset(false);

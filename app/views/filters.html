@@ -7,14 +7,13 @@
           <a class="reset" ng-mouseup="resetDocTypes()" ng-show="docFilters">RESET</a>
         </div>
       </div>
-
       <div class="element" ng-repeat="docType in documentTypes.list" ng-show="docType.search_count">
         <div class="row" ng-click="update()">
-          <input type="checkbox" ng-model="docType.visible" id="type-{{docType.id}}"/>
+          <input type="checkbox" ng-model="documentTypes.states[docType.id]" id="type-{{docType.id}}"/>
           <label for="type-{{docType.id}}">
             {{docType.name | capitalizeFirst}}
           </label>
-          <span class="numberRes">{{docType.search_count}}</span>
+          <span class="numberRes">{{docType.search_count}} </span>
         </div>
       </div>
     </div>
@@ -26,8 +25,8 @@
 
       <div class="element" ng-repeat="provider in providers.list" ng-show="provider.search_count">
         <div class="row" ng-click="update()">
-          <input type="checkbox" ng-model="provider.visible" id="type-{{Object.keys(providers)[$index]}}"/>
-          <label for="type-{{Object.keys(providers)[$index]}}">
+          <input type="checkbox" ng-model="providers.states[Object.keys(providers.list)[$index]]" id="type-{{Object.keys(providers.list)[$index]}}"/>
+          <label for="type-{{Object.keys(providers.list)[$index]}}">
             {{provider.name | capitalizeFirst}}
           </label>
           <span class="numberRes">{{provider.search_count}}</span>
@@ -39,6 +38,7 @@
       <h3>WHEN</h3>
       <div class="element">
         <select ng-model="timeFilter" id="timeFilter">
+          <option value="">Choose a timeframe</option>
           <option ng-repeat="time in times" value="{{time.timestamp}}">{{time.label}}</option>
         </select>
       </div>

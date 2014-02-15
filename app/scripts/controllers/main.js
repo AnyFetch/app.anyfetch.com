@@ -72,7 +72,7 @@ angular.module('anyfetchFrontApp')
 
     angular.forEach(Object.keys($scope.documentTypes.list), function(value){
       var docType = $scope.documentTypes.list[value];
-      if (!docType.visible) {
+      if (!$scope.documentTypes.states[value]) {
         $scope.docFilters = true;
       } else if (docType.search_count !== 0) {
         args += '&document_type='+value;
@@ -81,7 +81,7 @@ angular.module('anyfetchFrontApp')
 
     angular.forEach(Object.keys($scope.providers.list), function(value){
       var prov = $scope.providers.list[value];
-      if (!prov.visible) {
+      if (!$scope.providers.states[value]) {
         $scope.provFilters = true;
       } else if (prov.search_count !== 0) {
         args += '&token='+value;
@@ -139,6 +139,7 @@ angular.module('anyfetchFrontApp')
     }
     
     if (times) {
+      $scope.timeFilter = null;
       $scope.times = TimeService.set(times);
     }
   };

@@ -8,6 +8,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   var datas = {
     providers: {
       list: null,
+      states: null,
       totalCount: 0
     },
     providersUpToDate: null
@@ -33,6 +34,7 @@ angular.module('anyfetchFrontApp.providerService', [])
 
   datas.set = function(providers, time) {
     datas.providers.list = providers;
+    datas.providers.states = {};
     datas.reset(true);
     serverTime = new Date(time).getTime();
 
@@ -40,11 +42,12 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   datas.reset = function(full) {
-    angular.forEach(datas.providers.list, function(value){
+    angular.forEach(datas.providers.list, function(value, index){
       if (full) {
         value.search_count = 0;
       }
-      value.visible = true;
+      console.log(index);
+      datas.providers.states[index] = true;
     });
   };
 
