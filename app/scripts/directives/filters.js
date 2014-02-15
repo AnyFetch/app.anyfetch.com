@@ -9,8 +9,7 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       nbdoctypes: '=',
       nbprov: '=',
       update: '=',
-      times: '=',
-      timefilter: '='
+      times: '='
     },
     templateUrl: 'views/filters.html',
     replace: true,
@@ -21,17 +20,17 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
 
       scope.resetDocTypes = function() {
         DocumentTypesService.reset(false);
-        scope.update();
+        scope.update(scope.timeFilter);
       };
 
       scope.resetProv = function() {
         ProvidersService.reset(false);
-        scope.update();
+        scope.update(scope.timeFilter);
       };
 
-      scope.$watch('timefilter', function(newVal) {
+      scope.$watch('timeFilter', function(newVal) {
         if (newVal) {
-          scope.update();
+          scope.update(scope.timeFilter);
         }
       });
     }

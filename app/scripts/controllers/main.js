@@ -104,7 +104,7 @@ angular.module('anyfetchFrontApp')
       if (afterDate < 10) {
         afterDate = '0'+afterDate;
       }
-      
+
       var before = new Date(parseInt($scope.timeFilter));
       var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth()+1, 0).getDate();
       before.setMonth(before.getMonth() + 2);
@@ -130,9 +130,17 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.updateFiltersCount = function(docTypes, provs, times) {
-    $scope.nbDocTypes = DocumentTypesService.updateSearchCounts(docTypes);
-    $scope.nbProv = ProvidersService.updateSearchCounts(provs);
-    $scope.times = TimeService.set(times);
+    if (docTypes) {
+      $scope.nbDocTypes = DocumentTypesService.updateSearchCounts(docTypes);
+    }
+    
+    if (provs) {
+      $scope.nbProv = ProvidersService.updateSearchCounts(provs);
+    }
+    
+    if (times) {
+      $scope.times = TimeService.set(times);
+    }
   };
 
   $scope.searchLaunch = function(query) {
@@ -196,14 +204,23 @@ angular.module('anyfetchFrontApp')
     $location.search(actualSearch);
   };
 
-  $scope.update = function() {
+  $scope.update = function(time) {
     // console.log('Update initiated');
     $scope.loading = true;
+
+    if (time) {
+      $scope.timeFilter = time;
+    } else if ($scope.timeFilter) {
+      $scope.timeFilter = null;
+    }
 
     $scope.getRes(0, 5)
       .then(function(data) {
         // console.log('Data then :', data);
         $scope.results = data.datas;
+        if (time) {
+          $scope.updateFiltersCount(data.document_types, data.tokens, null);
+        }
         $scope.loading = false;
       });
   };
