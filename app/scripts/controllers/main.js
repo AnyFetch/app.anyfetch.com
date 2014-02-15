@@ -38,7 +38,7 @@ angular.module('anyfetchFrontApp')
     } else if (apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
-          console.log('Data recieved from search: ', data);
+          // console.log('Data recieved from search: ', data);
 
           if (data.datas.length === limit) {
             $scope.lastRes = start+limit;
@@ -120,12 +120,12 @@ angular.module('anyfetchFrontApp')
 
       var argsTime = '&after='+after.getFullYear()+'-'+afterMonth+'-'+afterDate;
       argsTime += '&before='+before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
-      console.log(argsTime);
+      // console.log(argsTime);
 
       newQuery += argsTime;
     }
 
-    console.log('Old Query: ',apiQuery, ' newQuery: ', newQuery);
+    // console.log('Old Query: ',apiQuery, ' newQuery: ', newQuery);
     return newQuery;
   };
 
