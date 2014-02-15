@@ -4,7 +4,7 @@
       <div class="row">
         <h3 class="large-6 columns">What</h3>
         <div class="large-6 columns text-right">
-          <a class="reset" ng-mouseup="resetDocTypes()" ng-show="docFilters">RESET</a>
+          <a class="reset" ng-mouseup="resetDocTypes()" ng-show="documentTypes.filtered">RESET</a>
         </div>
       </div>
       <div class="element" ng-repeat="docType in documentTypes.list" ng-show="docType.search_count">
@@ -21,6 +21,9 @@
     <div class="filter">
       <div class="row">
         <h3 class="large-6 columns">Where</h3>
+        <div class="large-6 columns text-right">
+          <a class="reset" ng-mouseup="resetProv()" ng-show="providers.filtered">RESET</a>
+        </div>
       </div>
 
       <div class="element" ng-repeat="provider in providers.list" ng-show="provider.search_count">
@@ -35,7 +38,12 @@
     </div>
 
     <div class="filter">
-      <h3>WHEN</h3>
+      <div class="row">
+        <h3 class="large-6 columns">WHEN</h3>
+        <div class="large-6 columns text-right">
+          <a class="reset" ng-mouseup="resetTime()" ng-show="timeFilter">RESET</a>
+        </div>
+      </div>
       <div class="element">
         <select ng-model="timeFilter" id="timeFilter">
           <option value="">Choose a timeframe</option>

@@ -26,6 +26,12 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
         scope.update(scope.timeFilter);
       };
 
+      scope.resetTime = function() {
+        scope.timeFilter = '';
+        // Forcing time filter update
+        scope.update(scope.timeFilter, true);
+      };
+
       scope.$watch('timeFilter', function(newVal) {
         if (newVal) {
           scope.update(scope.timeFilter);

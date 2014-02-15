@@ -9,7 +9,8 @@ angular.module('anyfetchFrontApp.providerService', [])
     providers: {
       list: null,
       states: null,
-      totalCount: 0
+      totalCount: 0,
+      filtered: false
     },
     providersUpToDate: null
   };
@@ -42,6 +43,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   datas.reset = function(full) {
+    datas.providers.filtered = false;
     angular.forEach(datas.providers.list, function(value, index){
       if (full) {
         value.search_count = 0;
