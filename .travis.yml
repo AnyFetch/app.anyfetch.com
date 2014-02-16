@@ -6,7 +6,7 @@ install:
 before_script:
   - npm install -g bower grunt-cli
   - bower install
-  - gem install compass
+  - gem install compass --version 1.0.0.alpha.18
 script:
   - grunt build
   - grunt test
