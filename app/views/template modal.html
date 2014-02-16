@@ -15,6 +15,39 @@
       <a class="button tiny radius"><span class="hide-for-small">Next</span> &gt;</a>
     </div>
   </div> -->
+
+
+  <!-- Dropdown related -->
+  <div id="dropdown_related" class="preview_modal">
+    <ul>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+    </ul>
+  </div>
+
+  <!-- FOOTER -->
   <div class="footer">
     <div class="left">
       <div class="ariane-1">
@@ -31,8 +64,13 @@
       </div>
     </div>
     <div class="buttons right">
-      <a class="button tiny radius" ng-click="show_similar()">
+
+      <a class="button tiny radius">
         <img src="/images/icon-preview/link.svg" width="16px" height="16px" />
+        <span class="hide-for-small">Related</span> (4) &#9652;
+      </a>
+      <a class="button tiny radius" ng-click="show_similar()">
+        <img src="/images/icon-preview/similar.svg" width="16px" height="16px" />
         <span class="hide-for-small">Show similar</span>
       </a>
       <a class="button tiny radius" ng-show="documentfull.actions.delete" href="{{documentfull.actions.delete}}">
