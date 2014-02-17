@@ -10,5 +10,6 @@
   },
   "_source": "git://github.com/janl/mustache.js.git",
   "_target": "~0.7.3",
-  "_originalSource": "mustache"
+  "_originalSource": "mustache",
+  "_direct": true
 }
