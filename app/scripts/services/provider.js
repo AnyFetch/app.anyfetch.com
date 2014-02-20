@@ -48,7 +48,7 @@ angular.module('anyfetchFrontApp.providerService', [])
       if (full) {
         value.search_count = 0;
       }
-      console.log(index);
+      
       datas.providers.states[index] = true;
     });
   };

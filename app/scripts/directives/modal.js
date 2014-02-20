@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.modalDirective', [])
-.directive('modal', function(DocumentTypesService, ProvidersService, $location) {
+.directive('modal', function(DocumentTypesService, ProvidersService, $location, $http) {
 
   return {
     restrict: 'E',
@@ -13,6 +13,21 @@ angular.module('anyfetchFrontApp.modalDirective', [])
     templateUrl: 'views/template modal.html',
     replace: true,
     link: function(scope) {
+      console.log(DocumentTypesService.get());
+
+      scope.resetScope = function () {
+        scope.relatedShow = false;
+        scope.relatedDatas = null;
+        scope.fullText = null;
+      };
+
+      scope.displayFull = function(id) {
+        var actualSearch = $location.search();
+        actualSearch.id = id;
+        console.log(actualSearch);
+        $location.search(actualSearch);
+      };
+
       scope.hideModal = function() {
         scope.show = false;
         $('body').removeClass('lock');
@@ -28,12 +43,50 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         }
       };
 
+      scope.relatedToggle = function() {
+        scope.relatedShow = !scope.relatedShow;
+
+        if (scope.relatedShow && !scope.relatedDatas) {
+          scope.related();
+        }
+      };
+
+      scope.related = function() {
+        scope.relatedShow = true;
+
+        scope.relatedLoading = true;
+
+        // 52f97e21da04847b53ffe21a
+        console.log(scope.documentfull.id);
+        var apiQuery = 'http://api.anyfetch.com/documents/'+scope.documentfull.id+'/related';
+        $http({method: 'GET', url: apiQuery})
+          .success(function(data) {
+            scope.relatedLoading = false;
+            if (data) {
+              if (data.datas.length) {
+                console.log(data);
+                scope.relatedDatas = data;
+              }
+              else {
+                //No related!
+              }
+            } else {
+              //Nothing recieved!
+            }
+          })
+          .error(function() {
+            console.log('Error while loading full preview of the document '+scope.documentfull.id);
+            // scope.display_error('Error while loading full preview of the document '+scope.id);
+          });
+      };
+
       scope.$watch('documentfull', function(newVal) {
-        scope.fullText = null;
+        scope.resetScope();
+
         $(document).foundation();
         scope.query = scope.query || $location.search().q;
         if (newVal) {
-          var htmlTemplate = DocumentTypesService.get()[scope.documentfull.document_type].template_full;
+          var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].template_full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
           scope.provider = ProvidersService.providers[scope.documentfull.token];
         }
