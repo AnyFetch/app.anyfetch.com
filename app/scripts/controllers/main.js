@@ -6,7 +6,7 @@
 // ------------------------------------------------------
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService) {
+.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService, TimeService) {
 
   $scope.logout = function() {
     AuthService.logout(function() {
@@ -27,13 +27,18 @@ angular.module('anyfetchFrontApp')
     } else if ($scope.query) {
       apiQuery = 'http://api.anyfetch.com/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
 
-      apiQuery = $scope.filterDoc(apiQuery);
+      apiQuery = $scope.filters(apiQuery);
     }
 
-    if (apiQuery !== undefined) {
+    if (apiQuery === '') {
+      $scope.results = [];
+      $scope.moreResult = false;
+      $scope.loading = false;
+      deferred.reject();
+    } else if (apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
-          console.log('Data recieved from search: ', data);
+          // console.log('Data recieved from search: ', data);
 
           if (data.datas.length === limit) {
             $scope.lastRes = start+limit;
@@ -44,12 +49,11 @@ angular.module('anyfetchFrontApp')
           }
           deferred.resolve(data);
         })
-        .error(function() {
+        .error(function(error) {
+          console.error(error);
+          $scope.display_error('Error '+ error.code +': '+ error.message +'. Please restart your search.');
           if ($scope.similar_to) {
-            $scope.display_error('Error while searching for similar documents of '+ $scope.similar_to +'. Please restart your search.');
             $location.search({});
-          } else {
-            $scope.display_error('Error while searching '+ $scope.query +'. Please reload.');
           }
           deferred.reject();
         });
@@ -60,33 +64,92 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
-  $scope.filterDoc = function(apiQuery) {
+  $scope.filters = function(apiQuery) {
     var args = '';
-    var hasFilter = false;
+    var newQuery = apiQuery;
+    $scope.documentTypes.filtered = false;
+    $scope.providers.filtered = false;
 
-    angular.forEach(Object.keys($scope.documentTypes), function(value){
-      var docType = $scope.documentTypes[value];
-      if (!docType.visible) {
-        hasFilter = true;
+    angular.forEach(Object.keys($scope.documentTypes.list), function(value){
+      var docType = $scope.documentTypes.list[value];
+      if (!$scope.documentTypes.states[value]) {
+        $scope.documentTypes.filtered = true;
       } else if (docType.search_count !== 0) {
         args += '&document_type='+value;
       }
     });
 
-    if (hasFilter) {
-      console.log(args);
-      return apiQuery+args;
+    angular.forEach(Object.keys($scope.providers.list), function(value){
+      var prov = $scope.providers.list[value];
+      if (!$scope.providers.states[value]) {
+        $scope.providers.filtered = true;
+      } else if (prov.search_count !== 0) {
+        args += '&token='+value;
+      }
+    });
+
+    if (($scope.documentTypes.filtered || $scope.providers.filtered) && args.length) {
+      newQuery += args;
+    } else if (($scope.documentTypes.filtered || $scope.providers.filtered) && !args.length) {
+      return '';
     }
 
-    return apiQuery;
+    if ($scope.timeFilter && $scope.timeFilter !== '') {
+      var after = new Date(parseInt($scope.timeFilter));
+      var afterMonth = after.getMonth() + 1;
+      if (afterMonth < 10) {
+        afterMonth = '0'+afterMonth;
+      }
+      var afterDate = after.getDate();
+      if (afterDate < 10) {
+        afterDate = '0'+afterDate;
+      }
+
+      var before = new Date(parseInt($scope.timeFilter));
+      var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth()+1, 0).getDate();
+      before.setMonth(before.getMonth() + 2);
+      before.setDate(nbDaysThisMonth);
+      var beforeMonth = before.getMonth() + 1;
+      if (beforeMonth < 10) {
+        beforeMonth = '0'+beforeMonth;
+      }
+      var beforeDate = before.getDate();
+      if (beforeDate < 10) {
+        beforeDate = '0'+beforeDate;
+      }
+
+      var argsTime = '&after='+after.getFullYear()+'-'+afterMonth+'-'+afterDate;
+      argsTime += '&before='+before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
+      // console.log(argsTime);
+
+      newQuery += argsTime;
+    }
+
+    // console.log('Old Query: ',apiQuery, ' newQuery: ', newQuery);
+    return newQuery;
+  };
+
+  $scope.updateFiltersCount = function(docTypes, provs, times) {
+    if (docTypes) {
+      DocumentTypesService.updateSearchCounts(docTypes);
+    }
+    
+    if (provs) {
+      ProvidersService.updateSearchCounts(provs);
+    }
+    
+    if (times) {
+      $scope.timeFilter = '';
+      $scope.times = TimeService.set(times);
+    }
   };
 
   $scope.searchLaunch = function(query) {
+    console.log('Search launched');
     $location.search({q: query});
-    DocumentTypesService.set($scope.documentTypes);
-    ProvidersService.set($scope.providers);
-    DocumentTypesService.updateSearchCounts([]);
-    ProvidersService.updateSearchCounts([]);
+    DocumentTypesService.set($scope.documentTypes.list);
+    ProvidersService.set($scope.providers.list);
+    $scope.updateFiltersCount([], [], {});
     $scope.searchUpdate();
   };
 
@@ -105,12 +168,7 @@ angular.module('anyfetchFrontApp')
           $scope.resultUpdate(data);
         });
     } else {
-      $scope.query = '';
-      $location.search({});
-      $scope.loading = false;
-      DocumentTypesService.updateSearchCounts([]);
-      ProvidersService.updateSearchCounts([]);
-      $scope.moreResult = false;
+      $scope.resetSearch();
     }
   };
 
@@ -134,12 +192,7 @@ angular.module('anyfetchFrontApp')
           $scope.resultUpdate(data);
         });
     } else {
-      $scope.query = '';
-      $location.search({});
-      $scope.loading = false;
-      DocumentTypesService.updateSearchCounts([]);
-      ProvidersService.updateSearchCounts([]);
-      $scope.moreResult = false;
+      $scope.resetSearch();
     }
   };
 
@@ -153,12 +206,23 @@ angular.module('anyfetchFrontApp')
     $location.search(actualSearch);
   };
 
-  $scope.update = function() {
+  $scope.update = function(time, force) {
+    // console.log('Update initiated');
     $scope.loading = true;
+
+    if (time && time !== '') {
+      $scope.timeFilter = time;
+    } else if ($scope.timeFilter) {
+      $scope.timeFilter = '';
+    }
 
     $scope.getRes(0, 5)
       .then(function(data) {
+        // console.log('Data then :', data);
         $scope.results = data.datas;
+        if (time || force) {
+          $scope.updateFiltersCount(data.document_types, data.tokens, '');
+        }
         $scope.loading = false;
       });
   };
@@ -175,9 +239,16 @@ angular.module('anyfetchFrontApp')
 
   $scope.resultUpdate = function(data) {
     $scope.results = data.datas;
-    DocumentTypesService.updateSearchCounts(data.document_types);
-    ProvidersService.updateSearchCounts(data.tokens);
+    $scope.updateFiltersCount(data.document_types, data.tokens, data.creation_date);
     $scope.loading = false;
+  };
+
+  $scope.resetSearch = function () {
+    $scope.query = '';
+    $location.search({});
+    $scope.loading = false;
+    $scope.updateFiltersCount([], [], {});
+    $scope.moreResult = false;
   };
 
   $scope.displayFull = function(id) {
@@ -291,7 +362,9 @@ angular.module('anyfetchFrontApp')
   $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
+  $scope.timeFilter = '';
   $scope.providersStatus = ProvidersService.providersUpToDate;
+  $scope.times = TimeService.times;
   
   $scope.rootUpdate();
 });
