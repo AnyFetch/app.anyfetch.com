@@ -12,7 +12,6 @@ angular.module('anyfetchFrontApp.titleDirective', [])
     replace: true,
     link: function(scope) {
       scope.$watch('document', function(newVal) {
-        console.log(scope);
         if (newVal) {
           var titleTemplate = DocumentTypesService.get().list[scope.document.document_type].template_title;
           scope.title = Mustache.render(titleTemplate, scope.document.datas);
