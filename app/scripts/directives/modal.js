@@ -13,6 +13,21 @@ angular.module('anyfetchFrontApp.modalDirective', [])
     templateUrl: 'views/template modal.html',
     replace: true,
     link: function(scope) {
+      scope.relDefaultLabel = 'undefined';
+
+      scope.resetScope = function () {
+        scope.relatedShow = false;
+        scope.relatedDatas = null;
+        scope.fullText = null;
+      };
+
+      scope.displayFull = function(id) {
+        var actualSearch = $location.search();
+        actualSearch.id = id;
+        console.log(actualSearch);
+        $location.search(actualSearch);
+      };
+
       scope.hideModal = function() {
         scope.show = false;
         $('body').removeClass('lock');
@@ -28,12 +43,18 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         }
       };
 
+      scope.relatedToggle = function() {
+        scope.relatedShow = !scope.relatedShow;
+      };
+
       scope.$watch('documentfull', function(newVal) {
-        scope.fullText = null;
+        scope.resetScope();
+        console.log(scope.documentfull);
+
         $(document).foundation();
         scope.query = scope.query || $location.search().q;
         if (newVal) {
-          var htmlTemplate = DocumentTypesService.get()[scope.documentfull.document_type].template_full;
+          var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].template_full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
           scope.provider = ProvidersService.providers[scope.documentfull.token];
         }

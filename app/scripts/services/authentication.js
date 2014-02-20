@@ -23,7 +23,7 @@ angular.module('anyfetchFrontApp.authenticationService', [])
     if (user) {
       // IE8 & IE9 hack
       if (!window.btoa) {
-        window.btoa = base64.encode;
+        // window.btoa = base64.encode;
       }
 
       credentials = btoa(user.email + ':' + user.password);
