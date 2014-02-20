@@ -18,32 +18,12 @@
 
 
   <!-- Dropdown related -->
-  <div id="dropdown_related" class="preview_modal">
+  <div id="dropdown_related" class="preview_modal" ng-show="relatedShow">
     <ul>
-      <li> ROW 1 </li>
-      <li> ROW 2 </li>
-      <li> ROW 3 </li>
-      <li> ROW 4 </li>
-      <li> ROW 1 </li>
-      <li> ROW 2 </li>
-      <li> ROW 3 </li>
-      <li> ROW 4 </li>
-      <li> ROW 1 </li>
-      <li> ROW 2 </li>
-      <li> ROW 3 </li>
-      <li> ROW 4 </li>
-      <li> ROW 1 </li>
-      <li> ROW 2 </li>
-      <li> ROW 3 </li>
-      <li> ROW 4 </li>
-      <li> ROW 1 </li>
-      <li> ROW 2 </li>
-      <li> ROW 3 </li>
-      <li> ROW 4 </li>
-      <li> ROW 1 </li>
-      <li> ROW 2 </li>
-      <li> ROW 3 </li>
-      <li> ROW 4 </li>
+      <li ng-show="relatedLoading">Loading...</li>
+      <div ng-show="!relatedLoading">
+        <li ng-repeat="rel in relatedDatas.datas" ng-click="displayFull(rel.id)">[{{$index}}] {{rel.datas.title || relDefaultLabel}} </li>
+      </div>
     </ul>
   </div>
 
@@ -65,9 +45,9 @@
     </div>
     <div class="buttons right">
 
-      <a class="button tiny radius">
+      <a class="button tiny radius" ng-show="documentfull.related.length" ng-click="relatedToggle()">
         <img src="/images/icon-preview/6c4f368c.link.svg" width="16px" height="16px">
-        <span class="hide-for-small">Related</span> (4) &#9652;
+        <span class="hide-for-small">Related</span> ({{documentfull.related.length}}) &#9652;
       </a>
       <a class="button tiny radius" ng-click="show_similar()">
         <img src="/images/icon-preview/3a440c49.similar.svg" width="16px" height="16px">
