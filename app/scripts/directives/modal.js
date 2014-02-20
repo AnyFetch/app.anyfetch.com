@@ -57,7 +57,6 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         scope.relatedLoading = true;
 
         // 52f97e21da04847b53ffe21a
-        console.log(scope.documentfull.id);
         var apiQuery = 'http://api.anyfetch.com/documents/'+scope.documentfull.id+'/related';
         $http({method: 'GET', url: apiQuery})
           .success(function(data) {
