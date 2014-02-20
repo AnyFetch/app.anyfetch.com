@@ -13,7 +13,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
     templateUrl: 'views/template modal.html',
     replace: true,
     link: function(scope) {
-      console.log(DocumentTypesService.get());
+      scope.relDefaultLabel = 'undefined';
 
       scope.resetScope = function () {
         scope.relatedShow = false;
@@ -61,10 +61,10 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         var apiQuery = 'http://api.anyfetch.com/documents/'+scope.documentfull.id+'/related';
         $http({method: 'GET', url: apiQuery})
           .success(function(data) {
+            console.log('Result: ', data);
             scope.relatedLoading = false;
             if (data) {
               if (data.datas.length) {
-                console.log(data);
                 scope.relatedDatas = data;
               }
               else {

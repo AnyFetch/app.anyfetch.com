@@ -22,7 +22,7 @@
     <ul>
       <li ng-show="relatedLoading">Loading...</li>
       <div ng-show="!relatedLoading">
-        <li ng-repeat="rel in relatedDatas.datas" ng-click="displayFull(rel.id)"> {{rel.datas.title}} </li>
+        <li ng-repeat="rel in relatedDatas.datas" ng-click="displayFull(rel.id)">[{{$index}}] {{rel.datas.title || relDefaultLabel}} </li>
       </div>
     </ul>
   </div>
