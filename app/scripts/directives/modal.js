@@ -13,7 +13,6 @@ angular.module('anyfetchFrontApp.modalDirective', [])
     templateUrl: 'views/template modal.html',
     replace: true,
     link: function(scope) {
-      console.log(DocumentTypesService.get());
       scope.relDefaultLabel = 'undefined';
 
       scope.resetScope = function () {
