@@ -252,6 +252,7 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.displayFull = function(id) {
+    $('body').scrollTop(0);
     var actualSearch = $location.search();
     actualSearch.id = id;
     $location.search(actualSearch);
