@@ -20,9 +20,8 @@
   <!-- Dropdown related -->
   <div id="dropdown_related" class="preview_modal" ng-show="relatedShow">
     <ul>
-      <li ng-show="relatedLoading">Loading...</li>
-      <div ng-show="!relatedLoading">
-        <li ng-repeat="rel in relatedDatas.datas" ng-click="displayFull(rel.id)">[{{$index}}] {{rel.datas.title || relDefaultLabel}} </li>
+      <div>
+        <li ng-repeat="rel in documentfull.related" ng-click="displayFull(rel.id)">[{{$index}}] {{rel.datas.title || relDefaultLabel}} </li>
       </div>
     </ul>
   </div>
@@ -39,7 +38,7 @@
       </div>
       <div class="ariane-2">
         <div class="types-vector types-{{documentfull.document_type}}"></div>
-        <h2>{{documentfull.datas.name || documentfull.datas.title}}</h2>
+        <h2><title document="documentfull"></h2>
         <legend>{{documentfull.creation_date | date:'short'}}</legend>
       </div>
     </div>
