@@ -414,7 +414,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('stagingcname', function () {
-    require('fs').unlinkSync(__dirname + '/dist/CNAME');
+    // Update GH pages CNAME
+    require('fs').writeFileSync(__dirname + '/dist/CNAME', 'staging.anyfetch.com');
   });
 
   grunt.registerTask('stage', [
