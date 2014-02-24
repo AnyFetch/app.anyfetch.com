@@ -46,18 +46,6 @@
    </script>
 
     <script src="bower_components/jquery/jquery.js"></script>
-    <!--[if lt IE 10]>
-      <script type="text/javascript" src="scripts/helpers/base64.js"></script>
-      <script type="text/javascript">
-      $(function() {
-        if(typeof btoa === "undefined") {
-          _keyStr = Base64._keyStr;
-          btoa = Base64.encode;
-          atob = Base64.decode;
-        }
-      });
-      </script>
-    <![endif]-->
     <script src="bower_components/angular/angular.js"></script>
 
     <!-- build:js scripts/modules.js -->
@@ -65,6 +53,7 @@
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="scripts/helpers/base64.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -86,5 +75,16 @@
     <script src="scripts/filters/filters.js"></script>
     <!-- endbuild -->
 
+    <!--[if lt IE 10]>
+      <script type="text/javascript">
+      $(function() {
+        if(typeof btoa === "undefined") {
+          _keyStr = Base64._keyStr;
+          btoa = Base64.encode;
+          atob = Base64.decode;
+        }
+      });
+      </script>
+    <![endif]-->
 </body>
 </html>
