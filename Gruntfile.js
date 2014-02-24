@@ -352,7 +352,13 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:Papiel/anyfetch-front.git',
+          remote: 'git@github.com:Papiel/anyfetch.com.git',
+          branch: 'gh-pages'
+        }
+      },
+      staging: {
+        options: {
+          remote: 'git@github.com:Papiel/staging.anyfetch.com.git',
           branch: 'gh-pages'
         }
       },
@@ -405,6 +411,11 @@ module.exports = function (grunt) {
   grunt.registerTask('deploy', [
     'build',
     'buildcontrol:pages'
+  ]);
+
+  grunt.registerTask('stage', [
+    'build',
+    'buildcontrol:staging'
   ]);
 
   grunt.registerTask('default', [
