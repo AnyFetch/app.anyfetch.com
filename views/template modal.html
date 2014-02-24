@@ -18,11 +18,32 @@
 
 
   <!-- Dropdown related -->
-  <div id="dropdown_related" class="preview_modal" ng-show="relatedShow">
+  <div id="dropdown_related" class="preview_modal">
     <ul>
-      <div>
-        <li ng-repeat="rel in documentfull.related" ng-click="displayFull(rel.id)">[{{$index}}] {{rel.datas.title || relDefaultLabel}} </li>
-      </div>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
+      <li> ROW 1 </li>
+      <li> ROW 2 </li>
+      <li> ROW 3 </li>
+      <li> ROW 4 </li>
     </ul>
   </div>
 
@@ -38,15 +59,15 @@
       </div>
       <div class="ariane-2">
         <div class="types-vector types-{{documentfull.document_type}}"></div>
-        <h2><title document="documentfull"></h2>
+        <h2>{{documentfull.datas.name || documentfull.datas.title}}</h2>
         <legend>{{documentfull.creation_date | date:'short'}}</legend>
       </div>
     </div>
     <div class="buttons right">
 
-      <a class="button tiny radius" ng-show="documentfull.related.length" ng-click="relatedToggle()">
+      <a class="button tiny radius">
         <img src="/images/icon-preview/6c4f368c.link.svg" width="16px" height="16px">
-        <span class="hide-for-small">Related</span> ({{documentfull.related.length}}) &#9652;
+        <span class="hide-for-small">Related</span> (4) &#9652;
       </a>
       <a class="button tiny radius" ng-click="show_similar()">
         <img src="/images/icon-preview/3a440c49.similar.svg" width="16px" height="16px">
