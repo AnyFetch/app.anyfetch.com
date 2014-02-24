@@ -413,8 +413,13 @@ module.exports = function (grunt) {
     'buildcontrol:pages'
   ]);
 
+  grunt.registerTask('stagingcname', function () {
+    require('fs').unlinkSync(__dirname + '/dist/CNAME');
+  });
+
   grunt.registerTask('stage', [
     'build',
+    'stagingcname',
     'buildcontrol:staging'
   ]);
 
