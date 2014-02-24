@@ -31,19 +31,6 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!--[if lt IE 10]>
-      <script type="text/javascript" src="scripts/helpers/base64.js"></script>
-      <script type="text/javascript">
-      $(function() {
-        if(typeof btoa === "undefined") {
-          _keyStr = Base64._keyStr;
-          btoa = Base64.encode;
-          atob = Base64.decode;
-        }
-      });
-      </script>
-    <![endif]-->
-
     <!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>
 
@@ -59,6 +46,18 @@
    </script>
 
     <script src="bower_components/jquery/jquery.js"></script>
+    <!--[if lt IE 10]>
+      <script type="text/javascript" src="scripts/helpers/base64.js"></script>
+      <script type="text/javascript">
+      $(function() {
+        if(typeof btoa === "undefined") {
+          _keyStr = Base64._keyStr;
+          btoa = Base64.encode;
+          atob = Base64.decode;
+        }
+      });
+      </script>
+    <![endif]-->
     <script src="bower_components/angular/angular.js"></script>
 
     <!-- build:js scripts/modules.js -->
