@@ -133,11 +133,11 @@ angular.module('anyfetchFrontApp')
     if (docTypes) {
       DocumentTypesService.updateSearchCounts(docTypes);
     }
-    
+
     if (provs) {
       ProvidersService.updateSearchCounts(provs);
     }
-    
+
     if (times) {
       $scope.timeFilter = '';
       $scope.times = TimeService.set(times);
@@ -199,7 +199,7 @@ angular.module('anyfetchFrontApp')
   $scope.close_similar = function(){
     $scope.similar_info = undefined;
     $scope.similar_to = undefined;
-    
+
     var actualSearch = $location.search();
     delete actualSearch.similar_to;
     $scope.query = undefined;
@@ -325,7 +325,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.rootUpdate = function() {
     $scope.id  = $location.search().id || '';
-    
+
     if ($scope.id) {
       $scope.modalLoading = true;
       $scope.loadFull();
@@ -366,6 +366,6 @@ angular.module('anyfetchFrontApp')
   $scope.timeFilter = '';
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;
-  
+
   $scope.rootUpdate();
 });
