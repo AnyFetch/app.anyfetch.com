@@ -450,7 +450,7 @@ html, body{
           height:56px;
           margin-left:12px;
         }
-        @each $type in "5252ce4ce4cfcd16f55cfa3b", "5252ce4ce4cfcd16f55cfa3c", "5252ce4ce4cfcd16f55cfa3d", "5252ce4ce4cfcd16f55cfa3f" {
+        @each $type in "5252ce4ce4cfcd16f55cfa3b", "5252ce4ce4cfcd16f55cfa3c", "5252ce4ce4cfcd16f55cfa3d", "5252ce4ce4cfcd16f55cfa3f", "5252ce4ce4cfcd16f55cfa3a" {
           .type-#{$type} {
             @include svg-background("icon-types/"+quote($type), 43px, 56px);
           }
