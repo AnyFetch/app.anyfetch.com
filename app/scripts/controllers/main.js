@@ -370,5 +370,7 @@ angular.module('anyfetchFrontApp')
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;
 
+  console.log($scope.providers.list);
+
   $scope.rootUpdate();
 });
