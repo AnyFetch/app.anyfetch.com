@@ -359,6 +359,9 @@ angular.module('anyfetchFrontApp')
   $scope.similarShow = false;
   $scope.Object = Object;
 
+  // Launch Uservoice
+  window.initUserVoice();
+
   $scope.results = [];
   $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;

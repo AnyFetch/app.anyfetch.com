@@ -56,7 +56,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         if (newVal) {
           var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].template_full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
-          scope.provider = ProvidersService.providers[scope.documentfull.token];
+          scope.provider = ProvidersService.providers.list[scope.documentfull.token];
         }
       });
     }

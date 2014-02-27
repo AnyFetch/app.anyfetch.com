@@ -50,16 +50,18 @@
 
   // Set colors
   UserVoice.push(['set', {
-    accent_color: '#448dd6',
+    accent_color: '#16a9e2',
     trigger_color: 'white',
-    trigger_background_color: '#448dd6'
+    trigger_background_color: '#ddd'
   }]);
 
-  // Add default trigger to the bottom-right corner of the window:
-  UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+  window.initUserVoice = function() {
+    // // Add default trigger to the bottom-right corner of the window:
+    UserVoice.push(['addTrigger', '#contact_us', {}]);
 
-  // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
-  UserVoice.push(['autoprompt', {}]);
+    // // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+    UserVoice.push(['autoprompt', {}]);
+  }
   </script>
 
 
