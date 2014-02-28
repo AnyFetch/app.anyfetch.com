@@ -12,7 +12,7 @@
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="styles/968da601.app.css"/>
+    <link rel="stylesheet" href="styles/e95f319a.app.css"/>
 
     <script src="scripts/1a5317ff.modernizr.js"></script>
 
@@ -27,7 +27,6 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
     <div class="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -41,12 +40,44 @@
      ga('send', 'pageview');
    </script>
 
+   <script>
+  // Include the UserVoice JavaScript SDK (only needed once on a page)
+  UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/WP3Llcik1ir7LgMdYAbo4w.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+  // Set colors
+  UserVoice.push(['set', {
+    accent_color: '#16a9e2',
+    trigger_color: 'white',
+    trigger_background_color: '#ddd'
+  }]);
+
+  window.initUserVoice = function() {
+    // // Add default trigger to the bottom-right corner of the window:
+    UserVoice.push(['addTrigger', '#contact_us', {}]);
+
+    // // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+    UserVoice.push(['autoprompt', {}]);
+  }
+  </script>
+
+
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
-    <script src="scripts/c07337e8.modules.js"></script>
+    <script src="scripts/4e9d3473.modules.js"></script>
 
-    <script src="scripts/c8ff4821.scripts.js"></script>
+    <script src="scripts/4e7c8f49.scripts.js"></script>
 
+    <!--[if lt IE 10]>
+      <script type="text/javascript">
+      $(function() {
+        if(typeof btoa === "undefined") {
+          _keyStr = Base64._keyStr;
+          btoa = Base64.encode;
+          atob = Base64.decode;
+        }
+      });
+      </script>
+    <![endif]-->
 </body>
 </html>

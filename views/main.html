@@ -21,7 +21,7 @@
         </a>
       </li>
       <li class="divider show-for-medium-up"></li>
-      <li class="show-for-medium-up"> <a href="mailto:support@papiel.fr"><div class="header-icon support"></div></a></li>
+      <li class="show-for-medium-up"> <a id="contact_us" data-uv-trigger=""><div class="header-icon support"></div></a></li>
       <li class="divider"></li>
       <li><a href="#" ng-click="logout()"><div class="header-icon logout"></div></a></li>
       <li class="divider"></li>
@@ -34,7 +34,7 @@
 
 <div id="dropdown_providers" class="f-dropdown" data-dropdown-content="">
   <ul>
-    <li ng-repeat="provider in providers">
+    <li ng-repeat="provider in providers.list">
       <div class="ic provider-{{provider.application}}"></div> {{provider.name}}<!--  <a class="button tiny edit">Edit</a> -->
       <div class="clearer"></div>
       <div class="state" ng-class="{true:'ok', false:'loadingProv' }[provider.upToDate]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
@@ -61,7 +61,7 @@
     <div class="loading inline" ng-show="similarLoading">
       <div class="loading-icon"></div> Loading...
     </div>
-    <a href="#" ng-hide="similarLoading">{{similar_info.datas.title || similar_info.datas.name}}</a>
+    <a href="#" ng-hide="similarLoading"><titledoc document="similar_info"></a>
   </div>
 </div>
 
@@ -86,7 +86,7 @@
             ////////////////////////////////////////////// -->
         <!-- Off Canvas Menu -->
         <aside class="left-off-canvas-menu show-for-small filters_off_canvas">
-          <!-- filters -->
+          <filters update="update" times="times">
         </aside>
 
         <div class="large-3 medium-3 columns filters">
