@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('anyfetchFrontApp.titleDirective', [])
-.directive('title', function(DocumentTypesService) {
+angular.module('anyfetchFrontApp.titledocDirective', [])
+.directive('titledoc', function(DocumentTypesService) {
 
   return {
     restrict: 'E',

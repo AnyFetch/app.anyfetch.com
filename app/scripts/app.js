@@ -7,7 +7,7 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.filters',
   'anyfetchFrontApp.gravatarDirective',
   'anyfetchFrontApp.snippetDirective',
-  'anyfetchFrontApp.titleDirective',
+  'anyfetchFrontApp.titledocDirective',
   'anyfetchFrontApp.modalDirective',
   'anyfetchFrontApp.filtersDirective',
   'anyfetchFrontApp.authenticationService',
