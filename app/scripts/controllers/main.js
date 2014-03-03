@@ -5,6 +5,8 @@
 //                  MainCrtl
 // ------------------------------------------------------
 
+var DEFAULT_LIMIT = 20;
+
 angular.module('anyfetchFrontApp')
 .controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService, TimeService) {
 
@@ -163,7 +165,7 @@ angular.module('anyfetchFrontApp')
     $scope.results = [];
 
     if ($scope.query.length) {
-      $scope.getRes(0, 5)
+      $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
           $scope.resultUpdate(data);
         });
@@ -187,7 +189,7 @@ angular.module('anyfetchFrontApp')
     $scope.results = [];
 
     if ($scope.similar_to.length) {
-      $scope.getRes(0, 5)
+      $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
           $scope.resultUpdate(data);
         });
@@ -216,7 +218,7 @@ angular.module('anyfetchFrontApp')
       $scope.timeFilter = '';
     }
 
-    $scope.getRes(0, 5)
+    $scope.getRes(0, DEFAULT_LIMIT)
       .then(function(data) {
         // console.log('Data then :', data);
         $scope.results = data.datas;
@@ -230,7 +232,7 @@ angular.module('anyfetchFrontApp')
   $scope.loadMore = function() {
     $scope.loading = true;
 
-    $scope.getRes($scope.lastRes, 5)
+    $scope.getRes($scope.lastRes, DEFAULT_LIMIT)
       .then(function(data) {
         $scope.results = $scope.results.concat(data.datas);
         $scope.loading = false;
