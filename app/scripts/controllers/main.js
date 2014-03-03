@@ -359,8 +359,10 @@ angular.module('anyfetchFrontApp')
   $scope.similarShow = false;
   $scope.Object = Object;
 
-  // Launch Uservoice
-  window.initUserVoice();
+  // Launch Uservoice (but not in tests)
+  if(window.initUserVoice) {
+    window.initUserVoice();
+  }
 
   $scope.results = [];
   $scope.full = null;
