@@ -82,6 +82,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.hideModal = function() {
         scope.show = false;
+        scope.zoom = 0;
         $('body').removeClass('lock');
       };
 
