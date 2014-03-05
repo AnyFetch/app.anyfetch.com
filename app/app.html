@@ -45,25 +45,24 @@
    </script>
 
    <script>
-  // Include the UserVoice JavaScript SDK (only needed once on a page)
-  UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/WP3Llcik1ir7LgMdYAbo4w.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+    // Include the UserVoice JavaScript SDK (only needed once on a page)
+    UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/WP3Llcik1ir7LgMdYAbo4w.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
 
-  // Set colors
-  UserVoice.push(['set', {
-    accent_color: '#16a9e2',
-    trigger_color: 'white',
-    trigger_background_color: '#ddd'
-  }]);
+    // Set colors
+    UserVoice.push(['set', {
+      accent_color: '#16a9e2',
+      trigger_color: 'white',
+      trigger_background_color: '#ddd'
+    }]);
 
-  window.initUserVoice = function() {
-    // // Add default trigger to the bottom-right corner of the window:
-    UserVoice.push(['addTrigger', '#contact_us', {}]);
+    window.initUserVoice = function() {
+      // // Add default trigger to the bottom-right corner of the window:
+      UserVoice.push(['addTrigger', '#contact_us', {}]);
 
-    // // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
-    UserVoice.push(['autoprompt', {}]);
-  }
-  </script>
-
+      // // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+      UserVoice.push(['autoprompt', {}]);
+    }
+    </script>
 
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
