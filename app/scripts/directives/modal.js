@@ -14,6 +14,8 @@ angular.module('anyfetchFrontApp.modalDirective', [])
     replace: true,
     link: function(scope) {
       scope.relDefaultLabel = 'undefined';
+      scope.zoom = 100;
+      scope.zoomClass = null;
 
       scope.resetScope = function () {
         scope.relatedShow = false;
@@ -26,6 +28,30 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         actualSearch.id = id;
         console.log(actualSearch);
         $location.search(actualSearch);
+      };
+
+      scope.zoomIn = function() {
+        if (scope.zoom < 200) {
+          scope.zoom += 10;
+
+          if (scope.zoom === 100) {
+            scope.zoomClass = null;
+          } else {
+            scope.zoomClass = 'zoom-' + scope.zoom;
+          }
+        }
+      };
+
+      scope.zoomOut = function() {
+        if (scope.zoom > 50) {
+          scope.zoom -= 10;
+
+          if (scope.zoom === 100) {
+            scope.zoomClass = null;
+          } else {
+            scope.zoomClass = 'zoom-' + scope.zoom;
+          }
+        }
       };
 
       scope.getDocumentTypeIcon = function(document) {

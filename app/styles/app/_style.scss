@@ -1,3 +1,7 @@
+// -----------------------------------------------------
+//          Mixins
+// -----------------------------------------------------
+
 @mixin svg-background($img, $width, $height) {
   background-image: inline-image($img + ".svg");
   background-size: $width $height;
@@ -789,6 +793,16 @@ html, body{
   }
 }
 
+$factor: 50;
+$hundred: 100;
+@while $factor <= 200 {
+  .zoom-#{$factor} {
+    transform: scale( (100/$factor) );
+    transform-origin: 0 0;
+  }
+
+  $factor: $factor + 10;
+}
 
 
 // -----------------------------------------------------
