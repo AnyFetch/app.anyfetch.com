@@ -25,9 +25,9 @@ angular.module('anyfetchFrontApp')
     var apiQuery;
 
     if ($scope.similar_to) {
-      apiQuery = 'http://api.anyfetch.com/documents/'+$scope.similar_to+'/similar?start='+start+'&limit='+limit;
+      apiQuery = API_URL + '/documents/'+$scope.similar_to+'/similar?start='+start+'&limit='+limit;
     } else if ($scope.query) {
-      apiQuery = 'http://api.anyfetch.com/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
+      apiQuery = API_URL + '/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
 
       apiQuery = $scope.filters(apiQuery);
     }
@@ -183,7 +183,7 @@ angular.module('anyfetchFrontApp')
     $scope.similarShow = true;
 
     $scope.similarLoading = true;
-    $scope.getFull('http://api.anyfetch.com/documents/'+ $scope.similar_to);
+    $scope.getFull(API_URL + '/documents/'+ $scope.similar_to);
 
     $scope.loading = true;
     $scope.results = [];

@@ -33,7 +33,7 @@ angular.module('anyfetchFrontApp.authenticationService', [])
 
     // Check the user credentials validity
     $http.defaults.headers.common.Authorization = 'Basic ' + credentials;
-    $http({method: 'GET', url: 'http://api.anyfetch.com'})
+    $http({method: 'GET', url: API_URL})
       .success(function(data) {
         datas.currentUser = {
           email: data.name,

@@ -48,7 +48,7 @@ angular.module('anyfetchFrontApp.providerService', [])
       if (full) {
         value.search_count = 0;
       }
-      
+
       datas.providers.states[index] = true;
     });
   };
@@ -67,7 +67,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   datas.update = function() {
     var deferred = $q.defer();
 
-    $http({method: 'POST', url: 'http://api.anyfetch.com/update'})
+    $http({method: 'POST', url: API_URL + '/update'})
       .success(deferred.resolve)
       .error(deferred.reject);
 
