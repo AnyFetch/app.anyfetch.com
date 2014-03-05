@@ -645,9 +645,9 @@ html, body{
         &.primary{
           background-color: $alternative-color;
           font-weight: bold;
-          &:hover{
-            background-color: darken($alternative-color,10%);
-          }
+        }
+        &.primary:hover{
+          background-color: darken($alternative-color,10%);
         }
       }
     }
