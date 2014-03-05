@@ -21,7 +21,12 @@
   <div id="dropdown_related" class="preview_modal" ng-show="relatedShow">
     <ul>
       <div>
-        <li ng-repeat="rel in documentfull.related" ng-click="displayFull(rel.id)">[{{$index}}] {{rel.datas.title || relDefaultLabel}} </li>
+        <li ng-repeat="rel in documentfull.related" ng-click="displayFull(rel.id)">
+          <div class="icon icon-small">
+            <div class="icon-types type-{{getDocumentTypeIcon(rel)}}"></div>
+          </div>
+          {{rel.datas.title || relDefaultLabel}}
+        </li>
       </div>
     </ul>
   </div>

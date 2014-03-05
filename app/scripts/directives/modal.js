@@ -28,6 +28,32 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         $location.search(actualSearch);
       };
 
+      scope.getDocumentTypeIcon = function(document) {
+        var docType = document.document_type;
+        if (docType === '5252ce4ce4cfcd16f55cfa3c') {
+
+          var path = document.datas.path;
+
+          // Prez icon
+          if (/\.(<[^\>]+>)?(ppt|pptx|odp)(<[^\>]+>)?/.exec(path)) {
+            return docType + '-prez';
+          }
+
+          // Pdf icon
+          if (/\.(<[^\>]+>)?pdf(<[^\>]+>)?/.exec(path)) {
+            return docType + '-pdf';
+          }
+
+          // Tab icon
+          if (/\.(<[^\>]+>)?(xls|xlsx|ods)(<[^\>]+>)?/.exec(path)) {
+            return docType + '-tab';
+          }
+
+        }
+
+        return docType;
+      };
+
       scope.hideModal = function() {
         scope.show = false;
         $('body').removeClass('lock');

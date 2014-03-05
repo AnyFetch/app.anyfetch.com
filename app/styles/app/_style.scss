@@ -438,52 +438,6 @@ html, body{
         border-top: 0px;
       }
 
-      .icon{
-        position:relative;
-        width:55px;
-        height:68px;
-        margin:10px 20px 10px 20px;
-        float:left;
-
-        .icon-types{
-          width:43px;
-          height:56px;
-          margin-left:12px;
-        }
-        @each $type in "5252ce4ce4cfcd16f55cfa3b", "5252ce4ce4cfcd16f55cfa3c", "5252ce4ce4cfcd16f55cfa3d", "5252ce4ce4cfcd16f55cfa3f", "5252ce4ce4cfcd16f55cfa3a" {
-          .type-#{$type} {
-            @include svg-background("icon-types/"+quote($type), 43px, 56px);
-          }
-        }
-        @each $type in "pdf", "prez", "tab" {
-          .type-5252ce4ce4cfcd16f55cfa3c-#{$type} {
-            @include svg-background("icon-types/5252ce4ce4cfcd16f55cfa3c-"+quote($type), 43px, 56px);
-          }
-        }
-
-        .icon-provider{
-          position: absolute;
-          bottom:0px;
-          left:0px;
-          width:20px;
-          height:20px;
-        }
-
-
-        @media #{$small-only}{
-          width:40px;
-          height: 38px;
-          margin:5px;
-
-          .icon-types{
-            width:21px;
-            height:28px;
-            background-size: 21px 28px;
-          }
-        }
-      }
-
-
       .details{
         padding:10px;
 
@@ -526,6 +480,63 @@ html, body{
     }
   }
 }
+.icon{
+  position:relative;
+  width:55px;
+  height:68px;
+  margin:10px 20px 10px 20px;
+  float:left;
+
+  .icon-types{
+    width:43px;
+    height:56px;
+    margin-left:12px;
+  }
+  @each $type in "5252ce4ce4cfcd16f55cfa3b", "5252ce4ce4cfcd16f55cfa3c", "5252ce4ce4cfcd16f55cfa3d", "5252ce4ce4cfcd16f55cfa3f", "5252ce4ce4cfcd16f55cfa3a" {
+    .type-#{$type} {
+      @include svg-background("icon-types/"+quote($type), 43px, 56px);
+    }
+  }
+  @each $type in "pdf", "prez", "tab" {
+    .type-5252ce4ce4cfcd16f55cfa3c-#{$type} {
+      @include svg-background("icon-types/5252ce4ce4cfcd16f55cfa3c-"+quote($type), 43px, 56px);
+    }
+  }
+
+  .icon-provider{
+    position: absolute;
+    bottom:0px;
+    left:0px;
+    width:20px;
+    height:20px;
+  }
+
+  &.icon-small {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+
+    .icon-types {
+      height: 25px;
+      width: 25px;
+      background-size: 20px;
+      margin: 0;
+    }
+  }
+
+  @media #{$small-only}{
+    width:40px;
+    height: 38px;
+    margin:5px;
+
+    .icon-types{
+      width:21px;
+      height:28px;
+      background-size: 21px 28px;
+    }
+  }
+}
+
 .inline_svg{
     display: inline-block;
     vertical-align: middle;
