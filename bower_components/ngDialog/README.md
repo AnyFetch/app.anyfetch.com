@@ -70,30 +70,6 @@ ngDialog.open({
 
 Name of controller that will be used for dialog window if necessary.
 
-##### ``scope {Object}``
-
-Scope object that will be passed to dialog. If you use controller with separate ``$scope`` service this object will be passed to ``$scope.$parent`` param:
-
-```javascript
-$scope.value = true;
-
-ngDialog.open({
-	template: 'externalTemplate.html',
-	className: 'ngdialog-theme-plain',
-	scope: $scope
-});
-```
-
-```html
-<script type="text/ng-template" id="externalTemplate.html">
-<p>External scope: <code>{{value}}</code></p>
-</script>
-```
-
-##### ``data {String}``
-
-Any data that you want to be stored in controller's ``$parent`` scope, it could be stringified JSON as well.
-
 ##### ``className {String}``
 
 This option allows to controll dialog look, you can use built-in [themes](https://github.com/likeastore/ngDialog#themes) or create your own styled modals.
@@ -146,29 +122,9 @@ Some imaginary button, for example, will look like:
 </button>
 ```
 
-## Events
-
-Everytime when ngDialog is opened or closed we're broadcasting two events (dispatching events downwards to all child scopes):
-
-- ``ngDialog.opened``
-
-- ``ngDialog.closed``
-
-This allows you to register your own listeners, example:
-
-```javascript
-$rootScope.$on('ngDialog.opened', function (e, $dialog) {
-	console.log('ngDialog opened: ' + $dialog.attr('id'));
-});
-```
-
 ## Themes
 
-Currently ngDialog contains two default themes that show how easily you can create your own. Check ``example`` folder for demonstration purposes.
-
-## References
-
-Have a nice experience and use **ngDialog** in your project? Let us know! We appreciate any kind of feedback ;)
+Currently ngDialog contains two default themes that show how easily you can create your own. Check ``examples`` folder for demonstration purposes.
 
 ## Licence
 
@@ -181,5 +137,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/likeastore/ngdialog/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

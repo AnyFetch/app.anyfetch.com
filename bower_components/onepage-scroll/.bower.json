@@ -10,5 +10,6 @@
   },
   "_source": "git://github.com/peachananr/onepage-scroll.git",
   "_target": "~1.1.1",
-  "_originalSource": "onepage-scroll"
+  "_originalSource": "onepage-scroll",
+  "_direct": true
 }

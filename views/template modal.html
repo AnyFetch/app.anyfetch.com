@@ -1,28 +1,35 @@
 <div class="preview" ng-show="show">
   <div class="background" ng-click="hideModal()"></div>
-  <div class="details" ng-bind-html="fullText"></div>
+  <div class="details">
+    <div class="{{zoomClass}}" ng-bind-html="fullText"></div>
+  </div>
   <div class="loading text-center" ng-hide="fullText != null">
     <div class="loading-icon"></div> Loading...
   </div>
   <div class="close" ng-click="hideModal()"></div>
-  <!-- <div class="highlight_bar">
-    <div class="left">
+  <div class="highlight_bar">
+    <!-- <div class="left">
       <a class="close_hightlight">x</a>
       Highlight : <span class="highlight_example">{{query}}</span>
-    </div>
+    </div> -->
     <div class="buttons right">
-      <a class="button tiny radius">&lt; <span class="hide-for-small">Previous</span></a>
-      <a class="button tiny radius"><span class="hide-for-small">Next</span> &gt;</a>
+      <!-- <a class="button tiny radius">&lt; <span class="hide-for-small">Previous</span></a>
+      <a class="button tiny radius"><span class="hide-for-small">Next</span> &gt;</a> -->
+      <a class="button tiny radius" ng-click="zoomIn()"><span class="hide-for-small"> - </span></a>
+      <a class="button tiny radius" ng-click="zoomOut()"><span class="hide-for-small"> + </span></a>
     </div>
-  </div> -->
+  </div>
 
 
   <!-- Dropdown related -->
   <div id="dropdown_related" class="preview_modal" ng-show="relatedShow">
     <ul>
-      <div>
-        <li ng-repeat="rel in documentfull.related" ng-click="displayFull(rel.id)">[{{$index}}] {{rel.datas.title || relDefaultLabel}} </li>
-      </div>
+      <li ng-repeat="rel in documentfull.related" ng-click="displayFull(rel.id)">
+        <div class="icon icon-small">
+          <div class="icon-types type-{{getDocumentTypeIcon(rel)}}"></div>
+        </div>
+        {{getTitleProjection(rel)}}
+      </li>
     </ul>
   </div>
 
@@ -44,13 +51,13 @@
     </div>
     <div class="buttons right">
 
-      <a class="button tiny radius" ng-show="documentfull.related.length" ng-click="relatedToggle()">
+      <a class="button tiny radius primary" ng-show="documentfull.related.length" ng-click="relatedToggle()">
         <img src="/images/icon-preview/6c4f368c.link.svg" width="16px" height="16px">
         <span class="hide-for-small">Related</span> ({{documentfull.related.length}}) &#9652;
       </a>
       <a class="button tiny radius" ng-click="show_similar()">
         <img src="/images/icon-preview/3a440c49.similar.svg" width="16px" height="16px">
-        <span class="hide-for-small">Show similar</span>
+        <span class="hide-for-small">More like this</span>
       </a>
       <a class="button tiny radius" ng-show="documentfull.actions.delete" href="{{documentfull.actions.delete}}">
         <img src="/images/icon-preview/a70b0851.remove.svg" width="16px" height="16px">
