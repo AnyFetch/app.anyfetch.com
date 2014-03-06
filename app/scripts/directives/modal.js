@@ -96,6 +96,11 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         }
       };
 
+      scope.getTitleProjection = function(rel) {
+        var htmlTemplate = DocumentTypesService.get().list[rel.document_type].template_title;
+        return Mustache.render(htmlTemplate, rel.datas);
+      };
+
       scope.relatedToggle = function() {
         scope.relatedShow = !scope.relatedShow;
       };
