@@ -594,7 +594,7 @@ html, body{
   .details{
     position: absolute;
     top:0px;
-    bottom:63px;
+    bottom:108px;
     left:10%;
     right:10%;
     overflow: scroll;
@@ -628,7 +628,7 @@ html, body{
     bottom:0px;
     left:0px;
     width:100%;
-    height:65px;
+    height:110px;
     border-top:2px solid lighten($primary-color, 10);
     background-color: $primary-color;
     overflow:hidden;
@@ -695,49 +695,46 @@ html, body{
       font-size: 11px;
       color:#EEE;
     }
-  }
 
-  .highlight_bar{
-    position:absolute;
-    bottom:65px;
-    left:0px;
-    width:100%;
-    height:45px;
-    border-top:2px solid lighten($primary-color, 25);
-    background-color: lighten($primary-color, 15);
-    overflow:hidden;
-    z-index:5;
-    color:#FFF;
-    font-size: 12px;
-
-    .left{
-      margin-top:15px;
-    }
-    a.close_hightlight{
-      float : left;
-      margin-left:10px;
-      margin-right:10px;
-      opacity:0.8;
+    .highlight_bar{
+      width:100%;
+      height:45px;
+      border-top:2px solid lighten($primary-color, 25);
+      background-color: lighten($primary-color, 15);
+      overflow:hidden;
+      z-index:5;
       color:#FFF;
-      &:hover{
-        opacity:1;
+      font-size: 12px;
+
+      .left{
+        margin-top:15px;
       }
-    }
-    .highlight_example{
-      background-color:#FFF;
-      color:$primary-color;
-      padding:4px 10px 4px 10px;
-      border-radius:2px;
-    }
-    .buttons{
-      margin-top: 3px;
-      margin-right: 10px;
-      text-align: right;
-      .button{
-        background-color: lighten($primary-color, 15);;
-        border:1px solid #FFF;
+      a.close_hightlight{
+        float : left;
+        margin-left:10px;
+        margin-right:10px;
+        opacity:0.8;
+        color:#FFF;
         &:hover{
-          background-color: darken($primary-color,10%);
+          opacity:1;
+        }
+      }
+      .highlight_example{
+        background-color:#FFF;
+        color:$primary-color;
+        padding:4px 10px 4px 10px;
+        border-radius:2px;
+      }
+      .buttons{
+        margin-top: 3px;
+        margin-right: 10px;
+        text-align: right;
+        .button{
+          background-color: lighten($primary-color, 15);;
+          border:1px solid #FFF;
+          &:hover{
+            background-color: darken($primary-color,10%);
+          }
         }
       }
     }
