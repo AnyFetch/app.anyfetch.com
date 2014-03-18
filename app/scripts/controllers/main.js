@@ -96,32 +96,9 @@ angular.module('anyfetchFrontApp')
       return '';
     }
 
-    if ($scope.timeFilter && $scope.timeFilter !== '') {
-      var after = new Date(parseInt($scope.timeFilter));
-      var afterMonth = after.getMonth() + 1;
-      if (afterMonth < 10) {
-        afterMonth = '0'+afterMonth;
-      }
-      var afterDate = after.getDate();
-      if (afterDate < 10) {
-        afterDate = '0'+afterDate;
-      }
-
-      var before = new Date(parseInt($scope.timeFilter));
-      var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth()+1, 0).getDate();
-      before.setMonth(before.getMonth() + 2);
-      before.setDate(nbDaysThisMonth);
-      var beforeMonth = before.getMonth() + 1;
-      if (beforeMonth < 10) {
-        beforeMonth = '0'+beforeMonth;
-      }
-      var beforeDate = before.getDate();
-      if (beforeDate < 10) {
-        beforeDate = '0'+beforeDate;
-      }
-
-      var argsTime = '&after='+after.getFullYear()+'-'+afterMonth+'-'+afterDate;
-      argsTime += '&before='+before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
+    if ($scope.times.after) {
+      var argsTime = '&after='+$scope.times.after;
+      argsTime += '&before='+$scope.times.before;
       // console.log(argsTime);
 
       newQuery += argsTime;
@@ -141,7 +118,6 @@ angular.module('anyfetchFrontApp')
     }
 
     if (times) {
-      $scope.timeFilter = '';
       $scope.times = TimeService.set(times);
     }
   };
@@ -208,21 +184,15 @@ angular.module('anyfetchFrontApp')
     $location.search(actualSearch);
   };
 
-  $scope.update = function(time, force) {
+  $scope.update = function(force) {
     // console.log('Update initiated');
     $scope.loading = true;
-
-    if (time && time !== '') {
-      $scope.timeFilter = time;
-    } else if ($scope.timeFilter) {
-      $scope.timeFilter = '';
-    }
 
     $scope.getRes(0, DEFAULT_LIMIT)
       .then(function(data) {
         // console.log('Data then :', data);
         $scope.results = data.datas;
-        if (time || force) {
+        if ($scope.times.last || force) {
           $scope.updateFiltersCount(data.document_types, data.tokens, '');
         }
         $scope.loading = false;
@@ -370,7 +340,6 @@ angular.module('anyfetchFrontApp')
   $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
-  $scope.timeFilter = '';
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;
 

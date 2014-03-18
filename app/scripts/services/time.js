@@ -4,13 +4,17 @@ angular.module('anyfetchFrontApp.timeService', [])
 .factory( 'TimeService', function() {
 
   var datas = {
-    times: []
+    times: {
+      list: [],
+      after: null,
+      before: null
+    }
   };
 
   var months = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
 
   datas.set = function(times) {
-    datas.times = [];
+    datas.reset();
     angular.forEach(Object.keys(times), function(value){
       var date = new Date(parseInt(value));
       var time = {
@@ -19,10 +23,16 @@ angular.module('anyfetchFrontApp.timeService', [])
         label: 'From ' + months[date.getMonth()] + ' to ' + months[(date.getMonth() + 2)] + ' ' + date.getFullYear()
       };
 
-      datas.times.push(time);
+      datas.times.list.push(time);
     });
 
     return datas.times;
+  };
+
+  datas.reset = function() {
+    datas.times.list = [];
+    datas.times.after = null;
+    datas.times.before = null;
   };
 
   datas.get = function() {

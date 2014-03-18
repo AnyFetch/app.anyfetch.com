@@ -47,7 +47,7 @@
       <div class="element">
         <select ng-model="timeFilter" id="timeFilter">
           <option value="">Choose a timeframe</option>
-          <option ng-repeat="time in times" value="{{time.timestamp}}">{{time.label}}</option>
+          <option ng-repeat="time in times.list" value="{{time.timestamp}}">{{time.label}}</option>
         </select>
       </div>
     </div>
