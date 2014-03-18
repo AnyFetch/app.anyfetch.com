@@ -21,6 +21,7 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.getRes = function(start, limit) {
+    console.log('get res');
     var deferred = $q.defer();
     var apiQuery;
 
@@ -67,7 +68,8 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.filters = function(apiQuery) {
-    var args = '';
+    var argsDocs = '';
+    var argsProv = '';
     var newQuery = apiQuery;
     $scope.documentTypes.filtered = false;
     $scope.providers.filtered = false;
@@ -77,22 +79,28 @@ angular.module('anyfetchFrontApp')
       if (!$scope.documentTypes.states[value]) {
         $scope.documentTypes.filtered = true;
       } else if (docType.search_count !== 0) {
-        args += '&document_type='+value;
+        argsDocs += '&document_type='+value;
       }
     });
+
+    if ($scope.documentTypes.filtered && argsDocs.length) {
+      newQuery += argsDocs;
+    } else if ($scope.documentTypes.filtered && !argsDocs.length) {
+      return '';
+    }
 
     angular.forEach(Object.keys($scope.providers.list), function(value){
       var prov = $scope.providers.list[value];
       if (!$scope.providers.states[value]) {
         $scope.providers.filtered = true;
       } else if (prov.search_count !== 0) {
-        args += '&token='+value;
+        argsProv += '&token='+value;
       }
     });
 
-    if (($scope.documentTypes.filtered || $scope.providers.filtered) && args.length) {
-      newQuery += args;
-    } else if (($scope.documentTypes.filtered || $scope.providers.filtered) && !args.length) {
+    if ($scope.providers.filtered && argsProv.length) {
+      newQuery += argsProv;
+    } else if ($scope.providers.filtered && !argsProv.length) {
       return '';
     }
 
@@ -204,8 +212,6 @@ angular.module('anyfetchFrontApp')
   // -1 : light update (no recount)
   // false / 0 : nothing to do duuuude!
   $scope.$watch('filterUpdate', function(newVal) {
-    console.log('New val filterUpdate: ', $scope.filterUpdate);
-
     if (newVal) {
       console.log('update res!');
       if ($scope.filterUpdate === -1) {
