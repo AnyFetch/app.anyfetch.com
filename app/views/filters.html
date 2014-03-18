@@ -44,12 +44,19 @@
           <a class="reset" ng-mouseup="resetTime()" ng-show="timeFilter">RESET</a>
         </div>
       </div>
+
       <div class="element">
-        <select ng-model="timeFilter" id="timeFilter">
-          <option value="">Choose a timeframe</option>
-          <option ng-repeat="time in times.list" value="{{time.timestamp}}">{{time.label}}</option>
-        </select>
-      </div>
+
+        <div class="slider-container">
+          <slider
+            ng-model-low="times.after"
+            ng-model-high="times.before"
+            floor="0"
+            ceiling="{{times.list.length-1}}"
+            step="1"
+            stretch="3">
+          </slider>
+        </div>
     </div>
 
   </form>

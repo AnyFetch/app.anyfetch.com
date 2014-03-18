@@ -33,34 +33,14 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
         scope.filterupdate = 1;
       };
 
-      scope.$watch('timeFilter', function(newVal) {
+      scope.$watch('times.after', function(newVal) {
         if (newVal) {
-          var after = new Date(parseInt(scope.timeFilter));
-          var afterMonth = after.getMonth() + 1;
-          if (afterMonth < 10) {
-            afterMonth = '0'+afterMonth;
-          }
-          var afterDate = after.getDate();
-          if (afterDate < 10) {
-            afterDate = '0'+afterDate;
-          }
+          scope.filterupdate = 1;
+        }
+      });
 
-          var before = new Date(parseInt(scope.timeFilter));
-          var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth()+1, 0).getDate();
-          before.setMonth(before.getMonth() + 2);
-          before.setDate(nbDaysThisMonth);
-          var beforeMonth = before.getMonth() + 1;
-          if (beforeMonth < 10) {
-            beforeMonth = '0'+beforeMonth;
-          }
-          var beforeDate = before.getDate();
-          if (beforeDate < 10) {
-            beforeDate = '0'+beforeDate;
-          }
-
-          scope.times.after = after.getFullYear()+'-'+afterMonth+'-'+afterDate;
-          scope.times.before = before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
-
+      scope.$watch('times.before', function(newVal) {
+        if (newVal) {
           scope.filterupdate = 1;
         }
       });

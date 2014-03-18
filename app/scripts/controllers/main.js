@@ -104,10 +104,11 @@ angular.module('anyfetchFrontApp')
       return '';
     }
 
-    if ($scope.times.after) {
-      var argsTime = '&after='+$scope.times.after;
-      argsTime += '&before='+$scope.times.before;
-      // console.log(argsTime);
+    if (TimeService.getAfter()) {
+      var argsTime = '&after='+TimeService.getAfter();
+      argsTime += '&before='+TimeService.getBefore();
+      console.log(TimeService.get());
+      console.log(argsTime);
 
       newQuery += argsTime;
     }

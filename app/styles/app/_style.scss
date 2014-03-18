@@ -870,3 +870,84 @@ $search-height:61px;
   }
 
 }
+
+
+// -----------------------------------------------------
+//          similar
+// -----------------------------------------------------
+
+slider {
+  display:     block;
+  position:    relative;
+  height:      30px;
+  width:       100%;
+  
+  span.bar {
+    height:     50%;
+    z-index:    0;
+    background: #eee;
+    left:       0;
+    top:        25%;
+    cursor:     pointer;
+  }
+
+  span.bar.selection, slider span.bar.unselected {
+  }
+
+  span.bar.selection {
+    background: #0a0;
+    opacity:    0.5;
+  }
+
+  span.bar.unselected {
+    width:      auto;
+    background: #a00;
+    opacity:    0.5;
+  }
+
+  span.pointer {
+    cursor:           pointer;
+    width:            15px;
+    top:              0;
+    bottom:           0;
+    background-color: #00a;
+  }
+
+  span.pointer:hover {
+  }
+
+  span.pointer.active {
+  }
+
+  span.bubble {
+    font-size:   0.7em;
+    line-height: 1.4em;
+    font-family: sans-serif;
+    text-align:  center;
+    text-shadow: none;
+    top:         -1.3em;
+    cursor:      pointer;
+  }
+
+  span.bubble.selection, span.bubble.limit {
+    top: 25%;
+  }
+
+  span.bubble.selection {
+  }
+
+  span.bubble.limit {
+  }
+
+  span.bubble.low, span.bubble.high {
+  }
+}
+
+.slider-container {
+  -webkit-touch-callout: none;
+  -webkit-user-select:   none;
+  -khtml-user-select:    none;
+  -moz-user-select:      -moz-none;
+  -ms-user-select:       none;
+  user-select:           none;
+}
