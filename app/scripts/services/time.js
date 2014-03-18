@@ -35,10 +35,12 @@ angular.module('anyfetchFrontApp.timeService', [])
   datas.reset = function(full) {
     if (full) {
       datas.times.list = [];
+      datas.times.after = null;
+      datas.times.before = null;
+    } else if (datas.times.list.length) {
+      datas.times.after = 0;
+      datas.times.before = datas.times.list.length-1;
     }
-
-    datas.times.after = null;
-    datas.times.before = null;
   };
 
   datas.get = function() {
@@ -47,7 +49,6 @@ angular.module('anyfetchFrontApp.timeService', [])
 
   datas.getAfter = function() {
     if ((datas.times.after >= 0) && datas.times.list.length) {
-      console.log(datas.times.list, datas.times.list[datas.times.after], datas.times.after);
       var after = new Date(parseInt(datas.times.list[datas.times.after].timestamp));
       var afterMonth = after.getMonth() + 1;
       if (afterMonth < 10) {
@@ -61,7 +62,6 @@ angular.module('anyfetchFrontApp.timeService', [])
       return after.getFullYear()+'-'+afterMonth+'-'+afterDate;
     }
     else {
-      console.log('Fuuu', datas.times.after);
       return '';
     }
   };
@@ -84,7 +84,6 @@ angular.module('anyfetchFrontApp.timeService', [])
       return before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
     }
     else {
-      console.log('Fuuu', datas.times.before);
       return '';
     }
   };
