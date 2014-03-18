@@ -314,8 +314,7 @@ angular.module('anyfetchFrontApp')
         var actualSearch = $location.search();
         delete actualSearch.id;
         $location.search(actualSearch);
-      }
-      else {
+      } else if (!$location.search().similar_to) {
         $scope.searchLaunch($location.search().q);
       }
     }
@@ -340,6 +339,7 @@ angular.module('anyfetchFrontApp')
       if ($location.search().similar_to) {
         if (!$scope.similar_to || $scope.similar_to !== $location.search().similar_to) {
           $scope.similarUpdate();
+          $scope.closeModal = true;
         }
       }
       else {
