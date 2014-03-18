@@ -822,8 +822,14 @@ $search-height:61px;
     background-color:#fbf7ed;
 
     .info {
-      label { color:$alternative-color; }
-      a { text-decoration: underline; color:#676767; }
+      label {
+        color:$alternative-color;
+        float: left;
+      }
+      a {
+        text-decoration: underline; color:#676767;
+        float: left;
+      }
     }
 
     a.close { color:$alternative-color; font-size:24px; }
