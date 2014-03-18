@@ -14,7 +14,7 @@ angular.module('anyfetchFrontApp.timeService', [])
   var months = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
 
   datas.set = function(times) {
-    datas.reset();
+    datas.reset(true);
     angular.forEach(Object.keys(times), function(value){
       var date = new Date(parseInt(value));
       var time = {
@@ -29,8 +29,11 @@ angular.module('anyfetchFrontApp.timeService', [])
     return datas.times;
   };
 
-  datas.reset = function() {
-    datas.times.list = [];
+  datas.reset = function(full) {
+    if (full) {
+      datas.times.list = [];
+    }
+    
     datas.times.after = null;
     datas.times.before = null;
   };

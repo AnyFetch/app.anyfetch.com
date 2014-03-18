@@ -199,6 +199,26 @@ angular.module('anyfetchFrontApp')
       });
   };
 
+  // Watch filterUpdate to know wether the filter has changed and the results needs to be reloaded
+  // 1 : full update
+  // -1 : light update (no recount)
+  // false / 0 : nothing to do duuuude!
+  $scope.$watch('filterUpdate', function(newVal) {
+    console.log('New val filterUpdate: ', $scope.filterUpdate);
+
+    if (newVal) {
+      console.log('update res!');
+      if ($scope.filterUpdate === -1) {
+        $scope.update(false);
+      }
+      else if ($scope.filterUpdate === 1) {
+        $scope.update(true);
+      }
+
+      $scope.filterUpdate = false;
+    }
+  });
+
   $scope.loadMore = function() {
     $scope.loading = true;
 
@@ -327,6 +347,7 @@ angular.module('anyfetchFrontApp')
 
   $rootScope.loginPage = false;
   $scope.modalShow = false;
+  $scope.filterUpdate = false;
   $scope.user = AuthService.currentUser;
   $scope.similarShow = false;
   $scope.Object = Object;

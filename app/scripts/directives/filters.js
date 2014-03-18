@@ -6,7 +6,7 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
   return {
     restrict: 'E',
     scope: {
-      update: '='
+      filterupdate: '='
     },
     templateUrl: 'views/filters.html',
     replace: true,
@@ -18,19 +18,19 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
 
       scope.resetDocTypes = function() {
         DocumentTypesService.reset(false);
-        scope.update(scope.timeFilter, false);
+        scope.filterupdate = 1;
       };
 
       scope.resetProv = function() {
         ProvidersService.reset(false);
-        scope.update(scope.timeFilter, false);
+        scope.filterupdate = 1;
       };
 
       scope.resetTime = function() {
         scope.timeFilter = '';
-        TimeService.reset();
+        TimeService.reset(false);
         // Forcing time filter update
-        scope.update(scope.timeFilter, true);
+        scope.filterupdate = 1;
       };
 
       scope.$watch('timeFilter', function(newVal) {
@@ -61,9 +61,21 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
           scope.times.after = after.getFullYear()+'-'+afterMonth+'-'+afterDate;
           scope.times.before = before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
 
-          scope.update();
+          scope.filterupdate = 1;
         }
       });
+
+      scope.$watch('documentTypes.states', function(newVal) {
+        if (newVal) {
+          scope.filterupdate = -1;
+        }
+      }, true);
+
+      scope.$watch('providers.states', function(newVal) {
+        if (newVal) {
+          scope.filterupdate = -1;
+        }
+      }, true);
     }
   };
 });
