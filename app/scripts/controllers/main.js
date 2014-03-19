@@ -37,6 +37,7 @@ angular.module('anyfetchFrontApp')
       $scope.results = [];
       $scope.moreResult = false;
       $scope.loading = false;
+      $scope.filterUpdate = false;
       deferred.reject();
     } else if (apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
@@ -50,6 +51,8 @@ angular.module('anyfetchFrontApp')
             $scope.lastRes = start+data.datas.length;
             $scope.moreResult = false;
           }
+          $scope.filterUpdate = false;
+
           deferred.resolve(data);
         })
         .error(function(error) {
@@ -214,12 +217,15 @@ angular.module('anyfetchFrontApp')
   // false / 0 : nothing to do duuuude!
   $scope.$watch('filterUpdate', function(newVal) {
     if (newVal) {
-      console.log('update res!');
-      if ($scope.filterUpdate === -1) {
-        $scope.update(false);
-      }
-      else if ($scope.filterUpdate === 1) {
-        $scope.update(true);
+      // Update only if a query is launched!
+      if ($scope.query && $scope.query.length) {
+        console.log('update res!');
+        if ($scope.filterUpdate === -1) {
+          $scope.update(false);
+        }
+        else if ($scope.filterUpdate === 1) {
+          $scope.update(true);
+        }
       }
 
       $scope.filterUpdate = false;
