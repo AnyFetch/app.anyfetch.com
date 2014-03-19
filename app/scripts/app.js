@@ -3,6 +3,7 @@
 angular.module('anyfetchFrontApp', [
   'ngCookies',
   'ngResource',
+  'vr.directives.slider',
   'ngRoute',
   'anyfetchFrontApp.filters',
   'anyfetchFrontApp.gravatarDirective',

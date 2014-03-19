@@ -21,6 +21,7 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.getRes = function(start, limit) {
+    console.log('get res');
     var deferred = $q.defer();
     var apiQuery;
 
@@ -36,6 +37,7 @@ angular.module('anyfetchFrontApp')
       $scope.results = [];
       $scope.moreResult = false;
       $scope.loading = false;
+      $scope.filterUpdate = false;
       deferred.reject();
     } else if (apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
@@ -49,6 +51,8 @@ angular.module('anyfetchFrontApp')
             $scope.lastRes = start+data.datas.length;
             $scope.moreResult = false;
           }
+          $scope.filterUpdate = false;
+
           deferred.resolve(data);
         })
         .error(function(error) {
@@ -67,7 +71,8 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.filters = function(apiQuery) {
-    var args = '';
+    var argsDocs = '';
+    var argsProv = '';
     var newQuery = apiQuery;
     $scope.documentTypes.filtered = false;
     $scope.providers.filtered = false;
@@ -77,52 +82,36 @@ angular.module('anyfetchFrontApp')
       if (!$scope.documentTypes.states[value]) {
         $scope.documentTypes.filtered = true;
       } else if (docType.search_count !== 0) {
-        args += '&document_type='+value;
+        argsDocs += '&document_type='+value;
       }
     });
+
+    if ($scope.documentTypes.filtered && argsDocs.length) {
+      newQuery += argsDocs;
+    } else if ($scope.documentTypes.filtered && !argsDocs.length) {
+      return '';
+    }
 
     angular.forEach(Object.keys($scope.providers.list), function(value){
       var prov = $scope.providers.list[value];
       if (!$scope.providers.states[value]) {
         $scope.providers.filtered = true;
       } else if (prov.search_count !== 0) {
-        args += '&token='+value;
+        argsProv += '&token='+value;
       }
     });
 
-    if (($scope.documentTypes.filtered || $scope.providers.filtered) && args.length) {
-      newQuery += args;
-    } else if (($scope.documentTypes.filtered || $scope.providers.filtered) && !args.length) {
+    if ($scope.providers.filtered && argsProv.length) {
+      newQuery += argsProv;
+    } else if ($scope.providers.filtered && !argsProv.length) {
       return '';
     }
 
-    if ($scope.timeFilter && $scope.timeFilter !== '') {
-      var after = new Date(parseInt($scope.timeFilter));
-      var afterMonth = after.getMonth() + 1;
-      if (afterMonth < 10) {
-        afterMonth = '0'+afterMonth;
-      }
-      var afterDate = after.getDate();
-      if (afterDate < 10) {
-        afterDate = '0'+afterDate;
-      }
-
-      var before = new Date(parseInt($scope.timeFilter));
-      var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth()+1, 0).getDate();
-      before.setMonth(before.getMonth() + 2);
-      before.setDate(nbDaysThisMonth);
-      var beforeMonth = before.getMonth() + 1;
-      if (beforeMonth < 10) {
-        beforeMonth = '0'+beforeMonth;
-      }
-      var beforeDate = before.getDate();
-      if (beforeDate < 10) {
-        beforeDate = '0'+beforeDate;
-      }
-
-      var argsTime = '&after='+after.getFullYear()+'-'+afterMonth+'-'+afterDate;
-      argsTime += '&before='+before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
-      // console.log(argsTime);
+    if (TimeService.getAfter()) {
+      var argsTime = '&after='+TimeService.getAfter();
+      argsTime += '&before='+TimeService.getBefore();
+      console.log(TimeService.get());
+      console.log(argsTime);
 
       newQuery += argsTime;
     }
@@ -141,7 +130,6 @@ angular.module('anyfetchFrontApp')
     }
 
     if (times) {
-      $scope.timeFilter = '';
       $scope.times = TimeService.set(times);
     }
   };
@@ -208,26 +196,41 @@ angular.module('anyfetchFrontApp')
     $location.search(actualSearch);
   };
 
-  $scope.update = function(time, force) {
+  $scope.update = function(force) {
     // console.log('Update initiated');
     $scope.loading = true;
-
-    if (time && time !== '') {
-      $scope.timeFilter = time;
-    } else if ($scope.timeFilter) {
-      $scope.timeFilter = '';
-    }
 
     $scope.getRes(0, DEFAULT_LIMIT)
       .then(function(data) {
         // console.log('Data then :', data);
         $scope.results = data.datas;
-        if (time || force) {
+        if ($scope.times.last || force) {
           $scope.updateFiltersCount(data.document_types, data.tokens, '');
         }
         $scope.loading = false;
       });
   };
+
+  // Watch filterUpdate to know wether the filter has changed and the results needs to be reloaded
+  // 1 : full update
+  // -1 : light update (no recount)
+  // false / 0 : nothing to do duuuude!
+  $scope.$watch('filterUpdate', function(newVal) {
+    if (newVal) {
+      // Update only if a query is launched!
+      if ($scope.query && $scope.query.length) {
+        console.log('update res!');
+        if ($scope.filterUpdate === -1) {
+          $scope.update(false);
+        }
+        else if ($scope.filterUpdate === 1) {
+          $scope.update(true);
+        }
+      }
+
+      $scope.filterUpdate = false;
+    }
+  });
 
   $scope.loadMore = function() {
     $scope.loading = true;
@@ -314,8 +317,7 @@ angular.module('anyfetchFrontApp')
         var actualSearch = $location.search();
         delete actualSearch.id;
         $location.search(actualSearch);
-      }
-      else {
+      } else if (!$location.search().similar_to) {
         $scope.searchLaunch($location.search().q);
       }
     }
@@ -340,6 +342,7 @@ angular.module('anyfetchFrontApp')
       if ($location.search().similar_to) {
         if (!$scope.similar_to || $scope.similar_to !== $location.search().similar_to) {
           $scope.similarUpdate();
+          $scope.closeModal = true;
         }
       }
       else {
@@ -357,6 +360,7 @@ angular.module('anyfetchFrontApp')
 
   $rootScope.loginPage = false;
   $scope.modalShow = false;
+  $scope.filterUpdate = false;
   $scope.user = AuthService.currentUser;
   $scope.similarShow = false;
   $scope.Object = Object;
@@ -370,7 +374,6 @@ angular.module('anyfetchFrontApp')
   $scope.full = null;
   $scope.documentTypes = DocumentTypesService.documentTypes;
   $scope.providers = ProvidersService.providers;
-  $scope.timeFilter = '';
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;
 

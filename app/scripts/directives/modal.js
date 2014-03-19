@@ -87,13 +87,13 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.show_similar = function() {
-        scope.hideModal();
         if ($location.search().id) {
           var actualSearch = $location.search();
           actualSearch.similar_to = actualSearch.id;
           delete actualSearch.id;
           $location.search(actualSearch);
         }
+        scope.hideModal();
       };
 
       scope.getTitleProjection = function(rel) {
