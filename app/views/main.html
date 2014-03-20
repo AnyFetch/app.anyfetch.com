@@ -110,7 +110,7 @@
               <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...
               </div>
-              <div class="result-row more text-center" ng-show="moreResult && !loading" ng-click="loadMore()">
+              <div class="result-row more text-center" ng-show="moreResult && !loading && results.length < documentTypes.totalCount" ng-click="loadMore()">
                 <a>Load more</a>
               </div>
             </div>
