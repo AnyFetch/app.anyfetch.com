@@ -26,6 +26,8 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
 
         scope.getDocumentTypeIcon = function() {
           var docType = scope.result.document_type;
+
+          // Special case for document files
           if (docType === '5252ce4ce4cfcd16f55cfa3c') {
 
             var path = scope.result.datas.path;
