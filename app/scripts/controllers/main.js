@@ -205,7 +205,7 @@ angular.module('anyfetchFrontApp')
         // console.log('Data then :', data);
         $scope.results = data.datas;
         if ($scope.times.last || force) {
-          $scope.updateFiltersCount(data.document_types, data.tokens, '');
+          $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, '');
         }
         $scope.loading = false;
       });
@@ -244,7 +244,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.resultUpdate = function(data) {
     $scope.results = data.datas;
-    $scope.updateFiltersCount(data.document_types, data.tokens, data.creation_date);
+    $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, data.facets.creation_dates);
     $scope.loading = false;
   };
 

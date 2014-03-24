@@ -30,6 +30,7 @@
     "require": false,
     "console": false,
     "anyfetchFrontApp": false,
-    "md5": false
+    "md5": false,
+    "API_URL": false
   }
 }

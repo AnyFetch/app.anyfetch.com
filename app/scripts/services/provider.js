@@ -67,7 +67,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   datas.update = function() {
     var deferred = $q.defer();
 
-    $http({method: 'POST', url: API_URL + '/update'})
+    $http({method: 'POST', url: API_URL + '/company/update'})
       .success(deferred.resolve)
       .error(deferred.reject);
 
