@@ -21,11 +21,6 @@ angular.module('anyfetchFrontApp.authenticationService', [])
     // Creation of the user credential
     var credentials;
     if (user) {
-      // IE8 & IE9 hack
-      if (!window.btoa) {
-        // window.btoa = base64.encode;
-      }
-
       credentials = btoa(user.email + ':' + user.password);
     } else {
       credentials = $cookies.credentials;
