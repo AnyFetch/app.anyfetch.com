@@ -8,8 +8,8 @@ angular.module('anyfetchFrontApp.authenticationService', [])
   };
 
   var bootstrapUserContent = function(data) {
-    DocumentTypesService.set(data.document_types);
-    ProvidersService.set(data.provider_status, data.server_time);
+    DocumentTypesService.set(data['/document_types']);
+    ProvidersService.set(data['/providers'], data['/'].server_time);
     ProvidersService.update();
   };
 
@@ -28,11 +28,10 @@ angular.module('anyfetchFrontApp.authenticationService', [])
 
     // Check the user credentials validity
     $http.defaults.headers.common.Authorization = 'Basic ' + credentials;
-    $http({method: 'GET', url: API_URL})
+    $http({method: 'GET', url: API_URL + "/batch?pages=/&pages=/document_types&pages=/providers"})
       .success(function(data) {
         datas.currentUser = {
-          email: data.name,
-          id: data.id,
+          email: data['/'].user_email,
           credentials: credentials
         };
 
