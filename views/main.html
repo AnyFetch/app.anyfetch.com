@@ -86,13 +86,13 @@
             ////////////////////////////////////////////// -->
         <!-- Off Canvas Menu -->
         <aside class="left-off-canvas-menu show-for-small filters_off_canvas">
-          <filters update="update" times="times">
+          <filters filterupdate="filterUpdate">
         </aside>
 
         <div class="large-3 medium-3 columns filters">
           <div class="hide-for-small show-for-medium-up">
             <div class="sidebar">
-              <filters update="update" times="times">
+              <filters filterupdate="filterUpdate">
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
               <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...
               </div>
-              <div class="result-row more text-center" ng-show="moreResult && !loading" ng-click="loadMore()">
+              <div class="result-row more text-center" ng-show="moreResult && !loading && results.length < documentTypes.totalCount" ng-click="loadMore()">
                 <a>Load more</a>
               </div>
             </div>
