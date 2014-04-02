@@ -80,7 +80,20 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         return docType;
       };
 
+      scope.unbindEchap = function() {
+        $(document).keyup(null);
+      };
+
+      scope.bindEchap = function() {
+        $(document).keyup(function(e){
+          if (e.keyCode === 27) {
+            scope.$apply(scope.hideModal);
+          }
+        });
+      };
+
       scope.hideModal = function() {
+        scope.unbindEchap();
         scope.show = false;
         scope.zoom = 0;
         $('body').removeClass('lock');
@@ -115,6 +128,8 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].template_full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
           scope.provider = ProvidersService.providers.list[scope.documentfull.token];
+
+          scope.bindEchap();
         }
       });
     }
