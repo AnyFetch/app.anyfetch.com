@@ -21,7 +21,7 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.getRes = function(start, limit) {
-    console.log('get res');
+    // console.log('get res');
     var deferred = $q.defer();
     var apiQuery;
 
@@ -110,8 +110,8 @@ angular.module('anyfetchFrontApp')
     if (TimeService.getAfter()) {
       var argsTime = '&after='+TimeService.getAfter();
       argsTime += '&before='+TimeService.getBefore();
-      console.log(TimeService.get());
-      console.log(argsTime);
+      // console.log(TimeService.get());
+      // console.log(argsTime);
 
       newQuery += argsTime;
     }
@@ -135,7 +135,7 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.searchLaunch = function(query) {
-    console.log('Search launched');
+    // console.log('Search launched');
     $location.search({q: query});
     DocumentTypesService.set($scope.documentTypes.list);
     ProvidersService.set($scope.providers.list);
@@ -219,7 +219,7 @@ angular.module('anyfetchFrontApp')
     if (newVal) {
       // Update only if a query is launched!
       if ($scope.query && $scope.query.length) {
-        console.log('update res!');
+        // console.log('update res!');
         if ($scope.filterUpdate === -1) {
           $scope.update(false);
         }

@@ -44,6 +44,7 @@ angular.module('anyfetchFrontApp.timeService', [])
   };
 
   datas.get = function() {
+    console.log(datas.times);
     return datas.times;
   };
 

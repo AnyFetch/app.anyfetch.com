@@ -17,6 +17,13 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       scope.Object = Object;
       scope.months = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
 
+      scope.init = {
+        timesAfter: false,
+        timesBefore: false,
+        docState: false,
+        provState: false,
+      };
+
       scope.getDate = function(i) {
         var actTime = scope.times.list[i];
 
@@ -53,32 +60,58 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       };
 
       scope.resetTime = function() {
+        console.log('trigger restTimes');
         TimeService.reset(false);
         // Forcing time filter update
         scope.filterupdate = 1;
       };
 
+      scope.updateTime = function() {
+        // DEBUG
+        // console.log('updateTime : ', scope.timeChanged);
+        if (scope.timeChanged) {
+          scope.filterupdate = 1;
+          scope.timeChanged = false;
+        }
+      };
+
       scope.$watch('times.after', function(newVal) {
         if (newVal) {
-          scope.filterupdate = 1;
+          if (scope.init.timesAfter) {
+            scope.timeChanged = true;
+          } else {
+            scope.init.timesAfter = true;
+          }
         }
       });
 
       scope.$watch('times.before', function(newVal) {
         if (newVal) {
-          scope.filterupdate = 1;
+          if (scope.init.timesBefore) {
+            scope.timeChanged = true;
+          } else {
+            scope.init.timesBefore = true;
+          }
         }
       });
 
       scope.$watch('documentTypes.states', function(newVal) {
         if (newVal) {
-          scope.filterupdate = -1;
+          if (scope.init.docState) {
+            scope.filterupdate = -1;
+          } else {
+            scope.init.docState = true;
+          }
         }
       }, true);
 
       scope.$watch('providers.states', function(newVal) {
         if (newVal) {
-          scope.filterupdate = -1;
+          if (scope.init.provState) {
+            scope.filterupdate = -1;
+          } else {
+            scope.init.provState = true;
+          }
         }
       }, true);
     }
