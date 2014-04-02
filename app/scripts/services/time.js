@@ -11,16 +11,12 @@ angular.module('anyfetchFrontApp.timeService', [])
     }
   };
 
-  var months = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
-
   datas.set = function(times) {
     datas.reset(true);
     angular.forEach(Object.keys(times), function(value){
-      var date = new Date(parseInt(value));
       var time = {
-        timestamp: value,
-        count: times[value],
-        label: 'From ' + months[date.getMonth()] + ' to ' + months[(date.getMonth() + 2)] + ' ' + date.getFullYear()
+        timestamp: parseInt(value),
+        count: times[value]
       };
 
       datas.times.list.push(time);
@@ -44,7 +40,6 @@ angular.module('anyfetchFrontApp.timeService', [])
   };
 
   datas.get = function() {
-    console.log(datas.times);
     return datas.times;
   };
 
