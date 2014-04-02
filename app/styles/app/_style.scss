@@ -963,7 +963,7 @@ slider {
   }
 
   span.bubble {
-    cursor: default;
+    cursor: pointer;
     top: -27px;
     padding: 1px 3px 1px 3px;
     font-size: 1em;
@@ -976,6 +976,10 @@ slider {
   }
   span.bubble.limit {
     color: #808080;
+  }
+
+  .input {
+    cursor: pointer;
   }
 }
 
