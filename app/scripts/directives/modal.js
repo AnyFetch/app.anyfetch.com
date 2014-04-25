@@ -26,7 +26,6 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       scope.displayFull = function(id) {
         var actualSearch = $location.search();
         actualSearch.id = id;
-        console.log(actualSearch);
         $location.search(actualSearch);
       };
 
@@ -110,7 +109,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.getTitleProjection = function(rel) {
-        var htmlTemplate = DocumentTypesService.get().list[rel.document_type].template_title;
+        var htmlTemplate = DocumentTypesService.get().list[rel.document_type].templates.title;
         return Mustache.render(htmlTemplate, rel.datas);
       };
 
@@ -125,7 +124,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         $(document).foundation();
         scope.query = scope.query || $location.search().q;
         if (newVal) {
-          var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].template_full;
+          var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].templates.full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
           scope.provider = ProvidersService.providers.list[scope.documentfull.token];
 
