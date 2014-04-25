@@ -1,6 +1,6 @@
 {
   "name": "angular-slider",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "main": "./build/angular-slider.min.js",
   "ignore": [
     "**/.*",
@@ -22,11 +22,11 @@
     "angular": "v1.2.14"
   },
   "homepage": "https://github.com/Venturocket/angular-slider",
-  "_release": "0.2.4",
+  "_release": "0.2.5",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.4",
-    "commit": "838774309cc523c5734ea0680926d00f5ac6dc3a"
+    "tag": "v0.2.5",
+    "commit": "1aea84ef9b0f30eaca181b408b081784b26059ac"
   },
   "_source": "git://github.com/Venturocket/angular-slider.git",
   "_target": "~0.2.4",
