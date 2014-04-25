@@ -10,20 +10,26 @@ Welcome @ anyFetch
 * [yeoman](http://yeoman.io/)
 
 
+## Installation
+Setup npm and bower:
+
+```
+npm install
+```
+
 ## How to use
 
-Before running any of these commands you need to install all the requirements. To load all the dependents packages you will need to launch `npm install` and `bower install`.
 
 ```sh
 grunt serve				# launch the developement server
 grunt test				# start the tests
-grunt build				# creation of a standalone application in the /build directory
+grunt build				# create standalone application in the /build directory
 ```
 
 ## Deployment
  
- ```sh
- grunt deploy
- ```
+```sh
+grunt deploy
+```
  
- This require push access to this repo.
+This require push access to this repo.
