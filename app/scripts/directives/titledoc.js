@@ -13,7 +13,7 @@ angular.module('anyfetchFrontApp.titledocDirective', [])
     link: function(scope) {
       scope.$watch('document', function(newVal) {
         if (newVal) {
-          var titleTemplate = DocumentTypesService.get().list[scope.document.document_type].template_title;
+          var titleTemplate = DocumentTypesService.get().list[scope.document.document_type].templates.title;
           scope.title = Mustache.render(titleTemplate, scope.document.datas);
         }
       });

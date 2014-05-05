@@ -3,16 +3,9 @@ Anyfetch front
 
 Welcome @ anyFetch
 
-## Requirements
-
-* node.js
-* compass
-* [yeoman](http://yeoman.io/)
-
-
-## How to use
-
+## How to install
 Before running any of these commands you need to install all the requirements. To load all the dependents packages you will need to run:
+
 ```sh
 gem install compass
 npm install -g grunt bower bower-cli
@@ -20,16 +13,18 @@ npm install
 bower install
 ```
 
+## How to use
 ```sh
 grunt serve				# launch the developement server
 grunt test				# start the tests
-grunt build				# creation of a standalone application in the /build directory
+grunt build				# create standalone application in the /build directory
 ```
 
 ## Deployment
+This require push access to this repo.
  
- ```sh
- grunt deploy
- ```
- 
- This require push access to this repo.
+```sh
+grunt deploy            # Deploy on production server.
+grunt stage             # Deploy on staging server / branch
+```
+
