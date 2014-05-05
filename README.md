@@ -12,7 +12,13 @@ Welcome @ anyFetch
 
 ## How to use
 
-Before running any of these commands you need to install all the requirements. To load all the dependents packages you will need to launch `npm install` and `bower install`.
+Before running any of these commands you need to install all the requirements. To load all the dependents packages you will need to run:
+```sh
+gem install compass
+npm install -g grunt bower bower-cli
+npm install
+bower install
+```
 
 ```sh
 grunt serve				# launch the developement server

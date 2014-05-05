@@ -1,9 +1,9 @@
 {
-  "name": "anyfetch-front",
+  "name": "anyfetch.com",
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Papiel/anyfetch-front"
+    "url": "https://github.com/Papiel/anyfetch.com"
   },
   "dependencies": {},
   "devDependencies": {
