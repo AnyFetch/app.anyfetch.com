@@ -7,10 +7,9 @@ Welcome @ anyFetch
 Before running any of these commands you need to install all the requirements. To load all the dependents packages you will need to run:
 
 ```sh
-gem install compass
-npm install -g grunt bower bower-cli
+npm install -g bower grunt-cli
 npm install
-bower install
+gem install compass
 ```
 
 ## How to use
