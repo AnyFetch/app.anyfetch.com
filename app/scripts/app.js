@@ -14,7 +14,8 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.authenticationService',
   'anyfetchFrontApp.documentService',
   'anyfetchFrontApp.providerService',
-  'anyfetchFrontApp.timeService'
+  'anyfetchFrontApp.timeService',
+  'anyfetchFrontApp.queryService'
 ])
   .config(function ($routeProvider, $sceProvider, $httpProvider) {
 

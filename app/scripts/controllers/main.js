@@ -3,35 +3,50 @@
 
 // ------------------------------------------------------
 //                  MainCrtl
+// Controller managing the front.
 // ------------------------------------------------------
 
+// Number of result returned by each queries
 var DEFAULT_LIMIT = 20;
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService, TimeService) {
+.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService, TimeService, QueryService) {
 
-  $scope.logout = function() {
-    AuthService.logout(function() {
-      $location.path('/login');
-    });
-  };
+// ------------------------------------------------------
+//                  Variables
+// ------------------------------------------------------
 
-  $scope.focusSearch = function() {
-    $('#search').focus();
-  };
+  $rootScope.loginPage = false;
+  $scope.modalShow = false;
+  $scope.filterUpdate = false;
+  $scope.user = AuthService.currentUser;
+  $scope.similarShow = false;
+  $scope.Object = Object;
+
+  // Position of the last result returned with getRes
+  $scope.lastRes = 0;
+
+  // Launch Uservoice (but not in tests)
+  if(window.initUserVoice) {
+    window.initUserVoice();
+  }
+
+  $scope.results = [];
+  $scope.full = null;
+  $scope.documentTypes = DocumentTypesService.documentTypes;
+  $scope.providers = ProvidersService.providers;
+  $scope.providersStatus = ProvidersService.providersUpToDate;
+  $scope.times = TimeService.times;
+
+
+// ------------------------------------------------------
+//                  Query
+// ------------------------------------------------------
 
   $scope.getRes = function(start, limit) {
-    // console.log('get res');
     var deferred = $q.defer();
-    var apiQuery;
-
-    if ($scope.similar_to) {
-      apiQuery = API_URL + '/documents/'+$scope.similar_to+'/similar?start='+start+'&limit='+limit;
-    } else if ($scope.query) {
-      apiQuery = API_URL + '/documents?search='+$scope.query+'&start='+start+'&limit='+limit;
-
-      apiQuery = $scope.filters(apiQuery);
-    }
+    var apiQuery = QueryService.queryBuilder($scope.query, $scope.similar_to, start, limit);
+    console.log(apiQuery);
 
     if (apiQuery === '') {
       $scope.results = [];
@@ -70,75 +85,18 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
-  $scope.filters = function(apiQuery) {
-    var argsDocs = '';
-    var argsProv = '';
-    var newQuery = apiQuery;
-    $scope.documentTypes.filtered = false;
-    $scope.providers.filtered = false;
-
-    angular.forEach(Object.keys($scope.documentTypes.list), function(value){
-      var docType = $scope.documentTypes.list[value];
-      if (!$scope.documentTypes.states[value]) {
-        $scope.documentTypes.filtered = true;
-      } else if (docType.search_count !== 0) {
-        argsDocs += '&document_type='+value;
-      }
-    });
-
-    if ($scope.documentTypes.filtered && argsDocs.length) {
-      newQuery += argsDocs;
-    } else if ($scope.documentTypes.filtered && !argsDocs.length) {
-      return '';
-    }
-
-    angular.forEach(Object.keys($scope.providers.list), function(value){
-      var prov = $scope.providers.list[value];
-      if (!$scope.providers.states[value]) {
-        $scope.providers.filtered = true;
-      } else if (prov.search_count !== 0) {
-        argsProv += '&token='+value;
-      }
-    });
-
-    if ($scope.providers.filtered && argsProv.length) {
-      newQuery += argsProv;
-    } else if ($scope.providers.filtered && !argsProv.length) {
-      return '';
-    }
-
-    if (TimeService.getAfter()) {
-      var argsTime = '&after='+TimeService.getAfter();
-      argsTime += '&before='+TimeService.getBefore();
-      // console.log(TimeService.get());
-      // console.log(argsTime);
-
-      newQuery += argsTime;
-    }
-
-    // console.log('Old Query: ',apiQuery, ' newQuery: ', newQuery);
-    return newQuery;
+  $scope.resultUpdate = function(data) {
+    $scope.results = data.datas;
+    $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, data.facets.creation_dates);
+    $scope.loading = false;
   };
 
-  $scope.updateFiltersCount = function(docTypes, provs, times) {
-    if (docTypes) {
-      DocumentTypesService.updateSearchCounts(docTypes);
-    }
-
-    if (provs) {
-      ProvidersService.updateSearchCounts(provs);
-    }
-
-    if (times) {
-      $scope.times = TimeService.set(times);
-    }
-  };
+// ------------------------------------------------------
+//                  Search
+// ------------------------------------------------------
 
   $scope.searchLaunch = function(query) {
-    // console.log('Search launched');
     $location.search({q: query});
-    DocumentTypesService.set($scope.documentTypes.list);
-    ProvidersService.set($scope.providers.list);
     $scope.updateFiltersCount([], [], {});
     $scope.searchUpdate();
   };
@@ -161,6 +119,41 @@ angular.module('anyfetchFrontApp')
       $scope.resetSearch();
     }
   };
+
+  $scope.loadMore = function() {
+    $scope.loading = true;
+
+    $scope.getRes($scope.lastRes, DEFAULT_LIMIT)
+      .then(function(data) {
+        $scope.results = $scope.results.concat(data.datas);
+        $scope.loading = false;
+      });
+  };
+
+  $scope.update = function(force) {
+    $scope.loading = true;
+
+    $scope.getRes(0, DEFAULT_LIMIT)
+      .then(function(data) {
+        $scope.results = data.datas;
+        if ($scope.times.last || force) {
+          $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, '');
+        }
+        $scope.loading = false;
+      });
+  };
+
+  $scope.resetSearch = function () {
+    $scope.query = '';
+    $location.search({});
+    $scope.loading = false;
+    $scope.updateFiltersCount([], [], {});
+    $scope.moreResult = false;
+  };
+
+// ------------------------------------------------------
+//                  Similar
+// ------------------------------------------------------
 
   $scope.similarUpdate = function() {
     $scope.similar_to = $location.search().similar_to || '';
@@ -196,19 +189,22 @@ angular.module('anyfetchFrontApp')
     $location.search(actualSearch);
   };
 
-  $scope.update = function(force) {
-    // console.log('Update initiated');
-    $scope.loading = true;
+// ------------------------------------------------------
+//                  Filters
+// ------------------------------------------------------
 
-    $scope.getRes(0, DEFAULT_LIMIT)
-      .then(function(data) {
-        // console.log('Data then :', data);
-        $scope.results = data.datas;
-        if ($scope.times.last || force) {
-          $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, '');
-        }
-        $scope.loading = false;
-      });
+  $scope.updateFiltersCount = function(docTypes, provs, times) {
+    if (docTypes) {
+      DocumentTypesService.updateSearchCounts(docTypes);
+    }
+
+    if (provs) {
+      ProvidersService.updateSearchCounts(provs);
+    }
+
+    if (times) {
+      $scope.times = TimeService.set(times);
+    }
   };
 
   // Watch filterUpdate to know wether the filter has changed and the results needs to be reloaded
@@ -232,29 +228,9 @@ angular.module('anyfetchFrontApp')
     }
   });
 
-  $scope.loadMore = function() {
-    $scope.loading = true;
-
-    $scope.getRes($scope.lastRes, DEFAULT_LIMIT)
-      .then(function(data) {
-        $scope.results = $scope.results.concat(data.datas);
-        $scope.loading = false;
-      });
-  };
-
-  $scope.resultUpdate = function(data) {
-    $scope.results = data.datas;
-    $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, data.facets.creation_dates);
-    $scope.loading = false;
-  };
-
-  $scope.resetSearch = function () {
-    $scope.query = '';
-    $location.search({});
-    $scope.loading = false;
-    $scope.updateFiltersCount([], [], {});
-    $scope.moreResult = false;
-  };
+// ------------------------------------------------------
+//                  Full (or modal)
+// ------------------------------------------------------
 
   $scope.displayFull = function(id) {
     $('body').scrollTop(0);
@@ -300,16 +276,6 @@ angular.module('anyfetchFrontApp')
       });
   };
 
-  $scope.close_error = function(){
-    $scope.errorMes = '';
-  };
-
-  $scope.display_error = function(mes){
-    $scope.errorMes = mes;
-    $('body').scrollTop(0);
-    setTimeout($scope.close_error, 1500);
-  };
-
   $scope.$watch('modalShow', function(newValue, oldValue) {
     if (!newValue && oldValue) {
       if ($scope.results.length) {
@@ -323,11 +289,29 @@ angular.module('anyfetchFrontApp')
     }
   });
 
+// ------------------------------------------------------
+//                  Error message
+// ------------------------------------------------------
+
+  $scope.display_error = function(mes){
+    $scope.errorMes = mes;
+    $('body').scrollTop(0);
+    setTimeout($scope.close_error, 1500);
+  };
+
+  $scope.close_error = function(){
+    $scope.errorMes = '';
+  };
+
+// ------------------------------------------------------
+//                  Route management
+// ------------------------------------------------------
+
   $scope.$on('$routeUpdate', function() {
-    $scope.rootUpdate();
+    $scope.routeUpdate();
   });
 
-  $scope.rootUpdate = function() {
+  $scope.routeUpdate = function() {
     $scope.id  = $location.search().id || '';
 
     if ($scope.id) {
@@ -358,24 +342,23 @@ angular.module('anyfetchFrontApp')
     }
   };
 
-  $rootScope.loginPage = false;
-  $scope.modalShow = false;
-  $scope.filterUpdate = false;
-  $scope.user = AuthService.currentUser;
-  $scope.similarShow = false;
-  $scope.Object = Object;
+// ------------------------------------------------------
+//                  Misc
+// ------------------------------------------------------
 
-  // Launch Uservoice (but not in tests)
-  if(window.initUserVoice) {
-    window.initUserVoice();
-  }
+  $scope.logout = function() {
+    AuthService.logout(function() {
+      $location.path('/login');
+    });
+  };
 
-  $scope.results = [];
-  $scope.full = null;
-  $scope.documentTypes = DocumentTypesService.documentTypes;
-  $scope.providers = ProvidersService.providers;
-  $scope.providersStatus = ProvidersService.providersUpToDate;
-  $scope.times = TimeService.times;
+  $scope.focusSearch = function() {
+    $('#search').focus();
+  };
 
-  $scope.rootUpdate();
+// ------------------------------------------------------
+//                  Init
+// ------------------------------------------------------
+
+  $scope.routeUpdate();
 });
