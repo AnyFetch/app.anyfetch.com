@@ -10,7 +10,6 @@ Before running any of these commands you need to install all the requirements. T
 gem install compass
 npm install -g grunt bower bower-cli
 npm install
-bower install
 ```
 
 ## How to use

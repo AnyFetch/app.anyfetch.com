@@ -2,11 +2,9 @@ language: node_js
 node_js:
   - '0.10'
 install:
-  - npm install
-before_script:
   - npm install -g bower grunt-cli
-  - bower install
-  - gem install compass --version 1.0.0.alpha.18
+  - npm install
+  - gem install compass
 script:
   - grunt build
   - grunt test
