@@ -136,7 +136,7 @@ angular.module('anyfetchFrontApp')
     $scope.getRes(0, DEFAULT_LIMIT)
       .then(function(data) {
         $scope.results = data.datas;
-        if ($scope.times.last || force) {
+        if (TimeService.times.last || force) {
           $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, '');
         }
         $scope.loading = false;
@@ -203,7 +203,7 @@ angular.module('anyfetchFrontApp')
     }
 
     if (times) {
-      $scope.times = TimeService.set(times);
+      TimeService.times = TimeService.set(times);
     }
   };
 
