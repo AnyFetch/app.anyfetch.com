@@ -130,19 +130,6 @@ angular.module('anyfetchFrontApp')
       });
   };
 
-  $scope.update = function(force) {
-    $scope.loading = true;
-
-    $scope.getRes(0, DEFAULT_LIMIT)
-      .then(function(data) {
-        $scope.results = data.datas;
-        if (TimeService.times.last || force) {
-          $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, '');
-        }
-        $scope.loading = false;
-      });
-  };
-
   $scope.resetSearch = function () {
     $scope.query = '';
     $location.search({});
@@ -215,16 +202,10 @@ angular.module('anyfetchFrontApp')
     if (newVal) {
       // Update only if a query is launched!
       if ($scope.query && $scope.query.length) {
-        // console.log('update res!');
-        if ($scope.filterUpdate === -1) {
-          $scope.update(false);
-        }
-        else if ($scope.filterUpdate === 1) {
-          $scope.update(true);
-        }
+        console.log('new search due to filters');
+        $scope.search();
+        $scope.filterUpdate = false;
       }
-
-      $scope.filterUpdate = false;
     }
   });
 
