@@ -85,9 +85,14 @@ angular.module('anyfetchFrontApp')
     return deferred.promise;
   };
 
-  $scope.resultUpdate = function(data) {
+  // The full argument define whether the filter needs to be updated or not
+  $scope.resultUpdate = function(data, full) {
     $scope.results = data.datas;
-    $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, data.facets.creation_dates);
+
+    if (full) {
+      $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, data.facets.creation_dates);
+    }
+
     $scope.loading = false;
   };
 
@@ -103,17 +108,18 @@ angular.module('anyfetchFrontApp')
 
   $scope.searchUpdate = function() {
     $scope.query = $location.search().q || '';
-    $scope.search();
+    $scope.search(true);
   };
 
-  $scope.search = function() {
+  // The full argument define whether the filter needs to be updated or not
+  $scope.search = function(full) {
     $scope.loading = true;
     $scope.results = [];
 
     if ($scope.query.length) {
       $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
-          $scope.resultUpdate(data);
+          $scope.resultUpdate(data, full);
         });
     } else {
       $scope.resetSearch();
@@ -159,7 +165,7 @@ angular.module('anyfetchFrontApp')
     if ($scope.similar_to.length) {
       $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
-          $scope.resultUpdate(data);
+          $scope.resultUpdate(data, true);
         });
     } else {
       $scope.resetSearch();
@@ -203,7 +209,7 @@ angular.module('anyfetchFrontApp')
       // Update only if a query is launched!
       if ($scope.query && $scope.query.length) {
         console.log('new search due to filters');
-        $scope.search();
+        $scope.search(false);
         $scope.filterUpdate = false;
       }
     }
