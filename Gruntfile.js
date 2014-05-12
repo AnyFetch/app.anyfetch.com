@@ -352,13 +352,13 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:Papiel/anyfetch.com.git',
+          remote: 'git@github.com:Papiel/app.anyfetch.com.git',
           branch: 'gh-pages'
         }
       },
       staging: {
         options: {
-          remote: 'git@github.com:Papiel/staging.anyfetch.com.git',
+          remote: 'git@github.com:Papiel/staging.app.anyfetch.com.git',
           branch: 'gh-pages'
         }
       },
@@ -415,7 +415,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('stagingcname', function () {
     // Update GH pages CNAME
-    require('fs').writeFileSync(__dirname + '/dist/CNAME', 'staging.anyfetch.com');
+    require('fs').writeFileSync(__dirname + '/dist/CNAME', 'staging.app.anyfetch.com');
   });
 
   grunt.registerTask('stage', [
