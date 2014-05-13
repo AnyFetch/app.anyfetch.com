@@ -10,8 +10,8 @@ angular.module('anyfetchFrontApp.gravatarDirective', [])
 
     return {
       restrict: 'EAC',
-      link:function (scope, elm, attrs) {
-        scope.$watch(attrs.gravatarEmail, function (value) {
+      link:function(scope, elm, attrs) {
+        scope.$watch(attrs.gravatarEmail, function(value) {
 
           var size = attrs.gravatarSize || 30;
           var defaultUrl = attrs.gravatarDefault || 'mm';

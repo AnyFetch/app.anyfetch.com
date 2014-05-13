@@ -31,11 +31,11 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
           var date = new Date(actTime.timestamp);
           return scope.months[date.getMonth()] + ' ' + date.getFullYear();
         }
-        
+
         return '?';
       };
 
-      scope.getRange = function (aft, bef) {
+      scope.getRange = function(aft, bef) {
         var afterTime = scope.times.list[aft];
         var beforeTime = scope.times.list[bef];
 
@@ -51,26 +51,26 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
 
       scope.resetDocTypes = function() {
         DocumentTypesService.reset(false);
-        scope.filterupdate = 1;
+        scope.filterupdate = true;
       };
 
       scope.resetProv = function() {
         ProvidersService.reset(false);
-        scope.filterupdate = 1;
+        scope.filterupdate = true;
       };
 
       scope.resetTime = function() {
         console.log('trigger restTimes');
         TimeService.reset(false);
         // Forcing time filter update
-        scope.filterupdate = 1;
+        scope.filterupdate = true;
       };
 
       scope.updateTime = function() {
         // DEBUG
-        // console.log('updateTime : ', scope.timeChanged);
+        console.log('updateTime : ', scope.timeChanged);
         if (scope.timeChanged) {
-          scope.filterupdate = 1;
+          scope.filterupdate = true;
           scope.timeChanged = false;
         }
       };
@@ -98,7 +98,7 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       scope.$watch('documentTypes.states', function(newVal) {
         if (newVal) {
           if (scope.init.docState) {
-            scope.filterupdate = -1;
+            scope.filterupdate = true;
           } else {
             scope.init.docState = true;
           }
@@ -108,7 +108,7 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       scope.$watch('providers.states', function(newVal) {
         if (newVal) {
           if (scope.init.provState) {
-            scope.filterupdate = -1;
+            scope.filterupdate = true;
           } else {
             scope.init.provState = true;
           }

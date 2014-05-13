@@ -15,7 +15,7 @@ angular.module('anyfetchFrontApp.providerService', [])
     providersUpToDate: null
   };
 
-  var checkProviderStatus = function () {
+  var checkProviderStatus = function() {
     serverTime += updateFreq;
     var providerStatusTmp = true;
 

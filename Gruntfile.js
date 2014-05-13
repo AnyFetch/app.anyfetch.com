@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
@@ -366,7 +366,7 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('serve', function (target) {
+  grunt.registerTask('serve', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -380,7 +380,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', function () {
+  grunt.registerTask('server', function() {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve']);
   });
@@ -413,7 +413,7 @@ module.exports = function (grunt) {
     'buildcontrol:pages'
   ]);
 
-  grunt.registerTask('stagingcname', function () {
+  grunt.registerTask('stagingcname', function() {
     // Update GH pages CNAME
     require('fs').writeFileSync(__dirname + '/dist/CNAME', 'staging.app.anyfetch.com');
   });
