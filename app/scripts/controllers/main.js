@@ -136,7 +136,7 @@ angular.module('anyfetchFrontApp')
       });
   };
 
-  $scope.resetSearch = function () {
+  $scope.resetSearch = function() {
     $scope.query = '';
     $location.search({});
     $scope.loading = false;

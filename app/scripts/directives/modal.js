@@ -17,7 +17,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       scope.zoom = 100;
       scope.zoomClass = null;
 
-      scope.resetScope = function () {
+      scope.resetScope = function() {
         scope.relatedShow = false;
         scope.relatedDatas = null;
         scope.fullText = null;

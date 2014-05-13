@@ -17,7 +17,7 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.timeService',
   'anyfetchFrontApp.queryService'
 ])
-  .config(function ($routeProvider, $sceProvider, $httpProvider) {
+  .config(function($routeProvider, $sceProvider, $httpProvider) {
 
     // Disable templating HTML protection for Mustache
     $sceProvider.enabled(false);
@@ -60,7 +60,7 @@ angular.module('anyfetchFrontApp', [
     }];
     $httpProvider.responseInterceptors.push(interceptor);
   })
-  .run(function (AuthService, $route, $q, $location, $rootScope) {
+  .run(function(AuthService, $route, $q, $location, $rootScope) {
 
     var bootstrapApp = function() {
         var deferred = $q.defer();
@@ -84,7 +84,7 @@ angular.module('anyfetchFrontApp', [
       }
     });
 
-    $rootScope.$on('$viewContentLoaded', function () {
+    $rootScope.$on('$viewContentLoaded', function() {
       $(document).foundation();
     });
   });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp')
-.controller('LoginCtrl', function ($scope, $rootScope, $location, AuthService) {
+.controller('LoginCtrl', function($scope, $rootScope, $location, AuthService) {
 
   $rootScope.loginPage = true;
   $scope.rememberMe = true;

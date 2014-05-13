@@ -31,11 +31,11 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
           var date = new Date(actTime.timestamp);
           return scope.months[date.getMonth()] + ' ' + date.getFullYear();
         }
-        
+
         return '?';
       };
 
-      scope.getRange = function (aft, bef) {
+      scope.getRange = function(aft, bef) {
         var afterTime = scope.times.list[aft];
         var beforeTime = scope.times.list[bef];
 

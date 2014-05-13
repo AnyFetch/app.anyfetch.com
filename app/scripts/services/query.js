@@ -4,7 +4,6 @@ angular.module('anyfetchFrontApp.queryService', [])
 .factory( 'QueryService', function($q, DocumentTypesService, ProvidersService, TimeService) {
 
   var datas = {
-    
   };
 
   datas.queryBuilder = function(query, similar_to, start, limit) {
@@ -64,13 +63,10 @@ angular.module('anyfetchFrontApp.queryService', [])
     if (TimeService.getAfter()) {
       var argsTime = '&after='+TimeService.getAfter();
       argsTime += '&before='+TimeService.getBefore();
-      // console.log(TimeService.get());
-      // console.log(argsTime);
 
       newQuery += argsTime;
     }
 
-    // console.log('Old Query: ',apiQuery, ' newQuery: ', newQuery);
     return newQuery;
   };
 
