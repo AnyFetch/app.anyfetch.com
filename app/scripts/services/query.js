@@ -39,10 +39,13 @@ angular.module('anyfetchFrontApp.queryService', [])
       }
     });
 
-    if (documentTypes.filtered && argsDocs.length) {
-      newQuery += argsDocs;
-    } else if (documentTypes.filtered && !argsDocs.length) {
-      return '';
+    if (documentTypes.filtered) {
+      if(argsDocs.length) {
+        newQuery += argsDocs;
+      }
+      else {
+        return '';
+      }
     }
 
     angular.forEach(Object.keys(providers.list), function(value){
@@ -54,10 +57,13 @@ angular.module('anyfetchFrontApp.queryService', [])
       }
     });
 
-    if (providers.filtered && argsProv.length) {
-      newQuery += argsProv;
-    } else if (providers.filtered && !argsProv.length) {
-      return '';
+    if (providers.filtered) {
+      if(argsProv.length) {
+        newQuery += argsProv;
+      }
+      else {
+        return '';
+      }
     }
 
     if (TimeService.getAfter()) {
