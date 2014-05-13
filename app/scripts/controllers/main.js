@@ -201,15 +201,13 @@ angular.module('anyfetchFrontApp')
   };
 
   // Watch filterUpdate to know wether the filter has changed and the results needs to be reloaded
-  // 1 : full update
-  // -1 : light update (no recount)
-  // false / 0 : nothing to do duuuude!
   $scope.$watch('filterUpdate', function(newVal) {
     if (newVal) {
       // Update only if a query is launched!
       if ($scope.query && $scope.query.length) {
         console.log('new search due to filters');
         $scope.search(false);
+        // Binded with the filter directive
         $scope.filterUpdate = false;
       }
     }
