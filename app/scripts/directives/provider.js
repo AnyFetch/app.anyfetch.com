@@ -32,7 +32,7 @@ angular.module('anyfetchFrontApp.providerDirective', [])
 
       scope.connect = function(providerId) {
         var creds = AuthService.currentUser.credentials;
-        var url = 'http://settings.anyfetch.com/provider/connect?app_id=' + providerId + '&creds=' + creds;
+        var url = 'http://settings.anyfetch.com/provider/connect?app_id=' + providerId + '&creds=' + creds + '&redirect_url=http://app.anyfetch.com';
         window.location = url;
       };
 
