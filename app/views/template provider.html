@@ -3,9 +3,9 @@
   <div class="details">
     <h1>Available Providers</h1>
     <ul class="no-bullet">
-      <li ng-repeat="provider in providers">
+      <li ng-repeat="provider in providers" class="clearfix">
         {{provider.name}}
-        <a class="b"></a>
+        <a class="button right" ng-click="connect(provider.id)">Connect</a>
       </li>
     </ul>
   </div>

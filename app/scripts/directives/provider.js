@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.providerDirective', [])
-.directive('provider', function(ProvidersService) {
+.directive('provider', function(ProvidersService, AuthService) {
 
   return {
     restrict: 'E',
@@ -28,6 +28,12 @@ angular.module('anyfetchFrontApp.providerDirective', [])
             scope.$apply(scope.hideModal);
           }
         });
+      };
+
+      scope.connect = function(providerId) {
+        var creds = AuthService.currentUser.credentials;
+        var url = 'http://settings.anyfetch.com/provider/connect?app_id=' + providerId + '&creds=' + creds;
+        window.location = url;
       };
 
       scope.$watch('show', function(newVal) {
