@@ -548,6 +548,13 @@ html, body{
 @each $provider in "53047faac8318c2d65000096", "52bff114c8318c29e9000005", "52cbda1ec8318c2d65000001", "53232d1dc8318cba94000042", "52ceb450c8318c4dc8000006" {
   .provider-#{$provider} {
     @include svg-background("icon-provider/"+quote($provider), 20px, 20px);
+
+    &.large {
+      background-size: 40px 40px;
+      background-repeat: no-repeat;
+      width: 40px;
+      height: 40px;
+    }
   }
   .provider-white-#{$provider} {
     @include svg-background("icon-white-provider/"+quote($provider), 20px, 20px);
@@ -990,4 +997,18 @@ slider {
   -moz-user-select:      -moz-none;
   -ms-user-select:       none;
   user-select:           none;
+}
+
+// -----------------------------------------------------
+//          provider list
+// -----------------------------------------------------
+.provider-list {
+  .large {
+    margin-right: 10px;
+    float: left;
+  }
+
+  .button {
+    height: 51px;
+  }
 }

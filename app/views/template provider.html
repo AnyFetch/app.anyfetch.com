@@ -2,8 +2,10 @@
   <div class="background" ng-click="hideModal()"></div>
   <div class="details">
     <h1>Available Providers</h1>
-    <ul class="no-bullet">
-      <li ng-repeat="provider in providers" class="clearfix">
+    <hr>
+    <ul class="no-bullet provider-list">
+      <li ng-repeat="provider in providers" class="clearfix provider">
+        <div class="large provider-{{provider.id}}"></div>
         {{provider.name}}
         <a class="button right" ng-click="connect(provider.id)">Connect</a>
       </li>
