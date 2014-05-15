@@ -10,6 +10,7 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.snippetDirective',
   'anyfetchFrontApp.titledocDirective',
   'anyfetchFrontApp.modalDirective',
+  'anyfetchFrontApp.providerDirective',
   'anyfetchFrontApp.filtersDirective',
   'anyfetchFrontApp.authenticationService',
   'anyfetchFrontApp.documentService',

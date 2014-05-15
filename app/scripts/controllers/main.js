@@ -18,6 +18,7 @@ angular.module('anyfetchFrontApp')
 
   $rootScope.loginPage = false;
   $scope.modalShow = false;
+  $scope.providerShow = false;
   $scope.filterUpdate = false;
   $scope.user = AuthService.currentUser;
   $scope.similarShow = false;
