@@ -1,6 +1,9 @@
 <!-- Modal full page -->
 <modal show="modalShow" documentfull="full" query="query"></modal>
 
+<!-- Provider modal -->
+<provider show="providerShow"></provider>
+
 <nav class="header_bar">
   <ul class="title-area">
     <!-- Title Area -->
@@ -31,7 +34,6 @@
 </nav>
 
 <!-- Dropdown providers -->
-
 <div id="dropdown_providers" class="f-dropdown" data-dropdown-content="">
   <ul>
     <li ng-repeat="provider in providers.list">
@@ -39,10 +41,9 @@
       <div class="clearer"></div>
       <div class="state" ng-class="{true:'ok', false:'loadingProv' }[provider.upToDate]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
     </li>
-    <a href="http://settings.anyfetch.com/"><button class="tiny add">+ Add provider</button></a>
+    <a ng-click="providerShow = true"><button class="tiny add">+ Add provider</button></a>
   </ul>
 </div>
-
 
 <!-- similar -->
 <div class="error overlay" ng-show="errorMes">
