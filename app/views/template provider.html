@@ -1,0 +1,16 @@
+<div class="preview" ng-show="show">
+  <div class="background" ng-click="hideModal()"></div>
+  <div class="details">
+    <h1>Available Providers</h1>
+    <ul class="no-bullet">
+      <li ng-repeat="provider in providers">
+        {{provider.name}}
+        <a class="b"></a>
+      </li>
+    </ul>
+  </div>
+  <div class="loading text-center" ng-hide="providers != null">
+    <div class="loading-icon"></div> Loading...
+  </div>
+  <div class="close" ng-click="hideModal()"></div>
+</div>

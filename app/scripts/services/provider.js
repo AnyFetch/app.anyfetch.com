@@ -78,6 +78,28 @@ angular.module('anyfetchFrontApp.providerService', [])
     return datas.providers;
   };
 
+  datas.getAvailableProviders = function() {
+    var deferred = $q.defer();
+
+    if (datas.availableProviders) {
+      deferred.resolve(datas.availableProviders);
+    } else {
+      $http.get('http://settings.anyfetch.com/provider')
+        .success(function(res) {
+          for(var provider in res) {
+            var id = res[provider]._id.$oid;
+            res[provider].id = id;
+          }
+
+          datas.availableProviders = res;
+          deferred.resolve(res);
+        })
+        .error(deferred.reject);
+    }
+
+    return deferred.promise;
+  };
+
   return datas;
 
 });
