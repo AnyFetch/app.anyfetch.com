@@ -14,6 +14,7 @@ angular.module('anyfetchFrontApp', [
   'anyfetchFrontApp.filtersDirective',
   'anyfetchFrontApp.authenticationService',
   'anyfetchFrontApp.documentService',
+  'anyfetchFrontApp.highlightService',
   'anyfetchFrontApp.providerService',
   'anyfetchFrontApp.timeService',
   'anyfetchFrontApp.queryService'

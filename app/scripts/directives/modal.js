@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.modalDirective', [])
-.directive('modal', function(DocumentTypesService, ProvidersService, $location) {
+.directive('modal', function(DocumentTypesService, ProvidersService, HighlightService, $location) {
 
   return {
     restrict: 'E',
@@ -16,11 +16,13 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       scope.relDefaultLabel = 'undefined';
       scope.zoom = 100;
       scope.zoomClass = null;
+      scope.showHighlighter = false;
 
       scope.resetScope = function() {
         scope.relatedShow = false;
         scope.relatedDatas = null;
         scope.fullText = null;
+        scope.highlight_position = '';
       };
 
       scope.displayFull = function(id) {
@@ -51,6 +53,16 @@ angular.module('anyfetchFrontApp.modalDirective', [])
             scope.zoomClass = 'zoom-' + scope.zoom;
           }
         }
+      };
+
+      scope.hightlightNext = function(){
+        HighlightService.next();
+        scope.highlight_position = HighlightService.getTextPosition();
+      };
+      
+      scope.hightlightPrevious = function(){
+        HighlightService.previous();
+        scope.highlight_position = HighlightService.getTextPosition();
       };
 
       scope.getDocumentTypeIcon = function(document) {
@@ -129,6 +141,11 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           scope.provider = ProvidersService.providers.list[scope.documentfull.token];
 
           scope.bindEchap();
+
+          HighlightService.reset();
+          console.log(HighlightService.getMaxIndex());
+          scope.showHighlighter = true;
+
         }
       });
     }
