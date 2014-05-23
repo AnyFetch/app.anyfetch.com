@@ -1,11 +1,12 @@
 <div class="preview" ng-show="show">
     <div class="background" ng-click="hideModal()"></div>
     <div class="details">
+      <div class="loading text-center" ng-hide="fullText != null">
+        <div class="loading-icon"></div> Loading...
+      </div>
+      
       <iframe id="iframe" class="iframe">
       </iframe>
-    </div>
-    <div class="loading text-center" ng-hide="fullText != null">
-      <div class="loading-icon"></div> Loading...
     </div>
     <div class="close" ng-click="hideModal()"></div>
 
