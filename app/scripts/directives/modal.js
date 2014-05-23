@@ -129,7 +129,8 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           scope.provider = ProvidersService.providers.list[scope.documentfull.token];
 
           var iframe = ($('#iframe')[0].contentWindow || $('#iframe')[0].contentDocument);
-          iframe.document.body.innerHTML = scope.fullText;
+          iframe.document.body.innerHTML = '<div class="wrapper">'+scope.fullText+'</div>';
+          iframe.document.head.innerHTML = '<link rel="stylesheet" href="styles/iframe.css">';
 
           scope.bindEchap();
         }
