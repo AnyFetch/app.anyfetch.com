@@ -128,6 +128,9 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
           scope.provider = ProvidersService.providers.list[scope.documentfull.token];
 
+          var iframe = ($('#iframe')[0].contentWindow || $('#test')[0].contentDocument);
+          iframe.document.body.innerHTML = scope.fullText;
+
           scope.bindEchap();
         }
       });
