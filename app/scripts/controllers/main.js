@@ -227,7 +227,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.loadFull = function() {
     if ($scope.id) {
-      var apiQuery = 'https://api.anyfetch.com/documents/'+ $scope.id;
+      var apiQuery = API_URL + '/documents/'+ $scope.id;
       if ($scope.query) {
         apiQuery += '?search=' + $scope.query;
       }
