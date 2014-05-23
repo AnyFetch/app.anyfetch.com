@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.highlightService', [])
-.factory( 'HighlightService', function() {
+.factory('HighlightService', function() {
 
   var datas = {
     current_index : null,
@@ -13,8 +13,8 @@ angular.module('anyfetchFrontApp.highlightService', [])
       iframe_element : '#iframe',
       page_container : '#page-container',
       container : '.details:eq(0)',
-      next_button: '#hightlight_next',
-      previous_button: '#hightlight_previous'
+      next_button: '#highlight_next',
+      previous_button: '#highlight_previous'
     }
   };
 
@@ -72,6 +72,15 @@ angular.module('anyfetchFrontApp.highlightService', [])
     }
     else{
       return '';
+    }
+  };
+
+  datas.getTextOccurences = function(){
+    if(datas.getMaxIndex() > 0){
+      return 'One occurence';
+    }
+    else{
+      return datas.getMaxIndex() + ' times';
     }
   };
 

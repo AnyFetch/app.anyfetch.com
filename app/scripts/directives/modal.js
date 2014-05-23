@@ -55,12 +55,12 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         }
       };
 
-      scope.hightlightNext = function(){
+      scope.highlightNext = function(){
         HighlightService.next();
         scope.highlight_position = HighlightService.getTextPosition();
       };
       
-      scope.hightlightPrevious = function(){
+      scope.highlightPrevious = function(){
         HighlightService.previous();
         scope.highlight_position = HighlightService.getTextPosition();
       };
@@ -148,7 +148,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           HighlightService.reset();
           if(HighlightService.getMaxIndex() > 0){
             scope.showHighlighter = true;
-            scope.highlight_position = HighlightService.getMaxIndex() + ' times';
+            scope.highlight_position = HighlightService.getTextOccurences();
           }
 
         }
