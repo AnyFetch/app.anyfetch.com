@@ -77,7 +77,7 @@ angular.module('anyfetchFrontApp.highlightService', [])
 
   datas.getTextOccurences = function(){
     if(datas.getMaxIndex() === 1){
-      return 'One occurence';
+      return 'One occurrence';
     }
     else{
       return datas.getMaxIndex() + ' times';
