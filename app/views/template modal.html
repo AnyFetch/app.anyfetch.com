@@ -24,13 +24,13 @@
 
     <!-- FOOTER -->
     <div class="footer">
-      <div class="highlight_bar">
+      <div class="high>
         <div class="left">
-          <a class="close_hightlight">x</a>
+          <a class="close_hightlight" ng-click="showHighlighter=false">x</a>
           Highlight : <span class="highlight_example">{{query}}</span> {{highlight_position}} 
         </div>
         <div class="buttons right">
-          <span ng-show="showHighlighter">
+          <span>
             <a class="button tiny radius" ng-click="hightlightPrevious()" id="hightlight_previous">&lt; <span class="hide-for-small">Previous</span></a>
 
             <a class="button tiny radius" ng-click="hightlightNext()"><span class="hide-for-small" id="hightlight_next">Next</span> &gt;</a>

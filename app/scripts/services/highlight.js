@@ -10,6 +10,7 @@ angular.module('anyfetchFrontApp.highlightService', [])
       hover_element : 'hlt_active',
       duration : 300,
       offset : 0,
+      iframe_element : '#iframe',
       page_container : '#page-container',
       container : '.details:eq(0)',
       next_button: '#hightlight_next',
@@ -18,9 +19,10 @@ angular.module('anyfetchFrontApp.highlightService', [])
   };
 
   datas.next = function(){
+    if(datas.getMaxIndex() === 0) return false;
     var next_index = 0;
     if(datas.current_index !== null){
-      if(next_index <= datas.getMaxIndex()){
+      if(next_index < datas.getMaxIndex()){
         next_index = datas.current_index + 1;
       }
     }
@@ -29,9 +31,11 @@ angular.module('anyfetchFrontApp.highlightService', [])
   };
 
   datas.previous = function(){
-    var previous_index = datas.getMaxIndex();
+    if(datas.getMaxIndex() === 0) return false;
+
+    var previous_index = datas.getMaxIndex() - 1;
     if(datas.current_index !== null){
-      if(previous_index > 0){
+      if(previous_index > 0 && datas.current_index > 0){
         previous_index = datas.current_index - 1;
       }
     }
@@ -40,39 +44,49 @@ angular.module('anyfetchFrontApp.highlightService', [])
   };
 
   datas.navigate = function(){
-    console.log(datas.current_index+'/'+datas.getMaxIndex());
-    if(datas.getElement().length > 0){
-      $(datas.options.container).find(datas.options.element).removeClass(datas.options.hover_element);
-      datas.getElement().addClass(datas.options.hover_element);
-      $(datas.options.container).scrollTo(
-        datas.getTopPosition(),
-        datas.options.duration,
-        {offset: {top: datas.options.offset}}
-      );
+    
+    datas.getRootContainer().find(datas.options.element).removeClass(datas.options.hover_element);
+    datas.getElement().addClass(datas.options.hover_element);
+    datas.getRootContainer().scrollTo(
+      datas.getTopPosition(),
+      datas.options.duration,
+      {offset: {top: datas.options.offset}}
+    );
+  };
+
+  datas.getRootContainer = function(){
+    if(datas.options.iframe_element !== null){
+      return $(datas.options.container).find(datas.options.iframe_element).contents();
     }
     else{
-      if(datas.getMaxIndex() > 0){
-        datas.current_index = 0;
-        datas.navigate();
-      }
+      return $(datas.options.container);
     }
-    
   };
 
   datas.getTextPosition = function(){
-    return (datas.current_index + 1 ).toString() + ' of ' + datas.getMaxIndex().toString();
+    if(datas.getMaxIndex() > 0){
+      return (datas.current_index + 1 ).toString() + ' of ' + datas.getMaxIndex().toString();
+    }
+    else{
+      return '';
+    }
   };
 
   datas.getTopPosition = function(){
-    return datas.getElement().offset().top - $(datas.options.page_container).offset().top + 81;
+    return datas.getElement().offset().top + 81;
   };
 
   datas.getElement = function(){
-    return $(datas.options.container).find(datas.options.element + ':eq(' + datas.current_index + ')');
+    var el = datas.getRootContainer().find(datas.options.element + ':eq(' + datas.current_index + ')');
+    if(el.length === 0 && datas.getMaxIndex() > 0){
+      datas.current_index = 0;
+      el = datas.getRootContainer().find(datas.options.element + ':eq(0)');
+    }
+    return el;
   };
 
   datas.getMaxIndex = function(){
-    return $(datas.options.container).find(datas.options.element).length;
+    return datas.getRootContainer().find(datas.options.element).length;
   };
 
   datas.reset = function(){

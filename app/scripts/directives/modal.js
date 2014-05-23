@@ -131,7 +131,6 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.$watch('documentfull', function(newVal) {
         scope.resetScope();
-        console.log(scope.documentfull);
 
         $(document).foundation();
         scope.query = scope.query || $location.search().q;
@@ -147,8 +146,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           scope.bindEchap();
 
           HighlightService.reset();
-          console.log(HighlightService.getMaxIndex());
-          scope.showHighlighter = true;
+          if(HighlightService.getMaxIndex() > 0) scope.showHighlighter = true;
 
         }
       });
