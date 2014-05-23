@@ -10,7 +10,7 @@
 var DEFAULT_LIMIT = 20;
 
 angular.module('anyfetchFrontApp')
-.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, ProvidersService, TimeService, QueryService) {
+.controller('MainCtrl', function($scope, $rootScope, $location, $http, $q, AuthService, DocumentTypesService, HighlightService, ProvidersService, TimeService, QueryService) {
 
 // ------------------------------------------------------
 //                  Variables

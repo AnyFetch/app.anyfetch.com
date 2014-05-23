@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.modalDirective', [])
-.directive('modal', function(DocumentTypesService, ProvidersService, $location) {
+.directive('modal', function(DocumentTypesService, ProvidersService, HighlightService, $location) {
 
   return {
     restrict: 'E',
@@ -16,11 +16,13 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       scope.relDefaultLabel = 'undefined';
       scope.zoom = 100;
       scope.zoomClass = null;
+      scope.showHighlighter = false;
 
       scope.resetScope = function() {
         scope.relatedShow = false;
         scope.relatedDatas = null;
         scope.fullText = null;
+        scope.highlight_position = '';
       };
 
       scope.displayFull = function(id) {
@@ -51,6 +53,16 @@ angular.module('anyfetchFrontApp.modalDirective', [])
             scope.zoomClass = 'zoom-' + scope.zoom;
           }
         }
+      };
+
+      scope.highlightNext = function(){
+        HighlightService.next();
+        scope.highlight_position = HighlightService.getTextPosition();
+      };
+      
+      scope.highlightPrevious = function(){
+        HighlightService.previous();
+        scope.highlight_position = HighlightService.getTextPosition();
       };
 
       scope.getDocumentTypeIcon = function(document) {
@@ -119,7 +131,6 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.$watch('documentfull', function(newVal) {
         scope.resetScope();
-        console.log(scope.documentfull);
 
         $(document).foundation();
         scope.query = scope.query || $location.search().q;
@@ -133,6 +144,13 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           iframe.document.head.innerHTML = '<link rel="stylesheet" href="styles/iframe.css">';
 
           scope.bindEchap();
+
+          HighlightService.reset();
+          if(HighlightService.getMaxIndex() > 0){
+            scope.showHighlighter = true;
+            scope.highlight_position = HighlightService.getTextOccurences();
+          }
+
         }
       });
     }
