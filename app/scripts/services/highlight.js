@@ -9,7 +9,7 @@ angular.module('anyfetchFrontApp.highlightService', [])
       element : '.hlt',
       hover_element : 'hlt_active',
       duration : 300,
-      offset : 0,
+      offset : 20,
       iframe_element : '#iframe',
       page_container : '#page-container',
       container : '.details:eq(0)',
@@ -19,7 +19,9 @@ angular.module('anyfetchFrontApp.highlightService', [])
   };
 
   datas.next = function(){
-    if(datas.getMaxIndex() === 0) return false;
+    if(datas.getMaxIndex() === 0){
+      return false;
+    }
     var next_index = 0;
     if(datas.current_index !== null){
       if(next_index < datas.getMaxIndex()){
@@ -31,8 +33,9 @@ angular.module('anyfetchFrontApp.highlightService', [])
   };
 
   datas.previous = function(){
-    if(datas.getMaxIndex() === 0) return false;
-
+    if(datas.getMaxIndex() === 0){
+      return false;
+    }
     var previous_index = datas.getMaxIndex() - 1;
     if(datas.current_index !== null){
       if(previous_index > 0 && datas.current_index > 0){
@@ -73,7 +76,7 @@ angular.module('anyfetchFrontApp.highlightService', [])
   };
 
   datas.getTopPosition = function(){
-    return datas.getElement().offset().top + 81;
+    return datas.getElement().offset().top - datas.options.offset ;
   };
 
   datas.getElement = function(){

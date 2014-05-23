@@ -146,7 +146,10 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           scope.bindEchap();
 
           HighlightService.reset();
-          if(HighlightService.getMaxIndex() > 0) scope.showHighlighter = true;
+          if(HighlightService.getMaxIndex() > 0){
+            scope.showHighlighter = true;
+            scope.highlight_position = HighlightService.getMaxIndex() + ' times';
+          }
 
         }
       });
