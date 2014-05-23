@@ -368,7 +368,8 @@ html, body{
     border-right: 1px solid $border-color;
     background-color:#fff;
     margin-bottom:20px;
-
+    word-wrap:break-word;
+    
     .empty {
       display: block;
       padding: 20px 0 40px;
