@@ -607,14 +607,14 @@ html, body{
   .details{
     position: absolute;
     top:0px;
-    bottom:108px;
+    bottom:50px;
     left:10%;
     right:10%;
     overflow: scroll;
     background-color:#FFF;
     z-index:3;
     box-shadow: 0 0 10px #000;
-        
+
     .iframe {
       width: 100%; height: 100%;
       border: none;
@@ -646,7 +646,7 @@ html, body{
     bottom:0px;
     left:0px;
     width:100%;
-    height:110px;
+    height:50px;
     border-top:2px solid lighten($primary-color, 10);
     background-color: $primary-color;
     overflow:hidden;
@@ -662,15 +662,15 @@ html, body{
       float:left;
       margin-left:20px;
       line-height: 65px;
-      margin-top:14px;
+      margin-top:7px;
     }
     .ariane-2{
       float:left;
-      margin-top:12px;
+      margin-top:7px;
       margin-left:5px;
     }
     .buttons{
-      margin-top: 10px;
+      margin-top: 5px;
       margin-right: 10px;
       text-align: right;
       .button{
@@ -713,46 +713,47 @@ html, body{
       font-size: 11px;
       color:#EEE;
     }
+  }
+  .highlight_bar{
+    position: absolute;
+    bottom: 50px;
+    width:100%;
+    height:45px;
+    border-top:2px solid lighten($primary-color, 25);
+    background-color: lighten($primary-color, 15);
+    overflow:hidden;
+    z-index:5;
+    color:#FFF;
+    font-size: 12px;
 
-    .highlight_bar{
-      width:100%;
-      height:45px;
-      border-top:2px solid lighten($primary-color, 25);
-      background-color: lighten($primary-color, 15);
-      overflow:hidden;
-      z-index:5;
+    .left{
+      margin-top:15px;
+    }
+    a.close_highlight{
+      float : left;
+      margin-left:10px;
+      margin-right:10px;
+      opacity:0.8;
       color:#FFF;
-      font-size: 12px;
-
-      .left{
-        margin-top:15px;
+      &:hover{
+        opacity:1;
       }
-      a.close_highlight{
-        float : left;
-        margin-left:10px;
-        margin-right:10px;
-        opacity:0.8;
-        color:#FFF;
+    }
+    .highlight_example{
+      background-color:#FFF;
+      color:$primary-color;
+      padding:4px 10px 4px 10px;
+      border-radius:2px;
+    }
+    .buttons{
+      margin-top: 3px;
+      margin-right: 10px;
+      text-align: right;
+      .button{
+        background-color: lighten($primary-color, 15);;
+        border:1px solid #FFF;
         &:hover{
-          opacity:1;
-        }
-      }
-      .highlight_example{
-        background-color:#FFF;
-        color:$primary-color;
-        padding:4px 10px 4px 10px;
-        border-radius:2px;
-      }
-      .buttons{
-        margin-top: 3px;
-        margin-right: 10px;
-        text-align: right;
-        .button{
-          background-color: lighten($primary-color, 15);;
-          border:1px solid #FFF;
-          &:hover{
-            background-color: darken($primary-color,10%);
-          }
+          background-color: darken($primary-color,10%);
         }
       }
     }
