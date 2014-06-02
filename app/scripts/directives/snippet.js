@@ -4,7 +4,7 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
 .directive('snippet', function(DocumentTypesService) {
 
     var mustacheTemplate = function(result, template) {
-      return Mustache.render(template, result.datas);
+      return Mustache.render(template, result.data);
     };
 
     return {
@@ -30,7 +30,7 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
           // Special case for document files
           if (docType === '5252ce4ce4cfcd16f55cfa3c') {
 
-            var path = scope.result.datas.path;
+            var path = scope.result.data.path;
 
             // Prez icon
             if (/\.(<[^\>]+>)?(ppt|pptx|odp)(<[^\>]+>)?/.exec(path)) {

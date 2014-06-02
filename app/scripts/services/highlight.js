@@ -3,7 +3,7 @@
 angular.module('anyfetchFrontApp.highlightService', [])
 .factory('HighlightService', function() {
 
-  var datas = {
+  var data = {
     current_index : null,
     options : {
       element : '.hlt',
@@ -18,94 +18,94 @@ angular.module('anyfetchFrontApp.highlightService', [])
     }
   };
 
-  datas.next = function(){
-    if(datas.getMaxIndex() === 0){
+  data.next = function(){
+    if(data.getMaxIndex() === 0){
       return false;
     }
     var next_index = 0;
-    if(datas.current_index !== null){
-      if(next_index < datas.getMaxIndex()){
-        next_index = datas.current_index + 1;
+    if(data.current_index !== null){
+      if(next_index < data.getMaxIndex()){
+        next_index = data.current_index + 1;
       }
     }
-    datas.current_index = next_index;
-    datas.navigate();
+    data.current_index = next_index;
+    data.navigate();
   };
 
-  datas.previous = function(){
-    if(datas.getMaxIndex() === 0){
+  data.previous = function(){
+    if(data.getMaxIndex() === 0){
       return false;
     }
-    var previous_index = datas.getMaxIndex() - 1;
-    if(datas.current_index !== null){
-      if(previous_index > 0 && datas.current_index > 0){
-        previous_index = datas.current_index - 1;
+    var previous_index = data.getMaxIndex() - 1;
+    if(data.current_index !== null){
+      if(previous_index > 0 && data.current_index > 0){
+        previous_index = data.current_index - 1;
       }
     }
-    datas.current_index = previous_index;
-    datas.navigate();
+    data.current_index = previous_index;
+    data.navigate();
   };
 
-  datas.navigate = function(){
-    
-    datas.getRootContainer().find(datas.options.element).removeClass(datas.options.hover_element);
-    datas.getElement().addClass(datas.options.hover_element);
-    datas.getRootContainer().scrollTo(
-      datas.getTopPosition(),
-      datas.options.duration,
-      {offset: {top: datas.options.offset}}
+  data.navigate = function(){
+
+    data.getRootContainer().find(data.options.element).removeClass(data.options.hover_element);
+    data.getElement().addClass(data.options.hover_element);
+    data.getRootContainer().scrollTo(
+      data.getTopPosition(),
+      data.options.duration,
+      {offset: {top: data.options.offset}}
     );
   };
 
-  datas.getRootContainer = function(){
-    if(datas.options.iframe_element !== null){
-      return $(datas.options.container).find(datas.options.iframe_element).contents();
+  data.getRootContainer = function(){
+    if(data.options.iframe_element !== null){
+      return $(data.options.container).find(data.options.iframe_element).contents();
     }
     else{
-      return $(datas.options.container);
+      return $(data.options.container);
     }
   };
 
-  datas.getTextPosition = function(){
-    if(datas.getMaxIndex() > 0){
-      return (datas.current_index + 1 ).toString() + ' of ' + datas.getMaxIndex().toString();
+  data.getTextPosition = function(){
+    if(data.getMaxIndex() > 0){
+      return (data.current_index + 1 ).toString() + ' of ' + data.getMaxIndex().toString();
     }
     else{
       return '';
     }
   };
 
-  datas.getTextOccurences = function(){
-    if(datas.getMaxIndex() === 1){
+  data.getTextOccurences = function(){
+    if(data.getMaxIndex() === 1){
       return 'One occurrence';
     }
     else{
-      return datas.getMaxIndex() + ' times';
+      return data.getMaxIndex() + ' times';
     }
   };
 
-  datas.getTopPosition = function(){
-    return datas.getElement().offset().top - datas.options.offset ;
+  data.getTopPosition = function(){
+    return data.getElement().offset().top - data.options.offset ;
   };
 
-  datas.getElement = function(){
-    var el = datas.getRootContainer().find(datas.options.element + ':eq(' + datas.current_index + ')');
-    if(el.length === 0 && datas.getMaxIndex() > 0){
-      datas.current_index = 0;
-      el = datas.getRootContainer().find(datas.options.element + ':eq(0)');
+  data.getElement = function(){
+    var el = data.getRootContainer().find(data.options.element + ':eq(' + data.current_index + ')');
+    if(el.length === 0 && data.getMaxIndex() > 0){
+      data.current_index = 0;
+      el = data.getRootContainer().find(data.options.element + ':eq(0)');
     }
     return el;
   };
 
-  datas.getMaxIndex = function(){
-    return datas.getRootContainer().find(datas.options.element).length;
+  data.getMaxIndex = function(){
+    return data.getRootContainer().find(data.options.element).length;
   };
 
-  datas.reset = function(){
-    datas.current_index = null;
+  data.reset = function(){
+    data.current_index = null;
   };
 
   // Return of the service
-  return datas;
+  return data;
 
 });

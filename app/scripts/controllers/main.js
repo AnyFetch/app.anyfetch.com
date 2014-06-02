@@ -60,11 +60,11 @@ angular.module('anyfetchFrontApp')
         .success(function(data) {
           // console.log('Data recieved from search: ', data);
 
-          if (data.datas.length === limit) {
+          if (data.data.length === limit) {
             $scope.lastRes = start+limit;
             $scope.moreResult = true;
           } else {
-            $scope.lastRes = start+data.datas.length;
+            $scope.lastRes = start+data.data.length;
             $scope.moreResult = false;
           }
           $scope.filterUpdate = false;
@@ -88,7 +88,7 @@ angular.module('anyfetchFrontApp')
 
   // The full argument define whether the filter needs to be updated or not
   $scope.resultUpdate = function(data, full) {
-    $scope.results = data.datas;
+    $scope.results = data.data;
 
     if (full) {
       $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, data.facets.creation_dates);
@@ -132,7 +132,7 @@ angular.module('anyfetchFrontApp')
 
     $scope.getRes($scope.lastRes, DEFAULT_LIMIT)
       .then(function(data) {
-        $scope.results = $scope.results.concat(data.datas);
+        $scope.results = $scope.results.concat(data.data);
         $scope.loading = false;
       });
   };

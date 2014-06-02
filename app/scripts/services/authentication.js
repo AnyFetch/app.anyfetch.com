@@ -3,7 +3,7 @@
 angular.module('anyfetchFrontApp.authenticationService', [])
 .factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http, $q, DocumentTypesService, ProvidersService) {
 
-  var datas = {
+  var data = {
     currentUser: null
   };
 
@@ -15,7 +15,7 @@ angular.module('anyfetchFrontApp.authenticationService', [])
 
   // Login : Login the user using the basic method or the cookies credentials
   // return a promise methode
-  datas.login = function(user) {
+  data.login = function(user) {
     var deferred = $q.defer();
 
     // Creation of the user credential
@@ -30,7 +30,7 @@ angular.module('anyfetchFrontApp.authenticationService', [])
     $http.defaults.headers.common.Authorization = 'Basic ' + credentials;
     $http({method: 'GET', url: API_URL + '/batch?pages=/&pages=/document_types&pages=/providers'})
       .success(function(data) {
-        datas.currentUser = {
+        data.currentUser = {
           email: data['/'].user_email,
           credentials: credentials
         };
@@ -39,7 +39,7 @@ angular.module('anyfetchFrontApp.authenticationService', [])
 
         bootstrapUserContent(data);
 
-        deferred.resolve(datas.currentUser);
+        deferred.resolve(data.currentUser);
       })
       .error(deferred.reject);
 
@@ -47,24 +47,24 @@ angular.module('anyfetchFrontApp.authenticationService', [])
   };
 
   // Lougout : Lougout the current user
-  datas.logout = function() {
+  data.logout = function() {
     console.log('loggin out');
-    datas.currentUser = null;
+    data.currentUser = null;
     $cookieStore.remove('credentials');
   };
 
   // isLoggedIn : check if a user is currently logged in
   // return a promise containing the user if it's resolved
-  datas.isLoggedin = function() {
+  data.isLoggedin = function() {
     var deferred = $q.defer();
 
-    if (datas.currentUser) {
-      deferred.resolve(datas.currentUser);
+    if (data.currentUser) {
+      deferred.resolve(data.currentUser);
     } else if ($cookies.credentials) {
-      datas.login()
+      data.login()
         .then(function(user) {
           console.log('Login ', user);
-          datas.currentUser = user;
+          data.currentUser = user;
           deferred.resolve(user);
         }, function() {
           $cookieStore.remove('credentials');
@@ -78,6 +78,6 @@ angular.module('anyfetchFrontApp.authenticationService', [])
   };
 
   // Return of the service
-  return datas;
+  return data;
 
 });

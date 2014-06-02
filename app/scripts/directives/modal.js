@@ -20,7 +20,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.resetScope = function() {
         scope.relatedShow = false;
-        scope.relatedDatas = null;
+        scope.relatedData = null;
         scope.fullText = null;
         scope.highlight_position = '';
       };
@@ -59,7 +59,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         HighlightService.next();
         scope.highlight_position = HighlightService.getTextPosition();
       };
-      
+
       scope.highlightPrevious = function(){
         HighlightService.previous();
         scope.highlight_position = HighlightService.getTextPosition();
@@ -69,7 +69,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         var docType = document.document_type;
         if (docType === '5252ce4ce4cfcd16f55cfa3c') {
 
-          var path = document.datas.path;
+          var path = document.data.path;
 
           // Prez icon
           if (/\.(<[^\>]+>)?(ppt|pptx|odp)(<[^\>]+>)?/.exec(path)) {
@@ -122,7 +122,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.getTitleProjection = function(rel) {
         var htmlTemplate = DocumentTypesService.get().list[rel.document_type].templates.title;
-        return Mustache.render(htmlTemplate, rel.datas);
+        return Mustache.render(htmlTemplate, rel.data);
       };
 
       scope.relatedToggle = function() {
@@ -136,7 +136,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         scope.query = scope.query || $location.search().q;
         if (newVal) {
           var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].templates.full;
-          scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.datas);
+          scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.data);
           scope.provider = ProvidersService.providers.list[scope.documentfull.token];
 
           var iframe = ($('#iframe')[0].contentWindow || $('#iframe')[0].contentDocument);
