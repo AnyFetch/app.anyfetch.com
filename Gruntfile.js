@@ -352,13 +352,13 @@ module.exports = function(grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:Papiel/app.anyfetch.com.git',
+          remote: 'git@github.com:AnyFetch/app.anyfetch.com.git',
           branch: 'gh-pages'
         }
       },
       staging: {
         options: {
-          remote: 'git@github.com:Papiel/staging.app.anyfetch.com.git',
+          remote: 'git@github.com:AnyFetch/staging.app.anyfetch.com.git',
           branch: 'gh-pages'
         }
       },
