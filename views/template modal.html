@@ -1,77 +1,87 @@
 <div class="preview" ng-show="show">
-  <div class="background" ng-click="hideModal()"></div>
-  <div class="details">
-    <div class="{{zoomClass}}" ng-bind-html="fullText"></div>
-  </div>
-  <div class="loading text-center" ng-hide="fullText != null">
-    <div class="loading-icon"></div> Loading...
-  </div>
-  <div class="close" ng-click="hideModal()"></div>
+    <div class="background" ng-click="hideModal()"></div>
+    <div class="details">
+      <div class="loading text-center" ng-hide="fullText != null">
+        <div class="loading-icon"></div> Loading...
+      </div>
 
+      <iframe id="iframe" class="iframe">
+      </iframe>
+    </div>
+    <div class="close" ng-click="hideModal()"></div>
 
-  <!-- Dropdown related -->
-  <div id="dropdown_related" class="preview_modal" ng-show="relatedShow">
-    <ul>
-      <li ng-repeat="rel in documentfull.related" ng-click="displayFull(rel.id)">
-        <div class="icon icon-small">
-          <div class="icon-types type-{{getDocumentTypeIcon(rel)}}"></div>
-        </div>
-        {{getTitleProjection(rel)}}
-      </li>
-    </ul>
-  </div>
+    <!-- Dropdown related -->
+    <div id="dropdown_related" class="preview_modal" ng-show="relatedShow">
+      <ul>
+        <li ng-repeat="rel in documentfull.related" ng-click="displayFull(rel.id)">
+          <div class="icon icon-small">
+            <div class="icon-types type-{{getDocumentTypeIcon(rel)}}"></div>
+          </div>
+          {{getTitleProjection(rel)}}
+        </li>
+      </ul>
+    </div>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="highlight_bar">
-      <!-- <div class="left">
-        <a class="close_hightlight">x</a>
-        Highlight : <span class="highlight_example">{{query}}</span>
-      </div> -->
+    <div class="highlight_bar" ng-show="showHighlighter">
+      <div class="left">
+        <a class="close_highlight" ng-click="showHighlighter=false">x</a>
+        Highlight : <span class="highlight_example">{{query}}</span> {{highlight_position}}
+      </div>
       <div class="buttons right">
-        <!-- <a class="button tiny radius">&lt; <span class="hide-for-small">Previous</span></a>
-        <a class="button tiny radius"><span class="hide-for-small">Next</span> &gt;</a> -->
+        <span>
+          <a class="button tiny radius" ng-click="highlightPrevious()" id="highlight_previous">&lt; <span class="hide-for-small">Previous</span></a>
+
+          <a class="button tiny radius" ng-click="highlightNext()"><span class="hide-for-small" id="highlight_next">Next</span> &gt;</a>
+        </span>
+
+
         <!-- <a class="button tiny radius" ng-click="zoomIn()"><span class="hide-for-small"> - </span></a> -->
         <!-- <a class="button tiny radius" ng-click="zoomOut()"><span class="hide-for-small"> + </span></a> -->
       </div>
     </div>
-    <div class="left">
-      <div class="ariane-1">
-        <h1>
-          <div class="provider provider-white-{{provider.application}}"></div>
-          <div class="separator-ariane"></div>
-          <span><span class="hide-for-small">{{provider.name}}</span></span>
-        </h1>
-      </div>
-      <div class="ariane-2">
-        <div class="types-vector types-{{documentfull.document_type}}"></div>
-        <h2><titledoc document="documentfull"></h2>
-        <legend>{{documentfull.creation_date | date:'short'}}</legend>
-      </div>
-    </div>
-    <div class="buttons right">
 
-      <a class="button tiny radius primary" ng-show="documentfull.related.length" ng-click="relatedToggle()">
-        <img src="/images/icon-preview/6c4f368c.link.svg" width="16px" height="16px">
-        <span class="hide-for-small">Related</span> ({{documentfull.related.length}}) &#9652;
-      </a>
-      <a class="button tiny radius" ng-click="show_similar()">
-        <img src="/images/icon-preview/3a440c49.similar.svg" width="16px" height="16px">
-        <span class="hide-for-small">More like this</span>
-      </a>
-      <a class="button tiny radius" ng-show="documentfull.actions.delete" href="{{documentfull.actions.delete}}">
-        <img src="/images/icon-preview/a70b0851.remove.svg" width="16px" height="16px">
-      </a>
-      <a class="button tiny radius" ng-show="documentfull.actions.reply" href="{{documentfull.actions.reply}}">
-        <img src="/images/icon-preview/29e2a687.share.svg" width="16px" height="16px">
-      </a>
-      <a class="button tiny radius" ng-show="documentfull.actions.share" href="{{documentfull.actions.share}}">
-        <img src="/images/icon-preview/29e2a687.share.svg" width="16px" height="16px">
-      </a>
-      <a class="button tiny radius" ng-show="documentfull.actions.download" href="{{documentfull.actions.download}}">
-        <img src="/images/icon-preview/68a60322.download.svg" width="16px" height="16px">
-      </a>
-      <a class="button tiny radius primary" ng-show="documentfull.actions.show" href="{{documentfull.actions.show}}">Open</a>
+    <!-- FOOTER -->
+    <div class="footer">
+
+      <div class="left">
+        <div class="ariane-1">
+          <h1>
+            <div class="provider provider-white-{{provider.application}}"></div>
+            <div class="separator-ariane"></div>
+            <span><span class="hide-for-small">{{provider.name}}</span></span>
+          </h1>
+        </div>
+        <div class="ariane-2">
+          <div class="types-vector types-{{documentfull.document_type}}"></div>
+          <h2><titledoc document="documentfull"></h2>
+          <legend>{{documentfull.creation_date | date:'short'}}</legend>
+        </div>
+      </div>
+      <div class="buttons right">
+
+        <a class="button tiny radius" ng-click="show_similar()">
+          <img src="/images/icon-preview/3a440c49.similar.svg" width="16px" height="16px">
+          <span class="hide-for-small">More like this</span>
+        </a>
+
+        <a class="button tiny radius primary" ng-show="documentfull.related.length" ng-click="relatedToggle()">
+          <img src="/images/icon-preview/6c4f368c.link.svg" width="16px" height="16px">
+          <span class="hide-for-small">Related</span> ({{documentfull.related.length}}) &#9652;
+        </a>
+
+        <a class="button tiny radius" ng-show="documentfull.actions.delete" href="{{documentfull.actions.delete}}">
+          <img src="/images/icon-preview/a70b0851.remove.svg" width="16px" height="16px">
+        </a>
+        <a class="button tiny radius" ng-show="documentfull.actions.reply" href="{{documentfull.actions.reply}}">
+          <img src="/images/icon-preview/29e2a687.share.svg" width="16px" height="16px">
+        </a>
+        <a class="button tiny radius" ng-show="documentfull.actions.share" href="{{documentfull.actions.share}}">
+          <img src="/images/icon-preview/29e2a687.share.svg" width="16px" height="16px">
+        </a>
+        <a class="button tiny radius" ng-show="documentfull.actions.download" href="{{documentfull.actions.download}}">
+          <img src="/images/icon-preview/68a60322.download.svg" width="16px" height="16px">
+        </a>
+        <a class="button tiny radius primary" ng-show="documentfull.actions.show" href="{{documentfull.actions.show}}">Open</a>
+      </div>
     </div>
-  </div>
 </div>

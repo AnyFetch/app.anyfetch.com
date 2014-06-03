@@ -53,6 +53,8 @@
 						} else {
 							$dialog.remove();
 						}
+
+						$rootScope.$broadcast('ngDialog.closed', $dialog);
 					}
 				};
 
@@ -72,6 +74,7 @@
 					 * @return {Object} dialog
 					 */
 					open: function (opts) {
+						var self = this;
 						var options = angular.copy(defaults);
 
 						opts = opts || {};
@@ -79,15 +82,23 @@
 
 						globalID += 1;
 
-						var scope = options.scope && angular.isObject(options.scope) || $rootScope.$new();
+						self.latestID = 'ngdialog' + globalID;
+
+						var scope = angular.isObject(options.scope) ? options.scope.$new() : $rootScope.$new();
 						var $dialog;
 
 						$q.when(loadTemplate(options.template)).then(function (template) {
+							template = angular.isString(template) ?
+								template :
+								template.data && angular.isString(template.data) ?
+									template.data :
+									'';
+
 							if (options.showClose) {
 								template += '<div class="ngdialog-close"></div>';
 							}
 
-							$dialog = $el('<div id="ngdialog' + globalID + '" class="ngdialog"></div>');
+							self.$result = $dialog = $el('<div id="ngdialog' + globalID + '" class="ngdialog"></div>');
 							$dialog.html('<div class="ngdialog-overlay"></div><div class="ngdialog-content">' + template + '</div>');
 
 							if (options.controller && angular.isString(options.controller)) {
@@ -96,6 +107,10 @@
 
 							if (options.className) {
 								$dialog.addClass(options.className);
+							}
+
+							if (options.data && angular.isString(options.data)) {
+								scope.ngDialogData = options.data.replace(/^\s*/, '')[0] === '{' ? angular.fromJson(options.data) : options.data;
 							}
 
 							$timeout(function () {
@@ -124,6 +139,8 @@
 							}
 
 							dialogsCount += 1;
+
+							$rootScope.$broadcast('ngDialog.opened', $dialog);
 
 							return publicMethods;
 						});
@@ -181,6 +198,8 @@
 						template: attrs.ngDialog,
 						className: attrs.ngDialogClass,
 						controller: attrs.ngDialogController,
+						scope: attrs.ngDialogScope,
+						data: attrs.ngDialogData,
 						showClose: attrs.ngDialogShowClose === 'false' ? false : true,
 						closeByDocument: attrs.ngDialogCloseByDocument === 'false' ? false : true,
 						closeByEscape: attrs.ngDialogCloseByKeyup === 'false' ? false : true
