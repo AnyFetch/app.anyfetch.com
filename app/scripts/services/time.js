@@ -3,7 +3,7 @@
 angular.module('anyfetchFrontApp.timeService', [])
 .factory( 'TimeService', function() {
 
-  var datas = {
+  var data = {
     times: {
       list: [],
       after: null,
@@ -11,41 +11,41 @@ angular.module('anyfetchFrontApp.timeService', [])
     }
   };
 
-  datas.set = function(times) {
-    datas.reset(true);
+  data.set = function(times) {
+    data.reset(true);
     angular.forEach(Object.keys(times), function(value){
       var time = {
         timestamp: parseInt(value),
         count: times[value]
       };
 
-      datas.times.list.push(time);
+      data.times.list.push(time);
     });
 
-    datas.times.after = 0;
-    datas.times.before = datas.times.list.length-1;
+    data.times.after = 0;
+    data.times.before = data.times.list.length-1;
 
-    return datas.times;
+    return data.times;
   };
 
-  datas.reset = function(full) {
+  data.reset = function(full) {
     if (full) {
-      datas.times.list = [];
-      datas.times.after = null;
-      datas.times.before = null;
-    } else if (datas.times.list.length) {
-      datas.times.after = 0;
-      datas.times.before = datas.times.list.length-1;
+      data.times.list = [];
+      data.times.after = null;
+      data.times.before = null;
+    } else if (data.times.list.length) {
+      data.times.after = 0;
+      data.times.before = data.times.list.length-1;
     }
   };
 
-  datas.get = function() {
-    return datas.times;
+  data.get = function() {
+    return data.times;
   };
 
-  datas.getAfter = function() {
-    if ((datas.times.after >= 0) && datas.times.list.length) {
-      var after = new Date(parseInt(datas.times.list[datas.times.after].timestamp));
+  data.getAfter = function() {
+    if ((data.times.after >= 0) && data.times.list.length) {
+      var after = new Date(parseInt(data.times.list[data.times.after].timestamp));
       var afterMonth = after.getMonth() + 1;
       if (afterMonth < 10) {
         afterMonth = '0'+afterMonth;
@@ -54,7 +54,7 @@ angular.module('anyfetchFrontApp.timeService', [])
       if (afterDate < 10) {
         afterDate = '0'+afterDate;
       }
-      
+
       return after.getFullYear()+'-'+afterMonth+'-'+afterDate;
     }
     else {
@@ -62,9 +62,9 @@ angular.module('anyfetchFrontApp.timeService', [])
     }
   };
 
-  datas.getBefore = function() {
-    if ((datas.times.before >= 0) && datas.times.list.length) {
-      var before = new Date(parseInt(datas.times.list[datas.times.before].timestamp));
+  data.getBefore = function() {
+    if ((data.times.before >= 0) && data.times.list.length) {
+      var before = new Date(parseInt(data.times.list[data.times.before].timestamp));
       var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth()+1, 0).getDate();
       before.setMonth(before.getMonth() + 2);
       before.setDate(nbDaysThisMonth);
@@ -76,7 +76,7 @@ angular.module('anyfetchFrontApp.timeService', [])
       if (beforeDate < 10) {
         beforeDate = '0'+beforeDate;
       }
-      
+
       return before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
     }
     else {
@@ -85,6 +85,6 @@ angular.module('anyfetchFrontApp.timeService', [])
   };
 
   // Return of the service
-  return datas;
+  return data;
 
 });

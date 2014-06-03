@@ -5,7 +5,7 @@ angular.module('anyfetchFrontApp.providerService', [])
 
   var serverTime = null;
   var updateFreq = 10000;
-  var datas = {
+  var data = {
     providers: {
       list: null,
       states: null,
@@ -19,7 +19,7 @@ angular.module('anyfetchFrontApp.providerService', [])
     serverTime += updateFreq;
     var providerStatusTmp = true;
 
-    angular.forEach(datas.providers.list, function(value){
+    angular.forEach(data.providers.list, function(value){
       var updateProvider = new Date(value.updated).getTime() + 2 * 60 * 1000;
       var status = updateProvider < serverTime;
       value.upToDate = status;
@@ -29,42 +29,42 @@ angular.module('anyfetchFrontApp.providerService', [])
       }
     });
 
-    datas.providersUpToDate = providerStatusTmp;
+    data.providersUpToDate = providerStatusTmp;
     $timeout(checkProviderStatus, updateFreq);
   };
 
-  datas.set = function(providers, time) {
-    datas.providers.list = providers;
-    datas.providers.states = {};
-    datas.reset(true);
+  data.set = function(providers, time) {
+    data.providers.list = providers;
+    data.providers.states = {};
+    data.reset(true);
     serverTime = new Date(time).getTime();
 
     checkProviderStatus();
   };
 
-  datas.reset = function(full) {
-    datas.providers.filtered = false;
-    angular.forEach(datas.providers.list, function(value, index){
+  data.reset = function(full) {
+    data.providers.filtered = false;
+    angular.forEach(data.providers.list, function(value, index){
       if (full) {
         value.search_count = 0;
       }
 
-      datas.providers.states[index] = true;
+      data.providers.states[index] = true;
     });
   };
 
-  datas.updateSearchCounts = function(resultsCounts) {
-    datas.providers.totalCount = 0;
-    angular.forEach(datas.providers.list, function(value, key){
+  data.updateSearchCounts = function(resultsCounts) {
+    data.providers.totalCount = 0;
+    angular.forEach(data.providers.list, function(value, key){
       var nbResults = resultsCounts[key];
       value.search_count = nbResults ? nbResults : 0;
-      datas.providers.totalCount += nbResults ? nbResults : 0;
+      data.providers.totalCount += nbResults ? nbResults : 0;
     });
 
-    return datas.providers.totalCount;
+    return data.providers.totalCount;
   };
 
-  datas.update = function() {
+  data.update = function() {
     var deferred = $q.defer();
 
     $http({method: 'POST', url: API_URL + '/company/update'})
@@ -74,15 +74,15 @@ angular.module('anyfetchFrontApp.providerService', [])
     return deferred.promise;
   };
 
-  datas.get = function() {
-    return datas.providers;
+  data.get = function() {
+    return data.providers;
   };
 
-  datas.getAvailableProviders = function() {
+  data.getAvailableProviders = function() {
     var deferred = $q.defer();
 
-    if (datas.availableProviders) {
-      deferred.resolve(datas.availableProviders);
+    if (data.availableProviders) {
+      deferred.resolve(data.availableProviders);
     } else {
       $http.get('http://settings.anyfetch.com/provider')
         .success(function(res) {
@@ -91,7 +91,7 @@ angular.module('anyfetchFrontApp.providerService', [])
             res[provider].id = id;
           }
 
-          datas.availableProviders = res;
+          data.availableProviders = res;
           deferred.resolve(res);
         })
         .error(deferred.reject);
@@ -100,6 +100,6 @@ angular.module('anyfetchFrontApp.providerService', [])
     return deferred.promise;
   };
 
-  return datas;
+  return data;
 
 });

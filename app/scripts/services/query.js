@@ -3,10 +3,10 @@
 angular.module('anyfetchFrontApp.queryService', [])
 .factory( 'QueryService', function($q, DocumentTypesService, ProvidersService, TimeService) {
 
-  var datas = {
+  var data = {
   };
 
-  datas.queryBuilder = function(query, similar_to, start, limit) {
+  data.queryBuilder = function(query, similar_to, start, limit) {
     var apiQuery;
 
     if (similar_to) {
@@ -14,13 +14,13 @@ angular.module('anyfetchFrontApp.queryService', [])
     } else if (query) {
       apiQuery = API_URL + '/documents?search='+query+'&start='+start+'&limit='+limit;
 
-      apiQuery = datas.filters(apiQuery);
+      apiQuery = data.filters(apiQuery);
     }
 
     return apiQuery;
   };
 
-  datas.filters = function(apiQuery) {
+  data.filters = function(apiQuery) {
     var argsDocs = '';
     var argsProv = '';
     var newQuery = apiQuery;
@@ -77,6 +77,6 @@ angular.module('anyfetchFrontApp.queryService', [])
   };
 
   // Return of the service
-  return datas;
+  return data;
 
 });
