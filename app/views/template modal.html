@@ -85,3 +85,12 @@
       </div>
     </div>
 </div>
+
+<script type="text/javascript">
+  var cssLink = document.createElement("link");
+  cssLink.href = "style.css";
+  cssLink.rel = "stylesheet";
+  cssLink.type = "text/css";
+
+  $('iframe ').contents().get(0).head.appendChild(cssLink);
+</script>
