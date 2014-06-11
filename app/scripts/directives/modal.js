@@ -137,7 +137,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         if (newVal) {
           var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].templates.full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.data);
-          scope.provider = ProvidersService.providers.list[scope.documentfull.token];
+          scope.provider = ProvidersService.providers.list[scope.documentfull.provider];
 
           var iframe = ($('#iframe')[0].contentWindow || $('#iframe')[0].contentDocument);
           iframe.document.body.innerHTML = '<div class="wrapper">'+scope.fullText+'</div>';

@@ -105,8 +105,8 @@
         <div class="large-9 medium-9 columns">
           <article class="results">
             <div class="loaded">
-              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes.states[result.document_type] && providers.states[result.token]">
-                <snippet result="result" click="displayFull(id)" providerid="providers.list[result.token].application"></snippet>
+              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes.states[result.document_type] && providers.states[result.provider]">
+                <snippet result="result" click="displayFull(id)" providerid="providers.list[result.provider].application"></snippet>
               </div>
               <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...
