@@ -87,7 +87,7 @@ angular.module('anyfetchFrontApp.providerService', [])
       $http.get('http://manager.anyfetch.com/marketplace.json?trusted=true')
         .success(function(res) {
           for(var provider in res) {
-            var id = res[provider].id.$oid;
+            var id = res[provider].id;
             res[provider].id = id;
           }
 
