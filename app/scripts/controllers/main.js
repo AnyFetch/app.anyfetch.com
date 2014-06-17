@@ -91,7 +91,7 @@ angular.module('anyfetchFrontApp')
     $scope.results = data.data;
 
     if (full) {
-      $scope.updateFiltersCount(data.facets.document_types, data.facets.tokens, data.facets.creation_dates);
+      $scope.updateFiltersCount(data.facets.document_types, data.facets.providers, data.facets.creation_dates);
     }
 
     $scope.loading = false;
