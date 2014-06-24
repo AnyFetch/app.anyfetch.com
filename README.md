@@ -8,8 +8,9 @@ Before running any of these commands you need to install all the requirements. T
 
 ```sh
 npm install -g bower grunt-cli
-npm install
 gem install compass
+npm install
+bower install
 ```
 
 ## How to use
