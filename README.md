@@ -25,6 +25,5 @@ This require push access to this repo.
  
 ```sh
 grunt deploy            # Deploy on production server.
-grunt stage             # Deploy on staging server / branch
 ```
 

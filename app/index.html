@@ -69,8 +69,8 @@
     var API_URL = 'https://api.anyfetch.com';
 
     // Call staging api when using staging url or on localhost.
-    if(document.location.hostname.indexOf('staging.') === 0 || document.location.hostname.indexOf('localhost') === 0) {
-      API_URL = 'http://staging.api.anyfetch.com';
+    if(document.location.hostname.indexOf('staging') === 0 || document.location.hostname.indexOf('localhost') === 0) {
+      API_URL = 'https://api-staging.anyfetch.com';
     }
 
     </script>

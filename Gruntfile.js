@@ -356,12 +356,6 @@ module.exports = function(grunt) {
           branch: 'gh-pages'
         }
       },
-      staging: {
-        options: {
-          remote: 'git@github.com:AnyFetch/staging.app.anyfetch.com.git',
-          branch: 'gh-pages'
-        }
-      },
     }
   });
 
