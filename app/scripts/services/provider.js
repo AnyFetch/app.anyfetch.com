@@ -34,7 +34,12 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   data.set = function(providers, time) {
-    data.providers.list = providers;
+    var providersHash = {};
+    providers.forEach(function(provider) {
+      providersHash[provider.id] = provider;
+    });
+
+    data.providers.list = providersHash;
     data.providers.states = {};
     data.reset(true);
     serverTime = new Date(time).getTime();
@@ -44,7 +49,7 @@ angular.module('anyfetchFrontApp.providerService', [])
 
   data.reset = function(full) {
     data.providers.filtered = false;
-    angular.forEach(data.providers.list, function(value, index){
+    angular.forEach(data.providers.list, function(value, index) {
       if (full) {
         value.search_count = 0;
       }
@@ -54,9 +59,15 @@ angular.module('anyfetchFrontApp.providerService', [])
   };
 
   data.updateSearchCounts = function(resultsCounts) {
+    var resultsCountsHash = {};
+    resultsCounts.forEach(function (resultCount) {
+      resultsCountsHash[resultCount.id] = resultCount;
+    });
+
+
     data.providers.totalCount = 0;
-    angular.forEach(data.providers.list, function(value, key){
-      var nbResults = resultsCounts[key];
+    angular.forEach(data.providers.list, function(value, key) {
+      var nbResults = resultsCountsHash[key] ? resultsCountsHash[key].document_count : 0;
       value.search_count = nbResults ? nbResults : 0;
       data.providers.totalCount += nbResults ? nbResults : 0;
     });

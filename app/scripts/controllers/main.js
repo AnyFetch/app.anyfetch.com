@@ -47,7 +47,6 @@ angular.module('anyfetchFrontApp')
   $scope.getRes = function(start, limit) {
     var deferred = $q.defer();
     var apiQuery = QueryService.queryBuilder($scope.query, $scope.similar_to, start, limit);
-    console.log(apiQuery);
 
     if (apiQuery === '') {
       $scope.results = [];
@@ -103,7 +102,7 @@ angular.module('anyfetchFrontApp')
 
   $scope.searchLaunch = function(query) {
     $location.search({q: query});
-    $scope.updateFiltersCount([], [], {});
+    $scope.updateFiltersCount([], [], []);
     $scope.searchUpdate();
   };
 
@@ -141,7 +140,7 @@ angular.module('anyfetchFrontApp')
     $scope.query = '';
     $location.search({});
     $scope.loading = false;
-    $scope.updateFiltersCount([], [], {});
+    $scope.updateFiltersCount([], [], []);
     $scope.moreResult = false;
   };
 

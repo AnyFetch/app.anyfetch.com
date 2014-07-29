@@ -30,7 +30,7 @@
         <div class="row">
           <input type="checkbox" ng-model="providers.states[Object.keys(providers.list).sort()[$index]]" id="type-{{Object.keys(providers.list).sort()[$index]}}"/>
           <label for="type-{{Object.keys(providers.list).sort()[$index]}}">
-            {{provider.name | capitalizeFirst}}
+            {{provider.client.name | capitalizeFirst}}
           </label>
           <span class="numberRes">{{provider.search_count}}</span>
         </div>
