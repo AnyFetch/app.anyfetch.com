@@ -66,7 +66,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.getDocumentTypeIcon = function(document) {
-        var docType = document.document_type;
+        var docType = document.document_type.id;
         if (docType === '5252ce4ce4cfcd16f55cfa3c') {
 
           var path = document.data.path;
@@ -121,7 +121,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.getTitleProjection = function(rel) {
-        var htmlTemplate = DocumentTypesService.get().list[rel.document_type].templates.title;
+        var htmlTemplate = DocumentTypesService.get().list[rel.document_type.id].templates.title;
         return Mustache.render(htmlTemplate, rel.data);
       };
 
@@ -135,9 +135,9 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         $(document).foundation();
         scope.query = scope.query || $location.search().q;
         if (newVal) {
-          var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type].templates.full;
+          var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type.id].templates.full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.data);
-          scope.provider = ProvidersService.providers.list[scope.documentfull.provider];
+          scope.provider = ProvidersService.providers.list[scope.documentfull.provider.id];
 
           var iframe = ($('#iframe')[0].contentWindow || $('#iframe')[0].contentDocument);
           iframe.document.body.innerHTML = '<div class="wrapper">'+scope.fullText+'</div>';
