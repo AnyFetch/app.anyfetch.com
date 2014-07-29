@@ -17,7 +17,7 @@ angular.module('anyfetchFrontApp')
 
     AuthService.login(credentials)
       .then(function(user) {
-        if (user) {
+        if(user) {
           $location.path('/');
           $scope.loadingLogin = false;
         }

@@ -24,7 +24,7 @@ angular.module('anyfetchFrontApp.providerDirective', [])
 
       scope.bindEchap = function() {
         $(document).keyup(function(e) {
-          if (e.keyCode === 27) {
+          if(e.keyCode === 27) {
             scope.$apply(scope.hideModal);
           }
         });
@@ -36,7 +36,7 @@ angular.module('anyfetchFrontApp.providerDirective', [])
       };
 
       scope.$watch('show', function(newVal) {
-        if (!newVal) {
+        if(!newVal) {
           return;
         }
 

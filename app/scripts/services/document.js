@@ -25,7 +25,7 @@ angular.module('anyfetchFrontApp.documentService', [])
   data.reset = function(full) {
     data.documentTypes.filtered = false;
     angular.forEach(data.documentTypes.list, function(value, index) {
-      if (full) {
+      if(full) {
         value.search_count = 0;
       }
       data.documentTypes.states[index] = true;

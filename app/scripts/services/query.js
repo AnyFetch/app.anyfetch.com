@@ -9,9 +9,9 @@ angular.module('anyfetchFrontApp.queryService', [])
   data.queryBuilder = function(query, similar_to, start, limit) {
     var apiQuery;
 
-    if (similar_to) {
+    if(similar_to) {
       apiQuery = API_URL + '/documents/' + similar_to + '/similar?start=' + start + '&limit=' + limit;
-    } else if (query) {
+    } else if(query) {
       apiQuery = API_URL + '/documents?search=' + query + '&start=' + start + '&limit=' + limit;
 
       apiQuery = data.filters(apiQuery);
@@ -32,14 +32,14 @@ angular.module('anyfetchFrontApp.queryService', [])
 
     angular.forEach(Object.keys(documentTypes.list), function(value) {
       var docType = documentTypes.list[value];
-      if (!documentTypes.states[value]) {
+      if(!documentTypes.states[value]) {
         documentTypes.filtered = true;
-      } else if (docType.search_count !== 0) {
+      } else if(docType.search_count !== 0) {
         argsDocs += '&document_type=' + value;
       }
     });
 
-    if (documentTypes.filtered) {
+    if(documentTypes.filtered) {
       if(argsDocs.length) {
         newQuery += argsDocs;
       }
@@ -50,14 +50,14 @@ angular.module('anyfetchFrontApp.queryService', [])
 
     angular.forEach(Object.keys(providers.list), function(value) {
       var prov = providers.list[value];
-      if (!providers.states[value]) {
+      if(!providers.states[value]) {
         providers.filtered = true;
-      } else if (prov.search_count !== 0) {
+      } else if(prov.search_count !== 0) {
         argsProv += '&provider=' + value;
       }
     });
 
-    if (providers.filtered) {
+    if(providers.filtered) {
       if(argsProv.length) {
         newQuery += argsProv;
       }
@@ -66,7 +66,7 @@ angular.module('anyfetchFrontApp.queryService', [])
       }
     }
 
-    if (TimeService.getAfter()) {
+    if(TimeService.getAfter()) {
       var argsTime = '&after=' + TimeService.getAfter();
       argsTime += '&before=' + TimeService.getBefore();
 

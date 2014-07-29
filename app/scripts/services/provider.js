@@ -24,7 +24,7 @@ angular.module('anyfetchFrontApp.providerService', [])
       var status = updateProvider < serverTime;
       value.upToDate = status;
 
-      if (!status) {
+      if(!status) {
         providerStatusTmp = false;
       }
     });
@@ -50,7 +50,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   data.reset = function(full) {
     data.providers.filtered = false;
     angular.forEach(data.providers.list, function(value, index) {
-      if (full) {
+      if(full) {
         value.search_count = 0;
       }
 
@@ -92,7 +92,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   data.getAvailableProviders = function() {
     var deferred = $q.defer();
 
-    if (data.availableProviders) {
+    if(data.availableProviders) {
       deferred.resolve(data.availableProviders);
     } else {
       $http.get('http://manager.anyfetch.com/marketplace.json?trusted=true')

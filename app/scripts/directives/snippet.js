@@ -28,22 +28,22 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
           var docType = scope.result.document_type.id;
 
           // Special case for document files
-          if (docType === '5252ce4ce4cfcd16f55cfa3c') {
+          if(docType === '5252ce4ce4cfcd16f55cfa3c') {
 
             var path = scope.result.data.path;
 
             // Prez icon
-            if (/\.(<[^\>]+>)?(ppt|pptx|odp)(<[^\>]+>)?/.exec(path)) {
+            if(/\.(<[^\>]+>)?(ppt|pptx|odp)(<[^\>]+>)?/.exec(path)) {
               return docType + '-prez';
             }
 
             // Pdf icon
-            if (/\.(<[^\>]+>)?pdf(<[^\>]+>)?/.exec(path)) {
+            if(/\.(<[^\>]+>)?pdf(<[^\>]+>)?/.exec(path)) {
               return docType + '-pdf';
             }
 
             // Tab icon
-            if (/\.(<[^\>]+>)?(xls|xlsx|ods)(<[^\>]+>)?/.exec(path)) {
+            if(/\.(<[^\>]+>)?(xls|xlsx|ods)(<[^\>]+>)?/.exec(path)) {
               return docType + '-tab';
             }
 

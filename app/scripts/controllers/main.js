@@ -48,18 +48,18 @@ angular.module('anyfetchFrontApp')
     var deferred = $q.defer();
     var apiQuery = QueryService.queryBuilder($scope.query, $scope.similar_to, start, limit);
 
-    if (apiQuery === '') {
+    if(apiQuery === '') {
       $scope.results = [];
       $scope.moreResult = false;
       $scope.loading = false;
       $scope.filterUpdate = false;
       deferred.reject();
-    } else if (apiQuery !== undefined) {
+    } else if(apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
           // console.log('Data recieved from search: ', data);
 
-          if (data.data.length === limit) {
+          if(data.data.length === limit) {
             $scope.lastRes = start + limit;
             $scope.moreResult = true;
           } else {
@@ -73,7 +73,7 @@ angular.module('anyfetchFrontApp')
         .error(function(error) {
           console.error(error);
           $scope.display_error('Error '+ error.code +': '+ error.message +'. Please restart your search.');
-          if ($scope.similar_to) {
+          if($scope.similar_to) {
             $location.search({});
           }
           deferred.reject();
@@ -90,7 +90,7 @@ angular.module('anyfetchFrontApp')
     $scope.results = data.data;
     console.log($scope.results);
 
-    if (full) {
+    if(full) {
       $scope.updateFiltersCount(data.facets.document_types, data.facets.providers, data.facets.creation_dates);
     }
 
@@ -117,7 +117,7 @@ angular.module('anyfetchFrontApp')
     $scope.loading = true;
     $scope.results = [];
 
-    if ($scope.query.length) {
+    if($scope.query.length) {
       $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
           $scope.resultUpdate(data, full);
@@ -163,7 +163,7 @@ angular.module('anyfetchFrontApp')
     $scope.loading = true;
     $scope.results = [];
 
-    if ($scope.similar_to.length) {
+    if($scope.similar_to.length) {
       $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
           $scope.resultUpdate(data, true);
@@ -188,24 +188,24 @@ angular.module('anyfetchFrontApp')
 // ------------------------------------------------------
 
   $scope.updateFiltersCount = function(docTypes, provs, times) {
-    if (docTypes) {
+    if(docTypes) {
       DocumentTypesService.updateSearchCounts(docTypes);
     }
 
-    if (provs) {
+    if(provs) {
       ProvidersService.updateSearchCounts(provs);
     }
 
-    if (times) {
+    if(times) {
       TimeService.times = TimeService.set(times);
     }
   };
 
   // Watch filterUpdate to know wether the filter has changed and the results needs to be reloaded
   $scope.$watch('filterUpdate', function(newVal) {
-    if (newVal) {
+    if(newVal) {
       // Update only if a query is launched!
-      if ($scope.query && $scope.query.length) {
+      if($scope.query && $scope.query.length) {
         console.log('new search due to filters');
         $scope.search(false);
         // Binded with the filter directive
@@ -226,9 +226,9 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.loadFull = function() {
-    if ($scope.id) {
+    if($scope.id) {
       var apiQuery = API_URL + '/documents/'+ $scope.id;
-      if ($scope.query) {
+      if($scope.query) {
         apiQuery += '?search=' + $scope.query;
       }
 
@@ -251,7 +251,7 @@ angular.module('anyfetchFrontApp')
         if($location.search().id) {
           $scope.full = data;
           $scope.modalLoading = false;
-        } else if ($scope.similar_to) {
+        } else if($scope.similar_to) {
           $scope.similar_info = data;
           $scope.similarLoading = false;
         }
@@ -263,13 +263,13 @@ angular.module('anyfetchFrontApp')
   };
 
   $scope.$watch('modalShow', function(newValue, oldValue) {
-    if (!newValue && oldValue) {
-      if ($scope.results.length) {
+    if(!newValue && oldValue) {
+      if($scope.results.length) {
         $scope.closeModal = true;
         var actualSearch = $location.search();
         delete actualSearch.id;
         $location.search(actualSearch);
-      } else if (!$location.search().similar_to) {
+      } else if(!$location.search().similar_to) {
         $scope.searchLaunch($location.search().q);
       }
     }
@@ -300,7 +300,7 @@ angular.module('anyfetchFrontApp')
   $scope.routeUpdate = function() {
     $scope.id  = $location.search().id || '';
 
-    if ($scope.id) {
+    if($scope.id) {
       $scope.modalLoading = true;
       $scope.loadFull();
       //LOCK SCROLL MAIN!!!
@@ -309,8 +309,8 @@ angular.module('anyfetchFrontApp')
       $scope.loading = true;
       $scope.modalShow = false;
 
-      if ($location.search().similar_to) {
-        if (!$scope.similar_to || $scope.similar_to !== $location.search().similar_to) {
+      if($location.search().similar_to) {
+        if(!$scope.similar_to || $scope.similar_to !== $location.search().similar_to) {
           $scope.similarUpdate();
           $scope.closeModal = true;
         }
@@ -318,9 +318,9 @@ angular.module('anyfetchFrontApp')
       else {
         $scope.similarShow = false;
 
-        if (!$scope.query || $scope.query !== $location.search().q) {
+        if(!$scope.query || $scope.query !== $location.search().q) {
           $scope.searchUpdate();
-        } else if ($scope.closeModal) {
+        } else if($scope.closeModal) {
           $scope.loading = false;
           $scope.closeModal = false;
         }

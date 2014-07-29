@@ -20,7 +20,7 @@ angular.module('anyfetchFrontApp.authenticationService', [])
 
     // Creation of the user credential
     var credentials;
-    if (user) {
+    if(user) {
       credentials = btoa(user.email + ':' + user.password);
     } else {
       credentials = $cookies.credentials;
@@ -58,9 +58,9 @@ angular.module('anyfetchFrontApp.authenticationService', [])
   data.isLoggedin = function() {
     var deferred = $q.defer();
 
-    if (data.currentUser) {
+    if(data.currentUser) {
       deferred.resolve(data.currentUser);
-    } else if ($cookies.credentials) {
+    } else if($cookies.credentials) {
       data.login()
         .then(function(user) {
           console.log('Login ', user);

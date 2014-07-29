@@ -32,10 +32,10 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.zoomIn = function() {
-        if (scope.zoom < 200) {
+        if(scope.zoom < 200) {
           scope.zoom += 10;
 
-          if (scope.zoom === 100) {
+          if(scope.zoom === 100) {
             scope.zoomClass = null;
           } else {
             scope.zoomClass = 'zoom-' + scope.zoom;
@@ -44,10 +44,10 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.zoomOut = function() {
-        if (scope.zoom > 50) {
+        if(scope.zoom > 50) {
           scope.zoom -= 10;
 
-          if (scope.zoom === 100) {
+          if(scope.zoom === 100) {
             scope.zoomClass = null;
           } else {
             scope.zoomClass = 'zoom-' + scope.zoom;
@@ -67,22 +67,22 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.getDocumentTypeIcon = function(document) {
         var docType = document.document_type.id;
-        if (docType === '5252ce4ce4cfcd16f55cfa3c') {
+        if(docType === '5252ce4ce4cfcd16f55cfa3c') {
 
           var path = document.data.path;
 
           // Prez icon
-          if (/\.(<[^\>]+>)?(ppt|pptx|odp)(<[^\>]+>)?/.exec(path)) {
+          if(/\.(<[^\>]+>)?(ppt|pptx|odp)(<[^\>]+>)?/.exec(path)) {
             return docType + '-prez';
           }
 
           // Pdf icon
-          if (/\.(<[^\>]+>)?pdf(<[^\>]+>)?/.exec(path)) {
+          if(/\.(<[^\>]+>)?pdf(<[^\>]+>)?/.exec(path)) {
             return docType + '-pdf';
           }
 
           // Tab icon
-          if (/\.(<[^\>]+>)?(xls|xlsx|ods)(<[^\>]+>)?/.exec(path)) {
+          if(/\.(<[^\>]+>)?(xls|xlsx|ods)(<[^\>]+>)?/.exec(path)) {
             return docType + '-tab';
           }
 
@@ -97,7 +97,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
       scope.bindEchap = function() {
         $(document).keyup(function(e) {
-          if (e.keyCode === 27) {
+          if(e.keyCode === 27) {
             scope.$apply(scope.hideModal);
           }
         });
@@ -111,7 +111,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.show_similar = function() {
-        if ($location.search().id) {
+        if($location.search().id) {
           var actualSearch = $location.search();
           actualSearch.similar_to = actualSearch.id;
           delete actualSearch.id;
@@ -134,7 +134,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
 
         $(document).foundation();
         scope.query = scope.query || $location.search().q;
-        if (newVal) {
+        if(newVal) {
           var htmlTemplate = DocumentTypesService.get().list[scope.documentfull.document_type.id].templates.full;
           scope.fullText = Mustache.render(htmlTemplate, scope.documentfull.data);
           scope.provider = ProvidersService.providers.list[scope.documentfull.provider.id];
