@@ -18,7 +18,7 @@ angular.module('anyfetchFrontApp.timeService', [])
     });
 
     data.reset(true);
-    angular.forEach(Object.keys(timesHash), function(value){
+    angular.forEach(Object.keys(timesHash), function(value) {
       var time = {
         timestamp: parseInt(value),
         count: timesHash[value]
@@ -34,11 +34,11 @@ angular.module('anyfetchFrontApp.timeService', [])
   };
 
   data.reset = function(full) {
-    if (full) {
+    if(full) {
       data.times.list = [];
       data.times.after = null;
       data.times.before = null;
-    } else if (data.times.list.length) {
+    } else if(data.times.list.length) {
       data.times.after = 0;
       data.times.before = data.times.list.length-1;
     }
@@ -49,18 +49,18 @@ angular.module('anyfetchFrontApp.timeService', [])
   };
 
   data.getAfter = function() {
-    if ((data.times.after >= 0) && data.times.list.length) {
+    if((data.times.after >= 0) && data.times.list.length) {
       var after = new Date(parseInt(data.times.list[data.times.after].timestamp));
       var afterMonth = after.getMonth() + 1;
-      if (afterMonth < 10) {
-        afterMonth = '0'+afterMonth;
+      if(afterMonth < 10) {
+        afterMonth = '0' + afterMonth;
       }
       var afterDate = after.getDate();
-      if (afterDate < 10) {
-        afterDate = '0'+afterDate;
+      if(afterDate < 10) {
+        afterDate = '0' + afterDate;
       }
 
-      return after.getFullYear()+'-'+afterMonth+'-'+afterDate;
+      return after.getFullYear() + '-' + afterMonth + '-' + afterDate;
     }
     else {
       return '';
@@ -68,21 +68,21 @@ angular.module('anyfetchFrontApp.timeService', [])
   };
 
   data.getBefore = function() {
-    if ((data.times.before >= 0) && data.times.list.length) {
+    if((data.times.before >= 0) && data.times.list.length) {
       var before = new Date(parseInt(data.times.list[data.times.before].timestamp));
-      var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth()+1, 0).getDate();
+      var nbDaysThisMonth = new Date(before.getFullYear(), before.getMonth() + 1, 0).getDate();
       before.setMonth(before.getMonth() + 2);
       before.setDate(nbDaysThisMonth);
       var beforeMonth = before.getMonth() + 1;
-      if (beforeMonth < 10) {
-        beforeMonth = '0'+beforeMonth;
+      if(beforeMonth < 10) {
+        beforeMonth = '0' + beforeMonth;
       }
       var beforeDate = before.getDate();
-      if (beforeDate < 10) {
-        beforeDate = '0'+beforeDate;
+      if(beforeDate < 10) {
+        beforeDate = '0' + beforeDate;
       }
 
-      return before.getFullYear()+'-'+beforeMonth+'-'+beforeDate;
+      return before.getFullYear() + '-' + beforeMonth + '-' + beforeDate;
     }
     else {
       return '';

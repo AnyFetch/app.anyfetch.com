@@ -18,13 +18,13 @@ angular.module('anyfetchFrontApp.highlightService', [])
     }
   };
 
-  data.next = function(){
-    if(data.getMaxIndex() === 0){
+  data.next = function() {
+    if(data.getMaxIndex() === 0) {
       return false;
     }
     var next_index = 0;
-    if(data.current_index !== null){
-      if(next_index < data.getMaxIndex()){
+    if(data.current_index !== null) {
+      if(next_index < data.getMaxIndex()) {
         next_index = data.current_index + 1;
       }
     }
@@ -32,13 +32,13 @@ angular.module('anyfetchFrontApp.highlightService', [])
     data.navigate();
   };
 
-  data.previous = function(){
-    if(data.getMaxIndex() === 0){
+  data.previous = function() {
+    if(data.getMaxIndex() === 0) {
       return false;
     }
     var previous_index = data.getMaxIndex() - 1;
-    if(data.current_index !== null){
-      if(previous_index > 0 && data.current_index > 0){
+    if(data.current_index !== null) {
+      if(previous_index > 0 && data.current_index > 0) {
         previous_index = data.current_index - 1;
       }
     }
@@ -46,7 +46,7 @@ angular.module('anyfetchFrontApp.highlightService', [])
     data.navigate();
   };
 
-  data.navigate = function(){
+  data.navigate = function() {
 
     data.getRootContainer().find(data.options.element).removeClass(data.options.hover_element);
     data.getElement().addClass(data.options.hover_element);
@@ -57,8 +57,8 @@ angular.module('anyfetchFrontApp.highlightService', [])
     );
   };
 
-  data.getRootContainer = function(){
-    if(data.options.iframe_element !== null){
+  data.getRootContainer = function() {
+    if(data.options.iframe_element !== null) {
       return $(data.options.container).find(data.options.iframe_element).contents();
     }
     else{
@@ -66,8 +66,8 @@ angular.module('anyfetchFrontApp.highlightService', [])
     }
   };
 
-  data.getTextPosition = function(){
-    if(data.getMaxIndex() > 0){
+  data.getTextPosition = function() {
+    if(data.getMaxIndex() > 0) {
       return (data.current_index + 1 ).toString() + ' of ' + data.getMaxIndex().toString();
     }
     else{
@@ -75,8 +75,8 @@ angular.module('anyfetchFrontApp.highlightService', [])
     }
   };
 
-  data.getTextOccurences = function(){
-    if(data.getMaxIndex() === 1){
+  data.getTextOccurences = function() {
+    if(data.getMaxIndex() === 1) {
       return 'One occurrence';
     }
     else{
@@ -84,24 +84,24 @@ angular.module('anyfetchFrontApp.highlightService', [])
     }
   };
 
-  data.getTopPosition = function(){
+  data.getTopPosition = function() {
     return data.getElement().offset().top - data.options.offset ;
   };
 
-  data.getElement = function(){
+  data.getElement = function() {
     var el = data.getRootContainer().find(data.options.element + ':eq(' + data.current_index + ')');
-    if(el.length === 0 && data.getMaxIndex() > 0){
+    if(el.length === 0 && data.getMaxIndex() > 0) {
       data.current_index = 0;
       el = data.getRootContainer().find(data.options.element + ':eq(0)');
     }
     return el;
   };
 
-  data.getMaxIndex = function(){
+  data.getMaxIndex = function() {
     return data.getRootContainer().find(data.options.element).length;
   };
 
-  data.reset = function(){
+  data.reset = function() {
     data.current_index = null;
   };
 

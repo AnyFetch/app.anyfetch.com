@@ -27,7 +27,7 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       scope.getDate = function(i) {
         var actTime = scope.times.list[i];
 
-        if (actTime) {
+        if(actTime) {
           var date = new Date(actTime.timestamp);
           return scope.months[date.getMonth()] + ' ' + date.getFullYear();
         }
@@ -39,7 +39,7 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
         var afterTime = scope.times.list[aft];
         var beforeTime = scope.times.list[bef];
 
-        if (afterTime && beforeTime) {
+        if(afterTime && beforeTime) {
           var afterDate = new Date(afterTime.timestamp);
           var beforeDate = new Date(beforeTime.timestamp);
 
@@ -69,15 +69,15 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       scope.updateTime = function() {
         // DEBUG
         console.log('updateTime : ', scope.timeChanged);
-        if (scope.timeChanged) {
+        if(scope.timeChanged) {
           scope.filterupdate = true;
           scope.timeChanged = false;
         }
       };
 
       scope.$watch('times.after', function(newVal) {
-        if (newVal) {
-          if (scope.init.timesAfter) {
+        if(newVal) {
+          if(scope.init.timesAfter) {
             scope.timeChanged = true;
           } else {
             scope.init.timesAfter = true;
@@ -86,8 +86,8 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       });
 
       scope.$watch('times.before', function(newVal) {
-        if (newVal) {
-          if (scope.init.timesBefore) {
+        if(newVal) {
+          if(scope.init.timesBefore) {
             scope.timeChanged = true;
           } else {
             scope.init.timesBefore = true;
@@ -96,8 +96,8 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       });
 
       scope.$watch('documentTypes.states', function(newVal) {
-        if (newVal) {
-          if (scope.init.docState) {
+        if(newVal) {
+          if(scope.init.docState) {
             scope.filterupdate = true;
           } else {
             scope.init.docState = true;
@@ -106,8 +106,8 @@ angular.module('anyfetchFrontApp.filtersDirective', [])
       }, true);
 
       scope.$watch('providers.states', function(newVal) {
-        if (newVal) {
-          if (scope.init.provState) {
+        if(newVal) {
+          if(scope.init.provState) {
             scope.filterupdate = true;
           } else {
             scope.init.provState = true;
