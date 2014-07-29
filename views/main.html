@@ -45,7 +45,7 @@
   </ul>
 </div>
 
-<!-- similar -->
+<!-- errors -->
 <div class="error overlay" ng-show="errorMes">
   <a class="close" ng-click="close_error()">x</a>
   <div class="info">
@@ -105,13 +105,13 @@
         <div class="large-9 medium-9 columns">
           <article class="results">
             <div class="loaded">
-              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes.states[result.document_type] && providers.states[result.provider]">
+              <div class="result-row" ng-repeat="result in results" ng-show="documentTypes.states[result.document_type.id] &amp;&amp; providers.states[result.provider.id]">
                 <snippet result="result" click="displayFull(id)" providerid="providers.list[result.provider].application"></snippet>
               </div>
               <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...
               </div>
-              <div class="result-row more text-center" ng-show="moreResult && !loading && results.length < documentTypes.totalCount" ng-click="loadMore()">
+              <div class="result-row more text-center" ng-show="moreResult &amp;&amp; !loading &amp;&amp; results.length < documentTypes.totalCount" ng-click="loadMore()">
                 <a>Load more</a>
               </div>
             </div>
