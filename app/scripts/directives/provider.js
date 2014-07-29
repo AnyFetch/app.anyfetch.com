@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.providerDirective', [])
-.directive('provider', function(ProvidersService, AuthService) {
+.directive('provider', function(ProvidersService) {
 
   return {
     restrict: 'E',

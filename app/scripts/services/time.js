@@ -12,11 +12,16 @@ angular.module('anyfetchFrontApp.timeService', [])
   };
 
   data.set = function(times) {
+    var timesHash = {};
+    times.forEach(function(time) {
+      timesHash[time.timestamp] = time.document_count;
+    });
+
     data.reset(true);
-    angular.forEach(Object.keys(times), function(value){
+    angular.forEach(Object.keys(timesHash), function(value){
       var time = {
         timestamp: parseInt(value),
-        count: times[value]
+        count: timesHash[value]
       };
 
       data.times.list.push(time);

@@ -17,7 +17,7 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
 
       templateUrl: 'views/template snippet.html',
       link : function(scope) {
-        var htmlTemplate = DocumentTypesService.get().list[scope.result.document_type].templates.snippet;
+        var htmlTemplate = DocumentTypesService.get().list[scope.result.document_type.id].templates.snippet;
         scope.snippetText = mustacheTemplate(scope.result, htmlTemplate);
 
         scope.snippetClick = function() {
@@ -25,7 +25,7 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
         };
 
         scope.getDocumentTypeIcon = function() {
-          var docType = scope.result.document_type;
+          var docType = scope.result.document_type.id;
 
           // Special case for document files
           if (docType === '5252ce4ce4cfcd16f55cfa3c') {

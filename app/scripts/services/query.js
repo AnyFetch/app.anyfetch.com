@@ -53,7 +53,7 @@ angular.module('anyfetchFrontApp.queryService', [])
       if (!providers.states[value]) {
         providers.filtered = true;
       } else if (prov.search_count !== 0) {
-        argsProv += '&provider='+value;
+        argsProv += '&provider=' + value;
       }
     });
 

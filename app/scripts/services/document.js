@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.documentService', [])
-.factory( 'DocumentTypesService', function() {
+.factory('DocumentTypesService', function() {
 
   var data = {
     documentTypes: {
@@ -13,7 +13,11 @@ angular.module('anyfetchFrontApp.documentService', [])
   };
 
   data.set = function(documentTypes) {
-    data.documentTypes.list = documentTypes;
+    var documentTypesHash = {};
+    documentTypes.forEach(function(documentType) {
+      documentTypesHash[documentType.id] = documentType;
+    });
+    data.documentTypes.list = documentTypesHash;
     data.documentTypes.states = {};
     data.reset(true);
   };
@@ -29,9 +33,14 @@ angular.module('anyfetchFrontApp.documentService', [])
   };
 
   data.updateSearchCounts = function(resultsCounts) {
+    var resultsCountsHash = {};
+    resultsCounts.forEach(function (resultCount) {
+      resultsCountsHash[resultCount.id] = resultCount;
+    });
+
     data.documentTypes.totalCount = 0;
     angular.forEach(data.documentTypes.list, function(value, key){
-      var nbResults = resultsCounts[key];
+      var nbResults = resultsCountsHash[key] ? resultsCountsHash[key].document_count : 0;
       value.search_count = nbResults ? nbResults : 0;
       data.documentTypes.totalCount += nbResults ? nbResults : 0;
     });

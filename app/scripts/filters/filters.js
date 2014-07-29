@@ -27,8 +27,8 @@ angular.module('anyfetchFrontApp.filters', [])
 })
 .filter('filtersResult', function() {
   return function(result, scope) {
-    var selectedDoc = ( (scope.filterType[result.document_type] === true) || (scope.filterDocsFull === true) );
-    var selectedProv = ( (scope.filterProv[result.provider] === true) || (scope.filterProvFull === true) );
+    var selectedDoc = ( (scope.filterType[result.document_type.id] === true) || (scope.filterDocsFull === true) );
+    var selectedProv = ( (scope.filterProv[result.provider.id] === true) || (scope.filterProvFull === true) );
     return (selectedDoc || scope.filterNeutralDocs) && (selectedProv || scope.filterNeutralProv);
   };
 });
