@@ -88,6 +88,7 @@ angular.module('anyfetchFrontApp')
   // The full argument define whether the filter needs to be updated or not
   $scope.resultUpdate = function(data, full) {
     $scope.results = data.data;
+    console.log($scope.results);
 
     if (full) {
       $scope.updateFiltersCount(data.facets.document_types, data.facets.providers, data.facets.creation_dates);
