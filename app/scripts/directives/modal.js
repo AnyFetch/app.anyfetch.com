@@ -55,12 +55,12 @@ angular.module('anyfetchFrontApp.modalDirective', [])
         }
       };
 
-      scope.highlightNext = function(){
+      scope.highlightNext = function() {
         HighlightService.next();
         scope.highlight_position = HighlightService.getTextPosition();
       };
 
-      scope.highlightPrevious = function(){
+      scope.highlightPrevious = function() {
         HighlightService.previous();
         scope.highlight_position = HighlightService.getTextPosition();
       };
@@ -96,7 +96,7 @@ angular.module('anyfetchFrontApp.modalDirective', [])
       };
 
       scope.bindEchap = function() {
-        $(document).keyup(function(e){
+        $(document).keyup(function(e) {
           if (e.keyCode === 27) {
             scope.$apply(scope.hideModal);
           }
@@ -140,13 +140,13 @@ angular.module('anyfetchFrontApp.modalDirective', [])
           scope.provider = ProvidersService.providers.list[scope.documentfull.provider.id];
 
           var iframe = ($('#iframe')[0].contentWindow || $('#iframe')[0].contentDocument);
-          iframe.document.body.innerHTML = '<div class="wrapper">'+scope.fullText+'</div>';
+          iframe.document.body.innerHTML = '<div class="wrapper">' + scope.fullText + '</div>';
           iframe.document.head.innerHTML = '<style>.wrapper{padding:2%}.hlt{background:rgba(255,242,138,.6)}.hlt_active{background:rgba(255,181,96,.6)}body{word-wrap:break-word}</style>';
 
           scope.bindEchap();
 
           HighlightService.reset();
-          if(HighlightService.getMaxIndex() > 0){
+          if(HighlightService.getMaxIndex() > 0) {
             scope.showHighlighter = true;
             scope.highlight_position = HighlightService.getTextOccurences();
           }

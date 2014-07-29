@@ -24,7 +24,7 @@ angular.module('anyfetchFrontApp.documentService', [])
 
   data.reset = function(full) {
     data.documentTypes.filtered = false;
-    angular.forEach(data.documentTypes.list, function(value, index){
+    angular.forEach(data.documentTypes.list, function(value, index) {
       if (full) {
         value.search_count = 0;
       }
@@ -39,7 +39,7 @@ angular.module('anyfetchFrontApp.documentService', [])
     });
 
     data.documentTypes.totalCount = 0;
-    angular.forEach(data.documentTypes.list, function(value, key){
+    angular.forEach(data.documentTypes.list, function(value, key) {
       var nbResults = resultsCountsHash[key] ? resultsCountsHash[key].document_count : 0;
       value.search_count = nbResults ? nbResults : 0;
       data.documentTypes.totalCount += nbResults ? nbResults : 0;

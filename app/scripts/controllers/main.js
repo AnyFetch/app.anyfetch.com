@@ -60,10 +60,10 @@ angular.module('anyfetchFrontApp')
           // console.log('Data recieved from search: ', data);
 
           if (data.data.length === limit) {
-            $scope.lastRes = start+limit;
+            $scope.lastRes = start + limit;
             $scope.moreResult = true;
           } else {
-            $scope.lastRes = start+data.data.length;
+            $scope.lastRes = start + data.data.length;
             $scope.moreResult = false;
           }
           $scope.filterUpdate = false;
@@ -173,7 +173,7 @@ angular.module('anyfetchFrontApp')
     }
   };
 
-  $scope.close_similar = function(){
+  $scope.close_similar = function() {
     $scope.similar_info = undefined;
     $scope.similar_to = undefined;
 
@@ -257,7 +257,7 @@ angular.module('anyfetchFrontApp')
         }
       })
       .error(function() {
-        $scope.display_error('Error while loading full preview of the document '+$scope.id);
+        $scope.display_error('Error while loading full preview of the document ' + $scope.id);
         $scope.searchLaunch($scope.query);
       });
   };
@@ -279,13 +279,13 @@ angular.module('anyfetchFrontApp')
 //                  Error message
 // ------------------------------------------------------
 
-  $scope.display_error = function(mes){
+  $scope.display_error = function(mes) {
     $scope.errorMes = mes;
     $('body').scrollTop(0);
     setTimeout($scope.close_error, 1500);
   };
 
-  $scope.close_error = function(){
+  $scope.close_error = function() {
     $scope.errorMes = '';
   };
 

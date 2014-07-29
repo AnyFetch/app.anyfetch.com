@@ -19,7 +19,7 @@ angular.module('anyfetchFrontApp.providerService', [])
     serverTime += updateFreq;
     var providerStatusTmp = true;
 
-    angular.forEach(data.providers.list, function(value){
+    angular.forEach(data.providers.list, function(value) {
       var updateProvider = new Date(value.updated).getTime() + 2 * 60 * 1000;
       var status = updateProvider < serverTime;
       value.upToDate = status;

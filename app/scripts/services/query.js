@@ -10,9 +10,9 @@ angular.module('anyfetchFrontApp.queryService', [])
     var apiQuery;
 
     if (similar_to) {
-      apiQuery = API_URL + '/documents/'+similar_to+'/similar?start='+start+'&limit='+limit;
+      apiQuery = API_URL + '/documents/' + similar_to + '/similar?start=' + start + '&limit=' + limit;
     } else if (query) {
-      apiQuery = API_URL + '/documents?search='+query+'&start='+start+'&limit='+limit;
+      apiQuery = API_URL + '/documents?search=' + query + '&start=' + start + '&limit=' + limit;
 
       apiQuery = data.filters(apiQuery);
     }
@@ -30,12 +30,12 @@ angular.module('anyfetchFrontApp.queryService', [])
     documentTypes.filtered = false;
     providers.filtered = false;
 
-    angular.forEach(Object.keys(documentTypes.list), function(value){
+    angular.forEach(Object.keys(documentTypes.list), function(value) {
       var docType = documentTypes.list[value];
       if (!documentTypes.states[value]) {
         documentTypes.filtered = true;
       } else if (docType.search_count !== 0) {
-        argsDocs += '&document_type='+value;
+        argsDocs += '&document_type=' + value;
       }
     });
 
@@ -48,7 +48,7 @@ angular.module('anyfetchFrontApp.queryService', [])
       }
     }
 
-    angular.forEach(Object.keys(providers.list), function(value){
+    angular.forEach(Object.keys(providers.list), function(value) {
       var prov = providers.list[value];
       if (!providers.states[value]) {
         providers.filtered = true;
@@ -67,8 +67,8 @@ angular.module('anyfetchFrontApp.queryService', [])
     }
 
     if (TimeService.getAfter()) {
-      var argsTime = '&after='+TimeService.getAfter();
-      argsTime += '&before='+TimeService.getBefore();
+      var argsTime = '&after=' + TimeService.getAfter();
+      argsTime += '&before=' + TimeService.getBefore();
 
       newQuery += argsTime;
     }

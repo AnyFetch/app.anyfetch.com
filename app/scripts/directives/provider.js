@@ -23,7 +23,7 @@ angular.module('anyfetchFrontApp.providerDirective', [])
       };
 
       scope.bindEchap = function() {
-        $(document).keyup(function(e){
+        $(document).keyup(function(e) {
           if (e.keyCode === 27) {
             scope.$apply(scope.hideModal);
           }

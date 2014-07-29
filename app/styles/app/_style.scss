@@ -90,7 +90,7 @@ html, body{
         width: 0;
       }
 
-      a:not(.button){
+      a:not(.button) {
         padding: 0 15.66667px;
         line-height: 47px;
         background: #16A9E2;
@@ -129,7 +129,7 @@ html, body{
   }
   @each $icon in logout, cloud, support {
     .header-icon.#{$icon} {
-      @include svg-background("icon-header/"+quote($icon), 20px, 20px);
+      @include svg-background("icon-header/" + quote($icon), 20px, 20px);
     }
   }
 }
@@ -504,12 +504,12 @@ html, body{
   }
   @each $type in "5252ce4ce4cfcd16f55cfa3b", "5252ce4ce4cfcd16f55cfa3c", "5252ce4ce4cfcd16f55cfa3d", "5252ce4ce4cfcd16f55cfa3f", "5252ce4ce4cfcd16f55cfa3a", "5252ce4ce4cfcd16f55cfa41" {
     .type-#{$type} {
-      @include svg-background("icon-types/"+quote($type), 43px, 56px);
+      @include svg-background("icon-types/" + quote($type), 43px, 56px);
     }
   }
   @each $type in "pdf", "prez", "tab" {
     .type-5252ce4ce4cfcd16f55cfa3c-#{$type} {
-      @include svg-background("icon-types/5252ce4ce4cfcd16f55cfa3c-"+quote($type), 43px, 56px);
+      @include svg-background("icon-types/5252ce4ce4cfcd16f55cfa3c-" + quote($type), 43px, 56px);
     }
   }
 
@@ -553,7 +553,7 @@ html, body{
 }
 @each $provider in "53047faac8318c2d65000096", "52bff114c8318c29e9000005", "52cbda1ec8318c2d65000001", "53232d1dc8318cba94000042", "52ceb450c8318c4dc8000006", "52bff1eec8318cb228000001" {
   .provider-#{$provider} {
-    @include svg-background("icon-provider/"+quote($provider), 20px, 20px);
+    @include svg-background("icon-provider/" + quote($provider), 20px, 20px);
 
     &.large {
       background-size: 40px 40px;
@@ -563,7 +563,7 @@ html, body{
     }
   }
   .provider-white-#{$provider} {
-    @include svg-background("icon-white-provider/"+quote($provider), 20px, 20px);
+    @include svg-background("icon-white-provider/" + quote($provider), 20px, 20px);
   }
 }
 
