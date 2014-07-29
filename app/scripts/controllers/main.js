@@ -57,7 +57,6 @@ angular.module('anyfetchFrontApp')
     } else if (apiQuery !== undefined) {
       $http({method: 'GET', url: apiQuery})
         .success(function(data) {
-          // console.log('Data recieved from search: ', data);
 
           if (data.data.length === limit) {
             $scope.lastRes = start+limit;
@@ -88,7 +87,6 @@ angular.module('anyfetchFrontApp')
   // The full argument define whether the filter needs to be updated or not
   $scope.resultUpdate = function(data, full) {
     $scope.results = data.data;
-    console.log($scope.results);
 
     if (full) {
       $scope.updateFiltersCount(data.facets.document_types, data.facets.providers, data.facets.creation_dates);
