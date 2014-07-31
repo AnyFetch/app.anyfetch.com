@@ -12,7 +12,7 @@ angular.module('anyfetchFrontApp.queryService', [])
     if(similar_to) {
       apiQuery = API_URL + '/documents/' + similar_to + '/similar?start=' + start + '&limit=' + limit;
     } else if(query) {
-      apiQuery = API_URL + '/documents?search=' + query + '&start=' + start + '&limit=' + limit;
+      apiQuery = API_URL + '/documents?search=' + encodeURIComponent(query) + '&start=' + start + '&limit=' + limit;
 
       apiQuery = data.filters(apiQuery);
     }

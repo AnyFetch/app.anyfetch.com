@@ -230,7 +230,7 @@ angular.module('anyfetchFrontApp')
     if($scope.id) {
       var apiQuery = API_URL + '/documents/'+ $scope.id;
       if($scope.query) {
-        apiQuery += '?search=' + $scope.query;
+        apiQuery += '?search=' + encodeURIComponent($scope.query);
       }
 
       $scope.modalShow = true;
