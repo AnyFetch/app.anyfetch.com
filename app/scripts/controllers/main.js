@@ -218,6 +218,9 @@ angular.module('anyfetchFrontApp')
 
   $scope.displayFull = function(id) {
     $('body').scrollTop(0);
+    var iframe = ($('#iframe')[0].contentWindow || $('#iframe')[0].contentDocument);
+    iframe.document.body.innerHTML = '';
+
     var actualSearch = $location.search();
     actualSearch.id = id;
     $location.search(actualSearch);
