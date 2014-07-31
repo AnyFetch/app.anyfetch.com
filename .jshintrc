@@ -31,6 +31,7 @@
     "console": false,
     "anyfetchFrontApp": false,
     "md5": false,
+    "alert": false,
     "API_URL": false
   }
 }

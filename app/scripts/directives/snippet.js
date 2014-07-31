@@ -1,4 +1,5 @@
 'use strict';
+var willReloadItself = false;
 
 angular.module('anyfetchFrontApp.snippetDirective', [])
 .directive('snippet', function(DocumentTypesService) {
@@ -17,6 +18,14 @@ angular.module('anyfetchFrontApp.snippetDirective', [])
 
       templateUrl: 'views/template snippet.html',
       link : function(scope) {
+        if(!DocumentTypesService.get().list[scope.result.document_type.id] && !willReloadItself) {
+          alert('Sorry, new document-types have been added to your account since you first loaded the app. The app will reload itself.');
+          document.location.reload();
+
+          // Add a flag to avoid displaying the dialog many times (the reload will take effect on return to the mainevent loop)
+          willReloadItself = true;
+        }
+
         var htmlTemplate = DocumentTypesService.get().list[scope.result.document_type.id].templates.snippet;
         scope.snippetText = mustacheTemplate(scope.result, htmlTemplate);
 
