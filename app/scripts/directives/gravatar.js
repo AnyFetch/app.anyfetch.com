@@ -4,7 +4,7 @@ angular.module('anyfetchFrontApp.gravatarDirective', [])
 .directive('gravatar', function() {
     var getImageSrc = function(value, size, defaultUrl) {
       var hash = md5(value);
-      var src = 'http://www.gravatar.com/avatar/' + hash + '?s=' + size + '&d=' + defaultUrl;
+      var src = 'https://www.gravatar.com/avatar/' + hash + '?s=' + size + '&d=' + defaultUrl;
       return src;
     };
 
