@@ -37,7 +37,9 @@
 <div id="dropdown_providers" class="f-dropdown" data-dropdown-content>
   <ul>
     <li ng-repeat="provider in providers.list" ng-show="!provider.is_basic_token">
-      <div class="ic provider-{{provider.client.id}}"></div><small>{{provider.client.name}}</small> {{provider.account_name}}
+      <div class="ic provider-{{provider.client.id}}"></div>
+        <small>{{provider.client.name}} ({{provider.document_count}})</small><br />
+        {{provider.account_name}}
       <div class="clearer"></div>
       <div class="state" ng-class="{true:'ok', false:'loadingProv' }[provider.upToDate]"></div><small>Last update: {{provider.updated | date:'MM/dd/yy h:mma'}}</small>
     </li>
