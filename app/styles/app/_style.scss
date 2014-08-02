@@ -467,6 +467,13 @@ html, body{
           }
         }
 
+        .two-columns{
+          *:first-child {
+            float: left;
+            margin-right: 10px;
+          }
+        }
+
         @media #{$small-only}{
           font-size:12px;
           h2,h1{

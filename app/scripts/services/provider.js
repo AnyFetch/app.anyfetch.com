@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.providerService', [])
-.factory( 'ProvidersService', function($q, $http, $timeout) {
+.factory('ProvidersService', function($q, $http, $timeout) {
 
   var serverTime = null;
   var updateFreq = 10000;
