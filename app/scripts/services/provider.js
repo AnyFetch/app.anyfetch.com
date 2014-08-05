@@ -8,6 +8,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   var data = {
     providers: {
       list: null,
+      orderedList: [],
       states: null,
       totalCount: 0,
       filtered: false
@@ -40,6 +41,7 @@ angular.module('anyfetchFrontApp.providerService', [])
     });
 
     data.providers.list = providersHash;
+    data.providers.orderedIdList = Object.keys(data.providers.list).sort();
     data.providers.states = {};
     data.reset(true);
     serverTime = new Date(time).getTime();

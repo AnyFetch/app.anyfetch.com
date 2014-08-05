@@ -28,8 +28,8 @@
 
       <div class="element" ng-repeat="provider in providers.list" ng-show="provider.search_count">
         <div class="row">
-          <input type="checkbox" ng-model="providers.states[Object.keys(providers.list).sort()[$index]]" id="type-{{Object.keys(providers.list).sort()[$index]}}"/>
-          <label for="type-{{Object.keys(providers.list).sort()[$index]}}">
+          <input type="checkbox" ng-model="providers.states[providers.orderedIdList[$index]]" id="type-{{providers.orderedIdList[$index]}}"/>
+          <label for="type-{{providers.orderedIdList[$index]}}">
             {{provider.client.name | capitalizeFirst}}
           </label>
           <span class="numberRes">{{provider.search_count}}</span>
