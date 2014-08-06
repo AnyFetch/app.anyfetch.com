@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="250px" height="333px" viewBox="0 0 250 333" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch Beta 3.0.1 (7595) - http://www.bohemiancoding.com/sketch -->
+    <title>event</title>
+    <description>Created with Sketch Beta.</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="5252ce4ce4cfcd16f55cfa3c-tab" sketch:type="MSLayerGroup">
+            <path d="M233.8,333 L16,333 C7.1,333 -0.1,325.8 -0.1,316.9 L-0.1,16.1 C-0.1,7.2 7.1,-2.84217094e-14 16,-2.84217094e-14 L167.9,-2.84217094e-14 L249.9,81.9 L249.9,316.9 C249.9,325.8 242.7,333 233.8,333" id="Shape" fill="#BE41A4" sketch:type="MSShapeGroup"></path>
+            <path d="M249.9,127.1 L171.1,80.3 L167.9,0 L249.9,82 L249.9,127.1 Z" id="Shape" fill="#78417D" sketch:type="MSShapeGroup"></path>
+            <path d="M167.6,0 L167.6,72.8 C167.6,78 171.8,82.3 177.1,82.3 L249.9,82.3 L167.6,0 L167.6,0 Z" id="Shape" fill="#C578BC" sketch:type="MSShapeGroup"></path>
+        </g>
+        <g id="Group" sketch:type="MSLayerGroup" transform="translate(46.000000, 100.000000)">
+            <rect id="Rectangle-1" fill="#FFFFFF" sketch:type="MSShapeGroup" x="0" y="19" width="158" height="132"></rect>
+            <rect id="Rectangle-2" fill="#D27AC0" sketch:type="MSShapeGroup" x="16" y="58" width="126" height="78"></rect>
+            <g id="Rectangle-3-+-Rectangle-4" transform="translate(29.000000, 0.000000)" sketch:type="MSShapeGroup">
+                <circle id="Oval-1" fill="#B33BA9" cx="89.5" cy="32.5" r="11.5"></circle>
+                <rect id="Rectangle-3" stroke="#B33BA9" stroke-width="3" fill="#FFFFFF" x="80" y="0" width="19" height="42" rx="8"></rect>
+                <circle id="Oval-2" fill="#B33BA9" cx="11.5" cy="32.5" r="11.5"></circle>
+                <rect id="Rectangle-4" stroke="#B33BA9" stroke-width="3" fill="#FFFFFF" x="2" y="0" width="19" height="42" rx="8"></rect>
+            </g>
+            <g transform="translate(28.000000, 68.000000)" fill="#FFFFFF" sketch:type="MSShapeGroup">
+                <rect id="Rectangle-5" x="0" y="0" width="21" height="16"></rect>
+                <rect id="Rectangle-6" x="27" y="0" width="21" height="16"></rect>
+                <rect id="Rectangle-7" x="54" y="0" width="21" height="16"></rect>
+                <rect id="Rectangle-8" x="0" y="21" width="21" height="16"></rect>
+                <rect id="Rectangle-9" x="27" y="21" width="21" height="16"></rect>
+                <rect id="Rectangle-10" x="54" y="21" width="21" height="16"></rect>
+                <rect id="Rectangle-11" x="27" y="42" width="21" height="16"></rect>
+                <rect id="Rectangle-12" x="81" y="21" width="21" height="16"></rect>
+                <rect id="Rectangle-13" x="54" y="42" width="21" height="16"></rect>
+                <rect id="Rectangle-14" x="81" y="42" width="21" height="16"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
