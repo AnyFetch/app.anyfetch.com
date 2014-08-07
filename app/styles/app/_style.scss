@@ -467,11 +467,9 @@ html, body{
           }
         }
 
-        .two-columns{
-          *:first-child {
-            float: left;
-            margin-right: 10px;
-          }
+        .two-columns > *:nth-child(n) {
+          float: left;
+          margin-right: 10px;
         }
 
         @media #{$small-only}{
