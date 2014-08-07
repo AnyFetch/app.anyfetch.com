@@ -467,9 +467,13 @@ html, body{
           }
         }
 
-        .two-columns > * {
-          float: left;
-          margin-right: 10px;
+        .two-columns {
+          display: inline-block;
+
+          & > * {
+            float: left;
+            margin-right: 10px;
+          }
         }
 
         @media #{$small-only}{
