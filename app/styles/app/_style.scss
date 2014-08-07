@@ -467,7 +467,7 @@ html, body{
           }
         }
 
-        .two-columns > *:nth-child(n) {
+        .two-columns > * {
           float: left;
           margin-right: 10px;
         }
