@@ -38,7 +38,7 @@ angular.module('anyfetchFrontApp')
   $scope.providers = ProvidersService.providers;
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;
-  $scope.managerUrl = MANAGER_URL;
+  $scope.managerUrl = document.MANAGER_URL || "https://manager.anyfetch.com";
 
 
 // ------------------------------------------------------
