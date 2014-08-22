@@ -32,6 +32,8 @@
     "anyfetchFrontApp": false,
     "md5": false,
     "alert": false,
-    "API_URL": false
+    "API_URL": false,
+    "MANAGER_URL": false,
+    "APP_URL": false
   }
 }

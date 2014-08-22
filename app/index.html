@@ -67,13 +67,17 @@
     <script>
     // Base URL for all API calls
     var API_URL = 'https://api.anyfetch.com';
+    var MANAGER_URL = 'https://manager.anyfetch.com';
+    var APP_URL = document.location;
 
     // Call staging api when using staging url or on localhost.
     if(document.location.hostname.indexOf('staging') !== -1 || document.location.hostname.indexOf('localhost') !== -1) {
       API_URL = 'https://api-staging.anyfetch.com';
+      MANAGER_URL = 'https://manager-staging.anyfetch.com';
     }
     if(document.location.hostname.indexOf('development') !== -1) {
       API_URL = 'https://api-development.anyfetch.com';
+      MANAGER_URL = 'https://manager-development.anyfetch.com';
     }
 
     </script>

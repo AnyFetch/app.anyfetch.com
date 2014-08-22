@@ -31,7 +31,7 @@ angular.module('anyfetchFrontApp.providerDirective', [])
       };
 
       scope.connect = function(providerId) {
-        var url = 'http://manager.anyfetch.com/connect/' + providerId;
+        var url = MANAGER_URL + '/connect/' + providerId + '?return_to=' + APP_URL;
         window.location = url;
       };
 
