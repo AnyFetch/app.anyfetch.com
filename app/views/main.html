@@ -28,8 +28,7 @@
       <li class="divider"></li>
       <li><a href="#" ng-click='logout()'><div class="header-icon logout"></div></a></li>
       <li class="divider"></li>
-      <!-- TODO: do not hard code manager url -->
-      <li><a href="https://manager.anyfetch.com" target="_blank"><span gravatar data-gravatar-email="user.email"></span> <span class="show-for-medium-up">{{user.email}}</span></a></li>
+      <li><a href="{{managerUrl}}" target="_blank"><span gravatar data-gravatar-email="user.email"></span> <span class="show-for-medium-up">{{user.email}}</span></a></li>
     </ul>
    </section>
 </nav>
