@@ -4,7 +4,7 @@ anyFetch.com website
 Welcome @ anyFetch
 
 ## How to install
-Before running any of these commands you need to install all the requirements. To load all the dependents packages you will need to run:
+Before running any of these commands you need to install all the requirements. To load all the packages you will need to run:
 
 ```sh
 npm install -g bower grunt-cli
