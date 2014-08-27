@@ -21,7 +21,7 @@ grunt build				# create standalone application in the /build directory
 ```
 
 ## Deployment
-This require push access to this repo.
+This requires push access to this repo.
  
 ```sh
 grunt deploy            # Deploy on production server.
