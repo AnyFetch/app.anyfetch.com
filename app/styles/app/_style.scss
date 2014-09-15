@@ -560,7 +560,7 @@ html, body{
     display: inline-block;
     vertical-align: middle;
 }
-@each $provider in "53047faac8318c2d65000096", "52bff114c8318c29e9000005", "52cbda1ec8318c2d65000001", "53232d1dc8318cba94000042", "539ef7289f240405465a2e1f", "52bff1eec8318cb228000001" {
+@each $provider in "53047faac8318c2d65000096", "52bff114c8318c29e9000005", "52cbda1ec8318c2d65000001", "53047faac8318c2d65000097", "539ef7289f240405465a2e1f", "52bff1eec8318cb228000001" {
   .provider-#{$provider} {
     @include svg-background("icon-provider/" + quote($provider), 20px, 20px);
 
