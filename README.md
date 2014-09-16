@@ -19,11 +19,3 @@ grunt serve				# launch the developement server
 grunt test				# start the tests
 grunt build				# create standalone application in the /build directory
 ```
-
-## Deployment
-This requires push access to this repo.
- 
-```sh
-grunt deploy            # Deploy on production server.
-```
-
