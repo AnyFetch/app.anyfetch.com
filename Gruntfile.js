@@ -270,6 +270,7 @@ module.exports = function(grunt) {
           src: [
             '*.{ico,png,txt}',
             'CNAME',
+            'opensearch.xml',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
             'fonts/*'
