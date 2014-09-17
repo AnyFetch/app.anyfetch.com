@@ -521,6 +521,9 @@ html, body{
       @include svg-background("icon-types/5252ce4ce4cfcd16f55cfa3c-" + quote($type), 43px, 56px);
     }
   }
+  .type-656d61696c2d746872656164 { /* Email-thread */
+    @include svg-background("icon-types/5252ce4ce4cfcd16f55cfa3f", 43px, 56px);
+  }
 
   .icon-provider{
     position: absolute;
