@@ -18,7 +18,8 @@
     "ngDialog": "*",
     "angular-touch": "~1.3.0",
     "venturocket-angular-slider": "~0.2.4",
-    "jquery.scrollTo": "~1.4.11"
+    "jquery.scrollTo": "~1.4.11",
+    "anyfetch-snippet-style": "~0.1.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
