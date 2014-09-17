@@ -6,7 +6,7 @@ angular.module('anyfetchFrontApp.highlightService', [])
   var data = {
     current_index : null,
     options : {
-      element : '.hlt',
+      element : '.anyfetch-hlt',
       hover_element : 'hlt_active',
       duration : 300,
       offset : 20,
