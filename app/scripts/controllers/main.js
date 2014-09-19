@@ -169,6 +169,7 @@ angular.module('anyfetchFrontApp')
       $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
           $scope.resultUpdate(data, true);
+          snippetStyle.formatDates(true);
         });
     } else {
       $scope.resetSearch();
