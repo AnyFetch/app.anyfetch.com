@@ -95,6 +95,7 @@ angular.module('anyfetchFrontApp')
     }
 
     $scope.loading = false;
+    snippetStyle.formatDates();
   };
 
 // ------------------------------------------------------
@@ -121,7 +122,6 @@ angular.module('anyfetchFrontApp')
       $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
           $scope.resultUpdate(data, full);
-          snippetStyle.formatDates(true);
         });
     } else {
       $scope.resetSearch();
@@ -135,7 +135,7 @@ angular.module('anyfetchFrontApp')
       .then(function(data) {
         $scope.results = $scope.results.concat(data.data);
         $scope.loading = false;
-        snippetStyle.formatDates(true);
+        snippetStyle.formatDates();
       });
   };
 
@@ -169,7 +169,6 @@ angular.module('anyfetchFrontApp')
       $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
           $scope.resultUpdate(data, true);
-          snippetStyle.formatDates(true);
         });
     } else {
       $scope.resetSearch();
@@ -204,7 +203,7 @@ angular.module('anyfetchFrontApp')
     }
   };
 
-  // Watch filterUpdate to know wether the filter has changed and the results needs to be reloaded
+  // Watch filterUpdate to know whether the filter has changed and the results needs to be reloaded
   $scope.$watch('filterUpdate', function(newVal) {
     if(newVal) {
       // Update only if a query is launched!
