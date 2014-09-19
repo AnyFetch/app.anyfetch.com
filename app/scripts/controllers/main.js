@@ -1,3 +1,4 @@
+/* global snippetStyle: false */
 'use strict';
 
 
@@ -38,7 +39,7 @@ angular.module('anyfetchFrontApp')
   $scope.providers = ProvidersService.providers;
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;
-  $scope.managerUrl = document.MANAGER_URL || "https://manager.anyfetch.com";
+  $scope.managerUrl = document.MANAGER_URL || 'https://manager.anyfetch.com';
 
 
 // ------------------------------------------------------
@@ -120,6 +121,7 @@ angular.module('anyfetchFrontApp')
       $scope.getRes(0, DEFAULT_LIMIT)
         .then(function(data) {
           $scope.resultUpdate(data, full);
+          snippetStyle.formatDates(true);
         });
     } else {
       $scope.resetSearch();
@@ -133,6 +135,7 @@ angular.module('anyfetchFrontApp')
       .then(function(data) {
         $scope.results = $scope.results.concat(data.data);
         $scope.loading = false;
+        snippetStyle.formatDates(true);
       });
   };
 
