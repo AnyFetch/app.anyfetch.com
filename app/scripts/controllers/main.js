@@ -1,3 +1,4 @@
+/* global snippetStyle: false */
 'use strict';
 
 
@@ -38,7 +39,7 @@ angular.module('anyfetchFrontApp')
   $scope.providers = ProvidersService.providers;
   $scope.providersStatus = ProvidersService.providersUpToDate;
   $scope.times = TimeService.times;
-  $scope.managerUrl = document.MANAGER_URL || "https://manager.anyfetch.com";
+  $scope.managerUrl = document.MANAGER_URL || 'https://manager.anyfetch.com';
 
 
 // ------------------------------------------------------
@@ -94,6 +95,7 @@ angular.module('anyfetchFrontApp')
     }
 
     $scope.loading = false;
+    setTimeout(snippetStyle.formatDates, 100);
   };
 
 // ------------------------------------------------------
@@ -133,6 +135,7 @@ angular.module('anyfetchFrontApp')
       .then(function(data) {
         $scope.results = $scope.results.concat(data.data);
         $scope.loading = false;
+        setTimeout(snippetStyle.formatDates, 100);
       });
   };
 
@@ -200,7 +203,7 @@ angular.module('anyfetchFrontApp')
     }
   };
 
-  // Watch filterUpdate to know wether the filter has changed and the results needs to be reloaded
+  // Watch filterUpdate to know whether the filter has changed and the results needs to be reloaded
   $scope.$watch('filterUpdate', function(newVal) {
     if(newVal) {
       // Update only if a query is launched!
