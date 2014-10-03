@@ -448,8 +448,7 @@ html, body{
       }
 
       .details{
-        padding:10px;
-
+        margin-left: 75px;
         h2, h1{
           display:block;
           font-weight: normal;
@@ -501,15 +500,11 @@ html, body{
 }
 .icon{
   position:relative;
-  width:55px;
-  height:68px;
-  margin:10px 20px 10px 20px;
   float:left;
+  display: inline-block;
 
   .icon-types{
-    width:43px;
-    height:56px;
-    margin-left:12px;
+    margin: 16px;
   }
   @each $type in "5252ce4ce4cfcd16f55cfa3b", "5252ce4ce4cfcd16f55cfa3c", "5252ce4ce4cfcd16f55cfa3d", "5252ce4ce4cfcd16f55cfa3f", "5252ce4ce4cfcd16f55cfa3a", "5252ce4ce4cfcd16f55cfa41", "5252ce4ce4cfcd16f55cfa40" {
     .type-#{$type} {
@@ -527,10 +522,10 @@ html, body{
 
   .icon-provider{
     position: absolute;
-    bottom:0px;
-    left:0px;
-    width:20px;
-    height:20px;
+    top: 60px;
+    left: 50px;
+    width: 20px;
+    height: 20px;
   }
 
   &.icon-small {
