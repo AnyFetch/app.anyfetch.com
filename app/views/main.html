@@ -108,7 +108,7 @@
           <article class="results">
             <div class="loaded">
               <div class="result-row" ng-repeat="result in results">
-                <snippet result="result" click="displayFull(id)" providerid="providers.list[result.provider].application"></snippet>
+                <snippet result="result" click="displayFull(id)" providerid="result.provider.client.id"></snippet>
               </div>
               <div class="loading" ng-show="loading">
                 <div class="loading-icon"></div> Loading...
