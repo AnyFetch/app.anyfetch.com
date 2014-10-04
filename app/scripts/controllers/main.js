@@ -95,6 +95,7 @@ angular.module('anyfetchFrontApp')
     }
 
     $scope.loading = false;
+    // TODO: fix this hack
     setTimeout(snippetStyle.formatDates, 100);
   };
 
@@ -135,6 +136,7 @@ angular.module('anyfetchFrontApp')
       .then(function(data) {
         $scope.results = $scope.results.concat(data.data);
         $scope.loading = false;
+        // TODO: fix this hack
         setTimeout(snippetStyle.formatDates, 100);
       });
   };
