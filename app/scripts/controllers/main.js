@@ -1,4 +1,4 @@
-/* global snippetStyle: false */
+/* global anyfetchAssets: false */
 'use strict';
 
 
@@ -96,7 +96,7 @@ angular.module('anyfetchFrontApp')
 
     $scope.loading = false;
     // TODO: fix this hack
-    setTimeout(snippetStyle.formatDates, 100);
+    setTimeout(anyfetchAssets.formatDates, 100);
   };
 
 // ------------------------------------------------------
@@ -137,7 +137,7 @@ angular.module('anyfetchFrontApp')
         $scope.results = $scope.results.concat(data.data);
         $scope.loading = false;
         // TODO: fix this hack
-        setTimeout(snippetStyle.formatDates, 100);
+        setTimeout(anyfetchAssets.formatDates, 100);
       });
   };
 
