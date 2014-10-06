@@ -560,7 +560,7 @@ html, body{
 }
 @each $provider in "52bff114c8318c29e9000005", "52bff1eec8318cb228000001", "53047faac8318c2d65000096", "53047faac8318c2d65000097", "53047faac8318c2d65000099", "539ef7289f240405465a2e1f" {
   .provider-#{$provider} {
-    @include svg-background("../bower_components/anyfetch-snippet-style/dist/images/providers/" + quote($provider), 20px, 20px);
+    @include svg-background("../bower_components/anyfetch-assets/dist/images/providers/" + quote($provider), 20px, 20px);
 
     &.large {
       background-size: 40px 40px;
@@ -570,7 +570,7 @@ html, body{
     }
   }
   .provider-white-#{$provider} {
-    @include svg-background("../bower_components/anyfetch-snippet-style/dist/images/providers/" + quote($provider) + "_grayscale", 20px, 20px);
+    @include svg-background("../bower_components/anyfetch-assets/dist/images/providers/" + quote($provider) + "_grayscale", 20px, 20px);
     // @include svg-background("icon-white-provider/" + quote($provider), 20px, 20px);
   }
 }
