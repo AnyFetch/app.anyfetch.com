@@ -73,6 +73,7 @@ angular.module('anyfetchFrontApp')
         })
         .error(function(error) {
           console.error(error);
+          $scope.loading = false;
           $scope.display_error('Error '+ error.code +': '+ error.message +'. Please restart your search.');
           if($scope.similar_to) {
             $location.search({});
@@ -80,6 +81,7 @@ angular.module('anyfetchFrontApp')
           deferred.reject();
         });
     } else {
+      $scope.loading = false;
       $scope.display_error('No query or similar documents found. Please retry your search.');
     }
 
