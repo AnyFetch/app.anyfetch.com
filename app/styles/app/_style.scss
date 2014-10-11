@@ -506,7 +506,7 @@ html, body{
   .icon-types{
     margin: 16px;
   }
-  @each $type in "5252ce4ce4cfcd16f55cfa3b", "5252ce4ce4cfcd16f55cfa3c", "5252ce4ce4cfcd16f55cfa3d", "5252ce4ce4cfcd16f55cfa3f", "5252ce4ce4cfcd16f55cfa3a", "5252ce4ce4cfcd16f55cfa41", "5252ce4ce4cfcd16f55cfa40" {
+  @each $type in $types {
     .type-#{$type} {
       @include svg-background("icon-types/" + quote($type), 43px, 56px);
     }
@@ -558,7 +558,7 @@ html, body{
     display: inline-block;
     vertical-align: middle;
 }
-@each $provider in "52bff114c8318c29e9000005", "52bff1eec8318cb228000001", "53047faac8318c2d65000096", "53047faac8318c2d65000097", "53047faac8318c2d65000099", "539ef7289f240405465a2e1f" {
+@each $provider in $providers {
   .provider-#{$provider} {
     @include svg-background("../bower_components/anyfetch-assets/dist/images/providers/" + quote($provider), 20px, 20px);
 
