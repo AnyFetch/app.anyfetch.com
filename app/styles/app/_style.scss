@@ -449,18 +449,17 @@ html, body{
 
       .details{
         margin-left: 75px;
-        h2, h1{
-          display:block;
-          font-weight: normal;
-          color:$text-color;
-          font-size:16px;
-          margin:0;
+        header.anyfetch-header{
+          h1, h2 {
+            color:$text-color;
+            font-size:16px;
+            font-weight: 400;
+          }
         }
 
-        p{
+        main.anyfetch-content{
           font-size:14px;
           color:$secondary-color;
-          margin:5px;
           strong{
             color:$primary-color;
           }
