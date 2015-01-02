@@ -20,14 +20,15 @@ angular.module('anyfetchFrontApp.authenticationService', [])
 
     // Creation of the user credential
     var credentials;
+    console.log(user);
     if(user) {
-      credentials = btoa(user.email + ':' + user.password);
+      credentials = user.token;
     } else {
       credentials = $cookies.credentials;
     }
 
     // Check the user credentials validity
-    $http.defaults.headers.common.Authorization = 'Basic ' + credentials;
+    $http.defaults.headers.common.Authorization = 'Bearer ' + credentials;
     $http({method: 'GET', url: API_URL + '/batch?pages=/&pages=/document_types&pages=/providers'})
       .success(function(data) {
         data.currentUser = {

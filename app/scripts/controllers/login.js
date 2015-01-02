@@ -9,9 +9,7 @@ angular.module('anyfetchFrontApp')
   // Login the user to anyfetch
   $scope.login = function() {
     var credentials = {
-      email: $scope.email,
-      password: $scope.password,
-      rememberMe: $scope.rememberMe
+      token: $scope.token,
     };
     $scope.loadingLogin = true;
 
