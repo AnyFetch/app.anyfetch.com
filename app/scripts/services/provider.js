@@ -62,7 +62,7 @@ angular.module('anyfetchFrontApp.providerService', [])
 
   data.updateSearchCounts = function(resultsCounts) {
     var resultsCountsHash = {};
-    resultsCounts.forEach(function (resultCount) {
+    resultsCounts.forEach(function(resultCount) {
       resultsCountsHash[resultCount.id] = resultCount;
     });
 
@@ -80,7 +80,7 @@ angular.module('anyfetchFrontApp.providerService', [])
   data.update = function() {
     var deferred = $q.defer();
 
-    $http({method: 'POST', url: API_URL + '/company/update'})
+    $http({method: 'POST', url: API_URL + '/user/update'})
       .success(deferred.resolve)
       .error(deferred.reject);
 
@@ -96,7 +96,8 @@ angular.module('anyfetchFrontApp.providerService', [])
 
     if(data.availableProviders) {
       deferred.resolve(data.availableProviders);
-    } else {
+    }
+    else {
       $http.get(MANAGER_URL + '/marketplace.json?trusted=true')
         .success(function(res) {
           for(var provider in res) {
