@@ -6,7 +6,7 @@
       </div>
 
       <form id="loginForm" ng-submit="login()">
-        <input name="token" type="token" placeholder="Token" autocomplete="off" data-ng-model="token" required autofocus/>
+        <input name="token" type="text" placeholder="Token" autocomplete="off" data-ng-model="token" required autofocus/>
 
         <div class="right">
           <input type="submit" data-ng-disabled="loginForm.$invalid" id="login" class="button small right radius" value="Login" />
