@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('anyfetchFrontApp.authenticationService', [])
-.factory( 'AuthService', function($cookies, $cookieStore, $rootScope, $http, $q, DocumentTypesService, ProvidersService) {
+.factory('AuthService', function($cookies, $cookieStore, $rootScope, $http, $q, DocumentTypesService, ProvidersService) {
 
   var data = {
     currentUser: null
@@ -18,30 +18,46 @@ angular.module('anyfetchFrontApp.authenticationService', [])
   data.login = function(user) {
     var deferred = $q.defer();
 
-    // Creation of the user credential
-    var credentials;
-    if(user) {
-      credentials = btoa(user.email + ':' + user.password);
-    } else {
-      credentials = $cookies.credentials;
+    var initializePage = function initializePage(token) {
+      $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+      $http({method: 'GET', url: API_URL + '/batch?pages=/&pages=/document_types&pages=/providers'})
+        .success(function(data) {
+          data.currentUser = {
+            email: data['/'].user_email,
+            credentials: token
+          };
+
+          $cookies.credentials = token;
+
+          bootstrapUserContent(data);
+
+          deferred.resolve(data.currentUser);
+        })
+        .error(deferred.reject);
+    };
+
+    var basicCredentials;
+    if(!user) {
+      // Already logged
+      initializePage($cookies.credentials);
     }
+    else {
+      // Create of the user credential
+      basicCredentials = btoa(user.email + ':' + user.password);
 
-    // Check the user credentials validity
-    $http.defaults.headers.common.Authorization = 'Basic ' + credentials;
-    $http({method: 'GET', url: API_URL + '/batch?pages=/&pages=/document_types&pages=/providers'})
-      .success(function(data) {
-        data.currentUser = {
-          email: data['/'].user_email,
-          credentials: credentials
-        };
-
-        $cookies.credentials = credentials;
-
-        bootstrapUserContent(data);
-
-        deferred.resolve(data.currentUser);
+      // Check the user credentials and retrieve a token
+      $http({
+        method: 'GET',
+        url: API_URL + '/token',
+        headers: {
+          'Authorization': 'Basic ' + basicCredentials
+        }
       })
-      .error(deferred.reject);
+        .success(function(data) {
+          initializePage(data.token);
+        })
+        .error(deferred.reject);
+    }
 
     return deferred.promise;
   };
@@ -60,7 +76,8 @@ angular.module('anyfetchFrontApp.authenticationService', [])
 
     if(data.currentUser) {
       deferred.resolve(data.currentUser);
-    } else if($cookies.credentials) {
+    }
+    else if($cookies.credentials) {
       data.login()
         .then(function(user) {
           console.log('Login ', user);
@@ -70,7 +87,8 @@ angular.module('anyfetchFrontApp.authenticationService', [])
           $cookieStore.remove('credentials');
           deferred.reject();
         });
-    } else {
+    }
+    else {
       deferred.reject();
     }
 
