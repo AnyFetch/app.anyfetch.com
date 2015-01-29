@@ -27,7 +27,7 @@ angular.module('anyfetchFrontApp.authenticationService', [])
             credentials: token
           };
 
-          $cookies.credentials = token;
+          localStorage.setItem('credentials', token);
 
           bootstrapUserContent(data);
 
@@ -39,7 +39,7 @@ angular.module('anyfetchFrontApp.authenticationService', [])
     var basicCredentials;
     if(!user) {
       // Already logged
-      initializePage($cookies.credentials);
+      initializePage(localStorage.getItem('credentials'));
     }
     else {
       // Create of the user credential
@@ -62,11 +62,11 @@ angular.module('anyfetchFrontApp.authenticationService', [])
     return deferred.promise;
   };
 
-  // Lougout : Lougout the current user
+  // Logout : Logout the current user
   data.logout = function() {
     console.log('loggin out');
     data.currentUser = null;
-    $cookieStore.remove('credentials');
+    localStorage.removeItem('credentials');
   };
 
   // isLoggedIn : check if a user is currently logged in
@@ -77,14 +77,14 @@ angular.module('anyfetchFrontApp.authenticationService', [])
     if(data.currentUser) {
       deferred.resolve(data.currentUser);
     }
-    else if($cookies.credentials) {
+    else if(localStorage.getItem('credentials')) {
       data.login()
         .then(function(user) {
           console.log('Login ', user);
           data.currentUser = user;
           deferred.resolve(user);
         }, function() {
-          $cookieStore.remove('credentials');
+          localStorage.removeItem('credentials');
           deferred.reject();
         });
     }
