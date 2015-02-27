@@ -36,7 +36,7 @@
 <!-- Dropdown providers -->
 <div id="dropdown_providers" class="f-dropdown" data-dropdown-content>
   <ul>
-    <li ng-repeat="provider in providers.list" ng-show="!provider.is_basic_token">
+    <li ng-repeat="provider in providers.list" ng-show="!provider.is_basic_token &amp;&amp; !(provider.client &amp;&amp; provider.client.oauth_app)">
       <div class="ic provider-{{provider.client.id}}"></div>
         <small>{{provider.client.name}} ({{provider.document_count}})</small><br />
         {{provider.account_name}}
